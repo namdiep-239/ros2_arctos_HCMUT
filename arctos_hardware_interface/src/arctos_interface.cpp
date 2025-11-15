@@ -5,6 +5,11 @@
 #include <vector>
 #include <chrono>
 
+// ANSI color codes for terminal output
+#define RESET   "\033[0m"
+#define RED     "\033[31m"
+#define BOLD_RED "\033[1;31m"
+
 using arctos_motor_driver::MotorMode;
 using hardware_interface::CallbackReturn;
 using hardware_interface::return_type;
@@ -64,7 +69,7 @@ namespace arctos_interface
         }
         catch (const std::exception &e)
         {
-            RCLCPP_WARN(node_->get_logger(), "Failed to initialize UART connection, assuming using simulation: %s", e.what());
+            RCLCPP_FATAL(node_->get_logger(), BOLD_RED "FATAL: Failed to initialize UART connection, assuming using simulation: %s" RESET, e.what());
         }
         
         // Process joints and their interfaces

@@ -114,7 +114,7 @@ bool UartProtocol::sendEmptyMsg()
  * for multiple joints/motors. The expected format should be defined based on
  * the communication protocol (e.g., comma-separated, semicolon-separated values).
  * 
- * @param data The raw message string received from the UART device
+ * @param data The raw message string received from the UART device, the string format is "j1,j2,j3,j4,j5,j6"
  * @return std::vector<double> A vector containing decoded position values for each joint
  * 
  * @note This function currently returns an empty vector - implementation needed
@@ -122,7 +122,7 @@ bool UartProtocol::sendEmptyMsg()
  */
 std::vector<double> UartProtocol::decodeMessage(const std::string data) {
     // decode the data here
-        // Làm việc trên bản sao (đúng prototype nhận by-value)
+    // Làm việc trên bản sao (đúng prototype nhận by-value)
     std::string line = data;
 
     // Bỏ EOL/CR ở cuối nếu có

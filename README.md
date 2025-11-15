@@ -90,37 +90,12 @@ Install the Python dependencies:
 pip install python-can ruamel.yaml rich keyboard -y
 ```
 
-Clone the latest `ros2_socketcan` (the current ros2_socketcan for humble is having issue that the receive topic `\from_can_bus` also receive its own transmit message, which complicate the processing of receive messsage).
-
-The downside of this new version of `ros2_socketcan` is that the **transmit message won't appear** on `candump`. But the message still got transmitted anyway.
-
-```bash
-mkdir -p ~/ros2_ulti/src
-cd ~/ros2_ulti/src
-git clone https://github.com/autowarefoundation/ros2_socketcan.git
-git checkout 822ca033c8ce934dc5a622d7bb80adb575522b33
-```
-
-Build ros2_socketcan with colcon:
-
-```bash
-source /opt/ros/humble/setup.bash
-cd ~/ros2_ulti
-colcon build --mixin release
-```
-
-Then add the install directory of ros2_socketcan to bashrc.
-
-```bash
-echo "source ~/ros2_ulti/install/setup.bash" >> ~/.bashrc
-```
-
 **Open new terminal**, then create a ROS2 workspace and clone the ROS2 Arctos repository inside the `src/` directory:
 
 ```bash
 mkdir -p ~/ros2_ws/src
 cd ~/ros2_ws/src
-git clone https://github.com/ngoccatt/ros2_arctos_HCMUT.git
+git clone --recurse-submodules https://github.com/ngoccatt/ros2_arctos_HCMUT.git
 ```
 
 **Note**: If you are on a different branch, you need to checkout the branch you want to use.
@@ -160,16 +135,10 @@ rosdep install --from-paths src -y --ignore-src
 
 **Note**: You may encounter an error with the package `ros-humble-warehouse-ros-mongo`. You can ignore this package for now.
 
-If this command install the ros2_socketcan from humble, remove it via:
-
-```bash
-Sudo apt remove ros-humble-ros2-socketcan
-```
-
 Build the workspace using `colcon`:
 
 ```bash
-cd ros2_arctos
+cd ~/ros2_ws
 colcon build --symlink-install
 source install/setup.bash
 ```
