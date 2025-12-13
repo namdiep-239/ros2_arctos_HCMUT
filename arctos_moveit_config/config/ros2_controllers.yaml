@@ -3,7 +3,7 @@
 # MoveIt automatically connects to this action interface.
 controller_manager:
   ros__parameters:
-    update_rate: 2  # Hz ([read -> update -> write] cycle is executed 20 times per second)
+    update_rate: 2  # Hz ([read -> update -> write] cycle is executed 2 times per second)
 
     denso_arm_controller:
       type: joint_trajectory_controller/JointTrajectoryController
@@ -81,8 +81,8 @@ arctos_hardware_interface:
       B_joint:                    
         motor_id: 5
         requires_homing: false
-        inverted: true             # for application: app request go to 10 rad, but raw request to 10 rad (validated)
-        inverted_feedback: false     # for case of request go to 1000, but motor run to -1000 (validated)
+        inverted: false             # for application: app request go to 10 rad, but raw request to 10 rad (validated)
+        inverted_feedback: true     # for case of request go to 1000, but motor run to -1000 (validated)
         gear_ratio: 1.0
         hardware_type: MKS_42D
         zero_position: -0.0
