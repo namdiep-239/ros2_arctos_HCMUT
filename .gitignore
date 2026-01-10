@@ -35,3 +35,4 @@
 .catkin_workspace
 /gamepadControl/__pycache__
 gamepadControl/can_demo_asyncua
+*/settings.json
