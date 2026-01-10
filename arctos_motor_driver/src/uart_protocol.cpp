@@ -207,7 +207,7 @@ void UartProtocol::readToBuffer(void)
         return;
     }
     try {
-        // serial::readline sẽ đọc tới ký tự cuối trong kEOL (ở đây là '\n')
+        // serial::readline sẽ đọc tới ký tự cuối trong kEOL (ở đây là '\r')
         std::string raw = serial_conn_.readline(65535UL, kEOL);
 
         // Cắt CR/LF đuôi nếu có

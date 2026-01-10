@@ -67,7 +67,7 @@ arctos_hardware_interface:
         hardware_type: MKS_42D
         zero_position: 0.0
         lower_limit: -119.0             # lower limit, in degree
-        upper_limit: 85.94367           # upper limit, in degree
+        upper_limit: 169.0           # upper limit, in degree
       A_joint:
         motor_id: 4
         requires_homing: false

@@ -49,7 +49,7 @@
       <joint name="Z_joint">
         <command_interface name="position">
           <param name="min">-2.0769</param>
-          <param name="max">1.5</param>
+          <param name="max">2.9496</param>
         </command_interface>
         <command_interface name="velocity">
           <param name="min">0</param>

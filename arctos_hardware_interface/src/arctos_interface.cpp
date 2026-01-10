@@ -29,7 +29,7 @@ namespace arctos_interface
 
     ArctosInterface::~ArctosInterface() = default;
 
-    /* communication between the robot hardware needs to be setup and memory dynamic should be allocated */
+    /* Here, you should initialize all member variables and process the parameters from the info argument, and memory dynamic should be allocated */
     /* HardwareInfo info could be collected from yaml file, under tag hardware/parameters*/
     CallbackReturn ArctosInterface::on_init(const hardware_interface::HardwareInfo &info)
     {
@@ -57,20 +57,6 @@ namespace arctos_interface
         std::vector<std::string> joint_names;
         joint_names.reserve(info_.joints.size());
 
-        
-        try
-        {
-            // Get params from Ros2_control/hardware/param in urdf
-            std::string device = info_.hardware_parameters["device"];
-            int baud_rate = std::stoi(info_.hardware_parameters["baud_rate"]);
-            int timeout = std::stoi(info_.hardware_parameters["timeout"]);
-            // then setup uart connection
-            uart_protocol_->setup(device, baud_rate, timeout);
-        }
-        catch (const std::exception &e)
-        {
-            RCLCPP_FATAL(node_->get_logger(), BOLD_RED "FATAL: Failed to initialize UART connection, assuming using simulation: %s" RESET, e.what());
-        }
         
         // Process joints and their interfaces
         for (size_t i = 0; i < info_.joints.size(); i++)
@@ -135,6 +121,7 @@ namespace arctos_interface
         return CallbackReturn::SUCCESS;
     }
 
+    /* setup the communication to the hardware and set everything up so that the hardware can be activated */
     CallbackReturn ArctosInterface::on_configure(const rclcpp_lifecycle::State &previous_state)
     {
         RCLCPP_INFO(node_->get_logger(), "Transitioning to CONFIGURE state from %s", previous_state.label().c_str());
@@ -148,9 +135,26 @@ namespace arctos_interface
             RCLCPP_ERROR(node_->get_logger(), "Failed to initialize motors: %s", e.what());
             return CallbackReturn::ERROR;
         }
+
+        // Initialize UART connection
+        try
+        {
+            // Get params from Ros2_control/hardware/param in urdf
+            std::string device = info_.hardware_parameters["device"];
+            int baud_rate = std::stoi(info_.hardware_parameters["baud_rate"]);
+            int timeout = std::stoi(info_.hardware_parameters["timeout"]);
+            // then setup uart connection
+            uart_protocol_->setup(device, baud_rate, timeout);
+        }
+        catch (const std::exception &e)
+        {
+            RCLCPP_ERROR(node_->get_logger(), BOLD_RED "FATAL: Failed to initialize UART connection, assuming using simulation: %s" RESET, e.what());
+        }
+
         return CallbackReturn::SUCCESS;
     }
 
+    /* Reset the robot position to 0 and start the UART reception thread */
     CallbackReturn ArctosInterface::on_activate(const rclcpp_lifecycle::State &previous_state)
     {
         RCLCPP_INFO(node_->get_logger(), "Transitioning to ACTIVE state from %s", previous_state.label().c_str());
