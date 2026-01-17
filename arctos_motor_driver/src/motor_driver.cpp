@@ -541,7 +541,7 @@ void MotorDriver::processEncoderResponse(uint8_t motor_id, const std::vector<dou
 
     // if the encoder response is exactly the same as previous encoder data, no need to process.
     if (isEncoderDataChanged(data, motor_id) == false) {
-        RCLCPP_INFO(node_->get_logger(), "No new data for %d", motor_id);
+        // RCLCPP_INFO(node_->get_logger(), "No new data for %d", motor_id);
         return;
     } else {
         pre_encoder_data_[motor_id-1] = data;
