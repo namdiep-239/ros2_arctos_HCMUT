@@ -435,11 +435,14 @@ void MotorDriver::updateJointStates() {
 
 void MotorDriver::processUartMessage() {
     std::string message;
-    std::vector<double> decodedPositions;
+    std::vector<double> decodedPositions(6, 0.0);
     do {
         message = uart_protocol_->getFromBuffer();
         if (message != "") {
-            decodedPositions = uart_protocol_->decodeMessage(message);
+            if (!uart_protocol_->decodeMessage(message, decodedPositions)) {
+                RCLCPP_ERROR(node_->get_logger(), "Failed to decode UART message: %s", message.c_str());
+                continue;
+            }
             if (decodedPositions.size() != joints_.size()) 
             {
                 RCLCPP_ERROR(node_->get_logger(), "The number of decoded joints does not match with the configured joints!");

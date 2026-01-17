@@ -120,7 +120,7 @@ bool UartProtocol::sendEmptyMsg()
  * @note This function currently returns an empty vector - implementation needed
  *       based on the specific protocol format used by the connected device.
  */
-std::vector<double> UartProtocol::decodeMessage(const std::string data) {
+bool UartProtocol::decodeMessage(const std::string data, std::vector<double> &axes) {
     // decode the data here
     // Làm việc trên bản sao (đúng prototype nhận by-value)
     std::string line = data;
@@ -143,19 +143,20 @@ std::vector<double> UartProtocol::decodeMessage(const std::string data) {
         std::ostringstream oss;
         oss << "decodeMessage: expected 6 values, got " << cleaned.size()
             << " (data='" << line << "')";
-        throw std::runtime_error(oss.str());
+        std::cerr << oss.str() << std::endl;
+        return false;
     }
-
-    std::vector<double> axes(6, 0.0);
+    
     for (size_t i = 0; i < 6; ++i) {
         if (!parseDoubleStrict(cleaned[i], axes[i])) {
             std::ostringstream oss;
             oss << "decodeMessage: invalid number at index " << i
                 << " ('" << cleaned[i] << "')";
-            throw std::runtime_error(oss.str());
+            std::cerr << oss.str() << std::endl;
+            return false;
         }
     }
-    return axes;
+    return true;
 }
 
 /**

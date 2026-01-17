@@ -376,7 +376,7 @@ namespace arctos_interface
                     {
                         // motor_driver_->setJointVelocity(info_.joints[i].name, joint_velocities_command_[i]);
                         RCLCPP_INFO(node_->get_logger(),
-                                    "Sent velocity command %.3f to joint %s. Last command: %.3f",
+                                    "Sent velocity command %.3f rad/s to joint %s. Last command: %.3f",
                                     joint_velocities_command_[i], info_.joints[i].name.c_str(),
                                     last_velocity_command_[i]);
                         last_velocity_command_[i] = joint_velocities_command_[i];
@@ -405,7 +405,7 @@ namespace arctos_interface
                         {
                             motor_driver_->setJointPosition(info_.joints[i].name, joint_position_command_[i], 0, abs(joint_velocities_command_[i] * 10) * 60);
                             RCLCPP_INFO(node_->get_logger(),
-                                        "Sent position command %.5f to joint %s. Last command: %.5f.",
+                                        "Sent position command %.5f rad to joint %s. Last command: %.5f.",
                                         joint_position_command_[i], info_.joints[i].name.c_str(),
                                         last_position_command_[i]);
                             last_position_command_[i] = joint_position_command_[i];

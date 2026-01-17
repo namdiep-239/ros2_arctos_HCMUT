@@ -40,8 +40,8 @@ public:
     /// @brief Get oldest message from buffer (FIFO) and remove it
     std::string getFromBuffer();
 
-    /// @brief Decode received message string into position values vector
-    std::vector<double> decodeMessage(const std::string data);
+    /// @brief Decode received message string into position values vector, return true for success decode.
+    bool decodeMessage(const std::string data, std::vector<double> &axes);
     
     /// @brief Format position vector into message string and send via UART
     bool sendPosition(std::vector<double> &positions);

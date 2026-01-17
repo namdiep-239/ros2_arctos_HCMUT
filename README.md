@@ -84,12 +84,6 @@ First, install the required dependencies:
 sudo apt install can-utils python3-rosdep ros-humble-can-msgs ros-humble-ros2-control -y
 ```
 
-Install the Python dependencies:
-
-```bash
-pip install python-can ruamel.yaml rich keyboard -y
-```
-
 **Open new terminal**, then create a ROS2 workspace and clone the ROS2 Arctos repository inside the `src/` directory:
 
 ```bash
@@ -108,6 +102,37 @@ git checkout <branch_name>
 Then navigate to the workspace root:
 ```bash
 cd ~/ros2_ws
+```
+
+### Install the Python dependencies:
+
+It's suggested to use Pyenv to manage environment. to install pyenv, follow [realPython tutorial](https://realpython.com/intro-to-pyenv/). Remember to register pyenv into bash.
+
+Move into ros2_ws folder. install Python 3.10.12, then create an virtual env **denso** out of it
+
+```bash
+pyenv install 3.10.12
+pyenv virtualenv 3.10.12 denso
+```
+
+You can check for installed python versions and virtualenvs using:
+
+```bash
+pyenv versions
+pyenv virtualenvs
+```
+
+Then, activate **denso** as the virtual env for ros2_ws folder. activate it whenever needed.
+
+```bash
+pyenv local denso
+pyenv activate
+```
+
+Install needed dependency for the project.
+
+```bash
+pip install python-can ruamel.yaml rich keyboard catkin-pkg
 ```
 
 ### Building the Workspace
@@ -135,6 +160,17 @@ rosdep install --from-paths src -y --ignore-src
 
 **Note**: You may encounter an error with the package `ros-humble-warehouse-ros-mongo`. You can ignore this package for now.
 
+
+#### Build the serial package
+
+Move into serial folder and build it first:
+
+```bash
+cd ~/ros2_ws/src/ros2_arctos_HCMUT/serial
+make
+make install
+```
+
 Build the workspace using `colcon`:
 
 ```bash
@@ -147,7 +183,7 @@ You should now have the workspace built and ready to use.
 
 ### Getting Started
 
-#### Setup CAN Interface
+#### Setup CAN Interface (skip)
 
 For this section, we will temporarily move to the ros2_arctos directory in the src folder.
 *In the future, we will handle this in a more user-friendly way.*
@@ -168,7 +204,7 @@ To setup the CAN interface, run the script `setup_canable.sh`:
 sudo ./scripts/setup_canable.sh
 ```
 
-#### Configure the joint limits and zero positions (First time only)
+#### Configure the joint limits and zero positions (First time only) (skip)
 
 **This only supports the joints XYZ at the moment.**
 
@@ -182,7 +218,7 @@ sudo -E python3 scripts/set_zero_position.py --init
 
 Follow the instructions on the screen to set the zero positions and joint limits.
 
-#### Set the zero positions (Every time you power the robot)
+#### Set the zero positions (Every time you power the robot) (skip)
 
 If this is the first time you are setting the zero positions, see the previous step and ignore this one.
 You only need to run this step if you have already set the zero positions and you have powered off the robot.
