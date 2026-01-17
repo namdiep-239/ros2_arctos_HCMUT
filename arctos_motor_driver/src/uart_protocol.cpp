@@ -179,12 +179,12 @@ bool UartProtocol::sendPosition(std::vector<double> &positions) {
     }
 
     std::ostringstream oss;
-    oss << std::setprecision(10) << positions[0];
+    oss.flags(std::ios::fixed);
+    oss << (int) (positions[0] * 100.0);  // Chuyển sang int với 2 chữ số thập phân
     for (size_t i = 1; i < 6; ++i) {
-        oss << DELIMITER << std::setprecision(10) << positions[i];
+        oss << DELIMITER << (int) (positions[i] * 100.0);
     }
     oss << kEOL;
-
     return sendMsg(oss.str());
 }
 

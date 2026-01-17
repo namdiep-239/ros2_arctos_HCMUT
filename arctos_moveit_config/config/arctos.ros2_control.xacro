@@ -14,7 +14,7 @@
         <xacro:unless value="${sim}">
           <plugin>arctos_interface/ArctosInterface</plugin>
           <param name="device">/dev/ttyUSB0</param>
-          <param name="baud_rate">19200</param>
+          <param name="baud_rate">115200</param>
           <param name="timeout">1000</param>
         </xacro:unless>
       </hardware>
@@ -25,7 +25,7 @@
         </command_interface>
         <command_interface name="velocity">
           <param name="min">0</param>
-          <param name="max">0.392699081698724</param>
+          <param name="max">3.0543</param>
         </command_interface>
         <state_interface name="position">
           <param name="initial_value">${initial_positions['X_joint']}</param>
@@ -39,7 +39,7 @@
         </command_interface>
         <command_interface name="velocity">
           <param name="min">0</param>
-          <param name="max">0.261799387799149</param>
+          <param name="max">3.4907</param>
         </command_interface>
         <state_interface name="position">
           <param name="initial_value">${initial_positions['Y_joint']}</param>
@@ -53,7 +53,7 @@
         </command_interface>
         <command_interface name="velocity">
           <param name="min">0</param>
-          <param name="max">0.285832571599111</param>
+          <param name="max">3.4907</param>
         </command_interface>
         <state_interface name="position">
           <param name="initial_value">${initial_positions['Z_joint']}</param>
@@ -67,7 +67,7 @@
         </command_interface>
         <command_interface name="velocity">
           <param name="min">0</param>
-          <param name="max">0.392699081698724</param>
+          <param name="max">5.236</param>
         </command_interface>
         <state_interface name="position">
           <param name="initial_value">${initial_positions['A_joint']}</param>
@@ -81,7 +81,7 @@
         </command_interface>
         <command_interface name="velocity">
           <param name="min">0</param>
-          <param name="max">0.302168853397778</param>
+          <param name="max">5.236</param>
         </command_interface>
         <state_interface name="position">
           <param name="initial_value">${initial_positions['B_joint']}</param>
@@ -95,7 +95,7 @@
         </command_interface>
         <command_interface name="velocity">
           <param name="min">0</param>
-          <param name="max">0.628318530717959</param>
+          <param name="max">8.3776</param>
         </command_interface>
         <state_interface name="position">
           <param name="initial_value">${initial_positions['C_joint']}</param>
