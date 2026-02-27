@@ -1,0 +1,33 @@
+[ 66%] Built target uart_protocol
+[ 66%] Built target can_protocol
+[100%] Built target arctos_motor_driver
+-- Install configuration: ""
+-- Execute custom install script
+-- Up-to-date symlink: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/include/arctos_motor_driver/can_protocol.hpp
+-- Up-to-date symlink: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/include/arctos_motor_driver/motor_driver.hpp
+-- Up-to-date symlink: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/include/arctos_motor_driver/motor_types.hpp
+-- Up-to-date symlink: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/include/arctos_motor_driver/uart_protocol.hpp
+-- Up-to-date symlink: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/arctos_motor_driver/environment/library_path.sh
+-- Up-to-date symlink: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/arctos_motor_driver/environment/library_path.dsv
+-- Up-to-date symlink: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/ament_index/resource_index/package_run_dependencies/arctos_motor_driver
+-- Up-to-date symlink: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/ament_index/resource_index/parent_prefix_path/arctos_motor_driver
+-- Up-to-date symlink: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/arctos_motor_driver/environment/ament_prefix_path.sh
+-- Up-to-date symlink: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/arctos_motor_driver/environment/ament_prefix_path.dsv
+-- Up-to-date symlink: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/arctos_motor_driver/environment/path.sh
+-- Up-to-date symlink: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/arctos_motor_driver/environment/path.dsv
+-- Up-to-date symlink: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/arctos_motor_driver/local_setup.bash
+-- Up-to-date symlink: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/arctos_motor_driver/local_setup.sh
+-- Up-to-date symlink: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/arctos_motor_driver/local_setup.zsh
+-- Up-to-date symlink: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/arctos_motor_driver/local_setup.dsv
+-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/arctos_motor_driver/package.dsv
+-- Up-to-date symlink: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/ament_index/resource_index/packages/arctos_motor_driver
+-- Up-to-date symlink: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/arctos_motor_driver/cmake/ament_cmake_export_targets-extras.cmake
+-- Up-to-date symlink: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/arctos_motor_driver/cmake/ament_cmake_export_dependencies-extras.cmake
+-- Up-to-date symlink: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/arctos_motor_driver/cmake/arctos_motor_driverConfig.cmake
+-- Up-to-date symlink: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/arctos_motor_driver/cmake/arctos_motor_driverConfig-version.cmake
+-- Up-to-date symlink: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/arctos_motor_driver/package.xml
+-- Up-to-date: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/lib/libcan_protocol.so
+-- Up-to-date: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/lib/libuart_protocol.so
+-- Up-to-date: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/lib/libarctos_motor_driver.so
+-- Up-to-date: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/arctos_motor_driver/cmake/export_arctos_motor_driverExport.cmake
+-- Up-to-date: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/arctos_motor_driver/cmake/export_arctos_motor_driverExport-noconfig.cmake

@@ -1,0 +1,97 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-192e64a437a249860591.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.12"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4
+					]
+				}
+			],
+			"name" : "",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "arctos_motor_driver",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "arctos_motor_driver::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-arctos_motor_driver-d49e1b0c01bfa23a1402.json",
+					"name" : "arctos_motor_driver",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "arctos_motor_driver_uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-arctos_motor_driver_uninstall-d0dc6dac7bcaa98746b6.json",
+					"name" : "arctos_motor_driver_uninstall",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "can_protocol::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-can_protocol-538c841a2b278455f249.json",
+					"name" : "can_protocol",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "uart_protocol::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-uart_protocol-5eb6f4a17ba80256e768.json",
+					"name" : "uart_protocol",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-uninstall-865d07b09ef57f64532d.json",
+					"name" : "uninstall",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_motor_driver",
+		"source" : "/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/arctos_motor_driver"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 3
+	}
+}

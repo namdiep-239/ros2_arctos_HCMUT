@@ -1,16 +1,55 @@
 from launch import LaunchDescription
 from launch.actions import RegisterEventHandler, DeclareLaunchArgument
 from launch.event_handlers import OnProcessExit
-from launch.actions import IncludeLaunchDescription, LogInfo
+from launch.actions import SetEnvironmentVariable, IncludeLaunchDescription, LogInfo
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration, PathJoinSubstitution, Command, FindExecutable
 from ament_index_python.packages import get_package_share_directory
 from launch_ros.actions import Node
 from moveit_configs_utils import MoveItConfigsBuilder
+from launch_ros.substitutions import FindPackageShare
 import os
-
+import xacro
 
 def generate_launch_description():
+    world_file = '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/building_robot.sdf'  # Path to your Gazebo world file, if you have one
+    ros_gz_sim_pkg_path = get_package_share_directory('ros_gz_sim')
+    # example_pkg_path = FindPackageShare('example_package')  # Replace with your own package name
+    gz_launch_path = PathJoinSubstitution([ros_gz_sim_pkg_path, 'launch', 'gz_sim.launch.py'])
+
+        # SetEnvironmentVariable(
+        #     'GZ_SIM_RESOURCE_PATH',
+        #     PathJoinSubstitution([example_pkg_path, 'models'])
+        # ),
+        # SetEnvironmentVariable(
+        #     'GZ_SIM_PLUGIN_PATH',
+        #     PathJoinSubstitution([example_pkg_path, 'plugins'])
+        # ),
+    gazebo = IncludeLaunchDescription(
+                PythonLaunchDescriptionSource(gz_launch_path),
+                launch_arguments={
+                    'gz_args': PathJoinSubstitution([world_file]),  # Replace with your own world file
+                    'on_exit_shutdown': 'True'
+                }.items(),)
+
+    # Bridging and remapping Gazebo topics to ROS 2 (replace with your own topics)
+    gz_bridge = Node(
+                package='ros_gz_bridge',
+                executable='parameter_bridge',
+                arguments=['/example_imu_topic@sensor_msgs/msg/Imu@gz.msgs.IMU',],
+                remappings=[('/example_imu_topic',
+                            '/remapped_imu_topic'),],
+                output='screen'
+            )
+    package_path = os.path.join(
+        get_package_share_directory('arctos_description'),)
+
+    xacro_file = os.path.join(package_path,
+                              'urdf',
+                              'arctos.urdf')
+    doc = xacro.parse(open(xacro_file))
+    xacro.process_doc(doc)
+    params = {'robot_description': doc.toxml()}
     # Get package paths
     arctos_hardware_interface_dir = get_package_share_directory('arctos_hardware_interface')
     arctos_moveit_dir = get_package_share_directory('arctos_moveit_config')
@@ -52,6 +91,11 @@ def generate_launch_description():
         output="both",
         parameters=[moveit_config.robot_description],
     )
+
+    # spawn_entity = Node(package='gazebo_ros', executable='spawn_entity.py',
+    #                 arguments=['-topic', 'robot_description',
+    #                             '-entity', 'cart'],
+    #                 output='screen')
 
     # Parameters
     robot_controllers = os.path.join(
@@ -120,13 +164,65 @@ def generate_launch_description():
             target_action=robot_arm_controller_spawner,
             on_exit=[rviz_node, move_group_launch]
         ))
-    
+    camera_node = Node(
+        package='v4l2_camera',
+        executable='v4l2_camera_node',
+        name='v4l2_camera',
+        output='screen',
+        parameters=[
+            {
+                # 'video_device': '/dev/video1',     # đổi device tại đây
+                # 'image_width': 640,
+                # 'image_height': 480,
+                # 'pixel_format': 'YUYV',             # hoặc MJPG
+                # 'frame_rate': 30.0,
+                # 'camera_frame_id': 'camera_link',
+                # 'qos_overrides': {
+                #     '/camera/image_raw': {
+                #         'publisher': {
+                #             'reliability': 'best_effort',
+                #             'history': 'keep_last',
+                #             'depth': 100,
+                #         }
+                #     }
+                # }
+                'video_device': '/dev/video0',     
+                'image_size': [640, 480],
+                'pixel_format': 'YUYV',             
+                'output_encoding': 'rgb8', 
+                'qos_overrides': {
+                    '/camera/image_raw': {
+                        'publisher': {
+                            'reliability': 'best_effort',
+                            'history': 'keep_last',
+                            'depth': 100,
+                        }
+                    }
+                }
+            }
+        ],
+        remappings=[
+            ('image_raw', '/camera/image_raw'),
+            ('camera_info', '/camera/camera_info')
+        ]
+    )
+    # camera_subscriber = Node(
+    #     package="v4l2_camera",
+    #     executable="camera_subscriber_node",
+    #     name="camera_subscriber",
+    #     # name="robot_state_publisher",
+    # )
     return LaunchDescription([
         LogInfo(msg=["Launching Arctos Bringup with RViz..."]),
+        camera_node,
+        # camera_subscriber,
         control_node,
+        gazebo,
+        gz_bridge,
         robot_state_pub_node,
         joint_state_broadcaster_spawner,
         delay_robot_arm_controller_spawner,
         delay_rviz_and_moveit_launch,
+        # spawn_entity,
         # can_launch
     ])

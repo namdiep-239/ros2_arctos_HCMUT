@@ -1,0 +1,79 @@
+-- The C compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)
+-- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+-- Override CMake install command with custom implementation using symlinks instead of copying resources
+-- Found rclcpp: 16.0.17 (/opt/ros/humble/share/rclcpp/cmake)
+-- Found rosidl_generator_c: 3.1.8 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+-- Found rosidl_adapter: 3.1.8 (/opt/ros/humble/share/rosidl_adapter/cmake)
+-- Found rosidl_generator_cpp: 3.1.8 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+-- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+-- Found rmw_fastrtps_cpp: 6.2.9 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+-- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.2")  
+-- Found FastRTPS: /opt/ros/humble/include  
+-- Using RMW implementation 'rmw_fastrtps_cpp' as default
+-- Looking for pthread.h
+-- Looking for pthread.h - found
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE  
+-- Found can_msgs: 2.0.0 (/opt/ros/humble/share/can_msgs/cmake)
+-- Found sensor_msgs: 4.9.0 (/opt/ros/humble/share/sensor_msgs/cmake)
+-- Found hardware_interface: 2.53.0 (/opt/ros/humble/share/hardware_interface/cmake)
+-- Found realtime_tools: 2.15.0 (/opt/ros/humble/share/realtime_tools/cmake)
+-- Found arctos_motor_driver: 0.0.1 (/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/arctos_motor_driver/cmake)
+-- Found std_srvs: 4.9.0 (/opt/ros/humble/share/std_srvs/cmake)
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_hardware_interface
+[ 25%] [32mBuilding CXX object CMakeFiles/arctos_services.dir/src/arctos_services.cpp.o[0m
+[ 50%] [32m[1mLinking CXX shared library libarctos_services.so[0m
+[ 50%] Built target arctos_services
+[ 75%] [32mBuilding CXX object CMakeFiles/arctos_interface.dir/src/arctos_interface.cpp.o[0m
+[100%] [32m[1mLinking CXX shared library libarctos_interface.so[0m
+[100%] Built target arctos_interface
+-- Install configuration: ""
+-- Execute custom install script
+-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface//arctos_hardware_interface.xml
+-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/include/arctos_hardware_interface/arctos_interface.hpp
+-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/include/arctos_hardware_interface/arctos_services.hpp
+-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/launch/can_interface.launch.py
+-- Up-to-date symlink: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/arctos_hardware_interface.xml
+-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/environment/library_path.sh
+-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/environment/library_path.dsv
+-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/ament_index/resource_index/package_run_dependencies/arctos_hardware_interface
+-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/ament_index/resource_index/parent_prefix_path/arctos_hardware_interface
+-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/environment/ament_prefix_path.sh
+-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/environment/ament_prefix_path.dsv
+-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/environment/path.sh
+-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/environment/path.dsv
+-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/local_setup.bash
+-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/local_setup.sh
+-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/local_setup.zsh
+-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/local_setup.dsv
+-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/package.dsv
+-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/ament_index/resource_index/packages/arctos_hardware_interface
+-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/ament_index/resource_index/hardware_interface__pluginlib__plugin/arctos_hardware_interface
+-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/cmake/ament_cmake_export_targets-extras.cmake
+-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/cmake/ament_cmake_export_dependencies-extras.cmake
+-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/cmake/arctos_hardware_interfaceConfig.cmake
+-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/cmake/arctos_hardware_interfaceConfig-version.cmake
+-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/package.xml
+-- Installing: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/lib/libarctos_interface.so
+-- Set runtime path of "/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/lib/libarctos_interface.so" to ""
+-- Installing: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/lib/libarctos_services.so
+-- Set runtime path of "/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/lib/libarctos_services.so" to ""
+-- Installing: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/cmake/export_arctos_interfaceExport.cmake
+-- Installing: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/cmake/export_arctos_interfaceExport-noconfig.cmake

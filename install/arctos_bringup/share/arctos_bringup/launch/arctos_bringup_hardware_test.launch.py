@@ -1,0 +1,1 @@
+/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/arctos_bringup/launch/arctos_bringup_hardware_test.launch.py

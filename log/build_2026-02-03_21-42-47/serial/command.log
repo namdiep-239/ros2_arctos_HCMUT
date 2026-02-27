@@ -1,0 +1,4 @@
+Invoking command in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/serial': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/serial -- -j12 -l12
+Invoked command in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/serial' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/serial -- -j12 -l12
+Invoking command in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/serial': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/serial
+Invoked command in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/serial' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/serial

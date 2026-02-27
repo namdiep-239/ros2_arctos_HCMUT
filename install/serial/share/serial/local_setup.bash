@@ -1,0 +1,1 @@
+/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/serial/ament_cmake_environment_hooks/local_setup.bash

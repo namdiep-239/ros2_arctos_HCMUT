@@ -1,0 +1,1 @@
+/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/arctos_description/launch/view_robot.launch.py

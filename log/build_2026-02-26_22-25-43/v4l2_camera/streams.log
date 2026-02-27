@@ -1,0 +1,106 @@
+[0.032s] Invoking command in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/v4l2_camera': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/nguyen/ros2_ws_1/install/gazebo_simulation:/opt/ros/humble /usr/bin/cmake /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/src/v4l2_camera -DCMAKE_INSTALL_PREFIX=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/v4l2_camera
+[0.139s] -- The C compiler identification is GNU 11.4.0
+[0.249s] -- The CXX compiler identification is GNU 11.4.0
+[0.262s] -- Detecting C compiler ABI info
+[0.394s] -- Detecting C compiler ABI info - done
+[0.406s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.407s] -- Detecting C compile features
+[0.408s] -- Detecting C compile features - done
+[0.411s] -- Detecting CXX compiler ABI info
+[0.567s] -- Detecting CXX compiler ABI info - done
+[0.580s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.581s] -- Detecting CXX compile features
+[0.582s] -- Detecting CXX compile features - done
+[0.598s] -- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.932s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[1.214s] -- Found ament_cmake_ros: 0.10.0 (/opt/ros/humble/share/ament_cmake_ros/cmake)
+[1.244s] -- Found rclcpp: 16.0.17 (/opt/ros/humble/share/rclcpp/cmake)
+[1.359s] -- Found rosidl_generator_c: 3.1.8 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[1.372s] -- Found rosidl_adapter: 3.1.8 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[1.389s] -- Found rosidl_generator_cpp: 3.1.8 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[1.412s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[1.442s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[1.528s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[1.534s] -- Found rmw_fastrtps_cpp: 6.2.9 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[1.715s] -- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.2")  
+[1.768s] -- Found FastRTPS: /opt/ros/humble/include  
+[1.845s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[1.864s] -- Looking for pthread.h
+[1.986s] -- Looking for pthread.h - found
+[1.987s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[2.106s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+[2.107s] -- Found Threads: TRUE  
+[2.193s] -- Found rclcpp_components: 16.0.17 (/opt/ros/humble/share/rclcpp_components/cmake)
+[2.243s] -- Found camera_info_manager: 3.1.12 (/opt/ros/humble/share/camera_info_manager/cmake)
+[2.316s] -- Found cv_bridge: 3.2.1 (/opt/ros/humble/share/cv_bridge/cmake)
+[2.338s] -- Found image_transport: 3.1.12 (/opt/ros/humble/share/image_transport/cmake)
+[2.391s] -- Found ament_lint_auto: 0.12.14 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[2.528s] -- Added test 'cppcheck' to perform static code analysis on C / C++ code
+[2.529s] -- Configured cppcheck include dirs: $<BUILD_INTERFACE:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/src/v4l2_camera/include>
+[2.529s] -- Configured cppcheck exclude dirs and/or files: 
+[2.535s] -- Added test 'cpplint' to check C / C++ code against the Google style
+[2.536s] -- Configured cpplint exclude dirs and/or files: 
+[2.539s] -- Added test 'lint_cmake' to check CMake code style
+[2.546s] -- Added test 'uncrustify' to check C / C++ code style
+[2.546s] -- Configured uncrustify additional arguments: 
+[2.547s] -- Added test 'xmllint' to check XML markup files
+[2.559s] -- Configuring done
+[2.590s] -- Generating done
+[2.600s] -- Build files have been written to: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/v4l2_camera
+[2.616s] Invoked command in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/v4l2_camera' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/nguyen/ros2_ws_1/install/gazebo_simulation:/opt/ros/humble /usr/bin/cmake /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/src/v4l2_camera -DCMAKE_INSTALL_PREFIX=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/v4l2_camera
+[2.619s] Invoking command in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/v4l2_camera': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/nguyen/ros2_ws_1/install/gazebo_simulation:/opt/ros/humble /usr/bin/cmake --build /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/v4l2_camera -- -j12 -l12
+[2.702s] [ 25%] [32mBuilding CXX object CMakeFiles/v4l2_camera.dir/src/v4l2_camera.cpp.o[0m
+[2.702s] [ 25%] [32mBuilding CXX object CMakeFiles/v4l2_camera.dir/src/parameters.cpp.o[0m
+[2.702s] [ 37%] [32mBuilding CXX object CMakeFiles/v4l2_camera.dir/src/v4l2_camera_device.cpp.o[0m
+[12.031s] [ 50%] [32m[1mLinking CXX shared library libv4l2_camera.so[0m
+[12.737s] [ 50%] Built target v4l2_camera
+[12.764s] [ 75%] [32mBuilding CXX object CMakeFiles/v4l2_camera_node.dir/src/v4l2_camera_node.cpp.o[0m
+[12.764s] [ 75%] [32mBuilding CXX object CMakeFiles/v4l2_camera_compose_test.dir/src/v4l2_camera_compose_test.cpp.o[0m
+[15.837s] [ 87%] [32m[1mLinking CXX executable v4l2_camera_node[0m
+[16.509s] [ 87%] Built target v4l2_camera_node
+[20.281s] [100%] [32m[1mLinking CXX executable v4l2_camera_compose_test[0m
+[21.144s] [100%] Built target v4l2_camera_compose_test
+[21.161s] Invoked command in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/v4l2_camera' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/nguyen/ros2_ws_1/install/gazebo_simulation:/opt/ros/humble /usr/bin/cmake --build /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/v4l2_camera -- -j12 -l12
+[21.163s] Invoking command in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/v4l2_camera': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/nguyen/ros2_ws_1/install/gazebo_simulation:/opt/ros/humble /usr/bin/cmake --install /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/v4l2_camera
+[21.172s] -- Install configuration: ""
+[21.172s] -- Installing: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/v4l2_camera/include
+[21.172s] -- Installing: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/v4l2_camera/include/v4l2_camera
+[21.172s] -- Installing: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/v4l2_camera/include/v4l2_camera/v4l2_camera_device.hpp
+[21.172s] -- Installing: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/v4l2_camera/include/v4l2_camera/fourcc.hpp
+[21.172s] -- Installing: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/v4l2_camera/include/v4l2_camera/pixel_format.hpp
+[21.172s] -- Installing: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/v4l2_camera/include/v4l2_camera/parameters.hpp
+[21.173s] -- Installing: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/v4l2_camera/include/v4l2_camera/v4l2_camera.hpp
+[21.173s] -- Installing: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/v4l2_camera/include/v4l2_camera/control.hpp
+[21.173s] -- Installing: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/v4l2_camera/include/v4l2_camera/image_format.hpp
+[21.173s] -- Installing: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/v4l2_camera/include/v4l2_camera/visibility_control.h
+[21.173s] -- Installing: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/v4l2_camera/lib/libv4l2_camera.so
+[21.186s] -- Set runtime path of "/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/v4l2_camera/lib/libv4l2_camera.so" to ""
+[21.186s] -- Installing: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/v4l2_camera/lib/v4l2_camera/v4l2_camera_node
+[21.187s] -- Set runtime path of "/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/v4l2_camera/lib/v4l2_camera/v4l2_camera_node" to ""
+[21.187s] -- Installing: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/v4l2_camera/lib/v4l2_camera/v4l2_camera_compose_test
+[21.195s] -- Set runtime path of "/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/v4l2_camera/lib/v4l2_camera/v4l2_camera_compose_test" to ""
+[21.195s] -- Installing: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/v4l2_camera/share/v4l2_camera/environment/library_path.sh
+[21.195s] -- Installing: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/v4l2_camera/share/v4l2_camera/environment/library_path.dsv
+[21.195s] -- Installing: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/v4l2_camera/share/ament_index/resource_index/package_run_dependencies/v4l2_camera
+[21.196s] -- Installing: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/v4l2_camera/share/ament_index/resource_index/parent_prefix_path/v4l2_camera
+[21.196s] -- Installing: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/v4l2_camera/share/v4l2_camera/environment/ament_prefix_path.sh
+[21.196s] -- Installing: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/v4l2_camera/share/v4l2_camera/environment/ament_prefix_path.dsv
+[21.196s] -- Installing: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/v4l2_camera/share/v4l2_camera/environment/path.sh
+[21.196s] -- Installing: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/v4l2_camera/share/v4l2_camera/environment/path.dsv
+[21.196s] -- Installing: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/v4l2_camera/share/v4l2_camera/local_setup.bash
+[21.197s] -- Installing: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/v4l2_camera/share/v4l2_camera/local_setup.sh
+[21.197s] -- Installing: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/v4l2_camera/share/v4l2_camera/local_setup.zsh
+[21.197s] -- Installing: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/v4l2_camera/share/v4l2_camera/local_setup.dsv
+[21.197s] -- Installing: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/v4l2_camera/share/v4l2_camera/package.dsv
+[21.198s] -- Installing: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/v4l2_camera/share/ament_index/resource_index/packages/v4l2_camera
+[21.198s] -- Installing: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/v4l2_camera/share/ament_index/resource_index/rclcpp_components/v4l2_camera
+[21.198s] -- Installing: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/v4l2_camera/share/v4l2_camera/cmake/export_v4l2_cameraExport.cmake
+[21.198s] -- Installing: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/v4l2_camera/share/v4l2_camera/cmake/export_v4l2_cameraExport-noconfig.cmake
+[21.199s] -- Installing: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/v4l2_camera/share/v4l2_camera/cmake/ament_cmake_export_include_directories-extras.cmake
+[21.199s] -- Installing: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/v4l2_camera/share/v4l2_camera/cmake/ament_cmake_export_targets-extras.cmake
+[21.199s] -- Installing: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/v4l2_camera/share/v4l2_camera/cmake/ament_cmake_export_libraries-extras.cmake
+[21.199s] -- Installing: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/v4l2_camera/share/v4l2_camera/cmake/ament_cmake_export_dependencies-extras.cmake
+[21.199s] -- Installing: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/v4l2_camera/share/v4l2_camera/cmake/v4l2_cameraConfig.cmake
+[21.199s] -- Installing: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/v4l2_camera/share/v4l2_camera/cmake/v4l2_cameraConfig-version.cmake
+[21.199s] -- Installing: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/v4l2_camera/share/v4l2_camera/package.xml
+[21.203s] Invoked command in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/v4l2_camera' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/nguyen/ros2_ws_1/install/gazebo_simulation:/opt/ros/humble /usr/bin/cmake --install /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/v4l2_camera

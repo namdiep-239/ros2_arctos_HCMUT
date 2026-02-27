@@ -1,0 +1,566 @@
+[0.240s] DEBUG:colcon:Command line arguments: ['/usr/bin/colcon', 'build', '--symlink-install']
+[0.240s] DEBUG:colcon:Parsed command line arguments: Namespace(log_base=None, log_level=None, verb_name='build', build_base='build', install_base='install', merge_install=False, symlink_install=True, test_result_base=None, continue_on_error=False, executor='parallel', parallel_workers=12, event_handlers=None, ignore_user_meta=False, metas=['./colcon.meta'], base_paths=['.'], packages_ignore=None, packages_ignore_regex=None, paths=None, packages_up_to=None, packages_up_to_regex=None, packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_select_by_dep=None, packages_skip_by_dep=None, packages_skip_up_to=None, packages_select_build_failed=False, packages_skip_build_finished=False, packages_select_test_failures=False, packages_skip_test_passed=False, packages_select=None, packages_skip=None, packages_select_regex=None, packages_skip_regex=None, packages_start=None, packages_end=None, allow_overriding=[], cmake_args=None, cmake_target=None, cmake_target_skip_unavailable=False, cmake_clean_cache=False, cmake_clean_first=False, cmake_force_configure=False, ament_cmake_args=None, catkin_cmake_args=None, catkin_skip_building_tests=False, mixin_files=None, mixin=None, verb_parser=<colcon_mixin.mixin.mixin_argument.MixinArgumentDecorator object at 0x76fc8f2de1d0>, verb_extension=<colcon_core.verb.build.BuildVerb object at 0x76fc8f46bbb0>, main=<bound method BuildVerb.main of <colcon_core.verb.build.BuildVerb object at 0x76fc8f46bbb0>>, mixin_verb=('build',))
+[0.467s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) check parameters
+[0.468s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) check parameters
+[0.468s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) check parameters
+[0.468s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) check parameters
+[0.468s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) discover
+[0.468s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) discover
+[0.468s] INFO:colcon.colcon_core.package_discovery:Crawling recursively for packages in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT'
+[0.468s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ignore', 'ignore_ament_install']
+[0.468s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore'
+[0.468s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore_ament_install'
+[0.468s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_pkg']
+[0.468s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_pkg'
+[0.468s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_meta']
+[0.468s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_meta'
+[0.468s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ros']
+[0.468s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ros'
+[0.480s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['cmake', 'python']
+[0.480s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'cmake'
+[0.480s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python'
+[0.480s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['python_setup_py']
+[0.480s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python_setup_py'
+[0.480s] Level 1:colcon.colcon_core.package_identification:_identify(arctos_bringup) by extensions ['ignore', 'ignore_ament_install']
+[0.480s] Level 1:colcon.colcon_core.package_identification:_identify(arctos_bringup) by extension 'ignore'
+[0.480s] Level 1:colcon.colcon_core.package_identification:_identify(arctos_bringup) by extension 'ignore_ament_install'
+[0.480s] Level 1:colcon.colcon_core.package_identification:_identify(arctos_bringup) by extensions ['colcon_pkg']
+[0.480s] Level 1:colcon.colcon_core.package_identification:_identify(arctos_bringup) by extension 'colcon_pkg'
+[0.480s] Level 1:colcon.colcon_core.package_identification:_identify(arctos_bringup) by extensions ['colcon_meta']
+[0.480s] Level 1:colcon.colcon_core.package_identification:_identify(arctos_bringup) by extension 'colcon_meta'
+[0.481s] Level 1:colcon.colcon_core.package_identification:_identify(arctos_bringup) by extensions ['ros']
+[0.481s] Level 1:colcon.colcon_core.package_identification:_identify(arctos_bringup) by extension 'ros'
+[0.483s] DEBUG:colcon.colcon_core.package_identification:Package 'arctos_bringup' with type 'ros.ament_cmake' and name 'arctos_bringup'
+[0.483s] Level 1:colcon.colcon_core.package_identification:_identify(arctos_description) by extensions ['ignore', 'ignore_ament_install']
+[0.483s] Level 1:colcon.colcon_core.package_identification:_identify(arctos_description) by extension 'ignore'
+[0.483s] Level 1:colcon.colcon_core.package_identification:_identify(arctos_description) by extension 'ignore_ament_install'
+[0.483s] Level 1:colcon.colcon_core.package_identification:_identify(arctos_description) by extensions ['colcon_pkg']
+[0.484s] Level 1:colcon.colcon_core.package_identification:_identify(arctos_description) by extension 'colcon_pkg'
+[0.484s] Level 1:colcon.colcon_core.package_identification:_identify(arctos_description) by extensions ['colcon_meta']
+[0.484s] Level 1:colcon.colcon_core.package_identification:_identify(arctos_description) by extension 'colcon_meta'
+[0.484s] Level 1:colcon.colcon_core.package_identification:_identify(arctos_description) by extensions ['ros']
+[0.484s] Level 1:colcon.colcon_core.package_identification:_identify(arctos_description) by extension 'ros'
+[0.484s] DEBUG:colcon.colcon_core.package_identification:Package 'arctos_description' with type 'ros.ament_cmake' and name 'arctos_description'
+[0.484s] Level 1:colcon.colcon_core.package_identification:_identify(arctos_hardware_interface) by extensions ['ignore', 'ignore_ament_install']
+[0.484s] Level 1:colcon.colcon_core.package_identification:_identify(arctos_hardware_interface) by extension 'ignore'
+[0.484s] Level 1:colcon.colcon_core.package_identification:_identify(arctos_hardware_interface) by extension 'ignore_ament_install'
+[0.484s] Level 1:colcon.colcon_core.package_identification:_identify(arctos_hardware_interface) by extensions ['colcon_pkg']
+[0.484s] Level 1:colcon.colcon_core.package_identification:_identify(arctos_hardware_interface) by extension 'colcon_pkg'
+[0.484s] Level 1:colcon.colcon_core.package_identification:_identify(arctos_hardware_interface) by extensions ['colcon_meta']
+[0.484s] Level 1:colcon.colcon_core.package_identification:_identify(arctos_hardware_interface) by extension 'colcon_meta'
+[0.484s] Level 1:colcon.colcon_core.package_identification:_identify(arctos_hardware_interface) by extensions ['ros']
+[0.484s] Level 1:colcon.colcon_core.package_identification:_identify(arctos_hardware_interface) by extension 'ros'
+[0.485s] DEBUG:colcon.colcon_core.package_identification:Package 'arctos_hardware_interface' with type 'ros.ament_cmake' and name 'arctos_hardware_interface'
+[0.485s] Level 1:colcon.colcon_core.package_identification:_identify(arctos_motor_driver) by extensions ['ignore', 'ignore_ament_install']
+[0.486s] Level 1:colcon.colcon_core.package_identification:_identify(arctos_motor_driver) by extension 'ignore'
+[0.486s] Level 1:colcon.colcon_core.package_identification:_identify(arctos_motor_driver) by extension 'ignore_ament_install'
+[0.486s] Level 1:colcon.colcon_core.package_identification:_identify(arctos_motor_driver) by extensions ['colcon_pkg']
+[0.486s] Level 1:colcon.colcon_core.package_identification:_identify(arctos_motor_driver) by extension 'colcon_pkg'
+[0.486s] Level 1:colcon.colcon_core.package_identification:_identify(arctos_motor_driver) by extensions ['colcon_meta']
+[0.486s] Level 1:colcon.colcon_core.package_identification:_identify(arctos_motor_driver) by extension 'colcon_meta'
+[0.486s] Level 1:colcon.colcon_core.package_identification:_identify(arctos_motor_driver) by extensions ['ros']
+[0.486s] Level 1:colcon.colcon_core.package_identification:_identify(arctos_motor_driver) by extension 'ros'
+[0.486s] DEBUG:colcon.colcon_core.package_identification:Package 'arctos_motor_driver' with type 'ros.ament_cmake' and name 'arctos_motor_driver'
+[0.486s] Level 1:colcon.colcon_core.package_identification:_identify(arctos_moveit_config) by extensions ['ignore', 'ignore_ament_install']
+[0.486s] Level 1:colcon.colcon_core.package_identification:_identify(arctos_moveit_config) by extension 'ignore'
+[0.487s] Level 1:colcon.colcon_core.package_identification:_identify(arctos_moveit_config) by extension 'ignore_ament_install'
+[0.487s] Level 1:colcon.colcon_core.package_identification:_identify(arctos_moveit_config) by extensions ['colcon_pkg']
+[0.487s] Level 1:colcon.colcon_core.package_identification:_identify(arctos_moveit_config) by extension 'colcon_pkg'
+[0.487s] Level 1:colcon.colcon_core.package_identification:_identify(arctos_moveit_config) by extensions ['colcon_meta']
+[0.487s] Level 1:colcon.colcon_core.package_identification:_identify(arctos_moveit_config) by extension 'colcon_meta'
+[0.487s] Level 1:colcon.colcon_core.package_identification:_identify(arctos_moveit_config) by extensions ['ros']
+[0.487s] Level 1:colcon.colcon_core.package_identification:_identify(arctos_moveit_config) by extension 'ros'
+[0.487s] DEBUG:colcon.colcon_core.package_identification:Package 'arctos_moveit_config' with type 'ros.ament_cmake' and name 'arctos_moveit_config'
+[0.488s] Level 1:colcon.colcon_core.package_identification:_identify(assets) by extensions ['ignore', 'ignore_ament_install']
+[0.488s] Level 1:colcon.colcon_core.package_identification:_identify(assets) by extension 'ignore'
+[0.488s] Level 1:colcon.colcon_core.package_identification:_identify(assets) by extension 'ignore_ament_install'
+[0.488s] Level 1:colcon.colcon_core.package_identification:_identify(assets) by extensions ['colcon_pkg']
+[0.488s] Level 1:colcon.colcon_core.package_identification:_identify(assets) by extension 'colcon_pkg'
+[0.488s] Level 1:colcon.colcon_core.package_identification:_identify(assets) by extensions ['colcon_meta']
+[0.488s] Level 1:colcon.colcon_core.package_identification:_identify(assets) by extension 'colcon_meta'
+[0.488s] Level 1:colcon.colcon_core.package_identification:_identify(assets) by extensions ['ros']
+[0.488s] Level 1:colcon.colcon_core.package_identification:_identify(assets) by extension 'ros'
+[0.488s] Level 1:colcon.colcon_core.package_identification:_identify(assets) by extensions ['cmake', 'python']
+[0.488s] Level 1:colcon.colcon_core.package_identification:_identify(assets) by extension 'cmake'
+[0.488s] Level 1:colcon.colcon_core.package_identification:_identify(assets) by extension 'python'
+[0.488s] Level 1:colcon.colcon_core.package_identification:_identify(assets) by extensions ['python_setup_py']
+[0.488s] Level 1:colcon.colcon_core.package_identification:_identify(assets) by extension 'python_setup_py'
+[0.488s] Level 1:colcon.colcon_core.package_identification:_identify(assets/home_sensors) by extensions ['ignore', 'ignore_ament_install']
+[0.488s] Level 1:colcon.colcon_core.package_identification:_identify(assets/home_sensors) by extension 'ignore'
+[0.488s] Level 1:colcon.colcon_core.package_identification:_identify(assets/home_sensors) by extension 'ignore_ament_install'
+[0.488s] Level 1:colcon.colcon_core.package_identification:_identify(assets/home_sensors) by extensions ['colcon_pkg']
+[0.488s] Level 1:colcon.colcon_core.package_identification:_identify(assets/home_sensors) by extension 'colcon_pkg'
+[0.488s] Level 1:colcon.colcon_core.package_identification:_identify(assets/home_sensors) by extensions ['colcon_meta']
+[0.488s] Level 1:colcon.colcon_core.package_identification:_identify(assets/home_sensors) by extension 'colcon_meta'
+[0.488s] Level 1:colcon.colcon_core.package_identification:_identify(assets/home_sensors) by extensions ['ros']
+[0.488s] Level 1:colcon.colcon_core.package_identification:_identify(assets/home_sensors) by extension 'ros'
+[0.488s] Level 1:colcon.colcon_core.package_identification:_identify(assets/home_sensors) by extensions ['cmake', 'python']
+[0.488s] Level 1:colcon.colcon_core.package_identification:_identify(assets/home_sensors) by extension 'cmake'
+[0.488s] Level 1:colcon.colcon_core.package_identification:_identify(assets/home_sensors) by extension 'python'
+[0.489s] Level 1:colcon.colcon_core.package_identification:_identify(assets/home_sensors) by extensions ['python_setup_py']
+[0.489s] Level 1:colcon.colcon_core.package_identification:_identify(assets/home_sensors) by extension 'python_setup_py'
+[0.489s] Level 1:colcon.colcon_core.package_identification:_identify(assets/zero_position) by extensions ['ignore', 'ignore_ament_install']
+[0.489s] Level 1:colcon.colcon_core.package_identification:_identify(assets/zero_position) by extension 'ignore'
+[0.489s] Level 1:colcon.colcon_core.package_identification:_identify(assets/zero_position) by extension 'ignore_ament_install'
+[0.489s] Level 1:colcon.colcon_core.package_identification:_identify(assets/zero_position) by extensions ['colcon_pkg']
+[0.489s] Level 1:colcon.colcon_core.package_identification:_identify(assets/zero_position) by extension 'colcon_pkg'
+[0.489s] Level 1:colcon.colcon_core.package_identification:_identify(assets/zero_position) by extensions ['colcon_meta']
+[0.489s] Level 1:colcon.colcon_core.package_identification:_identify(assets/zero_position) by extension 'colcon_meta'
+[0.489s] Level 1:colcon.colcon_core.package_identification:_identify(assets/zero_position) by extensions ['ros']
+[0.489s] Level 1:colcon.colcon_core.package_identification:_identify(assets/zero_position) by extension 'ros'
+[0.489s] Level 1:colcon.colcon_core.package_identification:_identify(assets/zero_position) by extensions ['cmake', 'python']
+[0.489s] Level 1:colcon.colcon_core.package_identification:_identify(assets/zero_position) by extension 'cmake'
+[0.489s] Level 1:colcon.colcon_core.package_identification:_identify(assets/zero_position) by extension 'python'
+[0.489s] Level 1:colcon.colcon_core.package_identification:_identify(assets/zero_position) by extensions ['python_setup_py']
+[0.489s] Level 1:colcon.colcon_core.package_identification:_identify(assets/zero_position) by extension 'python_setup_py'
+[0.489s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extensions ['ignore', 'ignore_ament_install']
+[0.489s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extension 'ignore'
+[0.489s] Level 1:colcon.colcon_core.package_identification:_identify(build) ignored
+[0.489s] Level 1:colcon.colcon_core.package_identification:_identify(gamepadControl) by extensions ['ignore', 'ignore_ament_install']
+[0.489s] Level 1:colcon.colcon_core.package_identification:_identify(gamepadControl) by extension 'ignore'
+[0.489s] Level 1:colcon.colcon_core.package_identification:_identify(gamepadControl) by extension 'ignore_ament_install'
+[0.490s] Level 1:colcon.colcon_core.package_identification:_identify(gamepadControl) by extensions ['colcon_pkg']
+[0.490s] Level 1:colcon.colcon_core.package_identification:_identify(gamepadControl) by extension 'colcon_pkg'
+[0.490s] Level 1:colcon.colcon_core.package_identification:_identify(gamepadControl) by extensions ['colcon_meta']
+[0.490s] Level 1:colcon.colcon_core.package_identification:_identify(gamepadControl) by extension 'colcon_meta'
+[0.490s] Level 1:colcon.colcon_core.package_identification:_identify(gamepadControl) by extensions ['ros']
+[0.490s] Level 1:colcon.colcon_core.package_identification:_identify(gamepadControl) by extension 'ros'
+[0.490s] Level 1:colcon.colcon_core.package_identification:_identify(gamepadControl) by extensions ['cmake', 'python']
+[0.490s] Level 1:colcon.colcon_core.package_identification:_identify(gamepadControl) by extension 'cmake'
+[0.490s] Level 1:colcon.colcon_core.package_identification:_identify(gamepadControl) by extension 'python'
+[0.490s] Level 1:colcon.colcon_core.package_identification:_identify(gamepadControl) by extensions ['python_setup_py']
+[0.490s] Level 1:colcon.colcon_core.package_identification:_identify(gamepadControl) by extension 'python_setup_py'
+[0.490s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extensions ['ignore', 'ignore_ament_install']
+[0.490s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extension 'ignore'
+[0.490s] Level 1:colcon.colcon_core.package_identification:_identify(install) ignored
+[0.490s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extensions ['ignore', 'ignore_ament_install']
+[0.490s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extension 'ignore'
+[0.490s] Level 1:colcon.colcon_core.package_identification:_identify(log) ignored
+[0.490s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extensions ['ignore', 'ignore_ament_install']
+[0.490s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extension 'ignore'
+[0.490s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extension 'ignore_ament_install'
+[0.490s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extensions ['colcon_pkg']
+[0.490s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extension 'colcon_pkg'
+[0.490s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extensions ['colcon_meta']
+[0.490s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extension 'colcon_meta'
+[0.491s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extensions ['ros']
+[0.491s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extension 'ros'
+[0.491s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extensions ['cmake', 'python']
+[0.491s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extension 'cmake'
+[0.491s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extension 'python'
+[0.491s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extensions ['python_setup_py']
+[0.491s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extension 'python_setup_py'
+[0.491s] Level 1:colcon.colcon_core.package_identification:_identify(scripts/stepper_motor) by extensions ['ignore', 'ignore_ament_install']
+[0.491s] Level 1:colcon.colcon_core.package_identification:_identify(scripts/stepper_motor) by extension 'ignore'
+[0.491s] Level 1:colcon.colcon_core.package_identification:_identify(scripts/stepper_motor) by extension 'ignore_ament_install'
+[0.491s] Level 1:colcon.colcon_core.package_identification:_identify(scripts/stepper_motor) by extensions ['colcon_pkg']
+[0.491s] Level 1:colcon.colcon_core.package_identification:_identify(scripts/stepper_motor) by extension 'colcon_pkg'
+[0.491s] Level 1:colcon.colcon_core.package_identification:_identify(scripts/stepper_motor) by extensions ['colcon_meta']
+[0.491s] Level 1:colcon.colcon_core.package_identification:_identify(scripts/stepper_motor) by extension 'colcon_meta'
+[0.491s] Level 1:colcon.colcon_core.package_identification:_identify(scripts/stepper_motor) by extensions ['ros']
+[0.491s] Level 1:colcon.colcon_core.package_identification:_identify(scripts/stepper_motor) by extension 'ros'
+[0.491s] Level 1:colcon.colcon_core.package_identification:_identify(scripts/stepper_motor) by extensions ['cmake', 'python']
+[0.491s] Level 1:colcon.colcon_core.package_identification:_identify(scripts/stepper_motor) by extension 'cmake'
+[0.491s] Level 1:colcon.colcon_core.package_identification:_identify(scripts/stepper_motor) by extension 'python'
+[0.491s] Level 1:colcon.colcon_core.package_identification:_identify(scripts/stepper_motor) by extensions ['python_setup_py']
+[0.491s] Level 1:colcon.colcon_core.package_identification:_identify(scripts/stepper_motor) by extension 'python_setup_py'
+[0.491s] Level 1:colcon.colcon_core.package_identification:_identify(scripts/stepper_motor/data) by extensions ['ignore', 'ignore_ament_install']
+[0.491s] Level 1:colcon.colcon_core.package_identification:_identify(scripts/stepper_motor/data) by extension 'ignore'
+[0.491s] Level 1:colcon.colcon_core.package_identification:_identify(scripts/stepper_motor/data) by extension 'ignore_ament_install'
+[0.492s] Level 1:colcon.colcon_core.package_identification:_identify(scripts/stepper_motor/data) by extensions ['colcon_pkg']
+[0.492s] Level 1:colcon.colcon_core.package_identification:_identify(scripts/stepper_motor/data) by extension 'colcon_pkg'
+[0.492s] Level 1:colcon.colcon_core.package_identification:_identify(scripts/stepper_motor/data) by extensions ['colcon_meta']
+[0.492s] Level 1:colcon.colcon_core.package_identification:_identify(scripts/stepper_motor/data) by extension 'colcon_meta'
+[0.492s] Level 1:colcon.colcon_core.package_identification:_identify(scripts/stepper_motor/data) by extensions ['ros']
+[0.492s] Level 1:colcon.colcon_core.package_identification:_identify(scripts/stepper_motor/data) by extension 'ros'
+[0.492s] Level 1:colcon.colcon_core.package_identification:_identify(scripts/stepper_motor/data) by extensions ['cmake', 'python']
+[0.492s] Level 1:colcon.colcon_core.package_identification:_identify(scripts/stepper_motor/data) by extension 'cmake'
+[0.492s] Level 1:colcon.colcon_core.package_identification:_identify(scripts/stepper_motor/data) by extension 'python'
+[0.492s] Level 1:colcon.colcon_core.package_identification:_identify(scripts/stepper_motor/data) by extensions ['python_setup_py']
+[0.492s] Level 1:colcon.colcon_core.package_identification:_identify(scripts/stepper_motor/data) by extension 'python_setup_py'
+[0.492s] Level 1:colcon.colcon_core.package_identification:_identify(serial) by extensions ['ignore', 'ignore_ament_install']
+[0.492s] Level 1:colcon.colcon_core.package_identification:_identify(serial) by extension 'ignore'
+[0.492s] Level 1:colcon.colcon_core.package_identification:_identify(serial) by extension 'ignore_ament_install'
+[0.492s] Level 1:colcon.colcon_core.package_identification:_identify(serial) by extensions ['colcon_pkg']
+[0.492s] Level 1:colcon.colcon_core.package_identification:_identify(serial) by extension 'colcon_pkg'
+[0.492s] Level 1:colcon.colcon_core.package_identification:_identify(serial) by extensions ['colcon_meta']
+[0.492s] Level 1:colcon.colcon_core.package_identification:_identify(serial) by extension 'colcon_meta'
+[0.492s] Level 1:colcon.colcon_core.package_identification:_identify(serial) by extensions ['ros']
+[0.492s] Level 1:colcon.colcon_core.package_identification:_identify(serial) by extension 'ros'
+[0.493s] DEBUG:colcon.colcon_core.package_identification:Package 'serial' with type 'ros.ament_cmake' and name 'serial'
+[0.493s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) using defaults
+[0.493s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) discover
+[0.493s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) using defaults
+[0.493s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) discover
+[0.493s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) using defaults
+[0.533s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) check parameters
+[0.533s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) discover
+[0.537s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 329 installed packages in /opt/ros/humble
+[0.538s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) using defaults
+[0.575s] Level 5:colcon.colcon_core.verb:set package 'arctos_description' build argument 'cmake_args' from command line to 'None'
+[0.575s] Level 5:colcon.colcon_core.verb:set package 'arctos_description' build argument 'cmake_target' from command line to 'None'
+[0.575s] Level 5:colcon.colcon_core.verb:set package 'arctos_description' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.575s] Level 5:colcon.colcon_core.verb:set package 'arctos_description' build argument 'cmake_clean_cache' from command line to 'False'
+[0.575s] Level 5:colcon.colcon_core.verb:set package 'arctos_description' build argument 'cmake_clean_first' from command line to 'False'
+[0.575s] Level 5:colcon.colcon_core.verb:set package 'arctos_description' build argument 'cmake_force_configure' from command line to 'False'
+[0.575s] Level 5:colcon.colcon_core.verb:set package 'arctos_description' build argument 'ament_cmake_args' from command line to 'None'
+[0.575s] Level 5:colcon.colcon_core.verb:set package 'arctos_description' build argument 'catkin_cmake_args' from command line to 'None'
+[0.575s] Level 5:colcon.colcon_core.verb:set package 'arctos_description' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.575s] DEBUG:colcon.colcon_core.verb:Building package 'arctos_description' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_description', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description', 'merge_install': False, 'path': '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/arctos_description', 'symlink_install': True, 'test_result_base': None}
+[0.575s] Level 5:colcon.colcon_core.verb:set package 'serial' build argument 'cmake_args' from command line to 'None'
+[0.575s] Level 5:colcon.colcon_core.verb:set package 'serial' build argument 'cmake_target' from command line to 'None'
+[0.575s] Level 5:colcon.colcon_core.verb:set package 'serial' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.575s] Level 5:colcon.colcon_core.verb:set package 'serial' build argument 'cmake_clean_cache' from command line to 'False'
+[0.575s] Level 5:colcon.colcon_core.verb:set package 'serial' build argument 'cmake_clean_first' from command line to 'False'
+[0.575s] Level 5:colcon.colcon_core.verb:set package 'serial' build argument 'cmake_force_configure' from command line to 'False'
+[0.575s] Level 5:colcon.colcon_core.verb:set package 'serial' build argument 'ament_cmake_args' from command line to 'None'
+[0.575s] Level 5:colcon.colcon_core.verb:set package 'serial' build argument 'catkin_cmake_args' from command line to 'None'
+[0.575s] Level 5:colcon.colcon_core.verb:set package 'serial' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.575s] DEBUG:colcon.colcon_core.verb:Building package 'serial' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/serial', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial', 'merge_install': False, 'path': '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/serial', 'symlink_install': True, 'test_result_base': None}
+[0.576s] Level 5:colcon.colcon_core.verb:set package 'arctos_motor_driver' build argument 'cmake_args' from command line to 'None'
+[0.576s] Level 5:colcon.colcon_core.verb:set package 'arctos_motor_driver' build argument 'cmake_target' from command line to 'None'
+[0.576s] Level 5:colcon.colcon_core.verb:set package 'arctos_motor_driver' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.576s] Level 5:colcon.colcon_core.verb:set package 'arctos_motor_driver' build argument 'cmake_clean_cache' from command line to 'False'
+[0.576s] Level 5:colcon.colcon_core.verb:set package 'arctos_motor_driver' build argument 'cmake_clean_first' from command line to 'False'
+[0.576s] Level 5:colcon.colcon_core.verb:set package 'arctos_motor_driver' build argument 'cmake_force_configure' from command line to 'False'
+[0.576s] Level 5:colcon.colcon_core.verb:set package 'arctos_motor_driver' build argument 'ament_cmake_args' from command line to 'None'
+[0.576s] Level 5:colcon.colcon_core.verb:set package 'arctos_motor_driver' build argument 'catkin_cmake_args' from command line to 'None'
+[0.576s] Level 5:colcon.colcon_core.verb:set package 'arctos_motor_driver' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.576s] DEBUG:colcon.colcon_core.verb:Building package 'arctos_motor_driver' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_motor_driver', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver', 'merge_install': False, 'path': '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/arctos_motor_driver', 'symlink_install': True, 'test_result_base': None}
+[0.576s] Level 5:colcon.colcon_core.verb:set package 'arctos_moveit_config' build argument 'cmake_args' from command line to 'None'
+[0.576s] Level 5:colcon.colcon_core.verb:set package 'arctos_moveit_config' build argument 'cmake_target' from command line to 'None'
+[0.576s] Level 5:colcon.colcon_core.verb:set package 'arctos_moveit_config' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.576s] Level 5:colcon.colcon_core.verb:set package 'arctos_moveit_config' build argument 'cmake_clean_cache' from command line to 'False'
+[0.576s] Level 5:colcon.colcon_core.verb:set package 'arctos_moveit_config' build argument 'cmake_clean_first' from command line to 'False'
+[0.576s] Level 5:colcon.colcon_core.verb:set package 'arctos_moveit_config' build argument 'cmake_force_configure' from command line to 'False'
+[0.576s] Level 5:colcon.colcon_core.verb:set package 'arctos_moveit_config' build argument 'ament_cmake_args' from command line to 'None'
+[0.576s] Level 5:colcon.colcon_core.verb:set package 'arctos_moveit_config' build argument 'catkin_cmake_args' from command line to 'None'
+[0.576s] Level 5:colcon.colcon_core.verb:set package 'arctos_moveit_config' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.576s] DEBUG:colcon.colcon_core.verb:Building package 'arctos_moveit_config' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_moveit_config', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config', 'merge_install': False, 'path': '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/arctos_moveit_config', 'symlink_install': True, 'test_result_base': None}
+[0.577s] Level 5:colcon.colcon_core.verb:set package 'arctos_hardware_interface' build argument 'cmake_args' from command line to 'None'
+[0.577s] Level 5:colcon.colcon_core.verb:set package 'arctos_hardware_interface' build argument 'cmake_target' from command line to 'None'
+[0.577s] Level 5:colcon.colcon_core.verb:set package 'arctos_hardware_interface' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.577s] Level 5:colcon.colcon_core.verb:set package 'arctos_hardware_interface' build argument 'cmake_clean_cache' from command line to 'False'
+[0.577s] Level 5:colcon.colcon_core.verb:set package 'arctos_hardware_interface' build argument 'cmake_clean_first' from command line to 'False'
+[0.577s] Level 5:colcon.colcon_core.verb:set package 'arctos_hardware_interface' build argument 'cmake_force_configure' from command line to 'False'
+[0.577s] Level 5:colcon.colcon_core.verb:set package 'arctos_hardware_interface' build argument 'ament_cmake_args' from command line to 'None'
+[0.577s] Level 5:colcon.colcon_core.verb:set package 'arctos_hardware_interface' build argument 'catkin_cmake_args' from command line to 'None'
+[0.577s] Level 5:colcon.colcon_core.verb:set package 'arctos_hardware_interface' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.577s] DEBUG:colcon.colcon_core.verb:Building package 'arctos_hardware_interface' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_hardware_interface', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface', 'merge_install': False, 'path': '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/arctos_hardware_interface', 'symlink_install': True, 'test_result_base': None}
+[0.577s] Level 5:colcon.colcon_core.verb:set package 'arctos_bringup' build argument 'cmake_args' from command line to 'None'
+[0.577s] Level 5:colcon.colcon_core.verb:set package 'arctos_bringup' build argument 'cmake_target' from command line to 'None'
+[0.577s] Level 5:colcon.colcon_core.verb:set package 'arctos_bringup' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.577s] Level 5:colcon.colcon_core.verb:set package 'arctos_bringup' build argument 'cmake_clean_cache' from command line to 'False'
+[0.577s] Level 5:colcon.colcon_core.verb:set package 'arctos_bringup' build argument 'cmake_clean_first' from command line to 'False'
+[0.577s] Level 5:colcon.colcon_core.verb:set package 'arctos_bringup' build argument 'cmake_force_configure' from command line to 'False'
+[0.577s] Level 5:colcon.colcon_core.verb:set package 'arctos_bringup' build argument 'ament_cmake_args' from command line to 'None'
+[0.577s] Level 5:colcon.colcon_core.verb:set package 'arctos_bringup' build argument 'catkin_cmake_args' from command line to 'None'
+[0.577s] Level 5:colcon.colcon_core.verb:set package 'arctos_bringup' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.577s] DEBUG:colcon.colcon_core.verb:Building package 'arctos_bringup' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_bringup', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_bringup', 'merge_install': False, 'path': '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/arctos_bringup', 'symlink_install': True, 'test_result_base': None}
+[0.577s] INFO:colcon.colcon_core.executor:Executing jobs using 'parallel' executor
+[0.578s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete
+[0.578s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/serial' with build type 'ament_cmake'
+[0.579s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/serial'
+[0.583s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_core.shell.bat': Not used on non-Windows systems
+[0.583s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.583s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.587s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/arctos_description' with build type 'ament_cmake'
+[0.587s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/arctos_description'
+[0.587s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.587s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.593s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/serial': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/serial -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial
+[0.600s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_description': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/arctos_description -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description
+[1.325s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_description' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/arctos_description -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description
+[1.326s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_description': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_description -- -j12 -l12
+[1.369s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_description' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_description -- -j12 -l12
+[1.380s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_description': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_description
+[1.537s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/serial' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/serial -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial
+[1.539s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/serial': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/serial -- -j12 -l12
+[1.727s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(arctos_description)
+[1.728s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_description' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_description
+[1.734s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description' for CMake module files
+[1.735s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description' for CMake config files
+[1.735s] Level 1:colcon.colcon_core.shell:create_environment_hook('arctos_description', 'cmake_prefix_path')
+[1.735s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description/share/arctos_description/hook/cmake_prefix_path.ps1'
+[1.737s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description/share/arctos_description/hook/cmake_prefix_path.dsv'
+[1.737s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description/share/arctos_description/hook/cmake_prefix_path.sh'
+[1.739s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description/bin'
+[1.739s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description/lib/pkgconfig/arctos_description.pc'
+[1.739s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description/lib/python3.10/site-packages'
+[1.739s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description/bin'
+[1.740s] INFO:colcon.colcon_core.shell:Creating package script '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description/share/arctos_description/package.ps1'
+[1.741s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description/share/arctos_description/package.dsv'
+[1.742s] INFO:colcon.colcon_core.shell:Creating package script '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description/share/arctos_description/package.sh'
+[1.743s] INFO:colcon.colcon_core.shell:Creating package script '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description/share/arctos_description/package.bash'
+[1.744s] INFO:colcon.colcon_core.shell:Creating package script '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description/share/arctos_description/package.zsh'
+[1.746s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description/share/colcon-core/packages/arctos_description)
+[1.747s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(arctos_description)
+[1.748s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description' for CMake module files
+[1.748s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description' for CMake config files
+[1.749s] Level 1:colcon.colcon_core.shell:create_environment_hook('arctos_description', 'cmake_prefix_path')
+[1.749s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description/share/arctos_description/hook/cmake_prefix_path.ps1'
+[1.750s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description/share/arctos_description/hook/cmake_prefix_path.dsv'
+[1.750s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description/share/arctos_description/hook/cmake_prefix_path.sh'
+[1.751s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description/bin'
+[1.751s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description/lib/pkgconfig/arctos_description.pc'
+[1.751s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description/lib/python3.10/site-packages'
+[1.752s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description/bin'
+[1.752s] INFO:colcon.colcon_core.shell:Creating package script '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description/share/arctos_description/package.ps1'
+[1.753s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description/share/arctos_description/package.dsv'
+[1.754s] INFO:colcon.colcon_core.shell:Creating package script '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description/share/arctos_description/package.sh'
+[1.754s] INFO:colcon.colcon_core.shell:Creating package script '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description/share/arctos_description/package.bash'
+[1.755s] INFO:colcon.colcon_core.shell:Creating package script '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description/share/arctos_description/package.zsh'
+[1.755s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description/share/colcon-core/packages/arctos_description)
+[1.756s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/arctos_moveit_config' with build type 'ament_cmake'
+[1.756s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/arctos_moveit_config'
+[1.756s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[1.756s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[1.767s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_moveit_config': AMENT_PREFIX_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description:/opt/ros/humble /usr/bin/cmake /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/arctos_moveit_config -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config
+[2.536s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_moveit_config' returned '0': AMENT_PREFIX_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description:/opt/ros/humble /usr/bin/cmake /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/arctos_moveit_config -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config
+[2.538s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_moveit_config': AMENT_PREFIX_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description:/opt/ros/humble /usr/bin/cmake --build /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_moveit_config -- -j12 -l12
+[2.592s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_moveit_config' returned '0': AMENT_PREFIX_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description:/opt/ros/humble /usr/bin/cmake --build /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_moveit_config -- -j12 -l12
+[2.595s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_moveit_config': AMENT_PREFIX_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description:/opt/ros/humble /usr/bin/cmake --install /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_moveit_config
+[2.987s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(arctos_moveit_config)
+[2.987s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config' for CMake module files
+[2.988s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_moveit_config' returned '0': AMENT_PREFIX_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description:/opt/ros/humble /usr/bin/cmake --install /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_moveit_config
+[2.989s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config' for CMake config files
+[2.990s] Level 1:colcon.colcon_core.shell:create_environment_hook('arctos_moveit_config', 'cmake_prefix_path')
+[2.991s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config/share/arctos_moveit_config/hook/cmake_prefix_path.ps1'
+[2.992s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config/share/arctos_moveit_config/hook/cmake_prefix_path.dsv'
+[2.993s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config/share/arctos_moveit_config/hook/cmake_prefix_path.sh'
+[2.994s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config/bin'
+[2.995s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config/lib/pkgconfig/arctos_moveit_config.pc'
+[2.995s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config/lib/python3.10/site-packages'
+[2.995s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config/bin'
+[2.996s] INFO:colcon.colcon_core.shell:Creating package script '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config/share/arctos_moveit_config/package.ps1'
+[2.998s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config/share/arctos_moveit_config/package.dsv'
+[2.999s] INFO:colcon.colcon_core.shell:Creating package script '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config/share/arctos_moveit_config/package.sh'
+[3.000s] INFO:colcon.colcon_core.shell:Creating package script '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config/share/arctos_moveit_config/package.bash'
+[3.000s] INFO:colcon.colcon_core.shell:Creating package script '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config/share/arctos_moveit_config/package.zsh'
+[3.001s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config/share/colcon-core/packages/arctos_moveit_config)
+[3.002s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(arctos_moveit_config)
+[3.003s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config' for CMake module files
+[3.003s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config' for CMake config files
+[3.004s] Level 1:colcon.colcon_core.shell:create_environment_hook('arctos_moveit_config', 'cmake_prefix_path')
+[3.005s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config/share/arctos_moveit_config/hook/cmake_prefix_path.ps1'
+[3.005s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config/share/arctos_moveit_config/hook/cmake_prefix_path.dsv'
+[3.006s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config/share/arctos_moveit_config/hook/cmake_prefix_path.sh'
+[3.007s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config/bin'
+[3.007s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config/lib/pkgconfig/arctos_moveit_config.pc'
+[3.008s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config/lib/python3.10/site-packages'
+[3.008s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config/bin'
+[3.009s] INFO:colcon.colcon_core.shell:Creating package script '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config/share/arctos_moveit_config/package.ps1'
+[3.010s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config/share/arctos_moveit_config/package.dsv'
+[3.011s] INFO:colcon.colcon_core.shell:Creating package script '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config/share/arctos_moveit_config/package.sh'
+[3.012s] INFO:colcon.colcon_core.shell:Creating package script '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config/share/arctos_moveit_config/package.bash'
+[3.013s] INFO:colcon.colcon_core.shell:Creating package script '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config/share/arctos_moveit_config/package.zsh'
+[3.014s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config/share/colcon-core/packages/arctos_moveit_config)
+[6.622s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/serial' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/serial -- -j12 -l12
+[6.624s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/serial': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/serial
+[6.878s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(serial)
+[6.878s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial' for CMake module files
+[6.879s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/serial' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/serial
+[6.879s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial' for CMake config files
+[6.879s] Level 1:colcon.colcon_core.shell:create_environment_hook('serial', 'cmake_prefix_path')
+[6.880s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/share/serial/hook/cmake_prefix_path.ps1'
+[6.880s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/share/serial/hook/cmake_prefix_path.dsv'
+[6.881s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/share/serial/hook/cmake_prefix_path.sh'
+[6.881s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/lib'
+[6.882s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/bin'
+[6.882s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/lib/pkgconfig/serial.pc'
+[6.882s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/lib/python3.10/site-packages'
+[6.882s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/bin'
+[6.883s] INFO:colcon.colcon_core.shell:Creating package script '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/share/serial/package.ps1'
+[6.883s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/share/serial/package.dsv'
+[6.884s] INFO:colcon.colcon_core.shell:Creating package script '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/share/serial/package.sh'
+[6.884s] INFO:colcon.colcon_core.shell:Creating package script '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/share/serial/package.bash'
+[6.885s] INFO:colcon.colcon_core.shell:Creating package script '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/share/serial/package.zsh'
+[6.885s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/share/colcon-core/packages/serial)
+[6.885s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(serial)
+[6.886s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial' for CMake module files
+[6.886s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial' for CMake config files
+[6.886s] Level 1:colcon.colcon_core.shell:create_environment_hook('serial', 'cmake_prefix_path')
+[6.886s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/share/serial/hook/cmake_prefix_path.ps1'
+[6.887s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/share/serial/hook/cmake_prefix_path.dsv'
+[6.888s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/share/serial/hook/cmake_prefix_path.sh'
+[6.888s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/lib'
+[6.888s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/bin'
+[6.888s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/lib/pkgconfig/serial.pc'
+[6.889s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/lib/python3.10/site-packages'
+[6.889s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/bin'
+[6.889s] INFO:colcon.colcon_core.shell:Creating package script '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/share/serial/package.ps1'
+[6.890s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/share/serial/package.dsv'
+[6.890s] INFO:colcon.colcon_core.shell:Creating package script '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/share/serial/package.sh'
+[6.891s] INFO:colcon.colcon_core.shell:Creating package script '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/share/serial/package.bash'
+[6.891s] INFO:colcon.colcon_core.shell:Creating package script '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/share/serial/package.zsh'
+[6.892s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/share/colcon-core/packages/serial)
+[6.892s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/arctos_motor_driver' with build type 'ament_cmake'
+[6.894s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/arctos_motor_driver'
+[6.894s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[6.894s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[6.905s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_motor_driver': AMENT_PREFIX_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial:/opt/ros/humble LD_LIBRARY_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/lib:${LD_LIBRARY_PATH} /usr/bin/cmake /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/arctos_motor_driver -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver
+[8.236s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_motor_driver' returned '0': AMENT_PREFIX_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial:/opt/ros/humble LD_LIBRARY_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/lib:${LD_LIBRARY_PATH} /usr/bin/cmake /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/arctos_motor_driver -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver
+[8.238s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_motor_driver': AMENT_PREFIX_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial:/opt/ros/humble LD_LIBRARY_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/lib:${LD_LIBRARY_PATH} /usr/bin/cmake --build /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_motor_driver -- -j12 -l12
+[20.662s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_motor_driver' returned '0': AMENT_PREFIX_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial:/opt/ros/humble LD_LIBRARY_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/lib:${LD_LIBRARY_PATH} /usr/bin/cmake --build /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_motor_driver -- -j12 -l12
+[20.664s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_motor_driver': AMENT_PREFIX_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial:/opt/ros/humble LD_LIBRARY_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/lib:${LD_LIBRARY_PATH} /usr/bin/cmake --install /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_motor_driver
+[20.931s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(arctos_motor_driver)
+[20.931s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver' for CMake module files
+[20.931s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_motor_driver' returned '0': AMENT_PREFIX_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial:/opt/ros/humble LD_LIBRARY_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/lib:${LD_LIBRARY_PATH} /usr/bin/cmake --install /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_motor_driver
+[20.932s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver' for CMake config files
+[20.932s] Level 1:colcon.colcon_core.shell:create_environment_hook('arctos_motor_driver', 'cmake_prefix_path')
+[20.932s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/arctos_motor_driver/hook/cmake_prefix_path.ps1'
+[20.933s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/arctos_motor_driver/hook/cmake_prefix_path.dsv'
+[20.933s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/arctos_motor_driver/hook/cmake_prefix_path.sh'
+[20.934s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/lib'
+[20.934s] Level 1:colcon.colcon_core.shell:create_environment_hook('arctos_motor_driver', 'ld_library_path_lib')
+[20.934s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/arctos_motor_driver/hook/ld_library_path_lib.ps1'
+[20.935s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/arctos_motor_driver/hook/ld_library_path_lib.dsv'
+[20.935s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/arctos_motor_driver/hook/ld_library_path_lib.sh'
+[20.935s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/bin'
+[20.935s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/lib/pkgconfig/arctos_motor_driver.pc'
+[20.935s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/lib/python3.10/site-packages'
+[20.936s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/bin'
+[20.936s] INFO:colcon.colcon_core.shell:Creating package script '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/arctos_motor_driver/package.ps1'
+[20.937s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/arctos_motor_driver/package.dsv'
+[20.937s] INFO:colcon.colcon_core.shell:Creating package script '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/arctos_motor_driver/package.sh'
+[20.937s] INFO:colcon.colcon_core.shell:Creating package script '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/arctos_motor_driver/package.bash'
+[20.938s] INFO:colcon.colcon_core.shell:Creating package script '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/arctos_motor_driver/package.zsh'
+[20.938s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/colcon-core/packages/arctos_motor_driver)
+[20.938s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(arctos_motor_driver)
+[20.939s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver' for CMake module files
+[20.939s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver' for CMake config files
+[20.939s] Level 1:colcon.colcon_core.shell:create_environment_hook('arctos_motor_driver', 'cmake_prefix_path')
+[20.939s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/arctos_motor_driver/hook/cmake_prefix_path.ps1'
+[20.940s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/arctos_motor_driver/hook/cmake_prefix_path.dsv'
+[20.940s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/arctos_motor_driver/hook/cmake_prefix_path.sh'
+[20.941s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/lib'
+[20.941s] Level 1:colcon.colcon_core.shell:create_environment_hook('arctos_motor_driver', 'ld_library_path_lib')
+[20.941s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/arctos_motor_driver/hook/ld_library_path_lib.ps1'
+[20.942s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/arctos_motor_driver/hook/ld_library_path_lib.dsv'
+[20.942s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/arctos_motor_driver/hook/ld_library_path_lib.sh'
+[20.942s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/bin'
+[20.942s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/lib/pkgconfig/arctos_motor_driver.pc'
+[20.942s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/lib/python3.10/site-packages'
+[20.943s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/bin'
+[20.943s] INFO:colcon.colcon_core.shell:Creating package script '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/arctos_motor_driver/package.ps1'
+[20.944s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/arctos_motor_driver/package.dsv'
+[20.944s] INFO:colcon.colcon_core.shell:Creating package script '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/arctos_motor_driver/package.sh'
+[20.944s] INFO:colcon.colcon_core.shell:Creating package script '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/arctos_motor_driver/package.bash'
+[20.945s] INFO:colcon.colcon_core.shell:Creating package script '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/arctos_motor_driver/package.zsh'
+[20.945s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/colcon-core/packages/arctos_motor_driver)
+[20.945s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/arctos_hardware_interface' with build type 'ament_cmake'
+[20.945s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/arctos_hardware_interface'
+[20.946s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[20.946s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[20.958s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_hardware_interface': AMENT_PREFIX_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial:/opt/ros/humble LD_LIBRARY_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/lib:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/lib:${LD_LIBRARY_PATH} /usr/bin/cmake /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/arctos_hardware_interface -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface
+[22.531s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_hardware_interface' returned '0': AMENT_PREFIX_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial:/opt/ros/humble LD_LIBRARY_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/lib:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/lib:${LD_LIBRARY_PATH} /usr/bin/cmake /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/arctos_hardware_interface -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface
+[22.533s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_hardware_interface': AMENT_PREFIX_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial:/opt/ros/humble LD_LIBRARY_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/lib:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/lib:${LD_LIBRARY_PATH} /usr/bin/cmake --build /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_hardware_interface -- -j12 -l12
+[35.245s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_hardware_interface' returned '0': AMENT_PREFIX_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial:/opt/ros/humble LD_LIBRARY_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/lib:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/lib:${LD_LIBRARY_PATH} /usr/bin/cmake --build /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_hardware_interface -- -j12 -l12
+[35.247s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_hardware_interface': AMENT_PREFIX_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial:/opt/ros/humble LD_LIBRARY_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/lib:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/lib:${LD_LIBRARY_PATH} /usr/bin/cmake --install /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_hardware_interface
+[35.548s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(arctos_hardware_interface)
+[35.548s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface' for CMake module files
+[35.549s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_hardware_interface' returned '0': AMENT_PREFIX_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial:/opt/ros/humble LD_LIBRARY_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/lib:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/lib:${LD_LIBRARY_PATH} /usr/bin/cmake --install /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_hardware_interface
+[35.549s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface' for CMake config files
+[35.550s] Level 1:colcon.colcon_core.shell:create_environment_hook('arctos_hardware_interface', 'cmake_prefix_path')
+[35.550s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/hook/cmake_prefix_path.ps1'
+[35.551s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/hook/cmake_prefix_path.dsv'
+[35.551s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/hook/cmake_prefix_path.sh'
+[35.552s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/lib'
+[35.552s] Level 1:colcon.colcon_core.shell:create_environment_hook('arctos_hardware_interface', 'ld_library_path_lib')
+[35.552s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/hook/ld_library_path_lib.ps1'
+[35.553s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/hook/ld_library_path_lib.dsv'
+[35.553s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/hook/ld_library_path_lib.sh'
+[35.554s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/bin'
+[35.554s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/lib/pkgconfig/arctos_hardware_interface.pc'
+[35.554s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/lib/python3.10/site-packages'
+[35.554s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/bin'
+[35.555s] INFO:colcon.colcon_core.shell:Creating package script '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/package.ps1'
+[35.555s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/package.dsv'
+[35.556s] INFO:colcon.colcon_core.shell:Creating package script '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/package.sh'
+[35.556s] INFO:colcon.colcon_core.shell:Creating package script '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/package.bash'
+[35.556s] INFO:colcon.colcon_core.shell:Creating package script '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/package.zsh'
+[35.557s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/colcon-core/packages/arctos_hardware_interface)
+[35.557s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(arctos_hardware_interface)
+[35.557s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface' for CMake module files
+[35.558s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface' for CMake config files
+[35.558s] Level 1:colcon.colcon_core.shell:create_environment_hook('arctos_hardware_interface', 'cmake_prefix_path')
+[35.559s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/hook/cmake_prefix_path.ps1'
+[35.559s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/hook/cmake_prefix_path.dsv'
+[35.559s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/hook/cmake_prefix_path.sh'
+[35.560s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/lib'
+[35.560s] Level 1:colcon.colcon_core.shell:create_environment_hook('arctos_hardware_interface', 'ld_library_path_lib')
+[35.560s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/hook/ld_library_path_lib.ps1'
+[35.561s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/hook/ld_library_path_lib.dsv'
+[35.561s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/hook/ld_library_path_lib.sh'
+[35.562s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/bin'
+[35.562s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/lib/pkgconfig/arctos_hardware_interface.pc'
+[35.562s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/lib/python3.10/site-packages'
+[35.562s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/bin'
+[35.562s] INFO:colcon.colcon_core.shell:Creating package script '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/package.ps1'
+[35.563s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/package.dsv'
+[35.564s] INFO:colcon.colcon_core.shell:Creating package script '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/package.sh'
+[35.564s] INFO:colcon.colcon_core.shell:Creating package script '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/package.bash'
+[35.565s] INFO:colcon.colcon_core.shell:Creating package script '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/package.zsh'
+[35.565s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/colcon-core/packages/arctos_hardware_interface)
+[35.566s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/arctos_bringup' with build type 'ament_cmake'
+[35.566s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/arctos_bringup'
+[35.566s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[35.566s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[35.584s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_bringup': AMENT_PREFIX_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description:/opt/ros/humble LD_LIBRARY_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/lib:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/lib:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/lib:${LD_LIBRARY_PATH} /usr/bin/cmake /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/arctos_bringup -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_bringup
+[37.221s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_bringup' returned '0': AMENT_PREFIX_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description:/opt/ros/humble LD_LIBRARY_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/lib:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/lib:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/lib:${LD_LIBRARY_PATH} /usr/bin/cmake /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/arctos_bringup -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_bringup
+[37.223s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_bringup': AMENT_PREFIX_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description:/opt/ros/humble LD_LIBRARY_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/lib:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/lib:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/lib:${LD_LIBRARY_PATH} /usr/bin/cmake --build /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_bringup -- -j12 -l12
+[37.271s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_bringup' returned '0': AMENT_PREFIX_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description:/opt/ros/humble LD_LIBRARY_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/lib:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/lib:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/lib:${LD_LIBRARY_PATH} /usr/bin/cmake --build /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_bringup -- -j12 -l12
+[37.274s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_bringup': AMENT_PREFIX_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description:/opt/ros/humble LD_LIBRARY_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/lib:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/lib:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/lib:${LD_LIBRARY_PATH} /usr/bin/cmake --install /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_bringup
+[37.528s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(arctos_bringup)
+[37.529s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_bringup' for CMake module files
+[37.529s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_bringup' returned '0': AMENT_PREFIX_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description:/opt/ros/humble LD_LIBRARY_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/lib:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/lib:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/lib:${LD_LIBRARY_PATH} /usr/bin/cmake --install /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_bringup
+[37.530s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_bringup' for CMake config files
+[37.530s] Level 1:colcon.colcon_core.shell:create_environment_hook('arctos_bringup', 'cmake_prefix_path')
+[37.530s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_bringup/share/arctos_bringup/hook/cmake_prefix_path.ps1'
+[37.531s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_bringup/share/arctos_bringup/hook/cmake_prefix_path.dsv'
+[37.531s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_bringup/share/arctos_bringup/hook/cmake_prefix_path.sh'
+[37.532s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_bringup/bin'
+[37.532s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_bringup/lib/pkgconfig/arctos_bringup.pc'
+[37.532s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_bringup/lib/python3.10/site-packages'
+[37.532s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_bringup/bin'
+[37.533s] INFO:colcon.colcon_core.shell:Creating package script '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_bringup/share/arctos_bringup/package.ps1'
+[37.534s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_bringup/share/arctos_bringup/package.dsv'
+[37.534s] INFO:colcon.colcon_core.shell:Creating package script '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_bringup/share/arctos_bringup/package.sh'
+[37.535s] INFO:colcon.colcon_core.shell:Creating package script '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_bringup/share/arctos_bringup/package.bash'
+[37.535s] INFO:colcon.colcon_core.shell:Creating package script '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_bringup/share/arctos_bringup/package.zsh'
+[37.535s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_bringup/share/colcon-core/packages/arctos_bringup)
+[37.536s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(arctos_bringup)
+[37.536s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_bringup' for CMake module files
+[37.537s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_bringup' for CMake config files
+[37.537s] Level 1:colcon.colcon_core.shell:create_environment_hook('arctos_bringup', 'cmake_prefix_path')
+[37.537s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_bringup/share/arctos_bringup/hook/cmake_prefix_path.ps1'
+[37.538s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_bringup/share/arctos_bringup/hook/cmake_prefix_path.dsv'
+[37.538s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_bringup/share/arctos_bringup/hook/cmake_prefix_path.sh'
+[37.539s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_bringup/bin'
+[37.539s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_bringup/lib/pkgconfig/arctos_bringup.pc'
+[37.539s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_bringup/lib/python3.10/site-packages'
+[37.539s] Level 1:colcon.colcon_core.environment:checking '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_bringup/bin'
+[37.540s] INFO:colcon.colcon_core.shell:Creating package script '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_bringup/share/arctos_bringup/package.ps1'
+[37.540s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_bringup/share/arctos_bringup/package.dsv'
+[37.541s] INFO:colcon.colcon_core.shell:Creating package script '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_bringup/share/arctos_bringup/package.sh'
+[37.541s] INFO:colcon.colcon_core.shell:Creating package script '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_bringup/share/arctos_bringup/package.bash'
+[37.542s] INFO:colcon.colcon_core.shell:Creating package script '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_bringup/share/arctos_bringup/package.zsh'
+[37.542s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_bringup/share/colcon-core/packages/arctos_bringup)
+[37.542s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:closing loop
+[37.543s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:loop closed
+[37.543s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete finished with '0'
+[37.543s] DEBUG:colcon.colcon_core.event_reactor:joining thread
+[37.549s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.terminal_notifier': Not used on non-Darwin systems
+[37.549s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.win32': Not used on non-Windows systems
+[37.549s] INFO:colcon.colcon_notification.desktop_notification:Sending desktop notification using 'notify2'
+[37.563s] DEBUG:colcon.colcon_core.event_reactor:joined thread
+[37.563s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/local_setup.ps1'
+[37.565s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/_local_setup_util_ps1.py'
+[37.568s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/setup.ps1'
+[37.569s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/local_setup.sh'
+[37.571s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/_local_setup_util_sh.py'
+[37.572s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/setup.sh'
+[37.574s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/local_setup.bash'
+[37.576s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/setup.bash'
+[37.579s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/local_setup.zsh'
+[37.580s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/setup.zsh'

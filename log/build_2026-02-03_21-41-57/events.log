@@ -1,0 +1,860 @@
+[0.000000] (-) TimerEvent: {}
+[0.000619] (arctos_description) JobQueued: {'identifier': 'arctos_description', 'dependencies': OrderedDict()}
+[0.000648] (serial) JobQueued: {'identifier': 'serial', 'dependencies': OrderedDict()}
+[0.000666] (arctos_motor_driver) JobQueued: {'identifier': 'arctos_motor_driver', 'dependencies': OrderedDict([('serial', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial')])}
+[0.000691] (arctos_moveit_config) JobQueued: {'identifier': 'arctos_moveit_config', 'dependencies': OrderedDict([('arctos_description', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description')])}
+[0.000720] (arctos_hardware_interface) JobQueued: {'identifier': 'arctos_hardware_interface', 'dependencies': OrderedDict([('serial', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial'), ('arctos_motor_driver', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver')])}
+[0.000739] (arctos_bringup) JobQueued: {'identifier': 'arctos_bringup', 'dependencies': OrderedDict([('arctos_description', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description'), ('serial', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial'), ('arctos_motor_driver', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver'), ('arctos_moveit_config', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config'), ('arctos_hardware_interface', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface')])}
+[0.000762] (serial) JobStarted: {'identifier': 'serial'}
+[0.008972] (arctos_description) JobStarted: {'identifier': 'arctos_description'}
+[0.012815] (serial) JobProgress: {'identifier': 'serial', 'progress': 'cmake'}
+[0.013734] (serial) Command: {'cmd': ['/usr/bin/cmake', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/serial', '-DAMENT_CMAKE_SYMLINK_INSTALL=1', '-DCMAKE_INSTALL_PREFIX=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial'], 'cwd': '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/serial', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'nguyen'), ('LC_TIME', 'vi_VN'), ('XDG_SESSION_TYPE', 'wayland'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/nguyen'), ('OLDPWD', '/home/nguyen/ros2_ws/src'), ('DESKTOP_SESSION', 'ubuntu'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('LC_MONETARY', 'vi_VN'), ('SYSTEMD_EXEC_PID', '1653'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'nguyen'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'nguyen'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/home/nguyen/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin'), ('SESSION_MANAGER', 'local/nguyen-aspire:@/tmp/.ICE-unix/1625,unix/nguyen-aspire:/tmp/.ICE-unix/1625'), ('XDG_MENU_PREFIX', 'gnome-'), ('LC_ADDRESS', 'vi_VN'), ('GNOME_TERMINAL_SCREEN', '/org/gnome/Terminal/screen/2e9c7e95_1405_4e25_b8e8_02161794cbe6'), ('GNOME_SETUP_DISPLAY', ':1'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':0'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('LC_TELEPHONE', 'vi_VN'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.ODJLK3'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('GNOME_TERMINAL_SERVICE', ':1.109'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/opt/ros/humble'), ('SHELL', '/bin/bash'), ('LC_NAME', 'vi_VN'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('LC_MEASUREMENT', 'vi_VN'), ('LC_IDENTIFICATION', 'vi_VN'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/serial'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('LC_NUMERIC', 'vi_VN'), ('LC_PAPER', 'vi_VN'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/opt/ros/humble')]), 'shell': False}
+[0.018557] (arctos_description) JobProgress: {'identifier': 'arctos_description', 'progress': 'cmake'}
+[0.019932] (arctos_description) Command: {'cmd': ['/usr/bin/cmake', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/arctos_description', '-DAMENT_CMAKE_SYMLINK_INSTALL=1', '-DCMAKE_INSTALL_PREFIX=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description'], 'cwd': '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_description', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'nguyen'), ('LC_TIME', 'vi_VN'), ('XDG_SESSION_TYPE', 'wayland'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/nguyen'), ('OLDPWD', '/home/nguyen/ros2_ws/src'), ('DESKTOP_SESSION', 'ubuntu'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('LC_MONETARY', 'vi_VN'), ('SYSTEMD_EXEC_PID', '1653'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'nguyen'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'nguyen'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/home/nguyen/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin'), ('SESSION_MANAGER', 'local/nguyen-aspire:@/tmp/.ICE-unix/1625,unix/nguyen-aspire:/tmp/.ICE-unix/1625'), ('XDG_MENU_PREFIX', 'gnome-'), ('LC_ADDRESS', 'vi_VN'), ('GNOME_TERMINAL_SCREEN', '/org/gnome/Terminal/screen/2e9c7e95_1405_4e25_b8e8_02161794cbe6'), ('GNOME_SETUP_DISPLAY', ':1'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':0'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('LC_TELEPHONE', 'vi_VN'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.ODJLK3'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('GNOME_TERMINAL_SERVICE', ':1.109'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/opt/ros/humble'), ('SHELL', '/bin/bash'), ('LC_NAME', 'vi_VN'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('LC_MEASUREMENT', 'vi_VN'), ('LC_IDENTIFICATION', 'vi_VN'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_description'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('LC_NUMERIC', 'vi_VN'), ('LC_PAPER', 'vi_VN'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/opt/ros/humble')]), 'shell': False}
+[0.099801] (-) TimerEvent: {}
+[0.127049] (serial) StdoutLine: {'line': b'-- The C compiler identification is GNU 11.4.0\n'}
+[0.127332] (arctos_description) StdoutLine: {'line': b'-- The C compiler identification is GNU 11.4.0\n'}
+[0.199960] (-) TimerEvent: {}
+[0.216393] (serial) StdoutLine: {'line': b'-- The CXX compiler identification is GNU 11.4.0\n'}
+[0.217441] (arctos_description) StdoutLine: {'line': b'-- The CXX compiler identification is GNU 11.4.0\n'}
+[0.227000] (arctos_description) StdoutLine: {'line': b'-- Detecting C compiler ABI info\n'}
+[0.227319] (serial) StdoutLine: {'line': b'-- Detecting C compiler ABI info\n'}
+[0.300117] (-) TimerEvent: {}
+[0.305910] (serial) StdoutLine: {'line': b'-- Detecting C compiler ABI info - done\n'}
+[0.306723] (arctos_description) StdoutLine: {'line': b'-- Detecting C compiler ABI info - done\n'}
+[0.316351] (serial) StdoutLine: {'line': b'-- Check for working C compiler: /usr/bin/cc - skipped\n'}
+[0.316789] (serial) StdoutLine: {'line': b'-- Detecting C compile features\n'}
+[0.317040] (arctos_description) StdoutLine: {'line': b'-- Check for working C compiler: /usr/bin/cc - skipped\n'}
+[0.317285] (arctos_description) StdoutLine: {'line': b'-- Detecting C compile features\n'}
+[0.317622] (serial) StdoutLine: {'line': b'-- Detecting C compile features - done\n'}
+[0.317731] (arctos_description) StdoutLine: {'line': b'-- Detecting C compile features - done\n'}
+[0.322165] (arctos_description) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info\n'}
+[0.322250] (serial) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info\n'}
+[0.400273] (-) TimerEvent: {}
+[0.409572] (serial) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info - done\n'}
+[0.409926] (arctos_description) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info - done\n'}
+[0.416577] (serial) StdoutLine: {'line': b'-- Check for working CXX compiler: /usr/bin/c++ - skipped\n'}
+[0.416892] (arctos_description) StdoutLine: {'line': b'-- Check for working CXX compiler: /usr/bin/c++ - skipped\n'}
+[0.417032] (serial) StdoutLine: {'line': b'-- Detecting CXX compile features\n'}
+[0.417195] (arctos_description) StdoutLine: {'line': b'-- Detecting CXX compile features\n'}
+[0.417295] (serial) StdoutLine: {'line': b'-- Detecting CXX compile features - done\n'}
+[0.417385] (arctos_description) StdoutLine: {'line': b'-- Detecting CXX compile features - done\n'}
+[0.422938] (arctos_description) StdoutLine: {'line': b'-- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)\n'}
+[0.423289] (serial) StdoutLine: {'line': b'-- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)\n'}
+[0.500423] (-) TimerEvent: {}
+[0.572991] (arctos_description) StdoutLine: {'line': b'-- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter \n'}
+[0.573637] (serial) StdoutLine: {'line': b'-- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter \n'}
+[0.600533] (-) TimerEvent: {}
+[0.637888] (serial) StdoutLine: {'line': b'-- Override CMake install command with custom implementation using symlinks instead of copying resources\n'}
+[0.638115] (arctos_description) StdoutLine: {'line': b'-- Override CMake install command with custom implementation using symlinks instead of copying resources\n'}
+[0.675907] (serial) StdoutLine: {'line': b'-- Found ament_cmake_gtest: 1.3.12 (/opt/ros/humble/share/ament_cmake_gtest/cmake)\n'}
+[0.691974] (serial) StdoutLine: {'line': b'-- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfig.cmake (found version "1.74.0")  \n'}
+[0.695834] (serial) StdoutLine: {'line': b"-- Found gtest sources under '/opt/ros/humble/src/gtest_vendor': C++ tests using 'Google Test' will be built\n"}
+[0.698740] (serial) StdoutLine: {'line': b'-- Looking for pthread.h\n'}
+[0.700627] (-) TimerEvent: {}
+[0.736621] (arctos_description) StdoutLine: {'line': b'-- Configuring done\n'}
+[0.739774] (arctos_description) StdoutLine: {'line': b'-- Generating done\n'}
+[0.741331] (arctos_description) StdoutLine: {'line': b'-- Build files have been written to: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_description\n'}
+[0.745948] (arctos_description) CommandEnded: {'returncode': 0}
+[0.746458] (arctos_description) JobProgress: {'identifier': 'arctos_description', 'progress': 'build'}
+[0.747678] (arctos_description) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_description', '--', '-j12', '-l12'], 'cwd': '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_description', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'nguyen'), ('LC_TIME', 'vi_VN'), ('XDG_SESSION_TYPE', 'wayland'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/nguyen'), ('OLDPWD', '/home/nguyen/ros2_ws/src'), ('DESKTOP_SESSION', 'ubuntu'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('LC_MONETARY', 'vi_VN'), ('SYSTEMD_EXEC_PID', '1653'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'nguyen'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'nguyen'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/home/nguyen/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin'), ('SESSION_MANAGER', 'local/nguyen-aspire:@/tmp/.ICE-unix/1625,unix/nguyen-aspire:/tmp/.ICE-unix/1625'), ('XDG_MENU_PREFIX', 'gnome-'), ('LC_ADDRESS', 'vi_VN'), ('GNOME_TERMINAL_SCREEN', '/org/gnome/Terminal/screen/2e9c7e95_1405_4e25_b8e8_02161794cbe6'), ('GNOME_SETUP_DISPLAY', ':1'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':0'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('LC_TELEPHONE', 'vi_VN'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.ODJLK3'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('GNOME_TERMINAL_SERVICE', ':1.109'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/opt/ros/humble'), ('SHELL', '/bin/bash'), ('LC_NAME', 'vi_VN'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('LC_MEASUREMENT', 'vi_VN'), ('LC_IDENTIFICATION', 'vi_VN'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_description'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('LC_NUMERIC', 'vi_VN'), ('LC_PAPER', 'vi_VN'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/opt/ros/humble')]), 'shell': False}
+[0.786104] (serial) StdoutLine: {'line': b'-- Looking for pthread.h - found\n'}
+[0.786639] (serial) StdoutLine: {'line': b'-- Performing Test CMAKE_HAVE_LIBC_PTHREAD\n'}
+[0.790264] (arctos_description) CommandEnded: {'returncode': 0}
+[0.791081] (arctos_description) JobProgress: {'identifier': 'arctos_description', 'progress': 'install'}
+[0.801384] (arctos_description) Command: {'cmd': ['/usr/bin/cmake', '--install', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_description'], 'cwd': '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_description', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'nguyen'), ('LC_TIME', 'vi_VN'), ('XDG_SESSION_TYPE', 'wayland'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/nguyen'), ('OLDPWD', '/home/nguyen/ros2_ws/src'), ('DESKTOP_SESSION', 'ubuntu'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('LC_MONETARY', 'vi_VN'), ('SYSTEMD_EXEC_PID', '1653'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'nguyen'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'nguyen'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/home/nguyen/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin'), ('SESSION_MANAGER', 'local/nguyen-aspire:@/tmp/.ICE-unix/1625,unix/nguyen-aspire:/tmp/.ICE-unix/1625'), ('XDG_MENU_PREFIX', 'gnome-'), ('LC_ADDRESS', 'vi_VN'), ('GNOME_TERMINAL_SCREEN', '/org/gnome/Terminal/screen/2e9c7e95_1405_4e25_b8e8_02161794cbe6'), ('GNOME_SETUP_DISPLAY', ':1'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':0'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('LC_TELEPHONE', 'vi_VN'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.ODJLK3'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('GNOME_TERMINAL_SERVICE', ':1.109'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/opt/ros/humble'), ('SHELL', '/bin/bash'), ('LC_NAME', 'vi_VN'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('LC_MEASUREMENT', 'vi_VN'), ('LC_IDENTIFICATION', 'vi_VN'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_description'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('LC_NUMERIC', 'vi_VN'), ('LC_PAPER', 'vi_VN'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/opt/ros/humble')]), 'shell': False}
+[0.802078] (-) TimerEvent: {}
+[0.808772] (arctos_description) StdoutLine: {'line': b'-- Install configuration: ""\n'}
+[0.809173] (arctos_description) StdoutLine: {'line': b'-- Execute custom install script\n'}
+[0.809779] (arctos_description) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description/share/arctos_description/urdf/arctos.urdf\n'}
+[0.819488] (arctos_description) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description/share/arctos_description/urdf/arctos.xacro\n'}
+[0.828943] (arctos_description) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description/share/arctos_description/urdf/arctos_gripper.xacro\n'}
+[0.839002] (arctos_description) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description/share/arctos_description/urdf/common/joint_link.xacro\n'}
+[0.848832] (arctos_description) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description/share/arctos_description/urdf/common/materials.xacro\n'}
+[0.859268] (arctos_description) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description/share/arctos_description/urdf/test_single_motor.urdf.xacro\n'}
+[0.866194] (serial) StdoutLine: {'line': b'-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success\n'}
+[0.867057] (serial) StdoutLine: {'line': b'-- Found Threads: TRUE  \n'}
+[0.869914] (arctos_description) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description/share/arctos_description/meshes/base_link.STL\n'}
+[0.879635] (arctos_description) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description/share/arctos_description/meshes/link_1.STL\n'}
+[0.890374] (arctos_description) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description/share/arctos_description/meshes/link_2.STL\n'}
+[0.900205] (arctos_description) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description/share/arctos_description/meshes/link_3.STL\n'}
+[0.902198] (-) TimerEvent: {}
+[0.909385] (arctos_description) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description/share/arctos_description/meshes/link_4.STL\n'}
+[0.919320] (arctos_description) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description/share/arctos_description/meshes/link_5.STL\n'}
+[0.930217] (arctos_description) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description/share/arctos_description/meshes/link_6.STL\n'}
+[0.936643] (serial) StdoutLine: {'line': b'-- Configuring done\n'}
+[0.942053] (arctos_description) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description/share/arctos_description/rviz/arctos.rviz\n'}
+[0.949550] (serial) StdoutLine: {'line': b'-- Generating done\n'}
+[0.952481] (arctos_description) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description/share/arctos_description/launch/test_single_motor.launch.py\n'}
+[0.953262] (serial) StdoutLine: {'line': b'-- Build files have been written to: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/serial\n'}
+[0.958341] (serial) CommandEnded: {'returncode': 0}
+[0.959266] (serial) JobProgress: {'identifier': 'serial', 'progress': 'build'}
+[0.960300] (serial) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/serial', '--', '-j12', '-l12'], 'cwd': '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/serial', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'nguyen'), ('LC_TIME', 'vi_VN'), ('XDG_SESSION_TYPE', 'wayland'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/nguyen'), ('OLDPWD', '/home/nguyen/ros2_ws/src'), ('DESKTOP_SESSION', 'ubuntu'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('LC_MONETARY', 'vi_VN'), ('SYSTEMD_EXEC_PID', '1653'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'nguyen'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'nguyen'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/home/nguyen/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin'), ('SESSION_MANAGER', 'local/nguyen-aspire:@/tmp/.ICE-unix/1625,unix/nguyen-aspire:/tmp/.ICE-unix/1625'), ('XDG_MENU_PREFIX', 'gnome-'), ('LC_ADDRESS', 'vi_VN'), ('GNOME_TERMINAL_SCREEN', '/org/gnome/Terminal/screen/2e9c7e95_1405_4e25_b8e8_02161794cbe6'), ('GNOME_SETUP_DISPLAY', ':1'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':0'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('LC_TELEPHONE', 'vi_VN'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.ODJLK3'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('GNOME_TERMINAL_SERVICE', ':1.109'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/opt/ros/humble'), ('SHELL', '/bin/bash'), ('LC_NAME', 'vi_VN'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('LC_MEASUREMENT', 'vi_VN'), ('LC_IDENTIFICATION', 'vi_VN'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/serial'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('LC_NUMERIC', 'vi_VN'), ('LC_PAPER', 'vi_VN'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/opt/ros/humble')]), 'shell': False}
+[0.962158] (arctos_description) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description/share/arctos_description/launch/view_robot.launch.py\n'}
+[0.974506] (arctos_description) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description/share/ament_index/resource_index/package_run_dependencies/arctos_description\n'}
+[0.984813] (arctos_description) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description/share/ament_index/resource_index/parent_prefix_path/arctos_description\n'}
+[0.995877] (arctos_description) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description/share/arctos_description/environment/ament_prefix_path.sh\n'}
+[1.002330] (-) TimerEvent: {}
+[1.005782] (arctos_description) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description/share/arctos_description/environment/ament_prefix_path.dsv\n'}
+[1.012533] (serial) StdoutLine: {'line': b'[ 28%] \x1b[32mBuilding CXX object gtest/CMakeFiles/gtest.dir/src/gtest-all.cc.o\x1b[0m\n'}
+[1.012911] (serial) StdoutLine: {'line': b'[ 28%] \x1b[32mBuilding CXX object gtest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.o\x1b[0m\n'}
+[1.013090] (serial) StdoutLine: {'line': b'[ 28%] \x1b[32mBuilding CXX object CMakeFiles/serial.dir/src/impl/unix.cc.o\x1b[0m\n'}
+[1.013233] (serial) StdoutLine: {'line': b'[ 28%] \x1b[32mBuilding CXX object CMakeFiles/serial.dir/src/serial.cc.o\x1b[0m\n'}
+[1.013374] (serial) StdoutLine: {'line': b'[ 35%] \x1b[32mBuilding CXX object CMakeFiles/serial.dir/src/impl/list_ports/list_ports_linux.cc.o\x1b[0m\n'}
+[1.018634] (arctos_description) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description/share/arctos_description/environment/path.sh\n'}
+[1.031000] (arctos_description) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description/share/arctos_description/environment/path.dsv\n'}
+[1.041160] (arctos_description) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description/share/arctos_description/local_setup.bash\n'}
+[1.051723] (arctos_description) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description/share/arctos_description/local_setup.sh\n'}
+[1.065421] (arctos_description) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description/share/arctos_description/local_setup.zsh\n'}
+[1.078436] (arctos_description) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description/share/arctos_description/local_setup.dsv\n'}
+[1.089300] (arctos_description) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description/share/arctos_description/package.dsv\n'}
+[1.099934] (arctos_description) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description/share/ament_index/resource_index/packages/arctos_description\n'}
+[1.102448] (-) TimerEvent: {}
+[1.112480] (arctos_description) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description/share/arctos_description/cmake/arctos_descriptionConfig.cmake\n'}
+[1.122931] (arctos_description) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description/share/arctos_description/cmake/arctos_descriptionConfig-version.cmake\n'}
+[1.136163] (arctos_description) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description/share/arctos_description/package.xml\n'}
+[1.149316] (arctos_description) CommandEnded: {'returncode': 0}
+[1.178131] (arctos_description) JobEnded: {'identifier': 'arctos_description', 'rc': 0}
+[1.179099] (arctos_moveit_config) JobStarted: {'identifier': 'arctos_moveit_config'}
+[1.185353] (arctos_moveit_config) JobProgress: {'identifier': 'arctos_moveit_config', 'progress': 'cmake'}
+[1.186273] (arctos_moveit_config) Command: {'cmd': ['/usr/bin/cmake', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/arctos_moveit_config', '-DAMENT_CMAKE_SYMLINK_INSTALL=1', '-DCMAKE_INSTALL_PREFIX=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config'], 'cwd': '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_moveit_config', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'nguyen'), ('LC_TIME', 'vi_VN'), ('XDG_SESSION_TYPE', 'wayland'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/nguyen'), ('OLDPWD', '/home/nguyen/ros2_ws/src'), ('DESKTOP_SESSION', 'ubuntu'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('LC_MONETARY', 'vi_VN'), ('SYSTEMD_EXEC_PID', '1653'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'nguyen'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'nguyen'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/home/nguyen/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin'), ('SESSION_MANAGER', 'local/nguyen-aspire:@/tmp/.ICE-unix/1625,unix/nguyen-aspire:/tmp/.ICE-unix/1625'), ('XDG_MENU_PREFIX', 'gnome-'), ('LC_ADDRESS', 'vi_VN'), ('GNOME_TERMINAL_SCREEN', '/org/gnome/Terminal/screen/2e9c7e95_1405_4e25_b8e8_02161794cbe6'), ('GNOME_SETUP_DISPLAY', ':1'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':0'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('LC_TELEPHONE', 'vi_VN'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.ODJLK3'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('GNOME_TERMINAL_SERVICE', ':1.109'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description:/opt/ros/humble'), ('SHELL', '/bin/bash'), ('LC_NAME', 'vi_VN'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('LC_MEASUREMENT', 'vi_VN'), ('LC_IDENTIFICATION', 'vi_VN'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_moveit_config'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('LC_NUMERIC', 'vi_VN'), ('LC_PAPER', 'vi_VN'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description:/opt/ros/humble')]), 'shell': False}
+[1.202596] (-) TimerEvent: {}
+[1.259573] (arctos_moveit_config) StdoutLine: {'line': b'-- The C compiler identification is GNU 11.4.0\n'}
+[1.302760] (-) TimerEvent: {}
+[1.331622] (arctos_moveit_config) StdoutLine: {'line': b'-- The CXX compiler identification is GNU 11.4.0\n'}
+[1.342286] (arctos_moveit_config) StdoutLine: {'line': b'-- Detecting C compiler ABI info\n'}
+[1.402923] (-) TimerEvent: {}
+[1.431717] (arctos_moveit_config) StdoutLine: {'line': b'-- Detecting C compiler ABI info - done\n'}
+[1.438853] (arctos_moveit_config) StdoutLine: {'line': b'-- Check for working C compiler: /usr/bin/cc - skipped\n'}
+[1.439187] (arctos_moveit_config) StdoutLine: {'line': b'-- Detecting C compile features\n'}
+[1.439478] (arctos_moveit_config) StdoutLine: {'line': b'-- Detecting C compile features - done\n'}
+[1.442711] (arctos_moveit_config) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info\n'}
+[1.503049] (-) TimerEvent: {}
+[1.529098] (arctos_moveit_config) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info - done\n'}
+[1.537016] (arctos_moveit_config) StdoutLine: {'line': b'-- Check for working CXX compiler: /usr/bin/c++ - skipped\n'}
+[1.537336] (arctos_moveit_config) StdoutLine: {'line': b'-- Detecting CXX compile features\n'}
+[1.537724] (arctos_moveit_config) StdoutLine: {'line': b'-- Detecting CXX compile features - done\n'}
+[1.540531] (arctos_moveit_config) StdoutLine: {'line': b'-- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)\n'}
+[1.601191] (serial) StdoutLine: {'line': b'[ 42%] \x1b[32m\x1b[1mLinking CXX static library libserial.a\x1b[0m\n'}
+[1.603186] (-) TimerEvent: {}
+[1.651735] (serial) StdoutLine: {'line': b'[ 42%] Built target serial\n'}
+[1.676726] (serial) StdoutLine: {'line': b'[ 50%] \x1b[32mBuilding CXX object CMakeFiles/serial_example.dir/examples/serial_example.cc.o\x1b[0m\n'}
+[1.703318] (-) TimerEvent: {}
+[1.736030] (arctos_moveit_config) StdoutLine: {'line': b'-- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter \n'}
+[1.803551] (-) TimerEvent: {}
+[1.821713] (arctos_moveit_config) StdoutLine: {'line': b'-- Override CMake install command with custom implementation using symlinks instead of copying resources\n'}
+[1.903656] (-) TimerEvent: {}
+[1.944889] (arctos_moveit_config) StdoutLine: {'line': b'-- Configuring done\n'}
+[1.948990] (arctos_moveit_config) StdoutLine: {'line': b'-- Generating done\n'}
+[1.951133] (arctos_moveit_config) StdoutLine: {'line': b'-- Build files have been written to: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_moveit_config\n'}
+[1.957552] (arctos_moveit_config) CommandEnded: {'returncode': 0}
+[1.958354] (arctos_moveit_config) JobProgress: {'identifier': 'arctos_moveit_config', 'progress': 'build'}
+[1.958647] (arctos_moveit_config) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_moveit_config', '--', '-j12', '-l12'], 'cwd': '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_moveit_config', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'nguyen'), ('LC_TIME', 'vi_VN'), ('XDG_SESSION_TYPE', 'wayland'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/nguyen'), ('OLDPWD', '/home/nguyen/ros2_ws/src'), ('DESKTOP_SESSION', 'ubuntu'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('LC_MONETARY', 'vi_VN'), ('SYSTEMD_EXEC_PID', '1653'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'nguyen'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'nguyen'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/home/nguyen/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin'), ('SESSION_MANAGER', 'local/nguyen-aspire:@/tmp/.ICE-unix/1625,unix/nguyen-aspire:/tmp/.ICE-unix/1625'), ('XDG_MENU_PREFIX', 'gnome-'), ('LC_ADDRESS', 'vi_VN'), ('GNOME_TERMINAL_SCREEN', '/org/gnome/Terminal/screen/2e9c7e95_1405_4e25_b8e8_02161794cbe6'), ('GNOME_SETUP_DISPLAY', ':1'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':0'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('LC_TELEPHONE', 'vi_VN'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.ODJLK3'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('GNOME_TERMINAL_SERVICE', ':1.109'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description:/opt/ros/humble'), ('SHELL', '/bin/bash'), ('LC_NAME', 'vi_VN'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('LC_MEASUREMENT', 'vi_VN'), ('LC_IDENTIFICATION', 'vi_VN'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_moveit_config'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('LC_NUMERIC', 'vi_VN'), ('LC_PAPER', 'vi_VN'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description:/opt/ros/humble')]), 'shell': False}
+[2.003808] (-) TimerEvent: {}
+[2.013324] (arctos_moveit_config) CommandEnded: {'returncode': 0}
+[2.014490] (arctos_moveit_config) JobProgress: {'identifier': 'arctos_moveit_config', 'progress': 'install'}
+[2.015171] (arctos_moveit_config) Command: {'cmd': ['/usr/bin/cmake', '--install', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_moveit_config'], 'cwd': '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_moveit_config', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'nguyen'), ('LC_TIME', 'vi_VN'), ('XDG_SESSION_TYPE', 'wayland'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/nguyen'), ('OLDPWD', '/home/nguyen/ros2_ws/src'), ('DESKTOP_SESSION', 'ubuntu'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('LC_MONETARY', 'vi_VN'), ('SYSTEMD_EXEC_PID', '1653'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'nguyen'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'nguyen'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/home/nguyen/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin'), ('SESSION_MANAGER', 'local/nguyen-aspire:@/tmp/.ICE-unix/1625,unix/nguyen-aspire:/tmp/.ICE-unix/1625'), ('XDG_MENU_PREFIX', 'gnome-'), ('LC_ADDRESS', 'vi_VN'), ('GNOME_TERMINAL_SCREEN', '/org/gnome/Terminal/screen/2e9c7e95_1405_4e25_b8e8_02161794cbe6'), ('GNOME_SETUP_DISPLAY', ':1'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':0'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('LC_TELEPHONE', 'vi_VN'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.ODJLK3'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('GNOME_TERMINAL_SERVICE', ':1.109'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description:/opt/ros/humble'), ('SHELL', '/bin/bash'), ('LC_NAME', 'vi_VN'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('LC_MEASUREMENT', 'vi_VN'), ('LC_IDENTIFICATION', 'vi_VN'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_moveit_config'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('LC_NUMERIC', 'vi_VN'), ('LC_PAPER', 'vi_VN'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description:/opt/ros/humble')]), 'shell': False}
+[2.025059] (arctos_moveit_config) StdoutLine: {'line': b'-- Install configuration: ""\n'}
+[2.025618] (arctos_moveit_config) StdoutLine: {'line': b'-- Execute custom install script\n'}
+[2.026065] (arctos_moveit_config) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config/share/ament_index/resource_index/package_run_dependencies/arctos_moveit_config\n'}
+[2.038367] (arctos_moveit_config) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config/share/ament_index/resource_index/parent_prefix_path/arctos_moveit_config\n'}
+[2.050646] (arctos_moveit_config) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config/share/arctos_moveit_config/environment/ament_prefix_path.sh\n'}
+[2.061719] (serial) StdoutLine: {'line': b'[ 57%] \x1b[32m\x1b[1mLinking CXX static library libgtest_main.a\x1b[0m\n'}
+[2.063544] (arctos_moveit_config) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config/share/arctos_moveit_config/environment/ament_prefix_path.dsv\n'}
+[2.065102] (serial) StdoutLine: {'line': b'[ 64%] \x1b[32m\x1b[1mLinking CXX executable serial_example\x1b[0m\n'}
+[2.074802] (arctos_moveit_config) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config/share/arctos_moveit_config/environment/path.sh\n'}
+[2.086748] (arctos_moveit_config) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config/share/arctos_moveit_config/environment/path.dsv\n'}
+[2.099752] (arctos_moveit_config) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config/share/arctos_moveit_config/local_setup.bash\n'}
+[2.103829] (serial) StdoutLine: {'line': b'[ 64%] Built target gtest_main\n'}
+[2.104079] (-) TimerEvent: {}
+[2.111815] (arctos_moveit_config) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config/share/arctos_moveit_config/local_setup.sh\n'}
+[2.123227] (arctos_moveit_config) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config/share/arctos_moveit_config/local_setup.zsh\n'}
+[2.135893] (arctos_moveit_config) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config/share/arctos_moveit_config/local_setup.dsv\n'}
+[2.146577] (arctos_moveit_config) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config/share/arctos_moveit_config/package.dsv\n'}
+[2.159018] (arctos_moveit_config) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config/share/ament_index/resource_index/packages/arctos_moveit_config\n'}
+[2.170760] (arctos_moveit_config) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config/share/arctos_moveit_config/cmake/arctos_moveit_configConfig.cmake\n'}
+[2.181196] (arctos_moveit_config) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config/share/arctos_moveit_config/cmake/arctos_moveit_configConfig-version.cmake\n'}
+[2.190774] (arctos_moveit_config) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config/share/arctos_moveit_config/package.xml\n'}
+[2.194907] (serial) StdoutLine: {'line': b'[ 64%] Built target serial_example\n'}
+[2.201253] (arctos_moveit_config) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config/share/arctos_moveit_config/launch/demo.launch.py\n'}
+[2.204206] (-) TimerEvent: {}
+[2.212101] (arctos_moveit_config) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config/share/arctos_moveit_config/launch/move_group.launch.py\n'}
+[2.222072] (arctos_moveit_config) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config/share/arctos_moveit_config/launch/moveit_rviz.launch.py\n'}
+[2.231301] (arctos_moveit_config) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config/share/arctos_moveit_config/launch/rsp.launch.py\n'}
+[2.240883] (arctos_moveit_config) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config/share/arctos_moveit_config/launch/setup_assistant.launch.py\n'}
+[2.251065] (arctos_moveit_config) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config/share/arctos_moveit_config/launch/spawn_controllers.launch.py\n'}
+[2.261819] (arctos_moveit_config) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config/share/arctos_moveit_config/launch/static_virtual_joint_tfs.launch.py\n'}
+[2.271161] (arctos_moveit_config) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config/share/arctos_moveit_config/launch/warehouse_db.launch.py\n'}
+[2.281065] (arctos_moveit_config) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config/share/arctos_moveit_config/config/arctos.ros2_control.xacro\n'}
+[2.292141] (arctos_moveit_config) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config/share/arctos_moveit_config/config/arctos.srdf\n'}
+[2.302061] (arctos_moveit_config) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config/share/arctos_moveit_config/config/arctos.urdf.xacro\n'}
+[2.304326] (-) TimerEvent: {}
+[2.311858] (arctos_moveit_config) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config/share/arctos_moveit_config/config/chomp_planning.yaml\n'}
+[2.321604] (arctos_moveit_config) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config/share/arctos_moveit_config/config/initial_positions.yaml\n'}
+[2.332909] (arctos_moveit_config) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config/share/arctos_moveit_config/config/joint_limits.yaml\n'}
+[2.343449] (arctos_moveit_config) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config/share/arctos_moveit_config/config/kinematics.yaml\n'}
+[2.352994] (arctos_moveit_config) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config/share/arctos_moveit_config/config/moveit.rviz\n'}
+[2.362617] (arctos_moveit_config) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config/share/arctos_moveit_config/config/moveit_controllers.yaml\n'}
+[2.373964] (arctos_moveit_config) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config/share/arctos_moveit_config/config/pilz_cartesian_limits.yaml\n'}
+[2.385326] (arctos_moveit_config) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config/share/arctos_moveit_config/config/ros2_controllers.yaml\n'}
+[2.394929] (arctos_moveit_config) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config/share/arctos_moveit_config/.setup_assistant\n'}
+[2.404457] (-) TimerEvent: {}
+[2.408797] (arctos_moveit_config) CommandEnded: {'returncode': 0}
+[2.436019] (arctos_moveit_config) JobEnded: {'identifier': 'arctos_moveit_config', 'rc': 0}
+[2.504629] (-) TimerEvent: {}
+[2.605069] (-) TimerEvent: {}
+[2.705539] (-) TimerEvent: {}
+[2.805908] (-) TimerEvent: {}
+[2.906273] (-) TimerEvent: {}
+[3.006682] (-) TimerEvent: {}
+[3.107268] (-) TimerEvent: {}
+[3.207613] (-) TimerEvent: {}
+[3.307929] (-) TimerEvent: {}
+[3.408267] (-) TimerEvent: {}
+[3.508570] (-) TimerEvent: {}
+[3.608923] (-) TimerEvent: {}
+[3.709260] (-) TimerEvent: {}
+[3.809668] (-) TimerEvent: {}
+[3.910108] (-) TimerEvent: {}
+[4.010420] (-) TimerEvent: {}
+[4.110881] (-) TimerEvent: {}
+[4.211253] (-) TimerEvent: {}
+[4.311654] (-) TimerEvent: {}
+[4.412012] (-) TimerEvent: {}
+[4.512319] (-) TimerEvent: {}
+[4.612707] (-) TimerEvent: {}
+[4.641720] (serial) StdoutLine: {'line': b'[ 71%] \x1b[32m\x1b[1mLinking CXX static library libgtest.a\x1b[0m\n'}
+[4.712799] (-) TimerEvent: {}
+[4.720609] (serial) StdoutLine: {'line': b'[ 71%] Built target gtest\n'}
+[4.743430] (serial) StdoutLine: {'line': b'[ 78%] \x1b[32mBuilding CXX object tests/CMakeFiles/serial-test-timer.dir/unit/unix_timer_tests.cc.o\x1b[0m\n'}
+[4.743805] (serial) StdoutLine: {'line': b'[ 85%] \x1b[32mBuilding CXX object tests/CMakeFiles/serial-test.dir/unix_serial_tests.cc.o\x1b[0m\n'}
+[4.812919] (-) TimerEvent: {}
+[4.913258] (-) TimerEvent: {}
+[5.013648] (-) TimerEvent: {}
+[5.114043] (-) TimerEvent: {}
+[5.214407] (-) TimerEvent: {}
+[5.314793] (-) TimerEvent: {}
+[5.415179] (-) TimerEvent: {}
+[5.515503] (-) TimerEvent: {}
+[5.615058] (serial) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/usr/include/boost/bind.hpp:30\x1b[m\x1b[K,\n'}
+[5.615380] (serial) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/serial/tests/unix_serial_tests.cc:23\x1b[m\x1b[K:\n'}
+[5.615490] (-) TimerEvent: {}
+[5.615646] (serial) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/boost/bind.hpp:36:1:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[K#pragma message: The practice of declaring the Bind placeholders (_1, _2, ...) in the global namespace is deprecated. Please use <boost/bind/bind.hpp> + using namespace boost::placeholders, or define BOOST_BIND_GLOBAL_PLACEHOLDERS to retain the current behavior.\x1b[m\x1b[K\xe2\x80\x99\n'}
+[5.615794] (serial) StderrLine: {'line': b'   36 | \x1b[01;36m\x1b[KBOOST_PRAGMA_MESSAGE\x1b[m\x1b[K(\n'}
+[5.615940] (serial) StderrLine: {'line': b'      | \x1b[01;36m\x1b[K^~~~~~~~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[5.692165] (serial) StdoutLine: {'line': b'[ 92%] \x1b[32m\x1b[1mLinking CXX executable serial-test-timer\x1b[0m\n'}
+[5.715652] (-) TimerEvent: {}
+[5.816057] (-) TimerEvent: {}
+[5.836343] (serial) StdoutLine: {'line': b'[100%] \x1b[32m\x1b[1mLinking CXX executable serial-test\x1b[0m\n'}
+[5.877738] (serial) StdoutLine: {'line': b'[100%] Built target serial-test-timer\n'}
+[5.916456] (-) TimerEvent: {}
+[6.016893] (-) TimerEvent: {}
+[6.024827] (serial) StdoutLine: {'line': b'[100%] Built target serial-test\n'}
+[6.042533] (serial) CommandEnded: {'returncode': 0}
+[6.043829] (serial) JobProgress: {'identifier': 'serial', 'progress': 'install'}
+[6.044414] (serial) Command: {'cmd': ['/usr/bin/cmake', '--install', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/serial'], 'cwd': '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/serial', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'nguyen'), ('LC_TIME', 'vi_VN'), ('XDG_SESSION_TYPE', 'wayland'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/nguyen'), ('OLDPWD', '/home/nguyen/ros2_ws/src'), ('DESKTOP_SESSION', 'ubuntu'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('LC_MONETARY', 'vi_VN'), ('SYSTEMD_EXEC_PID', '1653'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'nguyen'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'nguyen'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/home/nguyen/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin'), ('SESSION_MANAGER', 'local/nguyen-aspire:@/tmp/.ICE-unix/1625,unix/nguyen-aspire:/tmp/.ICE-unix/1625'), ('XDG_MENU_PREFIX', 'gnome-'), ('LC_ADDRESS', 'vi_VN'), ('GNOME_TERMINAL_SCREEN', '/org/gnome/Terminal/screen/2e9c7e95_1405_4e25_b8e8_02161794cbe6'), ('GNOME_SETUP_DISPLAY', ':1'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':0'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('LC_TELEPHONE', 'vi_VN'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.ODJLK3'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('GNOME_TERMINAL_SERVICE', ':1.109'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/opt/ros/humble'), ('SHELL', '/bin/bash'), ('LC_NAME', 'vi_VN'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('LC_MEASUREMENT', 'vi_VN'), ('LC_IDENTIFICATION', 'vi_VN'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/serial'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('LC_NUMERIC', 'vi_VN'), ('LC_PAPER', 'vi_VN'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/opt/ros/humble')]), 'shell': False}
+[6.053228] (serial) StdoutLine: {'line': b'-- Install configuration: ""\n'}
+[6.053615] (serial) StdoutLine: {'line': b'-- Execute custom install script\n'}
+[6.053901] (serial) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/lib/libserial.a\n'}
+[6.064113] (serial) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/include/serial/serial.h\n'}
+[6.074671] (serial) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/include/serial/v8stdint.h\n'}
+[6.086006] (serial) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/share/serial/environment/library_path.sh\n'}
+[6.097894] (serial) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/share/serial/environment/library_path.dsv\n'}
+[6.109319] (serial) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/share/ament_index/resource_index/package_run_dependencies/serial\n'}
+[6.117031] (-) TimerEvent: {}
+[6.119250] (serial) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/share/ament_index/resource_index/parent_prefix_path/serial\n'}
+[6.130889] (serial) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/share/serial/environment/ament_prefix_path.sh\n'}
+[6.141252] (serial) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/share/serial/environment/ament_prefix_path.dsv\n'}
+[6.151483] (serial) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/share/serial/environment/path.sh\n'}
+[6.163714] (serial) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/share/serial/environment/path.dsv\n'}
+[6.174583] (serial) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/share/serial/local_setup.bash\n'}
+[6.185289] (serial) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/share/serial/local_setup.sh\n'}
+[6.195292] (serial) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/share/serial/local_setup.zsh\n'}
+[6.207202] (serial) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/share/serial/local_setup.dsv\n'}
+[6.217164] (-) TimerEvent: {}
+[6.218359] (serial) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/share/serial/package.dsv\n'}
+[6.229747] (serial) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/share/ament_index/resource_index/packages/serial\n'}
+[6.241396] (serial) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/share/serial/cmake/ament_cmake_export_include_directories-extras.cmake\n'}
+[6.253052] (serial) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/share/serial/cmake/ament_cmake_export_libraries-extras.cmake\n'}
+[6.263726] (serial) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/share/serial/cmake/serialConfig.cmake\n'}
+[6.274755] (serial) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/share/serial/cmake/serialConfig-version.cmake\n'}
+[6.285924] (serial) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/share/serial/package.xml\n'}
+[6.299639] (serial) CommandEnded: {'returncode': 0}
+[6.314306] (serial) JobEnded: {'identifier': 'serial', 'rc': 0}
+[6.315069] (arctos_motor_driver) JobStarted: {'identifier': 'arctos_motor_driver'}
+[6.317363] (-) TimerEvent: {}
+[6.324686] (arctos_motor_driver) JobProgress: {'identifier': 'arctos_motor_driver', 'progress': 'cmake'}
+[6.325803] (arctos_motor_driver) Command: {'cmd': ['/usr/bin/cmake', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/arctos_motor_driver', '-DAMENT_CMAKE_SYMLINK_INSTALL=1', '-DCMAKE_INSTALL_PREFIX=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver'], 'cwd': '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_motor_driver', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'nguyen'), ('LC_TIME', 'vi_VN'), ('XDG_SESSION_TYPE', 'wayland'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/nguyen'), ('OLDPWD', '/home/nguyen/ros2_ws/src'), ('DESKTOP_SESSION', 'ubuntu'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('LC_MONETARY', 'vi_VN'), ('SYSTEMD_EXEC_PID', '1653'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'nguyen'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'nguyen'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/home/nguyen/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin'), ('SESSION_MANAGER', 'local/nguyen-aspire:@/tmp/.ICE-unix/1625,unix/nguyen-aspire:/tmp/.ICE-unix/1625'), ('XDG_MENU_PREFIX', 'gnome-'), ('LC_ADDRESS', 'vi_VN'), ('GNOME_TERMINAL_SCREEN', '/org/gnome/Terminal/screen/2e9c7e95_1405_4e25_b8e8_02161794cbe6'), ('GNOME_SETUP_DISPLAY', ':1'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':0'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('LC_TELEPHONE', 'vi_VN'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.ODJLK3'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('GNOME_TERMINAL_SERVICE', ':1.109'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial:/opt/ros/humble'), ('SHELL', '/bin/bash'), ('LC_NAME', 'vi_VN'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('LC_MEASUREMENT', 'vi_VN'), ('LC_IDENTIFICATION', 'vi_VN'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_motor_driver'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('LC_NUMERIC', 'vi_VN'), ('LC_PAPER', 'vi_VN'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial:/opt/ros/humble')]), 'shell': False}
+[6.384256] (arctos_motor_driver) StdoutLine: {'line': b'-- The C compiler identification is GNU 11.4.0\n'}
+[6.417509] (-) TimerEvent: {}
+[6.441137] (arctos_motor_driver) StdoutLine: {'line': b'-- The CXX compiler identification is GNU 11.4.0\n'}
+[6.448762] (arctos_motor_driver) StdoutLine: {'line': b'-- Detecting C compiler ABI info\n'}
+[6.517697] (-) TimerEvent: {}
+[6.525237] (arctos_motor_driver) StdoutLine: {'line': b'-- Detecting C compiler ABI info - done\n'}
+[6.532063] (arctos_motor_driver) StdoutLine: {'line': b'-- Check for working C compiler: /usr/bin/cc - skipped\n'}
+[6.532261] (arctos_motor_driver) StdoutLine: {'line': b'-- Detecting C compile features\n'}
+[6.532571] (arctos_motor_driver) StdoutLine: {'line': b'-- Detecting C compile features - done\n'}
+[6.535430] (arctos_motor_driver) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info\n'}
+[6.617798] (-) TimerEvent: {}
+[6.618121] (arctos_motor_driver) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info - done\n'}
+[6.626334] (arctos_motor_driver) StdoutLine: {'line': b'-- Check for working CXX compiler: /usr/bin/c++ - skipped\n'}
+[6.626744] (arctos_motor_driver) StdoutLine: {'line': b'-- Detecting CXX compile features\n'}
+[6.627136] (arctos_motor_driver) StdoutLine: {'line': b'-- Detecting CXX compile features - done\n'}
+[6.629687] (arctos_motor_driver) StdoutLine: {'line': b'-- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)\n'}
+[6.717918] (-) TimerEvent: {}
+[6.773666] (arctos_motor_driver) StdoutLine: {'line': b'-- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter \n'}
+[6.818045] (-) TimerEvent: {}
+[6.835201] (arctos_motor_driver) StdoutLine: {'line': b'-- Override CMake install command with custom implementation using symlinks instead of copying resources\n'}
+[6.863807] (arctos_motor_driver) StdoutLine: {'line': b'-- Looking for pthread.h\n'}
+[6.918179] (-) TimerEvent: {}
+[6.943833] (arctos_motor_driver) StdoutLine: {'line': b'-- Looking for pthread.h - found\n'}
+[6.944188] (arctos_motor_driver) StdoutLine: {'line': b'-- Performing Test CMAKE_HAVE_LIBC_PTHREAD\n'}
+[7.018297] (-) TimerEvent: {}
+[7.025054] (arctos_motor_driver) StdoutLine: {'line': b'-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success\n'}
+[7.026258] (arctos_motor_driver) StdoutLine: {'line': b'-- Found Threads: TRUE  \n'}
+[7.029725] (arctos_motor_driver) StdoutLine: {'line': b'-- Found rclcpp: 16.0.17 (/opt/ros/humble/share/rclcpp/cmake)\n'}
+[7.088784] (arctos_motor_driver) StdoutLine: {'line': b'-- Found rosidl_generator_c: 3.1.8 (/opt/ros/humble/share/rosidl_generator_c/cmake)\n'}
+[7.095675] (arctos_motor_driver) StdoutLine: {'line': b'-- Found rosidl_adapter: 3.1.8 (/opt/ros/humble/share/rosidl_adapter/cmake)\n'}
+[7.106432] (arctos_motor_driver) StdoutLine: {'line': b'-- Found rosidl_generator_cpp: 3.1.8 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)\n'}
+[7.118447] (-) TimerEvent: {}
+[7.121416] (arctos_motor_driver) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[7.140696] (arctos_motor_driver) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[7.193958] (arctos_motor_driver) StdoutLine: {'line': b'-- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)\n'}
+[7.197676] (arctos_motor_driver) StdoutLine: {'line': b'-- Found rmw_fastrtps_cpp: 6.2.9 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)\n'}
+[7.218598] (-) TimerEvent: {}
+[7.319035] (-) TimerEvent: {}
+[7.350555] (arctos_motor_driver) StdoutLine: {'line': b'-- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.2")  \n'}
+[7.380794] (arctos_motor_driver) StdoutLine: {'line': b'-- Found FastRTPS: /opt/ros/humble/include  \n'}
+[7.419144] (-) TimerEvent: {}
+[7.428076] (arctos_motor_driver) StdoutLine: {'line': b"-- Using RMW implementation 'rmw_fastrtps_cpp' as default\n"}
+[7.502946] (arctos_motor_driver) StdoutLine: {'line': b'-- Found can_msgs: 2.0.0 (/opt/ros/humble/share/can_msgs/cmake)\n'}
+[7.518339] (arctos_motor_driver) StdoutLine: {'line': b'-- Found sensor_msgs: 4.9.0 (/opt/ros/humble/share/sensor_msgs/cmake)\n'}
+[7.519233] (-) TimerEvent: {}
+[7.552075] (arctos_motor_driver) StdoutLine: {'line': b'-- Found serial: 1.2.1 (/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/share/serial/cmake)\n'}
+[7.619383] (-) TimerEvent: {}
+[7.621415] (arctos_motor_driver) StdoutLine: {'line': b'-- Configuring done\n'}
+[7.640603] (arctos_motor_driver) StdoutLine: {'line': b'-- Generating done\n'}
+[7.647669] (arctos_motor_driver) StdoutLine: {'line': b'-- Build files have been written to: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_motor_driver\n'}
+[7.657802] (arctos_motor_driver) CommandEnded: {'returncode': 0}
+[7.658338] (arctos_motor_driver) JobProgress: {'identifier': 'arctos_motor_driver', 'progress': 'build'}
+[7.659079] (arctos_motor_driver) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_motor_driver', '--', '-j12', '-l12'], 'cwd': '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_motor_driver', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'nguyen'), ('LC_TIME', 'vi_VN'), ('XDG_SESSION_TYPE', 'wayland'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/nguyen'), ('OLDPWD', '/home/nguyen/ros2_ws/src'), ('DESKTOP_SESSION', 'ubuntu'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('LC_MONETARY', 'vi_VN'), ('SYSTEMD_EXEC_PID', '1653'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'nguyen'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'nguyen'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/home/nguyen/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin'), ('SESSION_MANAGER', 'local/nguyen-aspire:@/tmp/.ICE-unix/1625,unix/nguyen-aspire:/tmp/.ICE-unix/1625'), ('XDG_MENU_PREFIX', 'gnome-'), ('LC_ADDRESS', 'vi_VN'), ('GNOME_TERMINAL_SCREEN', '/org/gnome/Terminal/screen/2e9c7e95_1405_4e25_b8e8_02161794cbe6'), ('GNOME_SETUP_DISPLAY', ':1'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':0'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('LC_TELEPHONE', 'vi_VN'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.ODJLK3'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('GNOME_TERMINAL_SERVICE', ':1.109'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial:/opt/ros/humble'), ('SHELL', '/bin/bash'), ('LC_NAME', 'vi_VN'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('LC_MEASUREMENT', 'vi_VN'), ('LC_IDENTIFICATION', 'vi_VN'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_motor_driver'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('LC_NUMERIC', 'vi_VN'), ('LC_PAPER', 'vi_VN'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial:/opt/ros/humble')]), 'shell': False}
+[7.714395] (arctos_motor_driver) StdoutLine: {'line': b'[ 16%] \x1b[32mBuilding CXX object CMakeFiles/uart_protocol.dir/src/uart_protocol.cpp.o\x1b[0m\n'}
+[7.714958] (arctos_motor_driver) StdoutLine: {'line': b'[ 33%] \x1b[32mBuilding CXX object CMakeFiles/can_protocol.dir/src/can_protocol.cpp.o\x1b[0m\n'}
+[7.719513] (-) TimerEvent: {}
+[7.819947] (-) TimerEvent: {}
+[7.920295] (-) TimerEvent: {}
+[8.020620] (-) TimerEvent: {}
+[8.121009] (-) TimerEvent: {}
+[8.221430] (-) TimerEvent: {}
+[8.321870] (-) TimerEvent: {}
+[8.356941] (arctos_motor_driver) StdoutLine: {'line': b'[ 50%] \x1b[32m\x1b[1mLinking CXX shared library libuart_protocol.so\x1b[0m\n'}
+[8.421937] (-) TimerEvent: {}
+[8.512789] (arctos_motor_driver) StdoutLine: {'line': b'[ 50%] Built target uart_protocol\n'}
+[8.522055] (-) TimerEvent: {}
+[8.622410] (-) TimerEvent: {}
+[8.722890] (-) TimerEvent: {}
+[8.823373] (-) TimerEvent: {}
+[8.923813] (-) TimerEvent: {}
+[9.024214] (-) TimerEvent: {}
+[9.124507] (-) TimerEvent: {}
+[9.224808] (-) TimerEvent: {}
+[9.325105] (-) TimerEvent: {}
+[9.425460] (-) TimerEvent: {}
+[9.525974] (-) TimerEvent: {}
+[9.626431] (-) TimerEvent: {}
+[9.726833] (-) TimerEvent: {}
+[9.827205] (-) TimerEvent: {}
+[9.927570] (-) TimerEvent: {}
+[10.027917] (-) TimerEvent: {}
+[10.128252] (-) TimerEvent: {}
+[10.228598] (-) TimerEvent: {}
+[10.329151] (-) TimerEvent: {}
+[10.429704] (-) TimerEvent: {}
+[10.530078] (-) TimerEvent: {}
+[10.630444] (-) TimerEvent: {}
+[10.730867] (-) TimerEvent: {}
+[10.831148] (-) TimerEvent: {}
+[10.931424] (-) TimerEvent: {}
+[11.031731] (-) TimerEvent: {}
+[11.132153] (-) TimerEvent: {}
+[11.232553] (-) TimerEvent: {}
+[11.332846] (-) TimerEvent: {}
+[11.433198] (-) TimerEvent: {}
+[11.533565] (-) TimerEvent: {}
+[11.633949] (-) TimerEvent: {}
+[11.734341] (-) TimerEvent: {}
+[11.834700] (-) TimerEvent: {}
+[11.935195] (-) TimerEvent: {}
+[12.035490] (-) TimerEvent: {}
+[12.135803] (-) TimerEvent: {}
+[12.236173] (-) TimerEvent: {}
+[12.336697] (-) TimerEvent: {}
+[12.437223] (-) TimerEvent: {}
+[12.537636] (-) TimerEvent: {}
+[12.638003] (-) TimerEvent: {}
+[12.738500] (-) TimerEvent: {}
+[12.838903] (-) TimerEvent: {}
+[12.939300] (-) TimerEvent: {}
+[13.039604] (-) TimerEvent: {}
+[13.139921] (-) TimerEvent: {}
+[13.240239] (-) TimerEvent: {}
+[13.340581] (-) TimerEvent: {}
+[13.440947] (-) TimerEvent: {}
+[13.541361] (-) TimerEvent: {}
+[13.641672] (-) TimerEvent: {}
+[13.742014] (-) TimerEvent: {}
+[13.842417] (-) TimerEvent: {}
+[13.942948] (-) TimerEvent: {}
+[14.043308] (-) TimerEvent: {}
+[14.143649] (-) TimerEvent: {}
+[14.243974] (-) TimerEvent: {}
+[14.344318] (-) TimerEvent: {}
+[14.444714] (-) TimerEvent: {}
+[14.545243] (-) TimerEvent: {}
+[14.645618] (-) TimerEvent: {}
+[14.746007] (-) TimerEvent: {}
+[14.846320] (-) TimerEvent: {}
+[14.946641] (-) TimerEvent: {}
+[15.047005] (-) TimerEvent: {}
+[15.147487] (-) TimerEvent: {}
+[15.247817] (-) TimerEvent: {}
+[15.348190] (-) TimerEvent: {}
+[15.448563] (-) TimerEvent: {}
+[15.548964] (-) TimerEvent: {}
+[15.649451] (-) TimerEvent: {}
+[15.749937] (-) TimerEvent: {}
+[15.821998] (arctos_motor_driver) StdoutLine: {'line': b'[ 66%] \x1b[32m\x1b[1mLinking CXX shared library libcan_protocol.so\x1b[0m\n'}
+[15.850156] (-) TimerEvent: {}
+[15.950760] (-) TimerEvent: {}
+[16.051162] (-) TimerEvent: {}
+[16.151729] (-) TimerEvent: {}
+[16.252223] (-) TimerEvent: {}
+[16.352648] (-) TimerEvent: {}
+[16.365924] (arctos_motor_driver) StdoutLine: {'line': b'[ 66%] Built target can_protocol\n'}
+[16.389707] (arctos_motor_driver) StdoutLine: {'line': b'[ 83%] \x1b[32mBuilding CXX object CMakeFiles/arctos_motor_driver.dir/src/motor_driver.cpp.o\x1b[0m\n'}
+[16.452823] (-) TimerEvent: {}
+[16.553256] (-) TimerEvent: {}
+[16.653600] (-) TimerEvent: {}
+[16.753947] (-) TimerEvent: {}
+[16.854302] (-) TimerEvent: {}
+[16.954674] (-) TimerEvent: {}
+[17.054934] (-) TimerEvent: {}
+[17.155336] (-) TimerEvent: {}
+[17.255812] (-) TimerEvent: {}
+[17.356171] (-) TimerEvent: {}
+[17.456532] (-) TimerEvent: {}
+[17.556903] (-) TimerEvent: {}
+[17.657236] (-) TimerEvent: {}
+[17.757569] (-) TimerEvent: {}
+[17.857903] (-) TimerEvent: {}
+[17.958215] (-) TimerEvent: {}
+[18.058537] (-) TimerEvent: {}
+[18.160881] (-) TimerEvent: {}
+[18.261204] (-) TimerEvent: {}
+[18.361542] (-) TimerEvent: {}
+[18.461915] (-) TimerEvent: {}
+[18.562220] (-) TimerEvent: {}
+[18.662554] (-) TimerEvent: {}
+[18.762931] (-) TimerEvent: {}
+[18.814663] (arctos_motor_driver) StderrLine: {'line': b'\x1b[01m\x1b[K/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/arctos_motor_driver/src/motor_driver.cpp:\x1b[m\x1b[K In member function \xe2\x80\x98\x1b[01m\x1b[Kvoid arctos_motor_driver::MotorDriver::requestMotorData(uint8_t)\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[18.814953] (arctos_motor_driver) StderrLine: {'line': b'\x1b[01m\x1b[K/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/arctos_motor_driver/src/motor_driver.cpp:1036:22:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kignoring return value of \xe2\x80\x98\x1b[01m\x1b[Kbool std::vector<_Tp, _Alloc>::empty() const [with _Tp = unsigned char; _Alloc = std::allocator<unsigned char>]\x1b[m\x1b[K\xe2\x80\x99, declared with attribute \xe2\x80\x98\x1b[01m\x1b[Knodiscard\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-result\x07-Wunused-result\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[18.815049] (arctos_motor_driver) StderrLine: {'line': b' 1036 |         \x1b[01;35m\x1b[Krequest.empty()\x1b[m\x1b[K;\n'}
+[18.815127] (arctos_motor_driver) StderrLine: {'line': b'      |         \x1b[01;35m\x1b[K~~~~~~~~~~~~~^~\x1b[m\x1b[K\n'}
+[18.815204] (arctos_motor_driver) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/usr/include/c++/11/vector:67\x1b[m\x1b[K,\n'}
+[18.815280] (arctos_motor_driver) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/usr/include/c++/11/functional:62\x1b[m\x1b[K,\n'}
+[18.815359] (arctos_motor_driver) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/usr/include/c++/11/pstl/glue_algorithm_defs.h:13\x1b[m\x1b[K,\n'}
+[18.815433] (arctos_motor_driver) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/usr/include/c++/11/algorithm:74\x1b[m\x1b[K,\n'}
+[18.815506] (arctos_motor_driver) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/executor.hpp:18\x1b[m\x1b[K,\n'}
+[18.815578] (arctos_motor_driver) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:25\x1b[m\x1b[K,\n'}
+[18.815657] (arctos_motor_driver) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21\x1b[m\x1b[K,\n'}
+[18.815730] (arctos_motor_driver) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155\x1b[m\x1b[K,\n'}
+[18.815823] (arctos_motor_driver) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/arctos_motor_driver/include/arctos_motor_driver/motor_types.hpp:6\x1b[m\x1b[K,\n'}
+[18.815918] (arctos_motor_driver) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/arctos_motor_driver/include/arctos_motor_driver/motor_driver.hpp:4\x1b[m\x1b[K,\n'}
+[18.815995] (arctos_motor_driver) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/arctos_motor_driver/src/motor_driver.cpp:1\x1b[m\x1b[K:\n'}
+[18.816070] (arctos_motor_driver) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/c++/11/bits/stl_vector.h:1007:7:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kdeclared here\n'}
+[18.816144] (arctos_motor_driver) StderrLine: {'line': b' 1007 |       \x1b[01;36m\x1b[Kempty\x1b[m\x1b[K() const _GLIBCXX_NOEXCEPT\n'}
+[18.816219] (arctos_motor_driver) StderrLine: {'line': b'      |       \x1b[01;36m\x1b[K^~~~~\x1b[m\x1b[K\n'}
+[18.863077] (-) TimerEvent: {}
+[18.963479] (-) TimerEvent: {}
+[19.063883] (-) TimerEvent: {}
+[19.164317] (-) TimerEvent: {}
+[19.264726] (-) TimerEvent: {}
+[19.365105] (-) TimerEvent: {}
+[19.465465] (-) TimerEvent: {}
+[19.565783] (-) TimerEvent: {}
+[19.666161] (-) TimerEvent: {}
+[19.766513] (-) TimerEvent: {}
+[19.859340] (arctos_motor_driver) StdoutLine: {'line': b'[100%] \x1b[32m\x1b[1mLinking CXX shared library libarctos_motor_driver.so\x1b[0m\n'}
+[19.866650] (-) TimerEvent: {}
+[19.966979] (-) TimerEvent: {}
+[20.067303] (-) TimerEvent: {}
+[20.067555] (arctos_motor_driver) StdoutLine: {'line': b'[100%] Built target arctos_motor_driver\n'}
+[20.083575] (arctos_motor_driver) CommandEnded: {'returncode': 0}
+[20.084272] (arctos_motor_driver) JobProgress: {'identifier': 'arctos_motor_driver', 'progress': 'install'}
+[20.084442] (arctos_motor_driver) Command: {'cmd': ['/usr/bin/cmake', '--install', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_motor_driver'], 'cwd': '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_motor_driver', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'nguyen'), ('LC_TIME', 'vi_VN'), ('XDG_SESSION_TYPE', 'wayland'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/nguyen'), ('OLDPWD', '/home/nguyen/ros2_ws/src'), ('DESKTOP_SESSION', 'ubuntu'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('LC_MONETARY', 'vi_VN'), ('SYSTEMD_EXEC_PID', '1653'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'nguyen'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'nguyen'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/home/nguyen/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin'), ('SESSION_MANAGER', 'local/nguyen-aspire:@/tmp/.ICE-unix/1625,unix/nguyen-aspire:/tmp/.ICE-unix/1625'), ('XDG_MENU_PREFIX', 'gnome-'), ('LC_ADDRESS', 'vi_VN'), ('GNOME_TERMINAL_SCREEN', '/org/gnome/Terminal/screen/2e9c7e95_1405_4e25_b8e8_02161794cbe6'), ('GNOME_SETUP_DISPLAY', ':1'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':0'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('LC_TELEPHONE', 'vi_VN'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.ODJLK3'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('GNOME_TERMINAL_SERVICE', ':1.109'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial:/opt/ros/humble'), ('SHELL', '/bin/bash'), ('LC_NAME', 'vi_VN'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('LC_MEASUREMENT', 'vi_VN'), ('LC_IDENTIFICATION', 'vi_VN'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_motor_driver'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('LC_NUMERIC', 'vi_VN'), ('LC_PAPER', 'vi_VN'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial:/opt/ros/humble')]), 'shell': False}
+[20.092976] (arctos_motor_driver) StdoutLine: {'line': b'-- Install configuration: ""\n'}
+[20.093445] (arctos_motor_driver) StdoutLine: {'line': b'-- Execute custom install script\n'}
+[20.093990] (arctos_motor_driver) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/include/arctos_motor_driver/can_protocol.hpp\n'}
+[20.105027] (arctos_motor_driver) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/include/arctos_motor_driver/motor_driver.hpp\n'}
+[20.115053] (arctos_motor_driver) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/include/arctos_motor_driver/motor_types.hpp\n'}
+[20.126872] (arctos_motor_driver) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/include/arctos_motor_driver/uart_protocol.hpp\n'}
+[20.137150] (arctos_motor_driver) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/arctos_motor_driver/environment/library_path.sh\n'}
+[20.146640] (arctos_motor_driver) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/arctos_motor_driver/environment/library_path.dsv\n'}
+[20.157264] (arctos_motor_driver) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/ament_index/resource_index/package_run_dependencies/arctos_motor_driver\n'}
+[20.167481] (-) TimerEvent: {}
+[20.168500] (arctos_motor_driver) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/ament_index/resource_index/parent_prefix_path/arctos_motor_driver\n'}
+[20.179108] (arctos_motor_driver) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/arctos_motor_driver/environment/ament_prefix_path.sh\n'}
+[20.189268] (arctos_motor_driver) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/arctos_motor_driver/environment/ament_prefix_path.dsv\n'}
+[20.199794] (arctos_motor_driver) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/arctos_motor_driver/environment/path.sh\n'}
+[20.209496] (arctos_motor_driver) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/arctos_motor_driver/environment/path.dsv\n'}
+[20.219718] (arctos_motor_driver) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/arctos_motor_driver/local_setup.bash\n'}
+[20.229890] (arctos_motor_driver) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/arctos_motor_driver/local_setup.sh\n'}
+[20.240820] (arctos_motor_driver) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/arctos_motor_driver/local_setup.zsh\n'}
+[20.251450] (arctos_motor_driver) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/arctos_motor_driver/local_setup.dsv\n'}
+[20.261556] (arctos_motor_driver) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/arctos_motor_driver/package.dsv\n'}
+[20.267553] (-) TimerEvent: {}
+[20.271574] (arctos_motor_driver) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/ament_index/resource_index/packages/arctos_motor_driver\n'}
+[20.281978] (arctos_motor_driver) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/arctos_motor_driver/cmake/ament_cmake_export_targets-extras.cmake\n'}
+[20.292939] (arctos_motor_driver) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/arctos_motor_driver/cmake/ament_cmake_export_dependencies-extras.cmake\n'}
+[20.303217] (arctos_motor_driver) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/arctos_motor_driver/cmake/arctos_motor_driverConfig.cmake\n'}
+[20.314342] (arctos_motor_driver) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/arctos_motor_driver/cmake/arctos_motor_driverConfig-version.cmake\n'}
+[20.325790] (arctos_motor_driver) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/arctos_motor_driver/package.xml\n'}
+[20.337189] (arctos_motor_driver) StdoutLine: {'line': b'-- Installing: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/lib/libcan_protocol.so\n'}
+[20.347465] (arctos_motor_driver) StdoutLine: {'line': b'-- Set runtime path of "/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/lib/libcan_protocol.so" to ""\n'}
+[20.347676] (arctos_motor_driver) StdoutLine: {'line': b'-- Installing: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/lib/libuart_protocol.so\n'}
+[20.348333] (arctos_motor_driver) StdoutLine: {'line': b'-- Set runtime path of "/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/lib/libuart_protocol.so" to ""\n'}
+[20.348500] (arctos_motor_driver) StdoutLine: {'line': b'-- Installing: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/lib/libarctos_motor_driver.so\n'}
+[20.349642] (arctos_motor_driver) StdoutLine: {'line': b'-- Set runtime path of "/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/lib/libarctos_motor_driver.so" to ""\n'}
+[20.349806] (arctos_motor_driver) StdoutLine: {'line': b'-- Installing: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/arctos_motor_driver/cmake/export_arctos_motor_driverExport.cmake\n'}
+[20.349941] (arctos_motor_driver) StdoutLine: {'line': b'-- Installing: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/arctos_motor_driver/cmake/export_arctos_motor_driverExport-noconfig.cmake\n'}
+[20.352516] (arctos_motor_driver) CommandEnded: {'returncode': 0}
+[20.367506] (arctos_motor_driver) JobEnded: {'identifier': 'arctos_motor_driver', 'rc': 0}
+[20.368211] (-) TimerEvent: {}
+[20.368294] (arctos_hardware_interface) JobStarted: {'identifier': 'arctos_hardware_interface'}
+[20.377348] (arctos_hardware_interface) JobProgress: {'identifier': 'arctos_hardware_interface', 'progress': 'cmake'}
+[20.377905] (arctos_hardware_interface) Command: {'cmd': ['/usr/bin/cmake', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/arctos_hardware_interface', '-DAMENT_CMAKE_SYMLINK_INSTALL=1', '-DCMAKE_INSTALL_PREFIX=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface'], 'cwd': '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_hardware_interface', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'nguyen'), ('LC_TIME', 'vi_VN'), ('XDG_SESSION_TYPE', 'wayland'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/lib:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/nguyen'), ('OLDPWD', '/home/nguyen/ros2_ws/src'), ('DESKTOP_SESSION', 'ubuntu'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('LC_MONETARY', 'vi_VN'), ('SYSTEMD_EXEC_PID', '1653'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'nguyen'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'nguyen'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/home/nguyen/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin'), ('SESSION_MANAGER', 'local/nguyen-aspire:@/tmp/.ICE-unix/1625,unix/nguyen-aspire:/tmp/.ICE-unix/1625'), ('XDG_MENU_PREFIX', 'gnome-'), ('LC_ADDRESS', 'vi_VN'), ('GNOME_TERMINAL_SCREEN', '/org/gnome/Terminal/screen/2e9c7e95_1405_4e25_b8e8_02161794cbe6'), ('GNOME_SETUP_DISPLAY', ':1'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':0'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('LC_TELEPHONE', 'vi_VN'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.ODJLK3'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('GNOME_TERMINAL_SERVICE', ':1.109'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial:/opt/ros/humble'), ('SHELL', '/bin/bash'), ('LC_NAME', 'vi_VN'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('LC_MEASUREMENT', 'vi_VN'), ('LC_IDENTIFICATION', 'vi_VN'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_hardware_interface'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('LC_NUMERIC', 'vi_VN'), ('LC_PAPER', 'vi_VN'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial:/opt/ros/humble')]), 'shell': False}
+[20.437903] (arctos_hardware_interface) StdoutLine: {'line': b'-- The C compiler identification is GNU 11.4.0\n'}
+[20.468349] (-) TimerEvent: {}
+[20.498607] (arctos_hardware_interface) StdoutLine: {'line': b'-- The CXX compiler identification is GNU 11.4.0\n'}
+[20.506556] (arctos_hardware_interface) StdoutLine: {'line': b'-- Detecting C compiler ABI info\n'}
+[20.568466] (-) TimerEvent: {}
+[20.582268] (arctos_hardware_interface) StdoutLine: {'line': b'-- Detecting C compiler ABI info - done\n'}
+[20.589210] (arctos_hardware_interface) StdoutLine: {'line': b'-- Check for working C compiler: /usr/bin/cc - skipped\n'}
+[20.589458] (arctos_hardware_interface) StdoutLine: {'line': b'-- Detecting C compile features\n'}
+[20.589702] (arctos_hardware_interface) StdoutLine: {'line': b'-- Detecting C compile features - done\n'}
+[20.592630] (arctos_hardware_interface) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info\n'}
+[20.668613] (-) TimerEvent: {}
+[20.683996] (arctos_hardware_interface) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info - done\n'}
+[20.692202] (arctos_hardware_interface) StdoutLine: {'line': b'-- Check for working CXX compiler: /usr/bin/c++ - skipped\n'}
+[20.692461] (arctos_hardware_interface) StdoutLine: {'line': b'-- Detecting CXX compile features\n'}
+[20.692821] (arctos_hardware_interface) StdoutLine: {'line': b'-- Detecting CXX compile features - done\n'}
+[20.696294] (arctos_hardware_interface) StdoutLine: {'line': b'-- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)\n'}
+[20.768748] (-) TimerEvent: {}
+[20.846755] (arctos_hardware_interface) StdoutLine: {'line': b'-- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter \n'}
+[20.868906] (-) TimerEvent: {}
+[20.907857] (arctos_hardware_interface) StdoutLine: {'line': b'-- Override CMake install command with custom implementation using symlinks instead of copying resources\n'}
+[20.943281] (arctos_hardware_interface) StdoutLine: {'line': b'-- Found rclcpp: 16.0.17 (/opt/ros/humble/share/rclcpp/cmake)\n'}
+[20.969011] (-) TimerEvent: {}
+[20.990538] (arctos_hardware_interface) StdoutLine: {'line': b'-- Found rosidl_generator_c: 3.1.8 (/opt/ros/humble/share/rosidl_generator_c/cmake)\n'}
+[20.996028] (arctos_hardware_interface) StdoutLine: {'line': b'-- Found rosidl_adapter: 3.1.8 (/opt/ros/humble/share/rosidl_adapter/cmake)\n'}
+[21.005978] (arctos_hardware_interface) StdoutLine: {'line': b'-- Found rosidl_generator_cpp: 3.1.8 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)\n'}
+[21.017766] (arctos_hardware_interface) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[21.034190] (arctos_hardware_interface) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[21.069144] (-) TimerEvent: {}
+[21.080905] (arctos_hardware_interface) StdoutLine: {'line': b'-- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)\n'}
+[21.085046] (arctos_hardware_interface) StdoutLine: {'line': b'-- Found rmw_fastrtps_cpp: 6.2.9 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)\n'}
+[21.169271] (-) TimerEvent: {}
+[21.196293] (arctos_hardware_interface) StdoutLine: {'line': b'-- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.2")  \n'}
+[21.228309] (arctos_hardware_interface) StdoutLine: {'line': b'-- Found FastRTPS: /opt/ros/humble/include  \n'}
+[21.269417] (-) TimerEvent: {}
+[21.274735] (arctos_hardware_interface) StdoutLine: {'line': b"-- Using RMW implementation 'rmw_fastrtps_cpp' as default\n"}
+[21.284174] (arctos_hardware_interface) StdoutLine: {'line': b'-- Looking for pthread.h\n'}
+[21.369534] (-) TimerEvent: {}
+[21.370329] (arctos_hardware_interface) StdoutLine: {'line': b'-- Looking for pthread.h - found\n'}
+[21.370797] (arctos_hardware_interface) StdoutLine: {'line': b'-- Performing Test CMAKE_HAVE_LIBC_PTHREAD\n'}
+[21.455616] (arctos_hardware_interface) StdoutLine: {'line': b'-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success\n'}
+[21.456653] (arctos_hardware_interface) StdoutLine: {'line': b'-- Found Threads: TRUE  \n'}
+[21.469668] (-) TimerEvent: {}
+[21.508328] (arctos_hardware_interface) StdoutLine: {'line': b'-- Found can_msgs: 2.0.0 (/opt/ros/humble/share/can_msgs/cmake)\n'}
+[21.522576] (arctos_hardware_interface) StdoutLine: {'line': b'-- Found sensor_msgs: 4.9.0 (/opt/ros/humble/share/sensor_msgs/cmake)\n'}
+[21.557365] (arctos_hardware_interface) StdoutLine: {'line': b'-- Found hardware_interface: 2.53.0 (/opt/ros/humble/share/hardware_interface/cmake)\n'}
+[21.569786] (-) TimerEvent: {}
+[21.670096] (-) TimerEvent: {}
+[21.702988] (arctos_hardware_interface) StdoutLine: {'line': b'-- Found realtime_tools: 2.15.0 (/opt/ros/humble/share/realtime_tools/cmake)\n'}
+[21.719241] (arctos_hardware_interface) StdoutLine: {'line': b'-- Found arctos_motor_driver: 0.0.1 (/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/arctos_motor_driver/cmake)\n'}
+[21.725002] (arctos_hardware_interface) StdoutLine: {'line': b'-- Found std_srvs: 4.9.0 (/opt/ros/humble/share/std_srvs/cmake)\n'}
+[21.770213] (-) TimerEvent: {}
+[21.825091] (arctos_hardware_interface) StdoutLine: {'line': b'-- Configuring done\n'}
+[21.870330] (-) TimerEvent: {}
+[21.929575] (arctos_hardware_interface) StdoutLine: {'line': b'-- Generating done\n'}
+[21.940060] (arctos_hardware_interface) StdoutLine: {'line': b'-- Build files have been written to: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_hardware_interface\n'}
+[21.952614] (arctos_hardware_interface) CommandEnded: {'returncode': 0}
+[21.953371] (arctos_hardware_interface) JobProgress: {'identifier': 'arctos_hardware_interface', 'progress': 'build'}
+[21.954169] (arctos_hardware_interface) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_hardware_interface', '--', '-j12', '-l12'], 'cwd': '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_hardware_interface', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'nguyen'), ('LC_TIME', 'vi_VN'), ('XDG_SESSION_TYPE', 'wayland'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/lib:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/nguyen'), ('OLDPWD', '/home/nguyen/ros2_ws/src'), ('DESKTOP_SESSION', 'ubuntu'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('LC_MONETARY', 'vi_VN'), ('SYSTEMD_EXEC_PID', '1653'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'nguyen'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'nguyen'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/home/nguyen/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin'), ('SESSION_MANAGER', 'local/nguyen-aspire:@/tmp/.ICE-unix/1625,unix/nguyen-aspire:/tmp/.ICE-unix/1625'), ('XDG_MENU_PREFIX', 'gnome-'), ('LC_ADDRESS', 'vi_VN'), ('GNOME_TERMINAL_SCREEN', '/org/gnome/Terminal/screen/2e9c7e95_1405_4e25_b8e8_02161794cbe6'), ('GNOME_SETUP_DISPLAY', ':1'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':0'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('LC_TELEPHONE', 'vi_VN'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.ODJLK3'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('GNOME_TERMINAL_SERVICE', ':1.109'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial:/opt/ros/humble'), ('SHELL', '/bin/bash'), ('LC_NAME', 'vi_VN'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('LC_MEASUREMENT', 'vi_VN'), ('LC_IDENTIFICATION', 'vi_VN'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_hardware_interface'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('LC_NUMERIC', 'vi_VN'), ('LC_PAPER', 'vi_VN'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial:/opt/ros/humble')]), 'shell': False}
+[21.970445] (-) TimerEvent: {}
+[22.016650] (arctos_hardware_interface) StdoutLine: {'line': b'[ 25%] \x1b[32mBuilding CXX object CMakeFiles/arctos_services.dir/src/arctos_services.cpp.o\x1b[0m\n'}
+[22.070566] (-) TimerEvent: {}
+[22.170872] (-) TimerEvent: {}
+[22.271177] (-) TimerEvent: {}
+[22.371488] (-) TimerEvent: {}
+[22.471802] (-) TimerEvent: {}
+[22.572143] (-) TimerEvent: {}
+[22.672469] (-) TimerEvent: {}
+[22.772804] (-) TimerEvent: {}
+[22.873093] (-) TimerEvent: {}
+[22.973384] (-) TimerEvent: {}
+[23.073679] (-) TimerEvent: {}
+[23.174033] (-) TimerEvent: {}
+[23.274461] (-) TimerEvent: {}
+[23.374930] (-) TimerEvent: {}
+[23.475345] (-) TimerEvent: {}
+[23.575685] (-) TimerEvent: {}
+[23.676014] (-) TimerEvent: {}
+[23.776383] (-) TimerEvent: {}
+[23.876778] (-) TimerEvent: {}
+[23.977148] (-) TimerEvent: {}
+[24.077562] (-) TimerEvent: {}
+[24.178023] (-) TimerEvent: {}
+[24.278366] (-) TimerEvent: {}
+[24.378814] (-) TimerEvent: {}
+[24.479282] (-) TimerEvent: {}
+[24.579859] (-) TimerEvent: {}
+[24.680221] (-) TimerEvent: {}
+[24.780598] (-) TimerEvent: {}
+[24.880982] (-) TimerEvent: {}
+[24.981338] (-) TimerEvent: {}
+[25.081732] (-) TimerEvent: {}
+[25.182246] (-) TimerEvent: {}
+[25.282593] (-) TimerEvent: {}
+[25.382940] (-) TimerEvent: {}
+[25.483243] (-) TimerEvent: {}
+[25.583596] (-) TimerEvent: {}
+[25.684157] (-) TimerEvent: {}
+[25.784471] (-) TimerEvent: {}
+[25.884782] (-) TimerEvent: {}
+[25.985112] (-) TimerEvent: {}
+[26.085414] (-) TimerEvent: {}
+[26.185742] (-) TimerEvent: {}
+[26.286039] (-) TimerEvent: {}
+[26.386312] (-) TimerEvent: {}
+[26.486612] (-) TimerEvent: {}
+[26.586925] (-) TimerEvent: {}
+[26.687314] (-) TimerEvent: {}
+[26.787815] (-) TimerEvent: {}
+[26.888143] (-) TimerEvent: {}
+[26.988456] (-) TimerEvent: {}
+[27.088783] (-) TimerEvent: {}
+[27.189110] (-) TimerEvent: {}
+[27.289411] (-) TimerEvent: {}
+[27.389732] (-) TimerEvent: {}
+[27.490118] (-) TimerEvent: {}
+[27.590460] (-) TimerEvent: {}
+[27.690815] (-) TimerEvent: {}
+[27.703449] (arctos_hardware_interface) StdoutLine: {'line': b'[ 50%] \x1b[32m\x1b[1mLinking CXX shared library libarctos_services.so\x1b[0m\n'}
+[27.790974] (-) TimerEvent: {}
+[27.891365] (-) TimerEvent: {}
+[27.991711] (-) TimerEvent: {}
+[28.079003] (arctos_hardware_interface) StdoutLine: {'line': b'[ 50%] Built target arctos_services\n'}
+[28.092024] (-) TimerEvent: {}
+[28.108011] (arctos_hardware_interface) StdoutLine: {'line': b'[ 75%] \x1b[32mBuilding CXX object CMakeFiles/arctos_interface.dir/src/arctos_interface.cpp.o\x1b[0m\n'}
+[28.192153] (-) TimerEvent: {}
+[28.292562] (-) TimerEvent: {}
+[28.393044] (-) TimerEvent: {}
+[28.493440] (-) TimerEvent: {}
+[28.593804] (-) TimerEvent: {}
+[28.694254] (-) TimerEvent: {}
+[28.794598] (-) TimerEvent: {}
+[28.895083] (-) TimerEvent: {}
+[28.995489] (-) TimerEvent: {}
+[29.095975] (-) TimerEvent: {}
+[29.196570] (-) TimerEvent: {}
+[29.296936] (-) TimerEvent: {}
+[29.397294] (-) TimerEvent: {}
+[29.497659] (-) TimerEvent: {}
+[29.598043] (-) TimerEvent: {}
+[29.698578] (-) TimerEvent: {}
+[29.799016] (-) TimerEvent: {}
+[29.899366] (-) TimerEvent: {}
+[29.999702] (-) TimerEvent: {}
+[30.100117] (-) TimerEvent: {}
+[30.200500] (-) TimerEvent: {}
+[30.300946] (-) TimerEvent: {}
+[30.401303] (-) TimerEvent: {}
+[30.501786] (-) TimerEvent: {}
+[30.602422] (-) TimerEvent: {}
+[30.702823] (-) TimerEvent: {}
+[30.803385] (-) TimerEvent: {}
+[30.904061] (-) TimerEvent: {}
+[31.004401] (-) TimerEvent: {}
+[31.104727] (-) TimerEvent: {}
+[31.205269] (-) TimerEvent: {}
+[31.305642] (-) TimerEvent: {}
+[31.406045] (-) TimerEvent: {}
+[31.506678] (-) TimerEvent: {}
+[31.607330] (-) TimerEvent: {}
+[31.707668] (-) TimerEvent: {}
+[31.808020] (-) TimerEvent: {}
+[31.908474] (-) TimerEvent: {}
+[32.009066] (-) TimerEvent: {}
+[32.109471] (-) TimerEvent: {}
+[32.209872] (-) TimerEvent: {}
+[32.310911] (-) TimerEvent: {}
+[32.411297] (-) TimerEvent: {}
+[32.511700] (-) TimerEvent: {}
+[32.612124] (-) TimerEvent: {}
+[32.712483] (-) TimerEvent: {}
+[32.812919] (-) TimerEvent: {}
+[32.913423] (-) TimerEvent: {}
+[32.927981] (arctos_hardware_interface) StdoutLine: {'line': b'[100%] \x1b[32m\x1b[1mLinking CXX shared library libarctos_interface.so\x1b[0m\n'}
+[33.013564] (-) TimerEvent: {}
+[33.114115] (-) TimerEvent: {}
+[33.214872] (-) TimerEvent: {}
+[33.315455] (-) TimerEvent: {}
+[33.415949] (-) TimerEvent: {}
+[33.516362] (-) TimerEvent: {}
+[33.616754] (-) TimerEvent: {}
+[33.717434] (-) TimerEvent: {}
+[33.817870] (-) TimerEvent: {}
+[33.918278] (-) TimerEvent: {}
+[34.018673] (-) TimerEvent: {}
+[34.119069] (-) TimerEvent: {}
+[34.219466] (-) TimerEvent: {}
+[34.319903] (-) TimerEvent: {}
+[34.420336] (-) TimerEvent: {}
+[34.520720] (-) TimerEvent: {}
+[34.621117] (-) TimerEvent: {}
+[34.651791] (arctos_hardware_interface) StdoutLine: {'line': b'[100%] Built target arctos_interface\n'}
+[34.666348] (arctos_hardware_interface) CommandEnded: {'returncode': 0}
+[34.667047] (arctos_hardware_interface) JobProgress: {'identifier': 'arctos_hardware_interface', 'progress': 'install'}
+[34.667281] (arctos_hardware_interface) Command: {'cmd': ['/usr/bin/cmake', '--install', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_hardware_interface'], 'cwd': '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_hardware_interface', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'nguyen'), ('LC_TIME', 'vi_VN'), ('XDG_SESSION_TYPE', 'wayland'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/lib:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/nguyen'), ('OLDPWD', '/home/nguyen/ros2_ws/src'), ('DESKTOP_SESSION', 'ubuntu'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('LC_MONETARY', 'vi_VN'), ('SYSTEMD_EXEC_PID', '1653'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'nguyen'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'nguyen'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/home/nguyen/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin'), ('SESSION_MANAGER', 'local/nguyen-aspire:@/tmp/.ICE-unix/1625,unix/nguyen-aspire:/tmp/.ICE-unix/1625'), ('XDG_MENU_PREFIX', 'gnome-'), ('LC_ADDRESS', 'vi_VN'), ('GNOME_TERMINAL_SCREEN', '/org/gnome/Terminal/screen/2e9c7e95_1405_4e25_b8e8_02161794cbe6'), ('GNOME_SETUP_DISPLAY', ':1'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':0'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('LC_TELEPHONE', 'vi_VN'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.ODJLK3'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('GNOME_TERMINAL_SERVICE', ':1.109'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial:/opt/ros/humble'), ('SHELL', '/bin/bash'), ('LC_NAME', 'vi_VN'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('LC_MEASUREMENT', 'vi_VN'), ('LC_IDENTIFICATION', 'vi_VN'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_hardware_interface'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('LC_NUMERIC', 'vi_VN'), ('LC_PAPER', 'vi_VN'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial:/opt/ros/humble')]), 'shell': False}
+[34.676276] (arctos_hardware_interface) StdoutLine: {'line': b'-- Install configuration: ""\n'}
+[34.676940] (arctos_hardware_interface) StdoutLine: {'line': b'-- Execute custom install script\n'}
+[34.677255] (arctos_hardware_interface) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface//arctos_hardware_interface.xml\n'}
+[34.690868] (arctos_hardware_interface) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/include/arctos_hardware_interface/arctos_interface.hpp\n'}
+[34.703459] (arctos_hardware_interface) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/include/arctos_hardware_interface/arctos_services.hpp\n'}
+[34.716296] (arctos_hardware_interface) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/launch/can_interface.launch.py\n'}
+[34.721272] (-) TimerEvent: {}
+[34.727423] (arctos_hardware_interface) StdoutLine: {'line': b'-- Up-to-date symlink: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/arctos_hardware_interface.xml\n'}
+[34.727673] (arctos_hardware_interface) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/environment/library_path.sh\n'}
+[34.738641] (arctos_hardware_interface) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/environment/library_path.dsv\n'}
+[34.749362] (arctos_hardware_interface) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/ament_index/resource_index/package_run_dependencies/arctos_hardware_interface\n'}
+[34.763089] (arctos_hardware_interface) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/ament_index/resource_index/parent_prefix_path/arctos_hardware_interface\n'}
+[34.774750] (arctos_hardware_interface) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/environment/ament_prefix_path.sh\n'}
+[34.785206] (arctos_hardware_interface) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/environment/ament_prefix_path.dsv\n'}
+[34.796033] (arctos_hardware_interface) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/environment/path.sh\n'}
+[34.807694] (arctos_hardware_interface) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/environment/path.dsv\n'}
+[34.818680] (arctos_hardware_interface) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/local_setup.bash\n'}
+[34.821391] (-) TimerEvent: {}
+[34.831153] (arctos_hardware_interface) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/local_setup.sh\n'}
+[34.843479] (arctos_hardware_interface) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/local_setup.zsh\n'}
+[34.854877] (arctos_hardware_interface) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/local_setup.dsv\n'}
+[34.865445] (arctos_hardware_interface) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/package.dsv\n'}
+[34.876351] (arctos_hardware_interface) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/ament_index/resource_index/packages/arctos_hardware_interface\n'}
+[34.887678] (arctos_hardware_interface) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/ament_index/resource_index/hardware_interface__pluginlib__plugin/arctos_hardware_interface\n'}
+[34.899105] (arctos_hardware_interface) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/cmake/ament_cmake_export_targets-extras.cmake\n'}
+[34.909780] (arctos_hardware_interface) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/cmake/ament_cmake_export_dependencies-extras.cmake\n'}
+[34.920459] (arctos_hardware_interface) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/cmake/arctos_hardware_interfaceConfig.cmake\n'}
+[34.921508] (-) TimerEvent: {}
+[34.933310] (arctos_hardware_interface) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/cmake/arctos_hardware_interfaceConfig-version.cmake\n'}
+[34.944470] (arctos_hardware_interface) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/package.xml\n'}
+[34.956350] (arctos_hardware_interface) StdoutLine: {'line': b'-- Installing: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/lib/libarctos_interface.so\n'}
+[34.960091] (arctos_hardware_interface) StdoutLine: {'line': b'-- Set runtime path of "/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/lib/libarctos_interface.so" to ""\n'}
+[34.960502] (arctos_hardware_interface) StdoutLine: {'line': b'-- Installing: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/lib/libarctos_services.so\n'}
+[34.966726] (arctos_hardware_interface) StdoutLine: {'line': b'-- Set runtime path of "/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/lib/libarctos_services.so" to ""\n'}
+[34.966967] (arctos_hardware_interface) StdoutLine: {'line': b'-- Installing: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/cmake/export_arctos_interfaceExport.cmake\n'}
+[34.967073] (arctos_hardware_interface) StdoutLine: {'line': b'-- Installing: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/cmake/export_arctos_interfaceExport-noconfig.cmake\n'}
+[34.969955] (arctos_hardware_interface) CommandEnded: {'returncode': 0}
+[34.987791] (arctos_hardware_interface) JobEnded: {'identifier': 'arctos_hardware_interface', 'rc': 0}
+[34.989401] (arctos_bringup) JobStarted: {'identifier': 'arctos_bringup'}
+[35.003372] (arctos_bringup) JobProgress: {'identifier': 'arctos_bringup', 'progress': 'cmake'}
+[35.004571] (arctos_bringup) Command: {'cmd': ['/usr/bin/cmake', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/arctos_bringup', '-DAMENT_CMAKE_SYMLINK_INSTALL=1', '-DCMAKE_INSTALL_PREFIX=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_bringup'], 'cwd': '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_bringup', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'nguyen'), ('LC_TIME', 'vi_VN'), ('XDG_SESSION_TYPE', 'wayland'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/lib:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/lib:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/nguyen'), ('OLDPWD', '/home/nguyen/ros2_ws/src'), ('DESKTOP_SESSION', 'ubuntu'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('LC_MONETARY', 'vi_VN'), ('SYSTEMD_EXEC_PID', '1653'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'nguyen'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'nguyen'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/home/nguyen/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin'), ('SESSION_MANAGER', 'local/nguyen-aspire:@/tmp/.ICE-unix/1625,unix/nguyen-aspire:/tmp/.ICE-unix/1625'), ('XDG_MENU_PREFIX', 'gnome-'), ('LC_ADDRESS', 'vi_VN'), ('GNOME_TERMINAL_SCREEN', '/org/gnome/Terminal/screen/2e9c7e95_1405_4e25_b8e8_02161794cbe6'), ('GNOME_SETUP_DISPLAY', ':1'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':0'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('LC_TELEPHONE', 'vi_VN'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.ODJLK3'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('GNOME_TERMINAL_SERVICE', ':1.109'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description:/opt/ros/humble'), ('SHELL', '/bin/bash'), ('LC_NAME', 'vi_VN'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('LC_MEASUREMENT', 'vi_VN'), ('LC_IDENTIFICATION', 'vi_VN'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_bringup'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('LC_NUMERIC', 'vi_VN'), ('LC_PAPER', 'vi_VN'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description:/opt/ros/humble')]), 'shell': False}
+[35.021634] (-) TimerEvent: {}
+[35.068081] (arctos_bringup) StdoutLine: {'line': b'-- The C compiler identification is GNU 11.4.0\n'}
+[35.121944] (-) TimerEvent: {}
+[35.133913] (arctos_bringup) StdoutLine: {'line': b'-- The CXX compiler identification is GNU 11.4.0\n'}
+[35.142303] (arctos_bringup) StdoutLine: {'line': b'-- Detecting C compiler ABI info\n'}
+[35.222049] (-) TimerEvent: {}
+[35.229284] (arctos_bringup) StdoutLine: {'line': b'-- Detecting C compiler ABI info - done\n'}
+[35.238887] (arctos_bringup) StdoutLine: {'line': b'-- Check for working C compiler: /usr/bin/cc - skipped\n'}
+[35.239140] (arctos_bringup) StdoutLine: {'line': b'-- Detecting C compile features\n'}
+[35.239698] (arctos_bringup) StdoutLine: {'line': b'-- Detecting C compile features - done\n'}
+[35.243806] (arctos_bringup) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info\n'}
+[35.322213] (-) TimerEvent: {}
+[35.341965] (arctos_bringup) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info - done\n'}
+[35.349538] (arctos_bringup) StdoutLine: {'line': b'-- Check for working CXX compiler: /usr/bin/c++ - skipped\n'}
+[35.349856] (arctos_bringup) StdoutLine: {'line': b'-- Detecting CXX compile features\n'}
+[35.350230] (arctos_bringup) StdoutLine: {'line': b'-- Detecting CXX compile features - done\n'}
+[35.353629] (arctos_bringup) StdoutLine: {'line': b'-- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)\n'}
+[35.422333] (-) TimerEvent: {}
+[35.522779] (-) TimerEvent: {}
+[35.595813] (arctos_bringup) StdoutLine: {'line': b'-- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter \n'}
+[35.622943] (-) TimerEvent: {}
+[35.680716] (arctos_bringup) StdoutLine: {'line': b'-- Override CMake install command with custom implementation using symlinks instead of copying resources\n'}
+[35.723131] (-) TimerEvent: {}
+[35.723392] (arctos_bringup) StdoutLine: {'line': b'-- Found arctos_description: 0.0.0 (/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description/share/arctos_description/cmake)\n'}
+[35.723746] (arctos_bringup) StdoutLine: {'line': b'-- Found arctos_hardware_interface: 0.0.1 (/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/cmake)\n'}
+[35.785417] (arctos_bringup) StdoutLine: {'line': b'-- Found rosidl_generator_c: 3.1.8 (/opt/ros/humble/share/rosidl_generator_c/cmake)\n'}
+[35.791683] (arctos_bringup) StdoutLine: {'line': b'-- Found rosidl_adapter: 3.1.8 (/opt/ros/humble/share/rosidl_adapter/cmake)\n'}
+[35.801988] (arctos_bringup) StdoutLine: {'line': b'-- Found rosidl_generator_cpp: 3.1.8 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)\n'}
+[35.814705] (arctos_bringup) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[35.823260] (-) TimerEvent: {}
+[35.834311] (arctos_bringup) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[35.886148] (arctos_bringup) StdoutLine: {'line': b'-- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)\n'}
+[35.889548] (arctos_bringup) StdoutLine: {'line': b'-- Found rmw_fastrtps_cpp: 6.2.9 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)\n'}
+[35.923377] (-) TimerEvent: {}
+[36.015007] (arctos_bringup) StdoutLine: {'line': b'-- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.2")  \n'}
+[36.023519] (-) TimerEvent: {}
+[36.052232] (arctos_bringup) StdoutLine: {'line': b'-- Found FastRTPS: /opt/ros/humble/include  \n'}
+[36.101987] (arctos_bringup) StdoutLine: {'line': b"-- Using RMW implementation 'rmw_fastrtps_cpp' as default\n"}
+[36.113560] (arctos_bringup) StdoutLine: {'line': b'-- Looking for pthread.h\n'}
+[36.123656] (-) TimerEvent: {}
+[36.206914] (arctos_bringup) StdoutLine: {'line': b'-- Looking for pthread.h - found\n'}
+[36.207282] (arctos_bringup) StdoutLine: {'line': b'-- Performing Test CMAKE_HAVE_LIBC_PTHREAD\n'}
+[36.223822] (-) TimerEvent: {}
+[36.306573] (arctos_bringup) StdoutLine: {'line': b'-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success\n'}
+[36.307820] (arctos_bringup) StdoutLine: {'line': b'-- Found Threads: TRUE  \n'}
+[36.323952] (-) TimerEvent: {}
+[36.424415] (-) TimerEvent: {}
+[36.524939] (-) TimerEvent: {}
+[36.555199] (arctos_bringup) StdoutLine: {'line': b'-- Found arctos_moveit_config: 0.3.0 (/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config/share/arctos_moveit_config/cmake)\n'}
+[36.619451] (arctos_bringup) StdoutLine: {'line': b'-- Configuring done\n'}
+[36.625132] (-) TimerEvent: {}
+[36.626358] (arctos_bringup) StdoutLine: {'line': b'-- Generating done\n'}
+[36.629670] (arctos_bringup) StdoutLine: {'line': b'-- Build files have been written to: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_bringup\n'}
+[36.642877] (arctos_bringup) CommandEnded: {'returncode': 0}
+[36.643465] (arctos_bringup) JobProgress: {'identifier': 'arctos_bringup', 'progress': 'build'}
+[36.644310] (arctos_bringup) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_bringup', '--', '-j12', '-l12'], 'cwd': '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_bringup', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'nguyen'), ('LC_TIME', 'vi_VN'), ('XDG_SESSION_TYPE', 'wayland'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/lib:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/lib:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/nguyen'), ('OLDPWD', '/home/nguyen/ros2_ws/src'), ('DESKTOP_SESSION', 'ubuntu'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('LC_MONETARY', 'vi_VN'), ('SYSTEMD_EXEC_PID', '1653'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'nguyen'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'nguyen'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/home/nguyen/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin'), ('SESSION_MANAGER', 'local/nguyen-aspire:@/tmp/.ICE-unix/1625,unix/nguyen-aspire:/tmp/.ICE-unix/1625'), ('XDG_MENU_PREFIX', 'gnome-'), ('LC_ADDRESS', 'vi_VN'), ('GNOME_TERMINAL_SCREEN', '/org/gnome/Terminal/screen/2e9c7e95_1405_4e25_b8e8_02161794cbe6'), ('GNOME_SETUP_DISPLAY', ':1'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':0'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('LC_TELEPHONE', 'vi_VN'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.ODJLK3'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('GNOME_TERMINAL_SERVICE', ':1.109'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description:/opt/ros/humble'), ('SHELL', '/bin/bash'), ('LC_NAME', 'vi_VN'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('LC_MEASUREMENT', 'vi_VN'), ('LC_IDENTIFICATION', 'vi_VN'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_bringup'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('LC_NUMERIC', 'vi_VN'), ('LC_PAPER', 'vi_VN'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description:/opt/ros/humble')]), 'shell': False}
+[36.692031] (arctos_bringup) CommandEnded: {'returncode': 0}
+[36.692988] (arctos_bringup) JobProgress: {'identifier': 'arctos_bringup', 'progress': 'install'}
+[36.694564] (arctos_bringup) Command: {'cmd': ['/usr/bin/cmake', '--install', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_bringup'], 'cwd': '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_bringup', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'nguyen'), ('LC_TIME', 'vi_VN'), ('XDG_SESSION_TYPE', 'wayland'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/lib:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/lib:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/nguyen'), ('OLDPWD', '/home/nguyen/ros2_ws/src'), ('DESKTOP_SESSION', 'ubuntu'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('LC_MONETARY', 'vi_VN'), ('SYSTEMD_EXEC_PID', '1653'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'nguyen'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'nguyen'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/home/nguyen/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin'), ('SESSION_MANAGER', 'local/nguyen-aspire:@/tmp/.ICE-unix/1625,unix/nguyen-aspire:/tmp/.ICE-unix/1625'), ('XDG_MENU_PREFIX', 'gnome-'), ('LC_ADDRESS', 'vi_VN'), ('GNOME_TERMINAL_SCREEN', '/org/gnome/Terminal/screen/2e9c7e95_1405_4e25_b8e8_02161794cbe6'), ('GNOME_SETUP_DISPLAY', ':1'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':0'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('LC_TELEPHONE', 'vi_VN'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.ODJLK3'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('GNOME_TERMINAL_SERVICE', ':1.109'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description:/opt/ros/humble'), ('SHELL', '/bin/bash'), ('LC_NAME', 'vi_VN'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('LC_MEASUREMENT', 'vi_VN'), ('LC_IDENTIFICATION', 'vi_VN'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_bringup'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('LC_NUMERIC', 'vi_VN'), ('LC_PAPER', 'vi_VN'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_moveit_config:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_description:/opt/ros/humble')]), 'shell': False}
+[36.702478] (arctos_bringup) StdoutLine: {'line': b'-- Install configuration: ""\n'}
+[36.702802] (arctos_bringup) StdoutLine: {'line': b'-- Execute custom install script\n'}
+[36.703350] (arctos_bringup) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_bringup/share/arctos_bringup/launch/arctos_bringup.launch.py\n'}
+[36.713407] (arctos_bringup) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_bringup/share/arctos_bringup/launch/arctos_bringup_hardware_test.launch.py\n'}
+[36.724340] (arctos_bringup) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_bringup/share/arctos_bringup/launch/controller.launch.py\n'}
+[36.725276] (-) TimerEvent: {}
+[36.734363] (arctos_bringup) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_bringup/share/arctos_bringup/launch/demo.launch.py\n'}
+[36.744383] (arctos_bringup) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_bringup/share/arctos_bringup/launch/minimal.launch.py\n'}
+[36.755823] (arctos_bringup) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_bringup/share/arctos_bringup/launch/minimal_base_xyz.launch.py\n'}
+[36.767731] (arctos_bringup) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_bringup/share/arctos_bringup/launch/view_arctos.launch.py\n'}
+[36.778219] (arctos_bringup) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_bringup/share/arctos_bringup/rviz/view_robot.rviz\n'}
+[36.788541] (arctos_bringup) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_bringup/share/ament_index/resource_index/package_run_dependencies/arctos_bringup\n'}
+[36.800313] (arctos_bringup) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_bringup/share/ament_index/resource_index/parent_prefix_path/arctos_bringup\n'}
+[36.811339] (arctos_bringup) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_bringup/share/arctos_bringup/environment/ament_prefix_path.sh\n'}
+[36.821626] (arctos_bringup) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_bringup/share/arctos_bringup/environment/ament_prefix_path.dsv\n'}
+[36.825405] (-) TimerEvent: {}
+[36.832548] (arctos_bringup) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_bringup/share/arctos_bringup/environment/path.sh\n'}
+[36.843831] (arctos_bringup) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_bringup/share/arctos_bringup/environment/path.dsv\n'}
+[36.854169] (arctos_bringup) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_bringup/share/arctos_bringup/local_setup.bash\n'}
+[36.864237] (arctos_bringup) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_bringup/share/arctos_bringup/local_setup.sh\n'}
+[36.873800] (arctos_bringup) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_bringup/share/arctos_bringup/local_setup.zsh\n'}
+[36.885550] (arctos_bringup) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_bringup/share/arctos_bringup/local_setup.dsv\n'}
+[36.896431] (arctos_bringup) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_bringup/share/arctos_bringup/package.dsv\n'}
+[36.906256] (arctos_bringup) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_bringup/share/ament_index/resource_index/packages/arctos_bringup\n'}
+[36.916545] (arctos_bringup) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_bringup/share/arctos_bringup/cmake/arctos_bringupConfig.cmake\n'}
+[36.925557] (-) TimerEvent: {}
+[36.927676] (arctos_bringup) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_bringup/share/arctos_bringup/cmake/arctos_bringupConfig-version.cmake\n'}
+[36.937959] (arctos_bringup) StdoutLine: {'line': b'-- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_bringup/share/arctos_bringup/package.xml\n'}
+[36.950396] (arctos_bringup) CommandEnded: {'returncode': 0}
+[36.964163] (arctos_bringup) JobEnded: {'identifier': 'arctos_bringup', 'rc': 0}
+[36.964802] (-) EventReactorShutdown: {}

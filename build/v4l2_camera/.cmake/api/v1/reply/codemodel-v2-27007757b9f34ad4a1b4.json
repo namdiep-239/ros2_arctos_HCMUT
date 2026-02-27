@@ -1,0 +1,106 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-a6d08935957f4fdbd333.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.12"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5
+					]
+				}
+			],
+			"name" : "",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "v4l2_camera",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "camera_subscriber_node::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-camera_subscriber_node-83d6975a2839faa7785a.json",
+					"name" : "camera_subscriber_node",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-uninstall-9845d5afe1f768b93345.json",
+					"name" : "uninstall",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "v4l2_camera::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-v4l2_camera-0133f0c15d52bba1490e.json",
+					"name" : "v4l2_camera",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "v4l2_camera_compose_test::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-v4l2_camera_compose_test-71056b838db3d08cdd77.json",
+					"name" : "v4l2_camera_compose_test",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "v4l2_camera_node::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-v4l2_camera_node-40b5643c888d515b85f3.json",
+					"name" : "v4l2_camera_node",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "v4l2_camera_uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-v4l2_camera_uninstall-cb9a056c8f4d9d694a6e.json",
+					"name" : "v4l2_camera_uninstall",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/v4l2_camera",
+		"source" : "/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/src/v4l2_camera"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 3
+	}
+}

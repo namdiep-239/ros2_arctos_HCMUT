@@ -1,0 +1,1 @@
+/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/arctos_moveit_config/launch/moveit_rviz.launch.py

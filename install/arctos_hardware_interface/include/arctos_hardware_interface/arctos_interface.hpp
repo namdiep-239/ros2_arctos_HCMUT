@@ -1,0 +1,1 @@
+/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/arctos_hardware_interface/include/arctos_hardware_interface/arctos_interface.hpp

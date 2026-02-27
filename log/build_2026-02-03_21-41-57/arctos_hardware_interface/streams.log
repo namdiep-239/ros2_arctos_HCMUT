@@ -1,0 +1,85 @@
+[0.011s] Invoking command in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_hardware_interface': AMENT_PREFIX_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial:/opt/ros/humble LD_LIBRARY_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/lib:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/lib:${LD_LIBRARY_PATH} /usr/bin/cmake /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/arctos_hardware_interface -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface
+[0.070s] -- The C compiler identification is GNU 11.4.0
+[0.130s] -- The CXX compiler identification is GNU 11.4.0
+[0.138s] -- Detecting C compiler ABI info
+[0.214s] -- Detecting C compiler ABI info - done
+[0.221s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.221s] -- Detecting C compile features
+[0.221s] -- Detecting C compile features - done
+[0.224s] -- Detecting CXX compiler ABI info
+[0.316s] -- Detecting CXX compiler ABI info - done
+[0.324s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.324s] -- Detecting CXX compile features
+[0.325s] -- Detecting CXX compile features - done
+[0.328s] -- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.479s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[0.540s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[0.575s] -- Found rclcpp: 16.0.17 (/opt/ros/humble/share/rclcpp/cmake)
+[0.622s] -- Found rosidl_generator_c: 3.1.8 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[0.628s] -- Found rosidl_adapter: 3.1.8 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[0.638s] -- Found rosidl_generator_cpp: 3.1.8 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[0.650s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.666s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.713s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[0.717s] -- Found rmw_fastrtps_cpp: 6.2.9 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[0.828s] -- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.2")  
+[0.860s] -- Found FastRTPS: /opt/ros/humble/include  
+[0.907s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[0.916s] -- Looking for pthread.h
+[1.002s] -- Looking for pthread.h - found
+[1.003s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[1.087s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+[1.088s] -- Found Threads: TRUE  
+[1.140s] -- Found can_msgs: 2.0.0 (/opt/ros/humble/share/can_msgs/cmake)
+[1.154s] -- Found sensor_msgs: 4.9.0 (/opt/ros/humble/share/sensor_msgs/cmake)
+[1.189s] -- Found hardware_interface: 2.53.0 (/opt/ros/humble/share/hardware_interface/cmake)
+[1.335s] -- Found realtime_tools: 2.15.0 (/opt/ros/humble/share/realtime_tools/cmake)
+[1.351s] -- Found arctos_motor_driver: 0.0.1 (/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/arctos_motor_driver/cmake)
+[1.357s] -- Found std_srvs: 4.9.0 (/opt/ros/humble/share/std_srvs/cmake)
+[1.457s] -- Configuring done
+[1.561s] -- Generating done
+[1.572s] -- Build files have been written to: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_hardware_interface
+[1.585s] Invoked command in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_hardware_interface' returned '0': AMENT_PREFIX_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial:/opt/ros/humble LD_LIBRARY_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/lib:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/lib:${LD_LIBRARY_PATH} /usr/bin/cmake /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/arctos_hardware_interface -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface
+[1.586s] Invoking command in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_hardware_interface': AMENT_PREFIX_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial:/opt/ros/humble LD_LIBRARY_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/lib:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/lib:${LD_LIBRARY_PATH} /usr/bin/cmake --build /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_hardware_interface -- -j12 -l12
+[1.648s] [ 25%] [32mBuilding CXX object CMakeFiles/arctos_services.dir/src/arctos_services.cpp.o[0m
+[7.335s] [ 50%] [32m[1mLinking CXX shared library libarctos_services.so[0m
+[7.711s] [ 50%] Built target arctos_services
+[7.740s] [ 75%] [32mBuilding CXX object CMakeFiles/arctos_interface.dir/src/arctos_interface.cpp.o[0m
+[12.560s] [100%] [32m[1mLinking CXX shared library libarctos_interface.so[0m
+[14.284s] [100%] Built target arctos_interface
+[14.298s] Invoked command in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_hardware_interface' returned '0': AMENT_PREFIX_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial:/opt/ros/humble LD_LIBRARY_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/lib:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/lib:${LD_LIBRARY_PATH} /usr/bin/cmake --build /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_hardware_interface -- -j12 -l12
+[14.300s] Invoking command in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_hardware_interface': AMENT_PREFIX_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial:/opt/ros/humble LD_LIBRARY_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/lib:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/lib:${LD_LIBRARY_PATH} /usr/bin/cmake --install /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_hardware_interface
+[14.308s] -- Install configuration: ""
+[14.309s] -- Execute custom install script
+[14.309s] -- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface//arctos_hardware_interface.xml
+[14.323s] -- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/include/arctos_hardware_interface/arctos_interface.hpp
+[14.335s] -- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/include/arctos_hardware_interface/arctos_services.hpp
+[14.348s] -- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/launch/can_interface.launch.py
+[14.359s] -- Up-to-date symlink: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/arctos_hardware_interface.xml
+[14.359s] -- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/environment/library_path.sh
+[14.370s] -- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/environment/library_path.dsv
+[14.381s] -- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/ament_index/resource_index/package_run_dependencies/arctos_hardware_interface
+[14.395s] -- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/ament_index/resource_index/parent_prefix_path/arctos_hardware_interface
+[14.407s] -- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/environment/ament_prefix_path.sh
+[14.417s] -- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/environment/ament_prefix_path.dsv
+[14.428s] -- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/environment/path.sh
+[14.440s] -- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/environment/path.dsv
+[14.451s] -- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/local_setup.bash
+[14.463s] -- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/local_setup.sh
+[14.475s] -- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/local_setup.zsh
+[14.487s] -- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/local_setup.dsv
+[14.497s] -- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/package.dsv
+[14.508s] -- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/ament_index/resource_index/packages/arctos_hardware_interface
+[14.520s] -- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/ament_index/resource_index/hardware_interface__pluginlib__plugin/arctos_hardware_interface
+[14.531s] -- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/cmake/ament_cmake_export_targets-extras.cmake
+[14.542s] -- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/cmake/ament_cmake_export_dependencies-extras.cmake
+[14.552s] -- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/cmake/arctos_hardware_interfaceConfig.cmake
+[14.565s] -- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/cmake/arctos_hardware_interfaceConfig-version.cmake
+[14.576s] -- Symlinking: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/package.xml
+[14.588s] -- Installing: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/lib/libarctos_interface.so
+[14.592s] -- Set runtime path of "/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/lib/libarctos_interface.so" to ""
+[14.592s] -- Installing: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/lib/libarctos_services.so
+[14.599s] -- Set runtime path of "/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/lib/libarctos_services.so" to ""
+[14.599s] -- Installing: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/cmake/export_arctos_interfaceExport.cmake
+[14.599s] -- Installing: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/cmake/export_arctos_interfaceExport-noconfig.cmake
+[14.602s] Invoked command in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_hardware_interface' returned '0': AMENT_PREFIX_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial:/opt/ros/humble LD_LIBRARY_PATH=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/lib:/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/serial/lib:${LD_LIBRARY_PATH} /usr/bin/cmake --install /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_hardware_interface

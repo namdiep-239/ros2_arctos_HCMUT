@@ -1,0 +1,34 @@
+[0.022s] Invoking command in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/gazebo_ros2_control': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/nguyen/ros2_ws_1/install/gazebo_simulation:/opt/ros/humble /usr/bin/cmake /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/gazebo_ros2_control -DCMAKE_INSTALL_PREFIX=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/gazebo_ros2_control
+[0.033s] -- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.178s] -- Found ament_lint_auto: 0.12.14 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[0.267s] -- Added test 'cppcheck' to perform static code analysis on C / C++ code
+[0.267s] -- Configured cppcheck include dirs: 
+[0.267s] -- Configured cppcheck exclude dirs and/or files: 
+[0.268s] -- Added test 'lint_cmake' to check CMake code style
+[0.270s] -- Added test 'uncrustify' to check C / C++ code style
+[0.270s] -- Configured uncrustify additional arguments: 
+[0.270s] -- Added test 'xmllint' to check XML markup files
+[0.272s] -- Configuring done
+[0.276s] -- Generating done
+[0.278s] -- Build files have been written to: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/gazebo_ros2_control
+[0.281s] Invoked command in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/gazebo_ros2_control' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/nguyen/ros2_ws_1/install/gazebo_simulation:/opt/ros/humble /usr/bin/cmake /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/gazebo_ros2_control -DCMAKE_INSTALL_PREFIX=/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/gazebo_ros2_control
+[0.283s] Invoking command in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/gazebo_ros2_control': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/nguyen/ros2_ws_1/install/gazebo_simulation:/opt/ros/humble /usr/bin/cmake --build /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/gazebo_ros2_control -- -j12 -l12
+[0.334s] Invoked command in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/gazebo_ros2_control' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/nguyen/ros2_ws_1/install/gazebo_simulation:/opt/ros/humble /usr/bin/cmake --build /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/gazebo_ros2_control -- -j12 -l12
+[0.335s] Invoking command in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/gazebo_ros2_control': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/nguyen/ros2_ws_1/install/gazebo_simulation:/opt/ros/humble /usr/bin/cmake --install /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/gazebo_ros2_control
+[0.345s] -- Install configuration: ""
+[0.345s] -- Installing: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/gazebo_ros2_control/share/ament_index/resource_index/package_run_dependencies/gazebo_ros2_control
+[0.345s] -- Installing: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/gazebo_ros2_control/share/ament_index/resource_index/parent_prefix_path/gazebo_ros2_control
+[0.345s] -- Installing: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/gazebo_ros2_control/share/gazebo_ros2_control/environment/ament_prefix_path.sh
+[0.345s] -- Installing: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/gazebo_ros2_control/share/gazebo_ros2_control/environment/ament_prefix_path.dsv
+[0.345s] -- Installing: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/gazebo_ros2_control/share/gazebo_ros2_control/environment/path.sh
+[0.347s] -- Installing: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/gazebo_ros2_control/share/gazebo_ros2_control/environment/path.dsv
+[0.347s] -- Installing: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/gazebo_ros2_control/share/gazebo_ros2_control/local_setup.bash
+[0.347s] -- Installing: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/gazebo_ros2_control/share/gazebo_ros2_control/local_setup.sh
+[0.347s] -- Installing: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/gazebo_ros2_control/share/gazebo_ros2_control/local_setup.zsh
+[0.347s] -- Installing: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/gazebo_ros2_control/share/gazebo_ros2_control/local_setup.dsv
+[0.347s] -- Installing: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/gazebo_ros2_control/share/gazebo_ros2_control/package.dsv
+[0.347s] -- Installing: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/gazebo_ros2_control/share/ament_index/resource_index/packages/gazebo_ros2_control
+[0.347s] -- Installing: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/gazebo_ros2_control/share/gazebo_ros2_control/cmake/gazebo_ros2_controlConfig.cmake
+[0.347s] -- Installing: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/gazebo_ros2_control/share/gazebo_ros2_control/cmake/gazebo_ros2_controlConfig-version.cmake
+[0.347s] -- Installing: /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/gazebo_ros2_control/share/gazebo_ros2_control/package.xml
+[0.351s] Invoked command in '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/gazebo_ros2_control' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/nguyen/ros2_ws_1/install/gazebo_simulation:/opt/ros/humble /usr/bin/cmake --install /home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/gazebo_ros2_control

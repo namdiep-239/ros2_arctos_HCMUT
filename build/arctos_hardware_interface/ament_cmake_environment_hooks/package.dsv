@@ -1,0 +1,4 @@
+source;share/arctos_hardware_interface/local_setup.bash
+source;share/arctos_hardware_interface/local_setup.dsv
+source;share/arctos_hardware_interface/local_setup.sh
+source;share/arctos_hardware_interface/local_setup.zsh

@@ -1,0 +1,17 @@
+[31mCMake Error at CMakeLists.txt:7 (find_package):
+  By not providing "Findcontrol_toolbox.cmake" in CMAKE_MODULE_PATH this
+  project has asked CMake to find a package configuration file provided by
+  "control_toolbox", but CMake did not find one.
+
+  Could not find a package configuration file provided by "control_toolbox"
+  with any of the following names:
+
+    control_toolboxConfig.cmake
+    control_toolbox-config.cmake
+
+  Add the installation prefix of "control_toolbox" to CMAKE_PREFIX_PATH or
+  set "control_toolbox_DIR" to a directory containing one of the above files.
+  If "control_toolbox" provides a separate development package or SDK, be
+  sure it has been installed.
+
+[0m
