@@ -1,0 +1,436 @@
+<?xml version="1.0"?>
+<sdf version="1.8">
+  <world name="car_world">
+    <physics name="1ms" type="ignored">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+    </physics>
+    <plugin
+      filename="libignition-gazebo-physics-system.so"
+      name="ignition::gazebo::systems::Physics">
+    </plugin>
+    <plugin
+      filename="libignition-gazebo-user-commands-system.so"
+      name="ignition::gazebo::systems::UserCommands">
+    </plugin>
+    <plugin
+      filename="libignition-gazebo-scene-broadcaster-system.so"
+      name="ignition::gazebo::systems::SceneBroadcaster">
+    </plugin>
+
+    <light type="directional" name="sun">
+      <cast_shadows>true</cast_shadows>
+      <pose>0 0 10 0 0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <constant>0.9</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <direction>-0.5 0.1 -0.9</direction>
+    </light>
+
+    <model name="ground_plane">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+            </plane>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <material>
+            <ambient>0.8 0.8 0.8 1</ambient>
+            <diffuse>0.8 0.8 0.8 1</diffuse>
+            <specular>0.8 0.8 0.8 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <model name='arctos'>
+    <joint name='world_joint' type='fixed'>
+      <pose relative_to='__model__'>0 0 0 0 0 0</pose>
+      <parent>world</parent>
+      <child>base_link</child>
+    </joint>
+    <link name='base_link'>
+      <pose relative_to='world_joint'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>-0.00047006 -0.012257 0.10022 0 0 0</pose>
+        <mass>55.784999999999997</mass>
+        <inertia>
+          <ixx>0.39179000000000003</ixx>
+          <ixy>-0.0027323</ixy>
+          <ixz>-0.00075955</ixz>
+          <iyy>0.32300000000000001</iyy>
+          <iyz>-0.022558000000000002</iyz>
+          <izz>0.34492</izz>
+        </inertia>
+      </inertial>
+      <collision name='base_link_collision'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://arctos_description/meshes/base_link.STL</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='base_link_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://arctos_description/meshes/base_link.STL</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.62745 0.62745 1 1</diffuse>
+          <ambient>0.62745 0.62745 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <joint name='X_joint' type='revolute'>
+      <pose relative_to='base_link'>0 0 0.183 0 0 0</pose>
+      <parent>base_link</parent>
+      <child>link_1</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-2.9670999999999998</lower>
+          <upper>2.9670999999999998</upper>
+          <effort>1</effort>
+          <velocity>3.0543</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>100</spring_reference>
+          <spring_stiffness>100</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='link_1'>
+      <pose relative_to='X_joint'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0.0075871 0.03734 0.10645 0 0 0</pose>
+        <mass>44.267000000000003</mass>
+        <inertia>
+          <ixx>0.28548000000000001</ixx>
+          <ixy>-0.012987</ixy>
+          <ixz>-0.013929</ixz>
+          <iyy>0.25047000000000003</iyy>
+          <iyz>-0.073189000000000004</iyz>
+          <izz>0.26167000000000001</izz>
+        </inertia>
+      </inertial>
+      <collision name='link_1_collision'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://arctos_description/meshes/link_1.STL</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='link_1_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://arctos_description/meshes/link_1.STL</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.980388 1 1 1</diffuse>
+          <ambient>0.980388 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <joint name='Y_joint' type='revolute'>
+      <pose relative_to='link_1'>-0.048 0.075 0.15 0 0 0</pose>
+      <parent>link_1</parent>
+      <child>link_2</child>
+      <axis>
+        <xyz>-1 0 0</xyz>
+        <limit>
+          <lower>-1.7453000000000001</lower>
+          <upper>2.3561999999999999</upper>
+          <effort>1</effort>
+          <velocity>3.4906999999999999</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>100</spring_reference>
+          <spring_stiffness>100</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='link_2'>
+      <pose relative_to='Y_joint'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>-0.06804399999999999 0.021826 0.15762 0 0 0</pose>
+        <mass>43.338999999999999</mass>
+        <inertia>
+          <ixx>0.97721999999999998</ixx>
+          <ixy>0.00042244</ixy>
+          <ixz>-0.021124</ixz>
+          <iyy>0.93503999999999998</iyy>
+          <iyz>-0.078229000000000007</iyz>
+          <izz>0.099170999999999995</izz>
+        </inertia>
+      </inertial>
+      <collision name='link_2_collision'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://arctos_description/meshes/link_2.STL</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='link_2_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://arctos_description/meshes/link_2.STL</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.980388 1 1 1</diffuse>
+          <ambient>0.980388 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <joint name='Z_joint' type='revolute'>
+      <pose relative_to='link_2'>0 0.029976 0.36377 0 0 0</pose>
+      <parent>link_2</parent>
+      <child>link_3</child>
+      <axis>
+        <xyz>-1 0 0</xyz>
+        <limit>
+          <lower>-2.0769000000000002</lower>
+          <upper>2.9496064359999998</upper>
+          <effort>1</effort>
+          <velocity>3.4906999999999999</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>100</spring_reference>
+          <spring_stiffness>100</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='link_3'>
+      <pose relative_to='Z_joint'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0.054747 -0.045778 0.060447 0 0 0</pose>
+        <mass>37.594000000000001</mass>
+        <inertia>
+          <ixx>0.31727</ixx>
+          <ixy>-0.0048815000000000004</ixy>
+          <ixz>0.0065087000000000001</ixz>
+          <iyy>0.26582</iyy>
+          <iyz>0.088578000000000004</iyz>
+          <izz>0.16116</izz>
+        </inertia>
+      </inertial>
+      <collision name='link_3_collision'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://arctos_description/meshes/link_3.STL</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='link_3_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://arctos_description/meshes/link_3.STL</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.980388 1 1 1</diffuse>
+          <ambient>0.980388 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <joint name='A_joint' type='revolute'>
+      <pose relative_to='link_3'>0.048 -0.09 0.198 0 0 0</pose>
+      <parent>link_3</parent>
+      <child>link_4</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-3.3161</lower>
+          <upper>3.3161</upper>
+          <effort>1</effort>
+          <velocity>5.2359999999999998</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>100</spring_reference>
+          <spring_stiffness>100</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='link_4'>
+      <pose relative_to='A_joint'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0.0051846 -0.00064606 0.10645 0 0 0</pose>
+        <mass>14.917</mass>
+        <inertia>
+          <ixx>0.062769000000000005</ixx>
+          <ixy>3.6977000000000002e-05</ixy>
+          <ixz>-0.0018680000000000001</ixz>
+          <iyy>0.069443000000000005</iyy>
+          <iyz>-0.00032273000000000002</iyz>
+          <izz>0.028683</izz>
+        </inertia>
+      </inertial>
+      <collision name='link_4_collision'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://arctos_description/meshes/link_4.STL</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='link_4_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://arctos_description/meshes/link_4.STL</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.980388 1 1 1</diffuse>
+          <ambient>0.980388 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <joint name='B_joint' type='revolute'>
+      <pose relative_to='link_4'>0 0 0.207 0 0 0</pose>
+      <parent>link_4</parent>
+      <child>link_5</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>-2.0943999999999998</lower>
+          <upper>2.0943999999999998</upper>
+          <effort>1</effort>
+          <velocity>5.2359999999999998</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>100</spring_reference>
+          <spring_stiffness>100</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='link_5'>
+      <pose relative_to='B_joint'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>-0.00049422 2.4246e-07 0.0067098 0 0 0</pose>
+        <mass>0.34309000000000001</mass>
+        <inertia>
+          <ixx>0.00034995000000000002</ixx>
+          <ixy>-1.2487e-09</ixy>
+          <ixz>-1.1371000000000001e-06</ixz>
+          <iyy>0.00030038999999999999</iyy>
+          <iyz>-1.4302000000000001e-09</iyz>
+          <izz>0.00022745</izz>
+        </inertia>
+      </inertial>
+      <collision name='link_5_collision'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://arctos_description/meshes/link_5.STL</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='link_5_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://arctos_description/meshes/link_5.STL</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.980388 1 1 1</diffuse>
+          <ambient>0.980388 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <joint name='C_joint' type='revolute'>
+      <pose relative_to='link_5'>0 0 0.052 0 0 0</pose>
+      <parent>link_5</parent>
+      <child>link_6</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-6.2831999999999999</lower>
+          <upper>6.2831999999999999</upper>
+          <effort>1</effort>
+          <velocity>8.3775999999999993</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>100</spring_reference>
+          <spring_stiffness>100</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='link_6'>
+      <pose relative_to='C_joint'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>3.1972e-05 -5.2042e-18 0.011587 0 0 0</pose>
+        <mass>0.068738999999999995</mass>
+        <inertia>
+          <ixx>2.0616999999999999e-05</ixx>
+          <ixy>-1.6907e-20</ixy>
+          <ixz>-2.8489999999999999e-08</ixz>
+          <iyy>2.0452999999999999e-05</iyy>
+          <iyz>2.0027e-21</iyz>
+          <izz>3.4375999999999997e-05</izz>
+        </inertia>
+      </inertial>
+      <collision name='link_6_collision'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://arctos_description/meshes/link_6.STL</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='link_6_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://arctos_description/meshes/link_6.STL</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.980388 1 1 1</diffuse>
+          <ambient>0.980388 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+  </model>
+  </world>
+</sdf>

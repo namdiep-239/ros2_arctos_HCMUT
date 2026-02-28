@@ -50,13 +50,13 @@ inline bool parseDoubleStrict(const std::string &token_in, double &out) {
   return true;
 }
 
-// EOL dùng khi đọc/ghi dòng. Nếu firmware yêu cầu CRLF, đổi thành "\r\n".
+// EOL when reading a line of string.if firmware require CRLF, change to "\r\n".
 constexpr const char* kEOL = "\r";
 
-// Lấy ký tự phân tách đầu tiên từ macro DELIMITER (giả định 1 ký tự)
+// Take the first char from macro DELIMITER (assumed to be 1 character)
 constexpr char delimChar() { return DELIMITER[0]; }
 
-} // anonymous namespaceS
+} // anonymous namespace
 
 
 namespace arctos_motor_driver {
