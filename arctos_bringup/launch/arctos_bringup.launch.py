@@ -89,7 +89,7 @@ def generate_launch_description():
     robot_hand_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=["arctos_hand_controller", "--controller-manager", "/controller_manager"],
+        arguments=["denso_hand_controller", "--controller-manager", "/controller_manager"],
     )
 
     # # Include CAN Launch

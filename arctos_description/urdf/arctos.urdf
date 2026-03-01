@@ -19,7 +19,118 @@
   <material name="gray">
     <color rgba="0.78431 0.98039 0.98039 1"/>
   </material>
-  <!-- <xacro:include filename="$(find arctos_description)/urdf/arctos_gripper.xacro" /> -->
+  <link name="gripper_body">
+    <visual>
+      <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://arctos_description/meshes/gripper_body.STL"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://arctos_description/meshes/gripper_body.STL"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin rpy="0.0 0.0 0.0" xyz="-7.0332E-05 9.1246E-05 -0.0028502"/>
+      <mass value="0.043421"/>
+      <inertia ixx="7.2269e-06" ixy="5.8062e-08" ixz="-5.7636e-08" iyy="3.9281e-05" iyz="3.3981e-07" izz="4.2669e-05"/>
+    </inertial>
+  </link>
+  <link name="right_finger">
+    <visual>
+      <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://arctos_description/meshes/right_finger.STL"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://arctos_description/meshes/right_finger.STL"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin rpy="0.0 0.0 0.0" xyz="0.0093854 2.231E-05 0.024961"/>
+      <mass value="0.011241"/>
+      <inertia ixx="2.3523e-06" ixy="9.9484e-10" ixz="-5.1106e-08" iyy="2.0221e-06" iyz="6.0211e-09" izz="6.0068e-07"/>
+    </inertial>
+  </link>
+  <link name="left_finger">
+    <visual>
+      <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://arctos_description/meshes/left_finger.STL"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://arctos_description/meshes/left_finger.STL"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin rpy="0.0 0.0 0.0" xyz="0.0093854 0.024961 -2.231E-05"/>
+      <mass value="0.011241"/>
+      <inertia ixx="2.3523e-06" ixy="-5.1106e-08" ixz="-9.9484e-10" iyy="6.0068e-07" iyz="-6.0211e-09" izz="2.0221e-06"/>
+    </inertial>
+  </link>
+  <joint name="Gripper_joint" type="fixed">
+    <parent link="link_6"/>
+    <child link="gripper_body"/>
+    <origin rpy="0.0 0.0 0.0" xyz="2.2508E-05 0.001025 0.051"/>
+    <axis xyz="0 0 0"/>
+    <limit effort="0.0" lower="0.0" upper="0.0" velocity="0.0"/>
+  </joint>
+  <!-- Add transmission element -->
+  <transmission name="transmission_Gripper_joint">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="Gripper_joint">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="Gripper_joint_motor">
+      <mechanicalReduction>1.0</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <joint name="Right_finger_joint" type="prismatic">
+    <parent link="gripper_body"/>
+    <child link="right_finger"/>
+    <origin rpy="0.0 0.0 0.0" xyz="0.02575 0 0.0085"/>
+    <axis xyz="-1.0 0.0 0.0"/>
+    <limit effort="100.0" lower="0.002" upper="0.026" velocity="100.0"/>
+  </joint>
+  <!-- Add transmission element -->
+  <transmission name="transmission_Right_finger_joint">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="Right_finger_joint">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="Right_finger_joint_motor">
+      <mechanicalReduction>1.0</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <joint name="Left_finger_joint" type="prismatic">
+    <parent link="gripper_body"/>
+    <child link="left_finger"/>
+    <origin rpy="1.5708 0 -3.1416" xyz="-0.02655 0 0.0085"/>
+    <axis xyz="-1.0 0.0 0.0"/>
+    <limit effort="100.0" lower="0.002" upper="0.026" velocity="100.0"/>
+    <mimic joint="Right_finger_joint"/>
+  </joint>
+  <!-- Add transmission element -->
+  <transmission name="transmission_Left_finger_joint">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="Left_finger_joint">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="Left_finger_joint_motor">
+      <mechanicalReduction>1.0</mechanicalReduction>
+    </actuator>
+  </transmission>
   <link name="world"/>
   <joint name="world_joint" type="fixed">
     <parent link="world"/>
@@ -237,7 +348,7 @@
   <joint name="B_joint" type="revolute">
     <parent link="link_4"/>
     <child link="link_5"/>
-    <origin rpy="0 0 0" xyz="0 0 0.207"/>
+    <origin rpy="0 0 3.14159265359" xyz="0 0 0.207"/>
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-2.0944" upper="2.0944" velocity="5.236"/>
   </joint>
