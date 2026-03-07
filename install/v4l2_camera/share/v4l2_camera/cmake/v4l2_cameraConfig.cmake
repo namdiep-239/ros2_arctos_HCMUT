@@ -1,1 +1,0 @@
-/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/v4l2_camera/ament_cmake_core/v4l2_cameraConfig.cmake

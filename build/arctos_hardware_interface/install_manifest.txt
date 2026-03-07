@@ -1,4 +1,0 @@
-/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/lib/libarctos_interface.so
-/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/lib/libarctos_services.so
-/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/cmake/export_arctos_interfaceExport.cmake
-/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_hardware_interface/share/arctos_hardware_interface/cmake/export_arctos_interfaceExport-noconfig.cmake

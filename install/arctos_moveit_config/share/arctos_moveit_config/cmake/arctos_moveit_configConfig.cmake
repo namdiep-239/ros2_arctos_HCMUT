@@ -1,1 +1,0 @@
-/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_moveit_config/ament_cmake_core/arctos_moveit_configConfig.cmake

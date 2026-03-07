@@ -36,3 +36,7 @@
 /gamepadControl/__pycache__
 gamepadControl/can_demo_asyncua
 */settings.json
+
+
+#log file
+/log

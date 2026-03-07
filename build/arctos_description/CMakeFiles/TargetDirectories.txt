@@ -1,9 +1,0 @@
-/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_description/CMakeFiles/uninstall.dir
-/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_description/CMakeFiles/arctos_description_uninstall.dir
-/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_description/CMakeFiles/test.dir
-/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_description/CMakeFiles/edit_cache.dir
-/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_description/CMakeFiles/rebuild_cache.dir
-/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_description/CMakeFiles/list_install_components.dir
-/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_description/CMakeFiles/install.dir
-/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_description/CMakeFiles/install/local.dir
-/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/build/arctos_description/CMakeFiles/install/strip.dir

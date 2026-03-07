@@ -1,4 +1,0 @@
-source;share/arctos_motor_driver/local_setup.bash
-source;share/arctos_motor_driver/local_setup.dsv
-source;share/arctos_motor_driver/local_setup.sh
-source;share/arctos_motor_driver/local_setup.zsh

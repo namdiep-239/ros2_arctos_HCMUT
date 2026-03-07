@@ -1,5 +1,0 @@
-/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/lib/libcan_protocol.so
-/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/lib/libuart_protocol.so
-/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/lib/libarctos_motor_driver.so
-/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/arctos_motor_driver/cmake/export_arctos_motor_driverExport.cmake
-/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/arctos_motor_driver/share/arctos_motor_driver/cmake/export_arctos_motor_driverExport-noconfig.cmake

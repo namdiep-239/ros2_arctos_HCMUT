@@ -1,1 +1,0 @@
-/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/arctos_hardware_interface/launch/can_interface.launch.py

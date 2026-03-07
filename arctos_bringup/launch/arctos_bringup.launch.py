@@ -3,7 +3,7 @@ from launch.actions import RegisterEventHandler, DeclareLaunchArgument
 from launch.event_handlers import OnProcessExit
 from launch.actions import SetEnvironmentVariable, IncludeLaunchDescription, LogInfo
 from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch.substitutions import LaunchConfiguration, PathJoinSubstitution, Command, FindExecutable
+from launch.substitutions import LaunchConfiguration, PathJoinSubstitution, Command, FindExecutable, TextSubstitution
 from ament_index_python.packages import get_package_share_directory
 from launch_ros.actions import Node
 from moveit_configs_utils import MoveItConfigsBuilder
@@ -12,19 +12,18 @@ import os
 import xacro
 
 def generate_launch_description():
-    world_file = '/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/building_robot.sdf'  # Path to your Gazebo world file, if you have one
+    world_file =  os.path.join(get_package_share_directory('arctos_description'), 'urdf', 'arctos.sdf')# Path to your Gazebo world file, if you have one
     ros_gz_sim_pkg_path = get_package_share_directory('ros_gz_sim')
     # example_pkg_path = FindPackageShare('example_package')  # Replace with your own package name
     gz_launch_path = PathJoinSubstitution([ros_gz_sim_pkg_path, 'launch', 'gz_sim.launch.py'])
-
-        # SetEnvironmentVariable(
-        #     'GZ_SIM_RESOURCE_PATH',
-        #     PathJoinSubstitution([example_pkg_path, 'models'])
-        # ),
-        # SetEnvironmentVariable(
-        #     'GZ_SIM_PLUGIN_PATH',
-        #     PathJoinSubstitution([example_pkg_path, 'plugins'])
-        # ),
+    # SetEnvironmentVariable(
+    #     'GZ_SIM_RESOURCE_PATH',
+    #     PathJoinSubstitution([example_pkg_path, 'models'])
+    # ),
+    # SetEnvironmentVariable(
+    #     'GZ_SIM_PLUGIN_PATH',
+    #     PathJoinSubstitution([example_pkg_path, 'plugins'])
+    # ),
     gazebo = IncludeLaunchDescription(
                 PythonLaunchDescriptionSource(gz_launch_path),
                 launch_arguments={
@@ -36,20 +35,22 @@ def generate_launch_description():
     gz_bridge = Node(
                 package='ros_gz_bridge',
                 executable='parameter_bridge',
-                arguments=['/example_imu_topic@sensor_msgs/msg/Imu@gz.msgs.IMU',],
+                arguments=['--config', PathJoinSubstitution([FindPackageShare('gazebo_ros2_control'), 'bridge.yaml'])],
                 remappings=[('/example_imu_topic',
                             '/remapped_imu_topic'),],
                 output='screen'
             )
-    package_path = os.path.join(
-        get_package_share_directory('arctos_description'),)
 
-    xacro_file = os.path.join(package_path,
-                              'urdf',
-                              'arctos.urdf')
-    doc = xacro.parse(open(xacro_file))
-    xacro.process_doc(doc)
-    params = {'robot_description': doc.toxml()}
+    # # Create the launch description and populate
+    # package_path = os.path.join(
+    # get_package_share_directory('arctos_description'),)
+
+    # xacro_file = os.path.join(package_path,
+    #                           'urdf',
+    #                           'arctos.urdf')
+    # doc = xacro.parse(open(xacro_file))
+    # xacro.process_doc(doc)
+    # params = {'robot_description': doc.toxml()}
     # Get package paths
     arctos_hardware_interface_dir = get_package_share_directory('arctos_hardware_interface')
     arctos_moveit_dir = get_package_share_directory('arctos_moveit_config')
@@ -117,6 +118,13 @@ def generate_launch_description():
              ("/controller_manager/robot_description", "/robot_description"),
         }
     )
+    # joint_state_publisher_gui = Node(
+    #     package='joint_state_publisher_gui',
+    #     executable='joint_state_publisher_gui',
+    #     name='joint_state_publisher_gui',
+    #     arguments=[world_file],
+    #     output=['screen']
+    # )
 
     joint_state_broadcaster_spawner = Node(
         package="controller_manager",

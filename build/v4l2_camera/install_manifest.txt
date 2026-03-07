@@ -1,6 +1,0 @@
-/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/v4l2_camera/lib/libv4l2_camera.so
-/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/v4l2_camera/lib/v4l2_camera/v4l2_camera_node
-/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/v4l2_camera/lib/v4l2_camera/v4l2_camera_compose_test
-/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/v4l2_camera/lib/v4l2_camera/camera_subscriber_node
-/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/v4l2_camera/share/v4l2_camera/cmake/export_v4l2_cameraExport.cmake
-/home/nguyen/ros2_ws/src/ros2_arctos_HCMUT/install/v4l2_camera/share/v4l2_camera/cmake/export_v4l2_cameraExport-noconfig.cmake
