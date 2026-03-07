@@ -28,7 +28,6 @@
         <state_interface name="position">
           <param name="initial_value">${initial_positions['X_joint']}</param>
         </state_interface>
-        <state_interface name="velocity" />
       </joint>
       <joint name="Y_joint">
         <command_interface name="position">
@@ -38,7 +37,6 @@
         <state_interface name="position">
           <param name="initial_value">${initial_positions['Y_joint']}</param>
         </state_interface>
-        <state_interface name="velocity" />
       </joint>
       <joint name="Z_joint">
         <command_interface name="position">
@@ -48,7 +46,6 @@
         <state_interface name="position">
           <param name="initial_value">${initial_positions['Z_joint']}</param>
         </state_interface>
-        <state_interface name="velocity" />
       </joint>
       <joint name="A_joint">
         <command_interface name="position">
@@ -58,7 +55,6 @@
         <state_interface name="position">
           <param name="initial_value">${initial_positions['A_joint']}</param>
         </state_interface>
-        <state_interface name="velocity" />
       </joint>
       <joint name="B_joint">
         <command_interface name="position">
@@ -68,7 +64,6 @@
         <state_interface name="position">
           <param name="initial_value">${initial_positions['B_joint']}</param>
         </state_interface>
-        <state_interface name="velocity" />
       </joint>
       <joint name="C_joint">
         <command_interface name="position">
@@ -78,12 +73,11 @@
         <state_interface name="position">
           <param name="initial_value">${initial_positions['C_joint']}</param>
         </state_interface>
-        <state_interface name="velocity" />
       </joint>
       <joint name="Right_finger_joint">
         <command_interface name="position">
           <param name="min">0.002</param>
-          <param name="max">0.026</param>
+          <param name="max">0.054</param>
         </command_interface>
         <state_interface name="position">
           <param name="initial_value">${initial_positions['Right_finger_joint']}</param>

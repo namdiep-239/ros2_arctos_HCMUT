@@ -37,7 +37,7 @@
         <joint name="Right_finger_joint" value="0.002"/>
     </group_state>
     <group_state name="close" group="denso_hand">
-        <joint name="Right_finger_joint" value="0.026"/>
+        <joint name="Right_finger_joint" value="0.054"/>
     </group_state>
     <!--END EFFECTOR: Purpose: Represent information about an end effector.-->
     <end_effector name="denso_hand" parent_link="link_6" group="denso_hand"/>

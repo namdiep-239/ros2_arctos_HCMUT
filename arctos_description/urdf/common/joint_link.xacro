@@ -60,7 +60,6 @@
             <param name="max">${limit_u}</param>
       </command_interface>
       <state_interface name="position"/>
-      <state_interface name="velocity"/>
     </joint>
   </xacro:macro>
 

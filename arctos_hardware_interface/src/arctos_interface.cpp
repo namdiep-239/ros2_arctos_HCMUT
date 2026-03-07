@@ -108,6 +108,7 @@ namespace arctos_interface
                 if (interface.name == "velocity")
                     has_velocity_interface_ = true;
             }
+            // has_velocity_interface_ = false; // Force disable velocity interface as we are not using it for now
             
         }
 
@@ -367,7 +368,7 @@ namespace arctos_interface
         {
             try
             {
-                // this is a wrong design! who the fuck send velocity via speed control mode (F6??)
+
                 if (has_velocity_interface_)
                 {
                     // TODO: Ensure this works properly
