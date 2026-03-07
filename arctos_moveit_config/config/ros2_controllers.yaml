@@ -3,7 +3,7 @@
 # MoveIt automatically connects to this action interface.
 controller_manager:
   ros__parameters:
-    update_rate: 20 # Hz ([read -> update -> write] cycle is executed 2 times per second)
+    update_rate: 10 # Hz ([read -> update -> write] cycle is executed 10 times per second - 100ms per cycle)
 
     denso_arm_controller:
       type: joint_trajectory_controller/JointTrajectoryController
@@ -27,10 +27,8 @@ denso_arm_controller:
       - C_joint
     command_interfaces:
       - position
-      - velocity
     state_interfaces:
       - position
-      - velocity
 
     state_publish_rate: 25.0
     action_monitor_rate: 10.0

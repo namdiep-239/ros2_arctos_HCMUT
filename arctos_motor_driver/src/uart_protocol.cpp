@@ -173,7 +173,7 @@ bool UartProtocol::decodeMessage(const std::string data, std::vector<double> &ax
  *       protocol format expected by the connected motor controller/device.
  */
 bool UartProtocol::sendPosition(std::vector<double> &positions) {
- if (positions.size() != 6) {
+ if ((positions.size() - 1) != 6) {     // Temporary manual to bypass missing gripper data from miniPC
         std::cerr << "sendPosition: positions must have 6 elements, got "
                   << positions.size() << std::endl;
         return false;
@@ -204,6 +204,7 @@ bool UartProtocol::sendPosition(std::vector<double> &positions) {
  */
 void UartProtocol::readToBuffer(void)
 {
+    static std::string preRaw;
     if (!this->connected()) {
         return;
     }
@@ -218,7 +219,15 @@ void UartProtocol::readToBuffer(void)
 
         if (!raw.empty()) {
             rev_buffer_.push(raw);
-            std::cerr << "uart: readToBuffer: received: " << raw << '\n';
+            if (preRaw != raw)
+            {
+                std::cerr << "uart: readToBuffer: received: " << raw << "\n";   
+            }
+            else
+            {
+                // std::cerr << "...";
+            }
+            preRaw = raw;
         }
         else{
             std::cerr << ".";

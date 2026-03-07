@@ -3,6 +3,7 @@ PROGRAM TASK1
     DEFINT len_str, pos, li1
     DEFSTR ls1, l_str, r_str
     DEFDBL valStr
+    DEFDBL tol, tol6
     IF (I1 = 1) AND (I5 < 100) THEN
         ls1 = S1
         IF (ls1 = "0,0,0,0,0,0") THEN
@@ -20,7 +21,7 @@ PROGRAM TASK1
         pos = 1
         valStr = VAL(l_str) * 1.0 / 100
         IF (I5 > 0) THEN
-            IF (ABS(valStr - JOINT(pos, J[I5-1])) > 10.0) THEN
+            IF (ABS(valStr - JOINT(pos, J[I5-1])) > tol) THEN
                 I1 = 0
                 END
             ENDIF
@@ -33,7 +34,7 @@ PROGRAM TASK1
             IF pos = 6 THEN
                 valStr = VAL(r_str) * 1.0 / 100
                 IF (I5 > 0) THEN
-                    IF (ABS(valStr - JOINT(pos, J[I5 - 1])) > 10.0) THEN
+                    IF (ABS(valStr - JOINT(pos, J[I5 - 1])) > tol6) THEN
                         pos = 1
                         I1 = 0
                         END
@@ -48,7 +49,7 @@ PROGRAM TASK1
             r_str = RIGHT$(r_str, len_str - li1)
             valStr = VAL(l_str) * 1.0 / 100
             IF (I5 > 0) THEN
-                IF (ABS(valStr - JOINT(pos, J[I5 - 1])) > 10.0)
+                IF (ABS(valStr - JOINT(pos, J[I5 - 1])) > tol)
                     pos = 1
                     I1 = 0
                     END

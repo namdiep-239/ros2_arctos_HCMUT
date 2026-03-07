@@ -443,7 +443,7 @@ void MotorDriver::processUartMessage() {
                 RCLCPP_ERROR(node_->get_logger(), "Failed to decode UART message: %s", message.c_str());
                 continue;
             }
-            if (decodedPositions.size() != joints_.size()) 
+            if ((decodedPositions.size() + 1 ) != joints_.size())   // Temporary manual to bypass missing gripper data from miniPC
             {
                 RCLCPP_ERROR(node_->get_logger(), "The number of decoded joints does not match with the configured joints!");
             }
@@ -583,7 +583,7 @@ void MotorDriver::processEncoderResponse(uint8_t motor_id, const std::vector<dou
             joint_angle_deg = -joint_angle_deg;
         }
 
-        RCLCPP_DEBUG(node_->get_logger(), "Final computed joint angle: %.3f rad", joint_angle_deg);
+        RCLCPP_DEBUG(node_->get_logger(), "Final computed joint angle: %.3f degrees", joint_angle_deg);
 
         // // **Filter sudden jumps using a moving average**
         // constexpr double FILTER_ALPHA = 0.3;
@@ -597,7 +597,7 @@ void MotorDriver::processEncoderResponse(uint8_t motor_id, const std::vector<dou
         // **Check if joint limits are valid**
         constexpr double TOLERANCE = 0.1;
         if (joint.position < (joint.position_min - TOLERANCE) || joint.position > (joint.position_max + TOLERANCE)) {
-            RCLCPP_WARN(node_->get_logger(), "Ignoring out-of-bounds encoder value %.3f rad for joint %s (limits: %.3f to %.3f)",
+            RCLCPP_WARN(node_->get_logger(), "Ignoring out-of-bounds encoder value %.3f degrees for joint %s (limits: %.3f to %.3f)",
                         joint.position, joint_name.c_str(), joint.position_min, joint.position_max);
             return;
         }
@@ -610,7 +610,7 @@ void MotorDriver::processEncoderResponse(uint8_t motor_id, const std::vector<dou
         if (std::abs(joint.position) < POSITION_DEADBAND) {
             joint.position = 0.0;
         }
-        RCLCPP_INFO(node_->get_logger(), "Updated motor %d (%s) position: %.2f rad", 
+        RCLCPP_INFO(node_->get_logger(), "Updated motor %d (%s) position: %.2f degrees", 
                     joint.motor_id, joint.inverted_feedback ? "inverted feedback" : "normal", joint.position);
 
         joint.last_update = node_->get_clock()->now();

@@ -325,9 +325,9 @@ namespace arctos_interface
 
                 if (has_velocity_interface_)
                 {
-                    // double vel = motor_driver_->getJointVelocity(joint_name);
-                    // joint_velocities_[i] = vel;
-                    // RCLCPP_DEBUG(node_->get_logger(), "Updated velocity for joint %s: %.3f", joint_name.c_str(), vel);
+                    double vel = motor_driver_->getJointVelocity(joint_name);
+                    joint_velocities_[i] = vel;
+                    RCLCPP_DEBUG(node_->get_logger(), "Updated velocity for joint %s: %.3f rad/s", joint_name.c_str(), vel);
                 }
 
                 rclcpp::Duration time_since_update = motor_driver_->getTimeSinceLastUpdate(joint_name);

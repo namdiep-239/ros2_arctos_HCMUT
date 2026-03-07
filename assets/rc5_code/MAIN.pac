@@ -17,9 +17,9 @@ PROGRAM MAIN
     RUN TASK0, C = 10
     DELAY 20
     REM ==== Process recevied data
-    RUN TASK1, C = 20
+    RUN TASK1, C = 15
     REM ==== RUN ROBOT
-    RUN TASK3, C = 50
+    RUN TASK3, C = 35
     REM ==== Transmit current joint
     RUN GET_JOINT, C = 100
 END
