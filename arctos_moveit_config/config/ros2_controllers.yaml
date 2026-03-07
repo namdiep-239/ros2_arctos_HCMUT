@@ -8,6 +8,8 @@ controller_manager:
     denso_arm_controller:
       type: joint_trajectory_controller/JointTrajectoryController
 
+    arctos_hand_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
 
     joint_state_broadcaster:
       type: joint_state_broadcaster/JointStateBroadcaster
@@ -108,3 +110,14 @@ arctos_hardware_interface:
         zero_position: 0.0
         lower_limit: 0.0
         upper_limit: 0.015
+
+arctos_hand_controller:
+  ros__parameters:
+    joints:
+      - Left_jaw_joint
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+    allow_partial_joints_goal: false
+    state_tolerance_check: false

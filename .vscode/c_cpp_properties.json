@@ -8,7 +8,9 @@
             "includePath": [
                 "/opt/ros/humble/include/**",
                 "/usr/include/**",
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/**",
+                "/home/nam/Coding/ros2_ws_rework/install/**",
+                "/home/nam/Coding/ros2_ws_rework/build/**"
             ],
             "name": "ROS",
             "intelliSenseMode": "gcc-x64",

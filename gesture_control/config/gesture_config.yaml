@@ -1,0 +1,20 @@
+gesture_commander_node:
+  ros__parameters:
+    # Minimum inference confidence to accept a detection (0.0 – 1.0)
+    confidence_threshold: 0.70
+
+    # Number of consecutive frames with the same label required before
+    # a command is triggered (debounce)
+    stability_frames: 3
+
+    # Minimum seconds between two successive commands (cooldown)
+    command_cooldown_sec: 2.0
+
+    # Y_joint increment per "point" gesture (radians, ~17 degrees)
+    # Positive = raise arm. Clamped to hardware limits (-100° … +135°).
+    point_delta_rad: 0.3
+
+    # Left_jaw_joint target positions (radians)
+    # Hardware limits: 0.0 (closed) … 0.015 (open)
+    gripper_open_pos: 0.015
+    gripper_closed_pos: 0.0
