@@ -6,6 +6,7 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration, PathJoinSubstitution, Command, FindExecutable
 from ament_index_python.packages import get_package_share_directory
 from launch_ros.actions import Node
+from launch_ros.substitutions import FindPackageShare
 from moveit_configs_utils import MoveItConfigsBuilder
 import os
 
@@ -15,12 +16,21 @@ def generate_launch_description():
     arctos_hardware_interface_dir = get_package_share_directory('arctos_hardware_interface')
     arctos_moveit_dir = get_package_share_directory('arctos_moveit_config')
 
+    use_sim_time = LaunchConfiguration('use_sim_time', default='true')
+
+    declare_use_sim_time = DeclareLaunchArgument(
+        'use_sim_time',
+        default_value='true',
+        description='Use simulation (Gazebo) clock if true'
+    )
+
+
     # MoveItConfigsBuilder automatically do the following:
-    # .robot_description: create urdf file using command: xacro arctos.urdf.xacro
+    # .robot_description: create urdf file using command: xacro gz_arctos.urdf.xacro
     # .robot_description_semantic
     moveit_config = (
         MoveItConfigsBuilder("arctos")
-        .robot_description(file_path="config/arctos.urdf.xacro")
+        .robot_description(file_path="config/gz_arctos.urdf.xacro")
         .robot_description_semantic(file_path="config/arctos.srdf")
         .trajectory_execution(file_path="config/moveit_controllers.yaml")
         .planning_pipelines(pipelines=["ompl", "chomp"])
@@ -41,6 +51,7 @@ def generate_launch_description():
             moveit_config.robot_description_semantic,
             moveit_config.planning_pipelines,
             moveit_config.robot_description_kinematics,
+            {"use_sim_time": use_sim_time},
         ],
     )
     # Nodes
@@ -50,28 +61,7 @@ def generate_launch_description():
         executable="robot_state_publisher",
         name="robot_state_publisher",
         output="both",
-        parameters=[moveit_config.robot_description],
-    )
-
-    # Parameters
-    robot_controllers = os.path.join(
-        arctos_moveit_dir, 'config', 'ros2_controllers.yaml'
-    )
-
-    control_node = Node(
-        package="controller_manager",
-        executable="ros2_control_node",
-        parameters=[robot_controllers],
-        output={'stdout': 'screen', 'stderr': 'screen'},
-        arguments=[
-            '--ros-args',
-            # '--log-level', 'debug',
-            '--log-level', 'arctos_hardware_interface:=info',
-            '--log-level', 'controller_manager:=info'
-        ],
-        remappings={
-             ("/controller_manager/robot_description", "/robot_description"),
-        }
+        parameters=[moveit_config.robot_description, {"use_sim_time": use_sim_time}],
     )
 
     joint_state_broadcaster_spawner = Node(
@@ -92,21 +82,64 @@ def generate_launch_description():
         arguments=["denso_hand_controller", "--controller-manager", "/controller_manager"],
     )
 
-    # # Include CAN Launch
-    # can_launch = IncludeLaunchDescription(
-    #     PythonLaunchDescriptionSource(
-    #         PathJoinSubstitution([arctos_hardware_interface_dir, "launch", "can_interface.launch.py"])
-    #     )
-    # )
+    # control node is removed, since:
+
+    #gz_ros2_control is installed, so the issue is architectural. Your launch file has a conflict:
+
+    # The URDF (via arctos.ros2_control.xacro) already defines a 
+    # gz_ros2_control::GazeboSimROS2ControlPlugin Gazebo plugin — 
+    # this plugin automatically creates and manages the controller manager 
+    # inside the Gazebo process and loads GazeboSimSystem internally.
+
+    # Your launch file also starts a standalone ros2_control_node (control_node), 
+    # which tries to independently load gz_ros2_control/GazeboSimSystem — 
+    # but that plugin only works inside the Gazebo context, not as a standalone process. 
+
+    # The standalone control_node should be removed. The Gazebo plugin handles everything
+
+    # spawn robot in Gazebo
+    gz_spawn_entity = Node(
+        package='ros_gz_sim',
+        executable='create',
+        output='screen',
+        arguments=['-topic', 'robot_description',
+                   '-name', 'denso', '-allow_renaming', 'true'],
+    )
+
+    # Bridge
+    bridge = Node(
+        package='ros_gz_bridge',
+        executable='parameter_bridge',
+        arguments=['/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock'],
+        output='screen'
+    )
 
     # Include MoveIt Launch
     move_group_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             PathJoinSubstitution([arctos_moveit_dir, "launch", "move_group.launch.py"])
-        )
+        ),
+        launch_arguments={"use_sim_time": use_sim_time}.items(),
     )
 
+    world_path = PathJoinSubstitution([
+        arctos_moveit_dir,
+        "worlds",
+        "denso_world.sdf"
+    ])
+
+    # Include Gazebo launch
+    gz_launch = IncludeLaunchDescription(
+            PythonLaunchDescriptionSource(
+                [PathJoinSubstitution([FindPackageShare('ros_gz_sim'),
+                                       'launch',
+                                       'gz_sim.launch.py'])]),
+            launch_arguments=[('gz_args', ['-r -v 1 ', world_path])])
+
     # Ensure joint state broadcaster starts before controllers
+    # wait for "target_action to exit" before starting the next one, 
+    # so that we can be sure the controllers are started after 
+    # the joint state broadcaster
     delay_robot_arm_controller_spawner = RegisterEventHandler(
         event_handler=OnProcessExit(
             target_action=joint_state_broadcaster_spawner,
@@ -119,14 +152,23 @@ def generate_launch_description():
         event_handler=OnProcessExit(
             target_action=robot_arm_controller_spawner,
             on_exit=[rviz_node, move_group_launch]
-        ))
+        )
+    )
     
     return LaunchDescription([
-        LogInfo(msg=["Launching Arctos Bringup with RViz..."]),
-        control_node,
+        declare_use_sim_time,
+        LogInfo(msg=["Launching Gz Arctos Bringup with RViz..."]),
+        LogInfo(msg=["use_sim_time: ", use_sim_time]),
+        gz_launch,
+        gz_spawn_entity,
+        bridge,
         robot_state_pub_node,
         joint_state_broadcaster_spawner,
         delay_robot_arm_controller_spawner,
         delay_rviz_and_moveit_launch,
-        # can_launch
+        # Launch Arguments
+        DeclareLaunchArgument(
+            'use_sim_time',
+            default_value=use_sim_time,
+            description='If true, use simulated clock'),
     ])

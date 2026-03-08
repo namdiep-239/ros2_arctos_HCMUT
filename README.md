@@ -68,6 +68,8 @@ It is recommended to follow the official installation guides for ROS2 and MoveIt
         sudo ufw allow 7400
         sudo ufw allow 7600
         ```
+- [Gazebo Fortress Installation](https://gazebosim.org/docs/fortress/install_ubuntu/)
+    - Follow the instruction to install Gazebo Fortress (Ignition)
 
 ### Setting Up the Workspace
 
@@ -79,9 +81,11 @@ First, install the required dependencies:
 - `python3-rosdep` for the easily installing dependencies.
 - `ros-humble-can-msgs` for the CAN messages.
 - `ros-humble-ros2-control` for the ROS2 control packages.
+- `ros-humble-gz-ros2-control` for the Gazebo ROS2 control packages.
+- `ros-humble-gz-ros2-control-demos` for the Gazebo ROS2 control demos.
 
 ```bash
-sudo apt install can-utils python3-rosdep ros-humble-can-msgs ros-humble-ros2-control -y
+sudo apt install can-utils python3-rosdep ros-humble-can-msgs ros-humble-ros2-control ros-humble-gz-ros2-control ros-humble-gz-ros2-control-demos -y
 ```
 
 **Open new terminal**, then create a ROS2 workspace and clone the ROS2 Arctos repository inside the `src/` directory:
@@ -183,75 +187,18 @@ You should now have the workspace built and ready to use.
 
 ### Getting Started
 
-#### Setup CAN Interface (skip)
-
-For this section, we will temporarily move to the ros2_arctos directory in the src folder.
-*In the future, we will handle this in a more user-friendly way.*
-
-```bash
-pushd src/ros2_arctos
-```
-
-Make the setup script executable:
-
-```bash
-chmod +x scripts/setup_canable.sh
-```
-
-To setup the CAN interface, run the script `setup_canable.sh`:
-
-```bash
-sudo ./scripts/setup_canable.sh
-```
-
-#### Configure the joint limits and zero positions (First time only) (skip)
-
-**This only supports the joints XYZ at the moment.**
-
-To configure the joint limits and zero positions, run the script `set_zero_position.py`.
-
-**Note**: You need to run this script as root.
-
-```bash
-sudo -E python3 scripts/set_zero_position.py --init
-```
-
-Follow the instructions on the screen to set the zero positions and joint limits.
-
-#### Set the zero positions (Every time you power the robot) (skip)
-
-If this is the first time you are setting the zero positions, see the previous step and ignore this one.
-You only need to run this step if you have already set the zero positions and you have powered off the robot.
-
-To set the zero positions, run the script `set_zero_position.py`.
-
-Note: You need to run this script as root.
-
-```bash
-sudo -E python3 scripts/set_zero_position.py --set-zero
-```
-
-Lastly, we will pop back to the workspace root and rebuild the workspace.
-
-This is necessary to ensure the limits and zero positions are correctly set and reflected in the workspace.
-
-Run the following command to pop back to the workspace root:
-```bash
-popd
-```
-
-Rebuild the workspace:
-
-```bash
-colcon build --symlink-install
-```
-
 #### Launch the robot
 
-To launch the robot, run the launch file `arctos_bringup.launch.py`:
+To launch the robot with real hardware, run the launch file `arctos_bringup.launch.py`:
 
 ```bash
-ros2 launch arctos_bringup arctos_bringup.launch.py
+ros2 launch arctos_bringup arctos_bringup.launch.py use_sim_time:=false
+```
+
+To launch the robot with gazebo sim, run the launch file `gz_arctos_bringup.launch.py`:
+
+```bash
+ros2 launch arctos_bringup gz_arctos_bringup.launch.py use_sim_time:=true
 ```
 
 ## Individual Package READMEs

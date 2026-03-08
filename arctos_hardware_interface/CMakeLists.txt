@@ -19,24 +19,6 @@ find_package(pluginlib REQUIRED)
 find_package(std_srvs REQUIRED)
 find_package(std_msgs REQUIRED)
 
-# =====================================  Add library for services  ===================================== 
-add_library(arctos_services SHARED
-  src/arctos_services.cpp
-)
-
-target_include_directories(arctos_services
-  PUBLIC
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-    $<INSTALL_INTERFACE:include>
-)
-
-ament_target_dependencies(arctos_services
-  rclcpp
-  std_srvs
-  std_msgs
-  arctos_motor_driver
-)
-
 # ===================================== Add library for hardware interface  ===================================== 
 add_library(arctos_interface SHARED
   src/arctos_interface.cpp
@@ -44,7 +26,6 @@ add_library(arctos_interface SHARED
 
 # Link the hardware interface libraries and dependencies
 target_link_libraries(arctos_interface
-  arctos_services
   ${rclcpp_LIBRARIES}
   ${hardware_interface_LIBRARIES} 
 )
@@ -75,7 +56,6 @@ pluginlib_export_plugin_description_file(hardware_interface "arctos_hardware_int
 # Install targets
 install(TARGETS 
   arctos_interface
-  arctos_services
   EXPORT export_arctos_interface
   LIBRARY DESTINATION lib
   ARCHIVE DESTINATION lib

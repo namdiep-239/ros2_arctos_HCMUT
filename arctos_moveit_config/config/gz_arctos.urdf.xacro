@@ -9,6 +9,6 @@
     <xacro:include filename="arctos.ros2_control.xacro" />
 
 
-    <xacro:arctos_ros2_control name="RealSystem" initial_positions_file="$(arg initial_positions_file)" sim="false"/>
+    <xacro:arctos_ros2_control name="GazeboSimSystem" initial_positions_file="$(arg initial_positions_file)" sim="true"/>
 
 </robot>

@@ -72,7 +72,7 @@ def generate_launch_description():
     hand_controller = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=["arctos_hand_controller", "--controller-manager", "/controller_manager"],
+        arguments=["denso_hand_controller", "--controller-manager", "/controller_manager"],
         output="screen",
     )
 

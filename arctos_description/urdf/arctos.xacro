@@ -3,7 +3,7 @@
 
   <xacro:include filename="$(find arctos_description)/urdf/common/materials.xacro" />
   <xacro:include filename="$(find arctos_description)/urdf/common/joint_link.xacro" />
-  <!-- <xacro:include filename="$(find arctos_description)/urdf/arctos_gripper.xacro" /> -->
+  <xacro:include filename="$(find arctos_description)/urdf/arctos_gripper.xacro" />
 
   <link name="world" />
   <joint name="world_joint" type="fixed">
@@ -112,7 +112,7 @@
   <xacro:arctos_joint
     name="B_joint" type="revolute"
     parent="link_4" child="link_5"
-    origin_xyz="0 0 0.207" origin_rpy="0 0 0"
+    origin_xyz="0 0 0.207" origin_rpy="0 0 3.14159265359"
     axis_xyz="1 0 0"
     limit_l="-2.0944" limit_u="2.0944" limit_e="1" limit_v="5.236" mimic=""
   />
