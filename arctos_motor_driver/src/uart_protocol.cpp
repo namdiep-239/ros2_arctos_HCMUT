@@ -50,13 +50,13 @@ inline bool parseDoubleStrict(const std::string &token_in, double &out) {
   return true;
 }
 
-// EOL dùng khi đọc/ghi dòng. Nếu firmware yêu cầu CRLF, đổi thành "\r\n".
+// EOL when reading a line of string.if firmware require CRLF, change to "\r\n".
 constexpr const char* kEOL = "\r";
 
-// Lấy ký tự phân tách đầu tiên từ macro DELIMITER (giả định 1 ký tự)
+// Take the first char from macro DELIMITER (assumed to be 1 character)
 constexpr char delimChar() { return DELIMITER[0]; }
 
-} // anonymous namespaceS
+} // anonymous namespace
 
 
 namespace arctos_motor_driver {
@@ -173,7 +173,7 @@ bool UartProtocol::decodeMessage(const std::string data, std::vector<double> &ax
  *       protocol format expected by the connected motor controller/device.
  */
 bool UartProtocol::sendPosition(std::vector<double> &positions) {
- if (positions.size() != 6) {
+ if ((positions.size() - 1) != 6) {     // Temporary manual to bypass missing gripper data from miniPC
         std::cerr << "sendPosition: positions must have 6 elements, got "
                   << positions.size() << std::endl;
         return false;
@@ -204,6 +204,7 @@ bool UartProtocol::sendPosition(std::vector<double> &positions) {
  */
 void UartProtocol::readToBuffer(void)
 {
+    static std::string preRaw;
     if (!this->connected()) {
         return;
     }
@@ -218,7 +219,15 @@ void UartProtocol::readToBuffer(void)
 
         if (!raw.empty()) {
             rev_buffer_.push(raw);
-            std::cerr << "uart: readToBuffer: received: " << raw << '\n';
+            if (preRaw != raw)
+            {
+                std::cerr << "uart: readToBuffer: received: " << raw << "\n";   
+            }
+            else
+            {
+                // std::cerr << "...";
+            }
+            preRaw = raw;
         }
         else{
             std::cerr << ".";

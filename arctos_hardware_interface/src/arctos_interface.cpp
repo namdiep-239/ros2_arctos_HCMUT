@@ -108,6 +108,7 @@ namespace arctos_interface
                 if (interface.name == "velocity")
                     has_velocity_interface_ = true;
             }
+            // has_velocity_interface_ = false; // Force disable velocity interface as we are not using it for now
             
         }
 
@@ -310,7 +311,7 @@ namespace arctos_interface
                 {
                     // for now, the gripper state will update directly from position_command.
                     // TODO: read actualy gripper state and update.
-                    if (joint_name == "Left_jaw_joint") 
+                    if (joint_name == "Right_finger_joint") 
                     {
                         joint_position_[i] = joint_position_command_[i];
                     }
@@ -325,9 +326,9 @@ namespace arctos_interface
 
                 if (has_velocity_interface_)
                 {
-                    // double vel = motor_driver_->getJointVelocity(joint_name);
-                    // joint_velocities_[i] = vel;
-                    // RCLCPP_DEBUG(node_->get_logger(), "Updated velocity for joint %s: %.3f", joint_name.c_str(), vel);
+                    double vel = motor_driver_->getJointVelocity(joint_name);
+                    joint_velocities_[i] = vel;
+                    RCLCPP_DEBUG(node_->get_logger(), "Updated velocity for joint %s: %.3f rad/s", joint_name.c_str(), vel);
                 }
 
                 rclcpp::Duration time_since_update = motor_driver_->getTimeSinceLastUpdate(joint_name);
@@ -367,7 +368,7 @@ namespace arctos_interface
         {
             try
             {
-                // this is a wrong design! who the fuck send velocity via speed control mode (F6??)
+
                 if (has_velocity_interface_)
                 {
                     // TODO: Ensure this works properly
@@ -394,7 +395,7 @@ namespace arctos_interface
                     // Only send if position has changed significantly
                     if (std::abs(joint_position_command_[i] - last_position_command_[i]) > position_tolerance_)
                     {
-                        if (info_.joints[i].name == "Left_jaw_joint") 
+                        if (info_.joints[i].name == "Right_finger_joint") 
                         {
                             // TODO: write function to control gripper.
                             // down here, we only have to care about what position will we drive our actuator. 

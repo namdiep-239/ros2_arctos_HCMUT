@@ -70,7 +70,7 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
-          Left_jaw_1:
+          Right_finger_1:
             Alpha: 1
             Show Axes: false
             Show Trail: false
@@ -166,7 +166,7 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
-          Left_jaw_1:
+          Right_finger_1:
             Alpha: 1
             Show Axes: false
             Show Trail: false

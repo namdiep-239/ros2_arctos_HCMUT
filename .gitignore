@@ -36,3 +36,9 @@
 /gamepadControl/__pycache__
 gamepadControl/can_demo_asyncua
 */settings.json
+*log_*2026*
+scripts/smooth_trajectory_test.py
+scripts/focused_timing_analysis.py
+scripts/analyze_timing_issues.py
+scripts/analyze_log_data.py
+scripts/README.md

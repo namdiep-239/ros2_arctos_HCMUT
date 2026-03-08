@@ -1,0 +1,8 @@
+'!TITLE "TASK0"
+PROGRAM TASK0
+    COM_STATE #1,I10
+    IF (I10 > 0) AND (I1 = 0) THEN
+        LINEINPUT #1, S1
+        I1 = 1
+    ENDIF
+END
