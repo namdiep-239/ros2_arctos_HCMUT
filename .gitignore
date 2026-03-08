@@ -42,3 +42,7 @@ scripts/focused_timing_analysis.py
 scripts/analyze_timing_issues.py
 scripts/analyze_log_data.py
 scripts/README.md
+arctos_moveit_config/config/gz_arctos.sdf
+.gitignore
+.gitignore
+arctos_moveit_config/config/gz_arctos.urdf

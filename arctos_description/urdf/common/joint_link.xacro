@@ -8,14 +8,14 @@
       <visual>
         <origin xyz="${origin_xyz}" rpy="${origin_rpy}" />
         <geometry>
-          <mesh filename="package://arctos_description/meshes/${name}.STL"/>
+          <mesh filename="package://arctos_description/meshes/${name}.STL" />
         </geometry>
         <material name="${material_name}" />
       </visual>
       <collision>
         <origin xyz="${origin_xyz}" rpy="${origin_rpy}" />
         <geometry>
-          <mesh filename="package://arctos_description/meshes/${name}.STL"/>
+          <mesh filename="package://arctos_description/meshes/${name}.STL" />
         </geometry>
       </collision>
       <inertial>
@@ -23,7 +23,14 @@
         <mass value="${mass}" />
         <inertia ixx="${ixx}" iyy="${iyy}" izz="${izz}" ixy="${ixy}" iyz="${iyz}" ixz="${ixz}" />
       </inertial>
+
     </link>
+    <!-- However, the correct and explicit way when gazebo lives outside the link -->
+    <gazebo reference="${name}">
+      <!-- https://sdformat.org/spec/1.12/link/#link_kinematic -->
+      <kinematic>true</kinematic>
+      <gravity>false</gravity>
+    </gazebo>
   </xacro:macro>
 
   <!-- Define arctos_joint macro with a default value for axis_xyz -->
@@ -37,8 +44,9 @@
       <axis xyz="${axis_xyz}" />
       <limit upper="${limit_u}" lower="${limit_l}" effort="${limit_e}" velocity="${limit_v}" />
       <xacro:if value="${mimic != ''}">
-          <mimic joint="${mimic}" />
+        <mimic joint="${mimic}" />
       </xacro:if>
+      <dynamics damping="2.0" friction="0.2"/>
     </joint>
 
     <!-- Add transmission element -->
@@ -56,10 +64,10 @@
   <xacro:macro name="arctos_control" params="name limit_u limit_l">
     <joint name="${name}">
       <command_interface name="position">
-            <param name="min">${limit_l}</param>
-            <param name="max">${limit_u}</param>
+        <param name="min">${limit_l}</param>
+        <param name="max">${limit_u}</param>
       </command_interface>
-      <state_interface name="position"/>
+      <state_interface name="position" />
     </joint>
   </xacro:macro>
 
