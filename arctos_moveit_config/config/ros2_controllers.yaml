@@ -115,5 +115,5 @@ arctos_hardware_interface:
         gear_ratio: 1.0
         hardware_type: MKS_42D
         zero_position: 0.0
-        lower_limit: 0.0
-        upper_limit: 0.015
+        lower_limit: 0.002
+        upper_limit: 0.054
