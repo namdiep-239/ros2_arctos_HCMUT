@@ -15,7 +15,6 @@ find_package(std_msgs REQUIRED)
 find_package(sensor_msgs REQUIRED)
 find_package(moveit_ros_planning_interface REQUIRED)
 find_package(moveit_msgs REQUIRED)
-find_package(trajectory_msgs REQUIRED)
 find_package(control_msgs REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
 
@@ -37,7 +36,6 @@ ament_target_dependencies(gesture_commander_node
   sensor_msgs
   moveit_ros_planning_interface
   moveit_msgs
-  trajectory_msgs
   control_msgs
 )
 

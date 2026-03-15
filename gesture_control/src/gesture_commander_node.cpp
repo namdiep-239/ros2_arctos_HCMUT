@@ -14,8 +14,8 @@
  * Gesture mapping:
  *   thumbs_up → MoveIt2 named pose "home"
  *   point     → Y_joint + point_delta_rad (raise arm)
- *   open      → Left_jaw_joint → gripper_open_pos
- *   fist      → Left_jaw_joint → gripper_closed_pos
+ *   open      → Right_finger_joint → gripper_open_pos
+ *   fist      → Right_finger_joint → gripper_closed_pos
  *   none      → move_group.stop() (hold current position)
  */
 
@@ -25,9 +25,7 @@
 
 #include <moveit/move_group_interface/move_group_interface.h>
 
-#include <control_msgs/action/follow_joint_trajectory.hpp>
-#include <trajectory_msgs/msg/joint_trajectory.hpp>
-#include <trajectory_msgs/msg/joint_trajectory_point.hpp>
+#include <control_msgs/action/gripper_command.hpp>
 
 #include <deque>
 #include <atomic>
@@ -40,7 +38,7 @@
 #include "gesture_control/msg/gesture_detection.hpp"
 
 using GestureDetection     = gesture_control::msg::GestureDetection;
-using FollowJointTraj      = control_msgs::action::FollowJointTrajectory;
+using GripperCommandAction = control_msgs::action::GripperCommand;
 using MoveGroupInterface   = moveit::planning_interface::MoveGroupInterface;
 
 // Y_joint limits (degrees → radians, from ros2_controllers.yaml)
@@ -80,8 +78,8 @@ public:
     cmd_pub_ = this->create_publisher<std_msgs::msg::String>("/gesture_command", 10);
 
     // ── Gripper action client ─────────────────────────────────────────────────
-    gripper_client_ = rclcpp_action::create_client<FollowJointTraj>(
-      this, "/arctos_hand_controller/follow_joint_trajectory");
+    gripper_client_ = rclcpp_action::create_client<GripperCommandAction>(
+      this, "/denso_hand_controller/gripper_cmd");
 
     last_command_time_ = this->now();
 
@@ -121,7 +119,7 @@ private:
   // ── ROS interfaces ──────────────────────────────────────────────────────────
   rclcpp::Subscription<GestureDetection>::SharedPtr gesture_sub_;
   rclcpp::Publisher<std_msgs::msg::String>::SharedPtr cmd_pub_;
-  rclcpp_action::Client<FollowJointTraj>::SharedPtr gripper_client_;
+  rclcpp_action::Client<GripperCommandAction>::SharedPtr gripper_client_;
 
   // ── MoveIt2 ─────────────────────────────────────────────────────────────────
   std::shared_ptr<MoveGroupInterface> move_group_;
@@ -274,17 +272,13 @@ private:
     if (!gripper_client_->wait_for_action_server(std::chrono::seconds(2))) {
       RCLCPP_WARN(this->get_logger(),
                   "Gripper action server not available: "
-                  "/arctos_hand_controller/follow_joint_trajectory");
+                  "/denso_hand_controller/gripper_cmd");
       return;
     }
 
-    auto goal = FollowJointTraj::Goal();
-    goal.trajectory.joint_names = {"Left_jaw_joint"};
-
-    trajectory_msgs::msg::JointTrajectoryPoint pt;
-    pt.positions          = {position};
-    pt.time_from_start    = rclcpp::Duration::from_seconds(1.0);
-    goal.trajectory.points.push_back(pt);
+    auto goal = GripperCommandAction::Goal();
+    goal.command.position   = position;
+    goal.command.max_effort = 0.0;  // no effort limit
 
     RCLCPP_INFO(this->get_logger(), "Sending gripper to %.4f rad...", position);
 
