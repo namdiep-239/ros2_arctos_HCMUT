@@ -69,9 +69,6 @@ namespace arctos_interface
 
             // Declare parameters for this joint
             node_->declare_parameter(param_prefix + "motor_id", -1);             // Motor/CAN ID
-            // node_->declare_parameter(param_prefix + "working_current", 1600); // Default 1.6A
-            // node_->declare_parameter(param_prefix + "holding_current", 50);   // Default 50%
-            // node_->declare_parameter(param_prefix + "home_current", 800);     // Default 0.8A for homing
             node_->declare_parameter(param_prefix + "hardware_type", "MKS_42D"); // Default MKS Servo
             node_->declare_parameter(param_prefix + "gear_ratio", 1.0);          // Default 1:1 gear ratio
             node_->declare_parameter(param_prefix + "inverted", false);          // Default no inverted in application side
@@ -326,9 +323,9 @@ namespace arctos_interface
 
                 if (has_velocity_interface_)
                 {
-                    double vel = motor_driver_->getJointVelocity(joint_name);
-                    joint_velocities_[i] = vel;
-                    RCLCPP_DEBUG(node_->get_logger(), "Updated velocity for joint %s: %.3f rad/s", joint_name.c_str(), vel);
+                    // double vel = motor_driver_->getJointVelocity(joint_name);
+                    // joint_velocities_[i] = vel;
+                    // RCLCPP_DEBUG(node_->get_logger(), "Updated velocity for joint %s: %.3f rad/s", joint_name.c_str(), vel);
                 }
 
                 rclcpp::Duration time_since_update = motor_driver_->getTimeSinceLastUpdate(joint_name);

@@ -117,16 +117,5 @@ arctos_hardware_interface:
         gear_ratio: 1.0
         hardware_type: MKS_42D
         zero_position: 0.0
-        lower_limit: 0.0
-        upper_limit: 0.015
-
-arctos_hand_controller:
-  ros__parameters:
-    joints:
-      - Left_jaw_joint
-    command_interfaces:
-      - position
-    state_interfaces:
-      - position
-    allow_partial_joints_goal: false
-    state_tolerance_check: false
+        lower_limit: 0.002
+        upper_limit: 0.054
