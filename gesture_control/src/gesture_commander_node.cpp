@@ -278,7 +278,7 @@ private:
 
     auto goal = GripperCommandAction::Goal();
     goal.command.position   = position;
-    goal.command.max_effort = 0.0;  // no effort limit
+    goal.command.max_effort = 50.0;  // N — sufficient for gripper; ignored in simulation
 
     RCLCPP_INFO(this->get_logger(), "Sending gripper to %.4f rad...", position);
 

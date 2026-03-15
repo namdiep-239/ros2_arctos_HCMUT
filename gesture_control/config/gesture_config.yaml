@@ -14,7 +14,8 @@ gesture_commander_node:
     # Positive = raise arm. Clamped to hardware limits (-100° … +135°).
     point_delta_rad: 0.3
 
-    # Left_jaw_joint target positions (radians)
-    # Hardware limits: 0.0 (closed) … 0.015 (open)
-    gripper_open_pos: 0.015
-    gripper_closed_pos: 0.0
+    # Right_finger_joint target positions (radians)
+    # Hardware limits: 0.002 (open) … 0.054 (closed)  — from arctos.ros2_control.xacro
+    # SRDF named states: open=0.002, close=0.054
+    gripper_open_pos: 0.002
+    gripper_closed_pos: 0.054
