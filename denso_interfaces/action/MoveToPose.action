@@ -1,0 +1,8 @@
+# Request
+geometry_msgs/Pose pose
+---
+#Result
+bool completed
+---
+#Feedback
+string step

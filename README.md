@@ -83,9 +83,10 @@ First, install the required dependencies:
 - `ros-humble-ros2-control` for the ROS2 control packages.
 - `ros-humble-gz-ros2-control` for the Gazebo ROS2 control packages.
 - `ros-humble-gz-ros2-control-demos` for the Gazebo ROS2 control demos.
+- `ros-humble-gripper-controllers` for the gripper controllers.
 
 ```bash
-sudo apt install can-utils python3-rosdep ros-humble-can-msgs ros-humble-ros2-control ros-humble-gz-ros2-control ros-humble-gz-ros2-control-demos -y
+sudo apt install can-utils python3-rosdep ros-humble-can-msgs ros-humble-ros2-control ros-humble-gz-ros2-control ros-humble-gz-ros2-control-demos ros-humble-gripper-controllers -y
 ```
 
 **Open new terminal**, then create a ROS2 workspace and clone the ROS2 Arctos repository inside the `src/` directory:
@@ -136,7 +137,7 @@ pyenv activate
 Install needed dependency for the project.
 
 ```bash
-pip install python-can ruamel.yaml rich keyboard catkin-pkg
+pip install python-can ruamel.yaml rich keyboard catkin-pkg lark empy==3.3.4
 ```
 
 ### Building the Workspace
