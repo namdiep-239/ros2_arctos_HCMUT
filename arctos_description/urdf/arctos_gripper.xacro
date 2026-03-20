@@ -52,7 +52,7 @@
     name="Gripper_joint" type="fixed"
     parent="link_6" child="gripper_body"
     origin_xyz="2.2508E-05 0.001025 0.051" origin_rpy="0.0 0.0 0.0"
-    limit_u="0.0" limit_l="0.0" limit_e="0.0" limit_v="0.0" mimic=""
+    limit_u="0.0" limit_l="0.0" limit_e="0.0" limit_v="0.0" damping="0.0" friction="0.0" mimic=""
   />
 
   <!-- Right_finger_joint, prismatic with axis directly defined -->
@@ -61,14 +61,14 @@
     name="Right_finger_joint" type="prismatic"
     parent="gripper_body" child="right_finger"
     origin_xyz="0.02575 0 0.0085" origin_rpy="0.0 0.0 0.0" axis_xyz="-1.0 0.0 0.0"  
-    limit_u="0.054" limit_l="0.002" limit_e="100.0" limit_v="100.0" damping="0.01" friction="0.0" mimic=""
+    limit_u="0.054" limit_l="0.002" limit_e="100.0" limit_v="100.0" damping="0.02" friction="0.0" mimic=""
   />
 
   <xacro:arctos_joint
     name="Left_finger_joint" type="prismatic"
     parent="gripper_body" child="left_finger"
     origin_xyz="-0.02655 0 0.0085" origin_rpy="1.5708 0 -3.1416" axis_xyz="-1.0 0.0 0.0"
-    limit_u="0.054" limit_l="0.002" limit_e="100.0" limit_v="100.0" damping="0.01" friction="0.0" mimic="Right_finger_joint"
+    limit_u="0.054" limit_l="0.002" limit_e="100.0" limit_v="100.0" damping="0.02" friction="0.0" mimic="Right_finger_joint"
   />
 
 
