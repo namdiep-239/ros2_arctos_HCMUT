@@ -10,19 +10,35 @@ find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(moveit_servo REQUIRED)
 find_package(trajectory_msgs REQUIRED)
+find_package(control_msgs REQUIRED)
+find_package(std_srvs REQUIRED)
 
+# install the first file (as executable)
 add_executable(denso_moveit_servo_node src/denso_moveit_servo_node.cpp)
 
-ament_target_dependencies(denso_moveit_servo_node rclcpp moveit_servo trajectory_msgs)
+ament_target_dependencies(denso_moveit_servo_node rclcpp moveit_servo trajectory_msgs control_msgs std_srvs)
+
+# then install the second file (as executable)
+add_executable(servo_keyboard_input src/servo_keyboard_input.cpp)
+
+ament_target_dependencies(servo_keyboard_input rclcpp moveit_servo trajectory_msgs control_msgs std_srvs)
 
 target_include_directories(denso_moveit_servo_node PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>)
 
+target_include_directories(servo_keyboard_input PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>)
+
 target_compile_features(denso_moveit_servo_node PUBLIC c_std_99 cxx_std_17)
 
-install(TARGETS denso_moveit_servo_node
-DESTINATION lib/${PROJECT_NAME})
+target_compile_features(servo_keyboard_input PUBLIC c_std_99 cxx_std_17)
+
+install(
+  TARGETS denso_moveit_servo_node servo_keyboard_input
+  DESTINATION lib/${PROJECT_NAME}
+  )
 
 install(
   DIRECTORY launch config
