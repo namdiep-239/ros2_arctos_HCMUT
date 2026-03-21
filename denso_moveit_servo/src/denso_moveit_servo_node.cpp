@@ -1,131 +1,244 @@
-#include <string>
-#include <memory>
+#include "denso_moveit_servo/denso_moveit_servo_node.hpp"
 
-// ROS
-#include <rclcpp/rclcpp.hpp>
-
-// Servo
-#include <moveit_servo/servo_parameters.h>
-#include <moveit_servo/servo.h>
-#include <moveit/planning_scene_monitor/planning_scene_monitor.h>
-#include <std_srvs/srv/trigger.hpp>
+#include <rclcpp_components/register_node_macro.hpp>
 
 using namespace std::chrono_literals;
 
-static const rclcpp::Logger LOGGER = rclcpp::get_logger("realtime_servo");
-
-// BEGIN_TUTORIAL
-
-// Setup
-// ^^^^^
-// First we declare pointers to the node and publisher that will publish commands to Servo
-rclcpp::Node::SharedPtr node_;
-// END_SUB_TUTORIAL
-
-// Next we will set up the node, planning_scene_monitor, and collision object
-int main(int argc, char **argv)
+namespace denso_moveit_servo
 {
-  rclcpp::init(argc, argv);
-  rclcpp::NodeOptions node_options;
-  rclcpp::Service<std_srvs::srv::Trigger>::SharedPtr start_servo_service_;
-  rclcpp::Service<std_srvs::srv::Trigger>::SharedPtr stop_servo_service_;
-  rclcpp::Service<std_srvs::srv::Trigger>::SharedPtr pause_servo_service_;
-  rclcpp::Service<std_srvs::srv::Trigger>::SharedPtr unpause_servo_service_;
 
-  // This is false for now until we fix the QoS settings in moveit to enable intra process comms
-  node_options.use_intra_process_comms(true);
-  node_ = std::make_shared<rclcpp::Node>("denso_moveit_servo_node", node_options);
+const rclcpp::Logger DensoMoveItServoNode::LOGGER = rclcpp::get_logger("denso_moveit_servo_node");
 
-  auto planning_scene_monitor = std::make_shared<planning_scene_monitor::PlanningSceneMonitor>(
-      node_, "robot_description", "planning_scene_monitor");
+DensoMoveItServoNode::DensoMoveItServoNode(const rclcpp::NodeOptions& options)
+  : Node("denso_moveit_servo_node", options)
+{
+  RCLCPP_INFO(LOGGER, "Initializing DensoMoveItServoNode...");
 
-  // Initializing Servo
-  // ^^^^^^^^^^^^^^^^^^
-  // Servo requires a number of parameters to dictate its behavior. These can be read automatically by using the
-  // :code:`makeServoParameters` helper function
-  // the ns (namespace) should be specified (as the same in launch file), or it'll automatically use "moveit_servo", then invoke panda arm instead.
-  auto servo_parameters = moveit_servo::ServoParameters::makeServoParameters(node_, "denso_moveit_servo");
-  if (!servo_parameters)
+  // Initialize planning scene monitor
+  if (!initializePlanningSceneMonitor())
   {
-    RCLCPP_FATAL(LOGGER, "Failed to load the servo parameters");
-    return EXIT_FAILURE;
+    RCLCPP_FATAL(LOGGER, "Failed to initialize planning scene monitor");
+    throw std::runtime_error("Planning scene monitor initialization failed");
   }
 
-  // Here we make sure the planning_scene_monitor is updating in real time from the joint states topic
-  if (planning_scene_monitor->getPlanningScene())
+  // Initialize servo
+  if (!initializeServo())
   {
-    planning_scene_monitor->startStateMonitor(servo_parameters->joint_topic);
-    planning_scene_monitor->startSceneMonitor(servo_parameters->monitored_planning_scene_topic);
-    planning_scene_monitor->startWorldGeometryMonitor();
-    planning_scene_monitor->setPlanningScenePublishingFrequency(25);
-    planning_scene_monitor->getStateMonitor()->enableCopyDynamics(true);
-    planning_scene_monitor->startPublishingPlanningScene(planning_scene_monitor::PlanningSceneMonitor::UPDATE_SCENE,
-                            std::string(node_->get_fully_qualified_name()) +
-                                "/publish_planning_scene");
+    RCLCPP_FATAL(LOGGER, "Failed to initialize servo");
+    throw std::runtime_error("Servo initialization failed");
+  }
+
+  setupServices();
+
+  RCLCPP_INFO(LOGGER, "DensoMoveItServoNode initialized successfully");
+}
+
+DensoMoveItServoNode::~DensoMoveItServoNode()
+{
+  RCLCPP_INFO(LOGGER, "Shutting down DensoMoveItServoNode...");
+  
+  // Stop servo if it's running
+  if (servo_)
+  {
+    servo_->setPaused(true);
+  }
+}
+
+bool DensoMoveItServoNode::initializePlanningSceneMonitor()
+{
+  // Create planning scene monitor
+  planning_scene_monitor_ = std::make_shared<planning_scene_monitor::PlanningSceneMonitor>(
+      shared_from_this(), "robot_description", "planning_scene_monitor");
+
+  // Load servo parameters first to get joint topics
+  servo_parameters_ = moveit_servo::ServoParameters::makeServoParameters(shared_from_this(), "denso_moveit_servo");
+  if (!servo_parameters_)
+  {
+    RCLCPP_ERROR(LOGGER, "Failed to load servo parameters");
+    return false;
+  }
+
+  // Configure planning scene monitor
+  if (planning_scene_monitor_->getPlanningScene())
+  {
+    planning_scene_monitor_->startStateMonitor(servo_parameters_->joint_topic);
+    planning_scene_monitor_->startSceneMonitor(servo_parameters_->monitored_planning_scene_topic);
+    planning_scene_monitor_->startWorldGeometryMonitor();
+    planning_scene_monitor_->setPlanningScenePublishingFrequency(25);
+    planning_scene_monitor_->getStateMonitor()->enableCopyDynamics(true);
+    planning_scene_monitor_->startPublishingPlanningScene(
+        planning_scene_monitor::PlanningSceneMonitor::UPDATE_SCENE,
+        std::string(this->get_fully_qualified_name()) + "/publish_planning_scene");
   }
   else
   {
     RCLCPP_ERROR(LOGGER, "Planning scene not configured");
-    return EXIT_FAILURE;
+    return false;
   }
 
-  // If the planning scene monitor in servo is the primary one we provide /get_planning_scene service so RViz displays
-  // or secondary planning scene monitors can fetch the scene, otherwise we request the planning scene from the
-  // primary planning scene monitor (e.g. move_group)
-  if (servo_parameters->is_primary_planning_scene_monitor)
-    planning_scene_monitor->providePlanningSceneService();
+  // Handle primary/secondary planning scene monitor
+  if (servo_parameters_->is_primary_planning_scene_monitor)
+    planning_scene_monitor_->providePlanningSceneService();
   else
-    planning_scene_monitor->requestPlanningSceneState();
+    planning_scene_monitor_->requestPlanningSceneState();
 
-  // Initialize the Servo C++ interface by passing a pointer to the node, the parameters, and the PSM
-  auto servo = std::make_unique<moveit_servo::Servo>(node_, servo_parameters, planning_scene_monitor);
+  return true;
+}
 
-  // Set up some services for Servo Node
+bool DensoMoveItServoNode::initializeServo()
+{
+  if (!servo_parameters_ || !planning_scene_monitor_)
+  {
+    RCLCPP_ERROR(LOGGER, "Prerequisites for servo initialization not met");
+    return false;
+  }
 
+  // Initialize the Servo C++ interface
+  try
+  {
+    servo_ = std::make_unique<moveit_servo::Servo>(
+        shared_from_this(), servo_parameters_, planning_scene_monitor_);
+    RCLCPP_INFO(LOGGER, "Servo initialized successfully");
+    return true;
+  }
+  catch (const std::exception& e)
+  {
+    RCLCPP_ERROR(LOGGER, "Failed to initialize servo: %s", e.what());
+    return false;
+  }
+}
+
+void DensoMoveItServoNode::setupServices()
+{
   // Set up services for interacting with Servo
-  start_servo_service_ = node_->create_service<std_srvs::srv::Trigger>(
-      "~/start_servo",
-      [&servo](const std::shared_ptr<std_srvs::srv::Trigger::Request> & /* unused*/,
-               const std::shared_ptr<std_srvs::srv::Trigger::Response> &response)
-      {
-        servo->start();
-        response->success = true;
-      });
+  start_servo_service_ = this->create_service<std_srvs::srv::Trigger>(
+      "~/start_servo", 
+      std::bind(&DensoMoveItServoNode::startServoCallback, this, 
+                std::placeholders::_1, std::placeholders::_2));
 
-  stop_servo_service_ = node_->create_service<std_srvs::srv::Trigger>(
+  stop_servo_service_ = this->create_service<std_srvs::srv::Trigger>(
       "~/stop_servo",
-      [&servo](const std::shared_ptr<std_srvs::srv::Trigger::Request> & /* unused*/,
-               const std::shared_ptr<std_srvs::srv::Trigger::Response> &response)
-      {
-        servo->setPaused(true);
-        response->success = true;
-      });
+      std::bind(&DensoMoveItServoNode::stopServoCallback, this,
+                std::placeholders::_1, std::placeholders::_2));
 
-  pause_servo_service_ = node_->create_service<std_srvs::srv::Trigger>(
+  pause_servo_service_ = this->create_service<std_srvs::srv::Trigger>(
       "~/pause_servo",
-      [&servo](const std::shared_ptr<std_srvs::srv::Trigger::Request> & /* unused*/,
-               const std::shared_ptr<std_srvs::srv::Trigger::Response> &response)
-      {
-        servo->setPaused(true);
-        response->success = true;
-      });
+      std::bind(&DensoMoveItServoNode::pauseServoCallback, this,
+                std::placeholders::_1, std::placeholders::_2));
 
-  unpause_servo_service_ = node_->create_service<std_srvs::srv::Trigger>(
+  unpause_servo_service_ = this->create_service<std_srvs::srv::Trigger>(
       "~/unpause_servo",
-      [&servo](const std::shared_ptr<std_srvs::srv::Trigger::Request> & /* unused*/,
-               const std::shared_ptr<std_srvs::srv::Trigger::Response> &response)
-      {
-        servo->setPaused(false);
-        response->success = true;
-      });
+      std::bind(&DensoMoveItServoNode::unpauseServoCallback, this,
+                std::placeholders::_1, std::placeholders::_2));
 
-  // We use a multithreaded executor here because Servo has concurrent processes for moving the robot and avoiding collisions
-  auto executor = std::make_unique<rclcpp::executors::MultiThreadedExecutor>();
-  executor->add_node(node_);
-  executor->spin();
+  RCLCPP_INFO(LOGGER, "Services set up successfully");
+}
 
-  // END_TUTORIAL
+void DensoMoveItServoNode::startServoCallback(
+    const std::shared_ptr<std_srvs::srv::Trigger::Request>& /*request*/,
+    const std::shared_ptr<std_srvs::srv::Trigger::Response>& response)
+{
+  if (servo_)
+  {
+    servo_->start();
+    response->success = true;
+    response->message = "Servo started successfully";
+    RCLCPP_INFO(LOGGER, "Servo started");
+  }
+  else
+  {
+    response->success = false;
+    response->message = "Servo not initialized";
+    RCLCPP_ERROR(LOGGER, "Cannot start servo - not initialized");
+  }
+}
 
+void DensoMoveItServoNode::stopServoCallback(
+    const std::shared_ptr<std_srvs::srv::Trigger::Request>& /*request*/,
+    const std::shared_ptr<std_srvs::srv::Trigger::Response>& response)
+{
+  if (servo_)
+  {
+    servo_->setPaused(true);
+    response->success = true;
+    response->message = "Servo stopped successfully";
+    RCLCPP_INFO(LOGGER, "Servo stopped");
+  }
+  else
+  {
+    response->success = false;
+    response->message = "Servo not initialized";
+    RCLCPP_ERROR(LOGGER, "Cannot stop servo - not initialized");
+  }
+}
+
+void DensoMoveItServoNode::pauseServoCallback(
+    const std::shared_ptr<std_srvs::srv::Trigger::Request>& /*request*/,
+    const std::shared_ptr<std_srvs::srv::Trigger::Response>& response)
+{
+  if (servo_)
+  {
+    servo_->setPaused(true);
+    response->success = true;
+    response->message = "Servo paused successfully";
+    RCLCPP_INFO(LOGGER, "Servo paused");
+  }
+  else
+  {
+    response->success = false;
+    response->message = "Servo not initialized";
+    RCLCPP_ERROR(LOGGER, "Cannot pause servo - not initialized");
+  }
+}
+
+void DensoMoveItServoNode::unpauseServoCallback(
+    const std::shared_ptr<std_srvs::srv::Trigger::Request>& /*request*/,
+    const std::shared_ptr<std_srvs::srv::Trigger::Response>& response)
+{
+  if (servo_)
+  {
+    servo_->setPaused(false);
+    response->success = true;
+    response->message = "Servo unpaused successfully";
+    RCLCPP_INFO(LOGGER, "Servo unpaused");
+  }
+  else
+  {
+    response->success = false;
+    response->message = "Servo not initialized";
+    RCLCPP_ERROR(LOGGER, "Cannot unpause servo - not initialized");
+  }
+}
+
+}  // namespace denso_moveit_servo
+
+// Register the component with the ROS 2 component system
+RCLCPP_COMPONENTS_REGISTER_NODE(denso_moveit_servo::DensoMoveItServoNode)
+
+// For backwards compatibility, provide a main function that creates the component
+int main(int argc, char* argv[])
+{
+  rclcpp::init(argc, argv);
+  
+  // Use MultiThreadedExecutor as required by MoveIt Servo
+  rclcpp::executors::MultiThreadedExecutor executor;
+  
+  rclcpp::NodeOptions options;
+  // Enable intra process comms for performance
+  options.use_intra_process_comms(true);
+  
+  auto node = std::make_shared<denso_moveit_servo::DensoMoveItServoNode>(options);
+  executor.add_node(node);
+  
+  try
+  {
+    executor.spin();
+  }
+  catch (const std::exception& e)
+  {
+    RCLCPP_ERROR(rclcpp::get_logger("main"), "Exception in executor: %s", e.what());
+  }
+  
   rclcpp::shutdown();
   return 0;
 }
