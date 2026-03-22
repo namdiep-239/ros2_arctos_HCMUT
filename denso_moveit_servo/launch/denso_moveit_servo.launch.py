@@ -44,7 +44,7 @@ def generate_launch_description():
     # Creates the Servo node and publishes commands to it
     servo_node = Node(
         package="denso_moveit_servo",
-        executable="denso_moveit_servo_node",
+        executable="denso_moveit_servo_node_exec",
         output="screen",
         parameters=[
             servo_params,

@@ -204,6 +204,15 @@ int KeyboardServo::keyLoop()
   bool publish_joint = false;
   bool servo_started = false;
 
+  double max_velocity_x = 3.0543;
+  double max_velocity_y = 3.4907;
+  double max_velocity_z = 3.4907;
+  double max_velocity_a = 5.236;
+  double max_velocity_b = 5.236;
+  double max_velocity_c = 8.3776;
+
+  double scaling = 0.2;
+
   rclcpp::Rate loop_rate(1);
 
   std::thread{ std::bind(&KeyboardServo::spin, this) }.detach();
@@ -279,37 +288,37 @@ int KeyboardServo::keyLoop()
       case KEYCODE_1:
         RCLCPP_DEBUG(pub_node_->get_logger(), "1");
         joint_msg->joint_names.push_back("X_joint");
-        joint_msg->velocities.push_back(joint_vel_cmd_);
+        joint_msg->velocities.push_back(max_velocity_x * scaling);
         publish_joint = true;
         break;
       case KEYCODE_2:
         RCLCPP_DEBUG(pub_node_->get_logger(), "2");
         joint_msg->joint_names.push_back("Y_joint");
-        joint_msg->velocities.push_back(joint_vel_cmd_);
+        joint_msg->velocities.push_back(max_velocity_y * scaling);
         publish_joint = true;
         break;
       case KEYCODE_3:
         RCLCPP_DEBUG(pub_node_->get_logger(), "3");
         joint_msg->joint_names.push_back("Z_joint");
-        joint_msg->velocities.push_back(joint_vel_cmd_);
+        joint_msg->velocities.push_back(max_velocity_z * scaling);
         publish_joint = true;
         break;
       case KEYCODE_4:
         RCLCPP_DEBUG(pub_node_->get_logger(), "4");
         joint_msg->joint_names.push_back("A_joint");
-        joint_msg->velocities.push_back(joint_vel_cmd_);
+        joint_msg->velocities.push_back(max_velocity_a * scaling);
         publish_joint = true;
         break;
       case KEYCODE_5:
         RCLCPP_DEBUG(pub_node_->get_logger(), "5");
         joint_msg->joint_names.push_back("B_joint");
-        joint_msg->velocities.push_back(joint_vel_cmd_);
+        joint_msg->velocities.push_back(max_velocity_b * scaling);
         publish_joint = true;
         break;
       case KEYCODE_6:
         RCLCPP_DEBUG(pub_node_->get_logger(), "6");
         joint_msg->joint_names.push_back("C_joint");
-        joint_msg->velocities.push_back(joint_vel_cmd_);
+        joint_msg->velocities.push_back(max_velocity_c * scaling);
         publish_joint = true;
         break;
       case KEYCODE_7:
@@ -320,7 +329,7 @@ int KeyboardServo::keyLoop()
         break;
       case KEYCODE_R:
         RCLCPP_DEBUG(pub_node_->get_logger(), "R");
-        joint_vel_cmd_ *= -1;
+        scaling *= -1.0;
         break;
       case KEYCODE_S:
         RCLCPP_DEBUG(service_node_->get_logger(), "S");

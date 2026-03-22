@@ -2,6 +2,7 @@
 
 #include <memory>
 #include <string>
+#include <atomic>
 
 // ROS
 #include <rclcpp/rclcpp.hpp>
@@ -43,6 +44,11 @@ private:
   bool initializeServo();
 
   /**
+    * @brief Deferred initialization callback executed after construction
+    */
+    void deferredInitialize();
+
+    /**
    * @brief Setup servo control services
    */
   void setupServices();
@@ -68,6 +74,8 @@ private:
   std::shared_ptr<planning_scene_monitor::PlanningSceneMonitor> planning_scene_monitor_;
   std::unique_ptr<moveit_servo::Servo> servo_;
   moveit_servo::ServoParameters::SharedConstPtr servo_parameters_;
+  rclcpp::TimerBase::SharedPtr deferred_init_timer_;
+  std::atomic<bool> initialized_{ false };
 
   // Services
   rclcpp::Service<std_srvs::srv::Trigger>::SharedPtr start_servo_service_;

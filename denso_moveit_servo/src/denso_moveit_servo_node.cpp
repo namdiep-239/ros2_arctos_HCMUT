@@ -13,24 +13,12 @@ DensoMoveItServoNode::DensoMoveItServoNode(const rclcpp::NodeOptions& options)
   : Node("denso_moveit_servo_node", options)
 {
   RCLCPP_INFO(LOGGER, "Initializing DensoMoveItServoNode...");
-
-  // Initialize planning scene monitor
-  if (!initializePlanningSceneMonitor())
-  {
-    RCLCPP_FATAL(LOGGER, "Failed to initialize planning scene monitor");
-    throw std::runtime_error("Planning scene monitor initialization failed");
-  }
-
-  // Initialize servo
-  if (!initializeServo())
-  {
-    RCLCPP_FATAL(LOGGER, "Failed to initialize servo");
-    throw std::runtime_error("Servo initialization failed");
-  }
-
   setupServices();
 
-  RCLCPP_INFO(LOGGER, "DensoMoveItServoNode initialized successfully");
+  deferred_init_timer_ = this->create_wall_timer(
+      0ms, std::bind(&DensoMoveItServoNode::deferredInitialize, this));
+
+  RCLCPP_INFO(LOGGER, "DensoMoveItServoNode constructed, waiting for deferred initialization");
 }
 
 DensoMoveItServoNode::~DensoMoveItServoNode()
@@ -42,6 +30,34 @@ DensoMoveItServoNode::~DensoMoveItServoNode()
   {
     servo_->setPaused(true);
   }
+}
+
+void DensoMoveItServoNode::deferredInitialize()
+{
+  if (deferred_init_timer_)
+  {
+    deferred_init_timer_->cancel();
+  }
+
+  if (initialized_.load())
+  {
+    return;
+  }
+
+  if (!initializePlanningSceneMonitor())
+  {
+    RCLCPP_FATAL(LOGGER, "Failed to initialize planning scene monitor");
+    return;
+  }
+
+  if (!initializeServo())
+  {
+    RCLCPP_FATAL(LOGGER, "Failed to initialize servo");
+    return;
+  }
+
+  initialized_.store(true);
+  RCLCPP_INFO(LOGGER, "DensoMoveItServoNode initialized successfully");
 }
 
 bool DensoMoveItServoNode::initializePlanningSceneMonitor()
@@ -138,6 +154,14 @@ void DensoMoveItServoNode::startServoCallback(
     const std::shared_ptr<std_srvs::srv::Trigger::Request>& /*request*/,
     const std::shared_ptr<std_srvs::srv::Trigger::Response>& response)
 {
+  if (!initialized_.load())
+  {
+    response->success = false;
+    response->message = "Servo node initialization in progress or failed";
+    RCLCPP_WARN(LOGGER, "Cannot start servo - node not initialized yet");
+    return;
+  }
+
   if (servo_)
   {
     servo_->start();
@@ -157,6 +181,14 @@ void DensoMoveItServoNode::stopServoCallback(
     const std::shared_ptr<std_srvs::srv::Trigger::Request>& /*request*/,
     const std::shared_ptr<std_srvs::srv::Trigger::Response>& response)
 {
+  if (!initialized_.load())
+  {
+    response->success = false;
+    response->message = "Servo node initialization in progress or failed";
+    RCLCPP_WARN(LOGGER, "Cannot stop servo - node not initialized yet");
+    return;
+  }
+
   if (servo_)
   {
     servo_->setPaused(true);
@@ -176,6 +208,14 @@ void DensoMoveItServoNode::pauseServoCallback(
     const std::shared_ptr<std_srvs::srv::Trigger::Request>& /*request*/,
     const std::shared_ptr<std_srvs::srv::Trigger::Response>& response)
 {
+  if (!initialized_.load())
+  {
+    response->success = false;
+    response->message = "Servo node initialization in progress or failed";
+    RCLCPP_WARN(LOGGER, "Cannot pause servo - node not initialized yet");
+    return;
+  }
+
   if (servo_)
   {
     servo_->setPaused(true);
@@ -195,6 +235,14 @@ void DensoMoveItServoNode::unpauseServoCallback(
     const std::shared_ptr<std_srvs::srv::Trigger::Request>& /*request*/,
     const std::shared_ptr<std_srvs::srv::Trigger::Response>& response)
 {
+  if (!initialized_.load())
+  {
+    response->success = false;
+    response->message = "Servo node initialization in progress or failed";
+    RCLCPP_WARN(LOGGER, "Cannot unpause servo - node not initialized yet");
+    return;
+  }
+
   if (servo_)
   {
     servo_->setPaused(false);
