@@ -36,6 +36,10 @@ denso_arm_controller:
     allow_partial_joints_goal: true
     state_tolerance_check: false  # Disable tolerance checking for simplicity
 
+    allow_nonzero_velocity_at_trajectory_end: false
+    # allow_integration_in_goal_trajectories: true   # Allow servo's incremental trajectories
+    # open_loop_control: true                        # Don't reject trajectory based on current state mismatch
+
 denso_hand_controller:
   ros__parameters:
     joint: Right_finger_joint
