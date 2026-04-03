@@ -38,7 +38,7 @@
 const std::string TWIST_TOPIC = "/denso_moveit_servo_node/delta_twist_cmds";
 const std::string JOINT_TOPIC = "/denso_moveit_servo_node/delta_joint_cmds";
 const size_t ROS_QUEUE_SIZE = 10;
-const std::string EEF_FRAME_ID = "gripper_body";
+const std::string EEF_FRAME_ID = "gripper_body_link";
 const std::string BASE_FRAME_ID = "base_link";
 
 // A class for reading the key inputs from the terminal

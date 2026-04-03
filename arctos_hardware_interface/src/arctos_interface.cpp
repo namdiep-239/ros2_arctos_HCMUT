@@ -304,7 +304,7 @@ namespace arctos_interface
                 {
                     // for now, the gripper state will update directly from position_command.
                     // TODO: read actualy gripper state and update.
-                    if (joint_name == "Right_finger_joint")
+                    if (joint_name == "gripper_gear_right_joint")
                     {
                         joint_position_[i] = joint_position_command_[i];
                     }
@@ -391,7 +391,7 @@ namespace arctos_interface
                 {
                     allowPosition[i] = false; // reset allowPosition for each joint, only set to true when trend changes or command changes significantly
                     // Only send if position has changed significantly
-                    if (info_.joints[i].name == "Right_finger_joint")
+                    if (info_.joints[i].name == "gripper_gear_right_joint")
                     {
                         // TODO: write function to control gripper.
                         // down here, we only have to care about what position will we drive our actuator.

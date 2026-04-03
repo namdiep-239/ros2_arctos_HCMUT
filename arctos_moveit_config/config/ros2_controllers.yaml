@@ -42,7 +42,7 @@ denso_arm_controller:
 
 denso_hand_controller:
   ros__parameters:
-    joint: Right_finger_joint
+    joint: gripper_gear_right_joint
 
     allow_partial_joints_goal: true
     state_tolerance_check: false  # Disable tolerance checking for simplicity
@@ -111,7 +111,7 @@ arctos_hardware_interface:
         zero_position: -0.0
         lower_limit: -360.0     # lower limit, in degree
         upper_limit: 360.0      # upper limit, in degree
-      Right_finger_joint:
+      gripper_gear_right_joint:
         motor_id: 7
         requires_homing: false
         inverted: false            # for application: app request go to 10 rad, but raw request to 10 rad
@@ -119,5 +119,5 @@ arctos_hardware_interface:
         gear_ratio: 1.0
         hardware_type: MKS_42D
         zero_position: 0.0
-        lower_limit: 0.002
-        upper_limit: 0.054
+        lower_limit: 0.0175
+        upper_limit: 1.4835
