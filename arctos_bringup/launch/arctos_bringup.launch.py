@@ -121,6 +121,35 @@ def generate_launch_description():
             on_exit=[rviz_node, move_group_launch]
         ))
     
+    camera_node = Node(
+        package='v4l2_camera',
+        executable='v4l2_camera_node',
+        name='v4l2_camera',
+        output='screen',
+        parameters=[
+            {
+                'video_device': '/dev/video0',     
+                'image_size': [640, 480],
+                'pixel_format': 'YUYV',             
+                'output_encoding': 'rgb8', 
+                'qos_overrides': {
+                    '/camera/image_raw': {
+                        'publisher': {
+                            'reliability': 'best_effort',
+                            'history': 'keep_last',
+                            'depth': 100,
+                        }
+                    }
+                }
+            }
+        ],
+        remappings=[
+            ('image_raw', '/camera/image_raw'),
+            ('camera_info', '/camera/camera_info'),
+            ('image_raw/compressed', '/camera/image_raw/compressed'),
+        ]
+    )
+    
     return LaunchDescription([
         LogInfo(msg=["Launching Arctos Bringup with RViz..."]),
         control_node,
@@ -128,5 +157,6 @@ def generate_launch_description():
         joint_state_broadcaster_spawner,
         delay_robot_arm_controller_spawner,
         delay_rviz_and_moveit_launch,
+        camera_node,
         # can_launch
     ])

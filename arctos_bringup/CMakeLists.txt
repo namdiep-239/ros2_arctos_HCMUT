@@ -11,6 +11,8 @@ find_package(arctos_description REQUIRED)
 find_package(arctos_hardware_interface REQUIRED)
 find_package(arctos_moveit_config REQUIRED)
 find_package(gz_ros2_control REQUIRED)
+# https://docs.ros.org/en/humble/p/v4l2_camera/#
+find_package(v4l2_camera REQUIRED)
 # uncomment the following section in order to fill in
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)

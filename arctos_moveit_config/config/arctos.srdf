@@ -36,7 +36,7 @@
         <joint name="Z_joint" value="0"/>
     </group_state>
     <group_state name="close" group="denso_hand">
-        <joint name="gripper_gear_right_joint" value="0.0175"/>
+        <joint name="gripper_gear_right_joint" value="0.02"/>
     </group_state>
     <group_state name="open" group="denso_hand">
         <joint name="gripper_gear_right_joint" value="1.4835"/>
@@ -78,6 +78,7 @@
     <disable_collisions link1="gripper_head_right" link2="link_4" reason="Never"/>
     <disable_collisions link1="gripper_head_right" link2="link_5" reason="Never"/>
     <disable_collisions link1="gripper_head_right" link2="link_6" reason="Never"/>
+    <disable_collisions link1="gripper_head_right" link2="gripper_head_left" reason="Never"/>
     <disable_collisions link1="link_1" link2="link_2" reason="Adjacent"/>
     <disable_collisions link1="link_2" link2="link_3" reason="Adjacent"/>
     <disable_collisions link1="link_2" link2="link_4" reason="Never"/>
