@@ -173,7 +173,7 @@ bool UartProtocol::decodeMessage(const std::string data, std::vector<double> &ax
  *       protocol format expected by the connected motor controller/device.
  */
 bool UartProtocol::sendPosition(std::vector<double> &positions) {
- if ((positions.size() - 1) != 6) {     // Temporary manual to bypass missing gripper data from miniPC
+ if ((positions.size()) != 6) {
         std::cerr << "sendPosition: positions must have 6 elements, got "
                   << positions.size() << std::endl;
         return false;

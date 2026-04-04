@@ -48,6 +48,10 @@ public:
     
     /// @brief Send empty message (carriage return) as keep-alive or wake-up signal
     bool sendEmptyMsg();
+
+    /// @brief Low-level message transmission helper function
+    bool sendMsg(const std::string &msg_to_send);
+    
 private:
     /// @brief Serial connection object for UART communication
     serial::Serial serial_conn_;
@@ -55,8 +59,7 @@ private:
     /// @brief FIFO buffer queue for storing received messages
     std::queue<std::string> rev_buffer_;
     
-    /// @brief Low-level message transmission helper function
-    bool sendMsg(const std::string &msg_to_send);
+
 };
 
 } // namespace arctos_motor_driver

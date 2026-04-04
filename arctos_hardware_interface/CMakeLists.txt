@@ -22,6 +22,7 @@ find_package(std_msgs REQUIRED)
 # ===================================== Add library for hardware interface  ===================================== 
 add_library(arctos_interface SHARED
   src/arctos_interface.cpp
+  src/denso_hand_interface.cpp
 )
 
 # Link the hardware interface libraries and dependencies

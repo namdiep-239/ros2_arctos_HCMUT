@@ -29,7 +29,7 @@ namespace arctos_interface
     ArctosInterface::~ArctosInterface() = default;
 
     /* Here, you should initialize all member variables and process the parameters from the info argument, and memory dynamic should be allocated */
-    /* HardwareInfo info could be collected from yaml file, under tag hardware/parameters*/
+    /* HardwareInfo info could be collected under <ros2_control> tag, and the joints are <joint>. We then seek each joint params via arctos_hardware_interface/ros__parameters */
     CallbackReturn ArctosInterface::on_init(const hardware_interface::HardwareInfo &info)
     {
         if (hardware_interface::SystemInterface::on_init(info) != CallbackReturn::SUCCESS)
@@ -66,12 +66,12 @@ namespace arctos_interface
             std::string param_prefix = "motors." + joint.name + ".";
 
             // Declare parameters for this joint
-            node_->declare_parameter(param_prefix + "motor_id", -1);             // Motor/CAN ID
-            node_->declare_parameter(param_prefix + "hardware_type", "MKS_42D"); // Default MKS Servo
-            node_->declare_parameter(param_prefix + "gear_ratio", 1.0);          // Default 1:1 gear ratio
-            node_->declare_parameter(param_prefix + "inverted", false);          // Default no inverted in application side
-            node_->declare_parameter(param_prefix + "inverted_feedback", false); // Default no inverted in physical side
-            node_->declare_parameter(param_prefix + "requires_homing", false);   // Default no homing needed
+            node_->declare_parameter(param_prefix + "motor_id", -1);
+            node_->declare_parameter(param_prefix + "hardware_type", "MKS_42D");
+            node_->declare_parameter(param_prefix + "gear_ratio", 1.0);
+            node_->declare_parameter(param_prefix + "inverted", false);
+            node_->declare_parameter(param_prefix + "inverted_feedback", false);
+            node_->declare_parameter(param_prefix + "requires_homing", false);
             node_->declare_parameter(param_prefix + "lower_limit", 0.0);
             node_->declare_parameter(param_prefix + "upper_limit", 0.0);
 
@@ -103,7 +103,6 @@ namespace arctos_interface
                 if (interface.name == "velocity")
                     has_velocity_interface_ = true;
             }
-            // has_velocity_interface_ = false; // Force disable velocity interface as we are not using it for now
         }
 
         node_->declare_parameter("position_tolerance", 0.001);
@@ -154,42 +153,20 @@ namespace arctos_interface
     {
         RCLCPP_INFO(node_->get_logger(), "Transitioning to ACTIVE state from %s", previous_state.label().c_str());
 
-        // Enable all motors
+        // Enable all motors (if required)
+
         for (size_t i = 0; i < info_.joints.size(); i++)
         {
-            try
-            {
-                const auto &joint_name = info_.joints[i].name;
-
-                RCLCPP_INFO(node_->get_logger(), "Enabling motor for joint %s", joint_name.c_str());
-                // Enable the motor first
-                // motor_driver_->enableMotor(joint_name);
-
-                // Check if homing is required
-                bool requires_homing = false;
-                std::string param_prefix = "motors." + joint_name + ".";
-                if (node_->get_parameter(param_prefix + "requires_homing", requires_homing) && requires_homing)
-                {
-                    RCLCPP_INFO(node_->get_logger(), "Starting homing sequence for joint %s", joint_name.c_str());
-
-                    RCLCPP_INFO(node_->get_logger(), "Homing completed for joint %s", joint_name.c_str());
-                }
-            }
-            catch (const std::exception &e)
-            {
-                RCLCPP_ERROR(node_->get_logger(), "Failed to activate joint %s: %s",
-                             info_.joints[i].name.c_str(), e.what());
-                return CallbackReturn::ERROR;
-            }
-            joint_position_command_[i] = 0.0; // force home on first activation
+            // force home on first activation
+            joint_position_command_[i] = 0.0;
         }
 
         // thread spin is required for continously reading UART strings,
-        allowSpin = true;
+        allowSpin.store(true);
         spinThread = std::thread(
             [&]()
             {
-                while (allowSpin)
+                while (allowSpin.load())
                 {
                     uart_protocol_->readToBuffer();
                     std::this_thread::sleep_for(std::chrono::milliseconds(5));
@@ -202,21 +179,8 @@ namespace arctos_interface
     CallbackReturn ArctosInterface::on_deactivate(const rclcpp_lifecycle::State &previous_state)
     {
         RCLCPP_INFO(node_->get_logger(), "Transitioning to INACTIVE state from %s", previous_state.label().c_str());
-        // Disable all motors
-        for (size_t i = 0; i < info_.joints.size(); i++)
-        {
-            try
-            {
-                // motor_driver_->disableMotor(info_.joints[i].name);
-                i = i;
-            }
-            catch (const std::exception &e)
-            {
-                RCLCPP_ERROR(node_->get_logger(), "Failed to disable motor for joint %s: %s",
-                             info_.joints[i].name.c_str(), e.what());
-            }
-        }
-        allowSpin = false;
+        // Disable the motors (if required)
+        allowSpin.store(false);
         spinThread.join();
         return CallbackReturn::SUCCESS;
     }
@@ -273,26 +237,10 @@ namespace arctos_interface
     */
     return_type ArctosInterface::read(const rclcpp::Time &time, const rclcpp::Duration & /*period*/)
     {
-        // spin_some is neccessary, if not used, hardware_interface won't catch any subscription event.
-        // rclcpp::spin_some(node_);
-        // created a thread that "spin()" for event already, hence spin_some here is not needed. :o
-
         // Process UART messages
         motor_driver_->processUartMessage();
-
-        static rclcpp::Time last_update_time = time; //  Static variable retains value between calls
+        static rclcpp::Time last_update_time = time;
         auto elapsed_time = time - last_update_time;
-
-        // Limit CAN queries to once every 500ms
-        // if (elapsed_time.seconds() > 0.01) {
-        //     motor_driver_->updateJointStates();  // Fetch fresh data from CAN bus
-        //     last_update_time = time;  //  Now correctly updated after each call
-        // }
-
-        // updateJointStates is a function that explicitly request the joint status of the robot.
-        // currently, data is updated automatically to robot when running. this is not yet used.
-        // motor_driver_->updateJointStates();
-
         for (size_t i = 0; i < info_.joints.size(); i++)
         {
             const std::string &joint_name = info_.joints[i].name;
@@ -302,18 +250,9 @@ namespace arctos_interface
 
                 if (has_position_interface_)
                 {
-                    // for now, the gripper state will update directly from position_command.
-                    // TODO: read actualy gripper state and update.
-                    if (joint_name == "gripper_gear_right_joint")
-                    {
-                        joint_position_[i] = joint_position_command_[i];
-                    }
-                    else
-                    {
-                        double pos = motor_driver_->getJointPosition(joint_name, true);
-                        joint_position_[i] = pos;
-                        RCLCPP_DEBUG(node_->get_logger(), "Updated position for joint %s: %.3f", joint_name.c_str(), pos);
-                    }
+                    double pos = motor_driver_->getJointPosition(joint_name, true);
+                    joint_position_[i] = pos;
+                    RCLCPP_DEBUG(node_->get_logger(), "Updated position for joint %s: %.3f", joint_name.c_str(), pos);
                 }
 
                 if (has_velocity_interface_)
@@ -346,17 +285,28 @@ namespace arctos_interface
     */
     return_type ArctosInterface::write(const rclcpp::Time & /*time*/, const rclcpp::Duration & /*period*/)
     {
+        // Reset trend after 5 cycles of no change
+        static const int TREND_RESET_THRESHOLD = 5;
+        // Number of consecutive increases/decreases to confirm trend
+        static const int TREND_THRESHOLD = 1;
+        // Delta increase in joint position to fill up the "empty slot"
+        static const float DELTA_COMMAND_INCREASE = 0.01;
+
         static bool isPositionUpdated;
         isPositionUpdated = false;
-        static std::vector<int> trend(info_.joints.size(), 0); // 2 for increasing, -2 for decreasing, 0 for unknown
-        static std::vector<bool> allowPosition(info_.joints.size(), false); // whether to allow position command to be sent, only set to true when trend changes or command changes significantly
-        static std::vector<int> idle_counter(info_.joints.size(), 0); // Track idle time for trend reset
-        static const int TREND_RESET_THRESHOLD = 5; // Reset trend after 5 cycles of no change
-        static const int TREND_THRESHOLD = 1; // Number of consecutive increases/decreases to confirm trend
+        // TREND_THRESHOLD for increasing, -TREND_THRESHOLD for decreasing, 0 for unknown
+        static std::vector<int> trend(info_.joints.size(), 0);
+        // whether to allow position command to be sent, only set to true when trend changes or command changes significantly
+        static std::vector<bool> allowPosition(info_.joints.size(), false);
+        // Track idle time for trend reset
+        static std::vector<int> idle_counter(info_.joints.size(), 0);
+
         // Resize last command vectors if not already done
         if (last_position_command_.size() != info_.joints.size())
         {
-            last_position_command_.resize(info_.joints.size(), -1.0); // force homing on first activation
+            // force homing on first activation
+            last_position_command_.resize(info_.joints.size(), -1.0);
+            last_valid_position_command_.resize(info_.joints.size(), 0.0);
             last_velocity_command_.resize(info_.joints.size(), 0.0);
             RCLCPP_INFO(node_->get_logger(), "Initialized last command vectors.");
         }
@@ -365,18 +315,15 @@ namespace arctos_interface
         {
             try
             {
-
                 if (has_velocity_interface_)
                 {
-                    // TODO: Ensure this works properly
                     // Only send if velocity has changed significantly
                     if (std::abs(joint_velocities_command_[i] - last_velocity_command_[i]) > velocity_tolerance_)
                     {
-                        // motor_driver_->setJointVelocity(info_.joints[i].name, joint_velocities_command_[i]);
-                        RCLCPP_INFO(node_->get_logger(),
-                                    "Sent velocity command %.3f rad/s to joint %s. Last command: %.3f",
-                                    joint_velocities_command_[i], info_.joints[i].name.c_str(),
-                                    last_velocity_command_[i]);
+                        RCLCPP_DEBUG(node_->get_logger(),
+                                     "Sent velocity command %.3f rad/s to joint %s. Last command: %.3f",
+                                     joint_velocities_command_[i], info_.joints[i].name.c_str(),
+                                     last_velocity_command_[i]);
                         last_velocity_command_[i] = joint_velocities_command_[i];
                     }
                     else
@@ -389,21 +336,16 @@ namespace arctos_interface
 
                 if (has_position_interface_)
                 {
-                    allowPosition[i] = false; // reset allowPosition for each joint, only set to true when trend changes or command changes significantly
+                    // reset allowPosition for each joint, only set to true when trend changes or command changes significantly
+                    allowPosition[i] = false;
                     // Only send if position has changed significantly
-                    if (info_.joints[i].name == "gripper_gear_right_joint")
-                    {
-                        // TODO: write function to control gripper.
-                        // down here, we only have to care about what position will we drive our actuator.
-                        // the talking between actions, msg between moveit and ros2 has been handled by moveit before reaching here.
-                        continue;
-                    }
                     if (std::abs(joint_position_command_[i] - last_position_command_[i]) > position_tolerance_)
                     {
-                        double position_delta = joint_position_command_[i] - last_position_command_[i];
+                        // Trend learning and reversal prevention logic
+                        double position_delta = joint_position_command_[i] - last_valid_position_command_[i];
                         bool is_increasing = position_delta > 0;
                         bool is_decreasing = position_delta < 0;
-                        
+
                         if (trend[i] >= TREND_THRESHOLD && is_increasing)
                         {
                             RCLCPP_INFO(node_->get_logger(), "Continuing increasing trend %s", info_.joints[i].name.c_str());
@@ -416,13 +358,13 @@ namespace arctos_interface
                         }
                         else if (trend[i] >= TREND_THRESHOLD && is_decreasing)
                         {
-                            RCLCPP_WARN(node_->get_logger(), "Blocking trend reversal (inc->dec) %s, cur: %.5f - last %.5f", info_.joints[i].name.c_str(), joint_position_command_[i], last_position_command_[i]);
-                            // allowPosition[i] remains false - block the command
+                            RCLCPP_WARN(node_->get_logger(), "Blocking trend reversal (inc->dec) %s, cur: %.5f - last %.5f", info_.joints[i].name.c_str(), joint_position_command_[i], last_valid_position_command_[i]);
+                            // allowPosition[i] remains false - block the command, send last valid position instead
                         }
                         else if (trend[i] <= -TREND_THRESHOLD && is_increasing)
                         {
-                            RCLCPP_WARN(node_->get_logger(), "Blocking trend reversal (dec->inc) %s, cur: %.5f - last %.5f", info_.joints[i].name.c_str(),joint_position_command_[i], last_position_command_[i]);
-                            // allowPosition[i] remains false - block the command
+                            RCLCPP_WARN(node_->get_logger(), "Blocking trend reversal (dec->inc) %s, cur: %.5f - last %.5f", info_.joints[i].name.c_str(), joint_position_command_[i], last_valid_position_command_[i]);
+                            // allowPosition[i] remains false - block the command, send last valid position instead
                         }
                         else if (trend[i] > -TREND_THRESHOLD && trend[i] < TREND_THRESHOLD)
                         {
@@ -440,33 +382,57 @@ namespace arctos_interface
                             allowPosition[i] = true;
                         }
 
+                        // Decide whether to send the position command based on trend analysis
                         if (allowPosition[i])
                         {
-                            idle_counter[i] = 0; // Reset idle counter on successful command
-                            {
-                                motor_driver_->setJointPosition(info_.joints[i].name, joint_position_command_[i], 0, abs(joint_velocities_command_[i] * 10) * 60);
-                                RCLCPP_INFO(node_->get_logger(),
-                                            "Sent position command %.5f rad to joint %s. Last command: %.5f.",
-                                            joint_position_command_[i], info_.joints[i].name.c_str(),
-                                            last_position_command_[i]);
-                                // last valid position command is saved here.
-                                last_position_command_[i] = joint_position_command_[i];
-                            }
-                            isPositionUpdated = true;
+
+                            motor_driver_->setJointPosition(info_.joints[i].name, joint_position_command_[i], 0, abs(joint_velocities_command_[i] * 10) * 60);
+                            RCLCPP_INFO(node_->get_logger(),
+                                        "Sent position command %.5f rad to joint %s. Last command: %.5f.",
+                                        joint_position_command_[i], info_.joints[i].name.c_str(),
+                                        last_position_command_[i]);
+                            // Remember last valid position command for trend analysis and potential padding
+                            last_valid_position_command_[i] = joint_position_command_[i];
                         }
+                        // send last valid position command again to prevent "empty slot" that might cause the robot to flicker
+                        else
+                        {
+                            std::string trend_text = "INCREASE";
+                            if (trend[i] >= TREND_THRESHOLD) 
+                            {
+                                // increasing trend, so increase the padding
+                                last_valid_position_command_[i] += DELTA_COMMAND_INCREASE;
+                            }
+                            else if (trend[i] <= -TREND_THRESHOLD) 
+                            {
+                                // decreasing trend, so decrease the padding
+                                last_valid_position_command_[i] -= DELTA_COMMAND_INCREASE;
+                                trend_text = "DECREASE";
+                            }
+                            
+                            motor_driver_->setJointPosition(info_.joints[i].name, last_valid_position_command_[i], 0, abs(joint_velocities_command_[i] * 10) * 60);
+                            RCLCPP_INFO(node_->get_logger(),
+                                        "Sent [padding] for trend [%s], position command %.5f rad to joint %s. Last command: %.5f.",
+                                        trend_text.c_str(), last_valid_position_command_[i], info_.joints[i].name.c_str(),
+                                        last_position_command_[i]);
+                        }
+                        isPositionUpdated = true;
+                        // last_position_command is updated to avoid stucking, where current joint_position_command_[i] always != last_position_command_[i]
+                        last_position_command_[i] = joint_position_command_[i];
+                        // Reset idle counter on successful command
+                        idle_counter[i] = 0;
                     }
                     else
                     {
+                        // Increment idle counter and reset trend if idle too long
+                        idle_counter[i]++;
                         RCLCPP_DEBUG(node_->get_logger(),
                                      "Position command for joint %s unchanged: %.3f",
                                      info_.joints[i].name.c_str(), joint_position_command_[i]);
-                        
-                        // Increment idle counter and reset trend if idle too long
-                        idle_counter[i]++;
                         if (idle_counter[i] >= TREND_RESET_THRESHOLD && trend[i] != 0)
                         {
-                            RCLCPP_INFO(node_->get_logger(), "Resetting trend for joint %s after %d idle cycles", 
-                                       info_.joints[i].name.c_str(), idle_counter[i]);
+                            RCLCPP_INFO(node_->get_logger(), "Resetting trend for joint %s after %d idle cycles",
+                                        info_.joints[i].name.c_str(), idle_counter[i]);
                             trend[i] = 0;
                             idle_counter[i] = 0;
                         }
