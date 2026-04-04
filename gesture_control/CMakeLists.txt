@@ -16,6 +16,7 @@ find_package(sensor_msgs REQUIRED)
 find_package(moveit_ros_planning_interface REQUIRED)
 find_package(moveit_msgs REQUIRED)
 find_package(control_msgs REQUIRED)
+find_package(std_srvs REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
 
 # ── Custom message generation ─────────────────────────────────────────────────
@@ -37,6 +38,7 @@ ament_target_dependencies(gesture_commander_node
   moveit_ros_planning_interface
   moveit_msgs
   control_msgs
+  std_srvs
 )
 
 # Link generated C++ message typesupport to the executable

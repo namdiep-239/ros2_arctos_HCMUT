@@ -3,7 +3,11 @@
  *
  * ROS2 node that subscribes to /gesture_detection, applies debounce + confidence
  * filtering, and executes robot commands via MoveGroupInterface (arm) and a
- * FollowJointTrajectory action client (gripper).
+ * GripperCommand action client (gripper).
+ *
+ * Two control modes (set use_servo in gesture_config.yaml):
+ *   use_servo: false  — MoveGroupInterface for all arm moves (default)
+ *   use_servo: true   — MoveIt Servo JointJog for 'point'; MoveGroupInterface only for 'home'
  *
  * Topics subscribed:
  *   /gesture_detection  (gesture_control/msg/GestureDetection)
@@ -16,16 +20,18 @@
  *   point     → Y_joint + point_delta_rad (raise arm)
  *   open      → Right_finger_joint → gripper_open_pos
  *   fist      → Right_finger_joint → gripper_closed_pos
- *   none      → move_group.stop() (hold current position)
+ *   none      → move_group.stop() / servo auto-halt
  */
 
 #include <rclcpp/rclcpp.hpp>
 #include <rclcpp_action/rclcpp_action.hpp>
 #include <std_msgs/msg/string.hpp>
+#include <std_srvs/srv/trigger.hpp>
 
 #include <moveit/move_group_interface/move_group_interface.h>
 
 #include <control_msgs/action/gripper_command.hpp>
+#include <control_msgs/msg/joint_jog.hpp>
 
 #include <deque>
 #include <atomic>
@@ -40,10 +46,14 @@
 using GestureDetection     = gesture_control::msg::GestureDetection;
 using GripperCommandAction = control_msgs::action::GripperCommand;
 using MoveGroupInterface   = moveit::planning_interface::MoveGroupInterface;
+using Trigger              = std_srvs::srv::Trigger;
 
 // Y_joint limits (degrees → radians, from ros2_controllers.yaml)
 static constexpr double Y_LOWER_RAD = -100.0 * M_PI / 180.0;   // -1.7453 rad
 static constexpr double Y_UPPER_RAD =  135.0 * M_PI / 180.0;   //  2.3562 rad
+
+// Servo JointJog publish rate (must be > 1/incoming_command_timeout = 10 Hz)
+static constexpr int SERVO_PUBLISH_HZ = 20;
 
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -59,15 +69,19 @@ public:
     this->declare_parameter("stability_frames",     3);
     this->declare_parameter("command_cooldown_sec", 2.0);
     this->declare_parameter("point_delta_rad",      0.3);
-    this->declare_parameter("gripper_open_pos",     0.015);
-    this->declare_parameter("gripper_closed_pos",   0.0);
+    this->declare_parameter("gripper_open_pos",     0.002);
+    this->declare_parameter("gripper_closed_pos",   0.054);
+    this->declare_parameter("use_servo",            false);
+    this->declare_parameter("point_velocity_rad_s", 0.5);
 
-    confidence_threshold_ = this->get_parameter("confidence_threshold").as_double();
-    stability_frames_     = this->get_parameter("stability_frames").as_int();
-    command_cooldown_sec_ = this->get_parameter("command_cooldown_sec").as_double();
-    point_delta_rad_      = this->get_parameter("point_delta_rad").as_double();
-    gripper_open_pos_     = this->get_parameter("gripper_open_pos").as_double();
-    gripper_closed_pos_   = this->get_parameter("gripper_closed_pos").as_double();
+    confidence_threshold_  = this->get_parameter("confidence_threshold").as_double();
+    stability_frames_      = this->get_parameter("stability_frames").as_int();
+    command_cooldown_sec_  = this->get_parameter("command_cooldown_sec").as_double();
+    point_delta_rad_       = this->get_parameter("point_delta_rad").as_double();
+    gripper_open_pos_      = this->get_parameter("gripper_open_pos").as_double();
+    gripper_closed_pos_    = this->get_parameter("gripper_closed_pos").as_double();
+    use_servo_             = this->get_parameter("use_servo").as_bool();
+    point_velocity_rad_s_  = this->get_parameter("point_velocity_rad_s").as_double();
 
     // ── Subscriber ───────────────────────────────────────────────────────────
     gesture_sub_ = this->create_subscription<GestureDetection>(
@@ -81,9 +95,21 @@ public:
     gripper_client_ = rclcpp_action::create_client<GripperCommandAction>(
       this, "/denso_hand_controller/gripper_cmd");
 
+    // ── Servo interfaces (only created when use_servo is true) ────────────────
+    if (use_servo_) {
+      joint_jog_pub_ = this->create_publisher<control_msgs::msg::JointJog>(
+        "/denso_moveit_servo_node/delta_joint_cmds", 10);
+      servo_start_client_ = this->create_client<Trigger>(
+        "/denso_moveit_servo_node/start_servo");
+      servo_stop_client_  = this->create_client<Trigger>(
+        "/denso_moveit_servo_node/stop_servo");
+      RCLCPP_INFO(this->get_logger(), "Servo mode enabled — JointJog on /denso_moveit_servo_node/delta_joint_cmds");
+    }
+
     last_command_time_ = this->now();
 
-    RCLCPP_INFO(this->get_logger(), "GestureCommanderNode created (move_group not yet ready)");
+    RCLCPP_INFO(this->get_logger(), "GestureCommanderNode created [use_servo=%s] (move_group not yet ready)",
+                use_servo_ ? "true" : "false");
   }
 
   /**
@@ -99,6 +125,10 @@ public:
     RCLCPP_INFO(this->get_logger(),
                 "MoveGroupInterface ready  [group=denso_arm  planning_frame=%s]",
                 move_group_->getPlanningFrame().c_str());
+
+    if (use_servo_) {
+      callServoService(servo_start_client_, "start_servo");
+    }
   }
 
 private:
@@ -109,6 +139,8 @@ private:
   double point_delta_rad_;
   double gripper_open_pos_;
   double gripper_closed_pos_;
+  bool   use_servo_;
+  double point_velocity_rad_s_;
 
   // ── State ───────────────────────────────────────────────────────────────────
   std::deque<std::string> gesture_buffer_;
@@ -121,8 +153,25 @@ private:
   rclcpp::Publisher<std_msgs::msg::String>::SharedPtr cmd_pub_;
   rclcpp_action::Client<GripperCommandAction>::SharedPtr gripper_client_;
 
+  // ── Servo interfaces ────────────────────────────────────────────────────────
+  rclcpp::Publisher<control_msgs::msg::JointJog>::SharedPtr joint_jog_pub_;
+  rclcpp::Client<Trigger>::SharedPtr servo_start_client_;
+  rclcpp::Client<Trigger>::SharedPtr servo_stop_client_;
+
   // ── MoveIt2 ─────────────────────────────────────────────────────────────────
   std::shared_ptr<MoveGroupInterface> move_group_;
+
+  // ── Servo helper ────────────────────────────────────────────────────────────
+
+  void callServoService(rclcpp::Client<Trigger>::SharedPtr client, const std::string & name)
+  {
+    if (!client->wait_for_service(std::chrono::seconds(2))) {
+      RCLCPP_WARN(this->get_logger(), "Servo service not available: %s", name.c_str());
+      return;
+    }
+    client->async_send_request(std::make_shared<Trigger::Request>());
+    RCLCPP_INFO(this->get_logger(), "Called servo service: %s", name.c_str());
+  }
 
   // ── Gesture callback ────────────────────────────────────────────────────────
 
@@ -193,7 +242,7 @@ private:
   void executeCommand(const std::string & gesture)
   {
     if      (gesture == "thumbs_up") { executeHome();                       }
-    else if (gesture == "point")     { executePointRaise();                 }
+    else if (gesture == "point")     { executePoint();                      }
     else if (gesture == "open")      { executeGripper(gripper_open_pos_);   }
     else if (gesture == "fist")      { executeGripper(gripper_closed_pos_); }
     else if (gesture == "none")      { executeStop();                       }
@@ -213,8 +262,14 @@ private:
   void executeHome()
   {
     RCLCPP_INFO(this->get_logger(), "Moving to 'home' pose...");
-    move_group_->setNamedTarget("home");
 
+    // Stop servo to avoid trajectory command conflicts during MoveGroupInterface execution
+    if (use_servo_) {
+      callServoService(servo_stop_client_, "stop_servo");
+      std::this_thread::sleep_for(std::chrono::milliseconds(300));
+    }
+
+    move_group_->setNamedTarget("home");
     MoveGroupInterface::Plan plan;
     if (move_group_->plan(plan) == moveit::core::MoveItErrorCode::SUCCESS) {
       move_group_->execute(plan);
@@ -222,14 +277,28 @@ private:
     } else {
       RCLCPP_WARN(this->get_logger(), "Failed to plan home pose.");
     }
+
+    // Resume servo after MoveGroupInterface is done
+    if (use_servo_) {
+      callServoService(servo_start_client_, "start_servo");
+    }
   }
 
-  void executePointRaise()
+  void executePoint()
+  {
+    if (use_servo_) {
+      executePointServo();
+    } else {
+      executePointMoveIt();
+    }
+  }
+
+  // MoveIt path: getCurrentState → setJointValueTarget → plan → execute
+  void executePointMoveIt()
   {
     RCLCPP_INFO(this->get_logger(),
-                "Raising arm (Y_joint += %.3f rad)...", point_delta_rad_);
+                "Raising arm via MoveIt (Y_joint += %.3f rad)...", point_delta_rad_);
 
-    // Get current robot state
     auto current_state = move_group_->getCurrentState(5.0);
     if (!current_state) {
       RCLCPP_WARN(this->get_logger(), "Could not get current robot state.");
@@ -240,22 +309,18 @@ private:
     std::vector<double> joint_values;
     current_state->copyJointGroupPositions(jmg, joint_values);
 
-    // Find Y_joint index in the planning group's variable list
     const auto & joint_names = jmg->getVariableNames();
     auto it = std::find(joint_names.begin(), joint_names.end(), "Y_joint");
     if (it == joint_names.end()) {
       RCLCPP_ERROR(this->get_logger(), "Y_joint not found in 'denso_arm' group.");
       return;
     }
-    const int y_idx = static_cast<int>(std::distance(joint_names.begin(), it));
+    const size_t y_idx = static_cast<size_t>(std::distance(joint_names.begin(), it));
 
-    // Apply delta, clamped to hardware limits
-    const double current_y = joint_values[static_cast<size_t>(y_idx)];
-    joint_values[static_cast<size_t>(y_idx)] =
-      std::clamp(current_y + point_delta_rad_, Y_LOWER_RAD, Y_UPPER_RAD);
+    const double current_y = joint_values[y_idx];
+    joint_values[y_idx] = std::clamp(current_y + point_delta_rad_, Y_LOWER_RAD, Y_UPPER_RAD);
 
-    RCLCPP_INFO(this->get_logger(), "Y_joint: %.4f → %.4f rad",
-                current_y, joint_values[static_cast<size_t>(y_idx)]);
+    RCLCPP_INFO(this->get_logger(), "Y_joint: %.4f → %.4f rad", current_y, joint_values[y_idx]);
 
     move_group_->setJointValueTarget(joint_values);
     MoveGroupInterface::Plan plan;
@@ -265,6 +330,34 @@ private:
     } else {
       RCLCPP_WARN(this->get_logger(), "Failed to plan arm raise.");
     }
+  }
+
+  // Servo path: publish JointJog velocity to servo for a computed duration
+  // No planning — arm starts moving within one servo publish_period (~150ms)
+  void executePointServo()
+  {
+    const double velocity  = (point_delta_rad_ >= 0) ? point_velocity_rad_s_ : -point_velocity_rad_s_;
+    const double duration_s = std::abs(point_delta_rad_) / std::abs(point_velocity_rad_s_);
+    const int    steps      = static_cast<int>(duration_s * SERVO_PUBLISH_HZ) + 1;
+
+    RCLCPP_INFO(this->get_logger(),
+                "Raising arm via Servo (Z_joint %.3f rad/s for %.2fs, %d steps)...",
+                velocity, duration_s, steps);
+
+    control_msgs::msg::JointJog jog;
+    jog.header.frame_id = "base_link";
+    jog.joint_names     = {"Z_joint"};
+    jog.velocities      = {velocity};
+    jog.duration        = 1.0 / SERVO_PUBLISH_HZ;
+
+    rclcpp::Rate rate(SERVO_PUBLISH_HZ);
+    for (int i = 0; i < steps && rclcpp::ok(); ++i) {
+      jog.header.stamp = this->now();
+      joint_jog_pub_->publish(jog);
+      rate.sleep();
+    }
+
+    RCLCPP_INFO(this->get_logger(), "Servo point raise done.");
   }
 
   void executeGripper(double position)
@@ -292,9 +385,14 @@ private:
 
   void executeStop()
   {
-    RCLCPP_INFO(this->get_logger(), "Stopping all arm motion (hold position)...");
-    move_group_->stop();
-    RCLCPP_INFO(this->get_logger(), "Motion stopped.");
+    if (use_servo_) {
+      // Servo auto-halts after incoming_command_timeout (0.1s) — nothing to do
+      RCLCPP_INFO(this->get_logger(), "Servo mode: halting (stop sending commands).");
+    } else {
+      RCLCPP_INFO(this->get_logger(), "Stopping all arm motion (hold position)...");
+      move_group_->stop();
+      RCLCPP_INFO(this->get_logger(), "Motion stopped.");
+    }
   }
 };
 
