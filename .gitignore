@@ -46,3 +46,4 @@ arctos_moveit_config/config/gz_arctos.sdf
 .gitignore
 .gitignore
 arctos_moveit_config/config/gz_arctos.urdf
+build/*
