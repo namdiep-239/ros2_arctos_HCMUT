@@ -211,7 +211,7 @@ int KeyboardServo::keyLoop()
   double max_velocity_b = 5.236;
   double max_velocity_c = 8.3776;
 
-  double scaling = 0.2;
+  double scaling = 0.1;
 
   rclcpp::Rate loop_rate(1);
 

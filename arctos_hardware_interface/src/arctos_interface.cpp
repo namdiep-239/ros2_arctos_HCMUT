@@ -288,7 +288,7 @@ namespace arctos_interface
         // Reset trend after 5 cycles of no change
         static const int TREND_RESET_THRESHOLD = 5;
         // Number of consecutive increases/decreases to confirm trend
-        static const int TREND_THRESHOLD = 1;
+        static const int TREND_THRESHOLD = 2;
         // Delta increase in joint position to fill up the "empty slot"
         static const float DELTA_COMMAND_INCREASE = 0.01;
 
