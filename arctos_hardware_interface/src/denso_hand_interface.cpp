@@ -148,7 +148,7 @@ namespace denso_hand_interface
             {
                 while (allowSpin.load())
                 {
-                    uart_protocol_->readToBuffer();
+                    uart_protocol_->readToBuffer(false);
                     std::this_thread::sleep_for(std::chrono::milliseconds(5));
                 }
             });
@@ -211,11 +211,9 @@ namespace denso_hand_interface
     During the main loop, ros2_control loops over all hardware components and calls the read method.
     -> responsible for updating the data values of the *state_interfaces*, by updating the *class member variable*
     */
-    return_type DensoHandInterface::read(const rclcpp::Time &time, const rclcpp::Duration & /*period*/)
+    return_type DensoHandInterface::read(const rclcpp::Time &time, const rclcpp::Duration &period)
     {
-
-        static rclcpp::Time last_update_time = time; //  Static variable retains value between calls
-        auto elapsed_time = time - last_update_time;
+        (void)time;
 
         servo_driver_->writeQueryCommand();
         // Process UART messages
@@ -230,11 +228,15 @@ namespace denso_hand_interface
 
                 if (has_position_interface_)
                 {
-
+                    double old_pos = servo_position_[i];
                     double pos = servo_driver_->getServoPosition(joint_name, true);
+                    double dt = period.seconds();
+                    if (has_velocity_interface_)
+                    {
+                        servo_velocity_[i] = (dt > 1e-6) ? (pos - old_pos) / dt : 0.0;
+                    }
                     servo_position_[i] = pos;
-                    RCLCPP_DEBUG(node_->get_logger(), "Updated position for joint %s: %.3f", joint_name.c_str(), pos);
-                    
+                    RCLCPP_DEBUG(node_->get_logger(), "Updated position for joint %s: %.3f vel: %.4f", joint_name.c_str(), pos, servo_velocity_[i]);
                 }
 
                 rclcpp::Duration time_since_update = servo_driver_->getTimeSinceLastUpdate(joint_name);
@@ -280,7 +282,7 @@ namespace denso_hand_interface
                     {
                         servo_driver_->setServoPosition(info_.joints[i].name, servo_position_command_[i], acceleration_, velocity_);
                         RCLCPP_INFO(node_->get_logger(),
-                                    "Sent position command %.5f rad to joint %s. Last command: %.5f.",
+                                    "Set position command %.5f rad to joint %s. Last command: %.5f.",
                                     servo_position_command_[i], info_.joints[i].name.c_str(),
                                     last_position_command_[i]);
                         // last valid position command is saved here.

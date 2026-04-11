@@ -58,9 +58,7 @@ public:
         double gear_ratio = 1.0, 
         bool inverted = false, 
         bool inverted_feedback = false, 
-        double zero_position = 0.0, 
-        double lower_limit = 0.0, 
-        double upper_limit = 0.0);
+        double zero_position = 0.0);
 
     /**
      * @brief Removes a servo from the motor driver.
@@ -151,7 +149,7 @@ private:
     // Internal handlers
 
     // old buffer, use for comparison
-    std::string pre_encoder_data_;
+    double pre_encoder_data_;
 
     /**
      * @brief Processes an encoder response from a motor.
@@ -165,7 +163,7 @@ private:
      * @param encoder_data The current encoder data.
      * @return True if the encoder data has changed, false otherwise.
      */
-    bool isServoDataChanged(std::string encoder_data) const;
+    bool isServoDataChanged(double encoder_data) const;
 };
 
 } // namespace arctos_motor_driver

@@ -202,7 +202,7 @@ bool UartProtocol::sendPosition(std::vector<double> &positions) {
  * 
  * @see getFromBuffer() to retrieve messages from the buffer
  */
-void UartProtocol::readToBuffer(void)
+void UartProtocol::readToBuffer(bool debug)
 {
     static std::string preRaw;
     if (!this->connected()) {
@@ -221,6 +221,7 @@ void UartProtocol::readToBuffer(void)
             rev_buffer_.push(raw);
             if (preRaw != raw)
             {
+                if (debug)
                 std::cerr << "uart: readToBuffer: received: " << raw << "\n";   
             }
             else
@@ -230,6 +231,7 @@ void UartProtocol::readToBuffer(void)
             preRaw = raw;
         }
         else{
+            if (debug)
             std::cerr << ".";
         }
     } catch (const std::exception& e) {
@@ -288,6 +290,37 @@ bool UartProtocol::sendMsg(const std::string &msg_to_send)
     catch(const std::exception& e)
     {
         std::cerr << "uart: sendMsg: " << e.what() << '\n';
+        return false;
+    }
+    return true;
+}
+
+/**
+ * @brief Sends a message string over the UART connection, appending cr lf at the end.
+ * 
+ * This is a private helper function that handles the low-level transmission of
+ * messages over the serial connection. It checks the connection status before
+ * attempting to send and handles any exceptions that may occur during transmission.
+ * 
+ * @param msg_to_send_without_eol The message string to transmit over UART without EOL
+ * @return true if the message was sent successfully, false if connection is down or error occurred
+ * 
+ */
+bool UartProtocol::sendMsgRaw(const std::string & msg_to_send_without_eol)
+{
+    if (!this->connected())
+    {
+        //std::wcerr << "uart: sendMsg: Serial not connected!\n";
+        return false;
+    }
+    try
+    {
+        std::string msg_with_eol = msg_to_send_without_eol + "\r\n";
+        serial_conn_.write(msg_with_eol);
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << "uart: sendMsgRaw: " << e.what() << '\n';
         return false;
     }
     return true;

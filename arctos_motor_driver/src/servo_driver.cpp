@@ -54,9 +54,7 @@ void ServoDriver::addServo(const std::string& servo_name,
                             double gear_ratio, 
                             bool inverted,
                             bool inverted_feedback, 
-                            double zero_position, 
-                            double lower_limit, 
-                            double upper_limit) 
+                            double zero_position) 
 {
     // Check if servo already exists
     if (servos_.size() > 0) {
@@ -88,8 +86,6 @@ void ServoDriver::addServo(const std::string& servo_name,
     servos_[servo_name].inverted = inverted;
     servos_[servo_name].inverted_feedback = inverted_feedback;
     servos_[servo_name].zero_position = zero_position;
-    servos_[servo_name].lower_limit = lower_limit;
-    servos_[servo_name].upper_limit = upper_limit;
     motor_to_servo_map_[motor_id] = servo_name;
 
     servos_[servo_name].last_update = node_->get_clock()->now();  // Initialize timestamp
@@ -174,7 +170,7 @@ void ServoDriver::setServoPosition(const std::string& servo_name, double positio
 /**
  * @brief Write command to actuator, using buffer from each motors
  *
- * Convert from 3D range: 1.1459 (3D_close) -> 84.9983 (3D_open)
+ * Convert from 3D range: 0.420 (3D_close) -> 84.9983 (3D_open)
  * to Servo range       : 185 (Real_close)    -> ~101 (Real_open)
  * # Step 1: convert 3D degree [x] into acceptable servo degree
  * servo degree = (185 - ([x] - 3D_close))
@@ -187,7 +183,7 @@ void ServoDriver::writeCommand() {
 
     for (auto& [servo_name, servo] : servos_) {
         // # Step 1:
-        double servo_degree = (REAL_SERVO_CLOSE - (servo.command_position - servo.lower_limit));
+        double servo_degree = (REAL_SERVO_CLOSE - (servo.command_position - servo.position_min));
         RCLCPP_INFO(node_->get_logger(), "Step 1: servo_degree = %.3f", servo_degree);
         // # Step 2:
         double servo_rad = servo_degree * MotorConstants::DEG_TO_RAD;
@@ -203,7 +199,7 @@ void ServoDriver::writeCommand() {
     }
     RCLCPP_INFO(node_->get_logger(), "Write command to actuator: %s", command.c_str());
     
-    uart_protocol_->sendMsg(command);
+    uart_protocol_->sendMsgRaw(command);
 }
 
 /*
@@ -216,9 +212,9 @@ void ServoDriver::writeQueryCommand() {
     };
     command += ojbect.dump();
 
-    RCLCPP_DEBUG(node_->get_logger(), "Write query to actuator: %s", command.c_str());
+    // RCLCPP_INFO(node_->get_logger(), "Write query to actuator: %s", command.c_str());
     
-    uart_protocol_->sendMsg(command);
+    uart_protocol_->sendMsgRaw(command);
 }
 
 /**
@@ -282,7 +278,7 @@ void ServoDriver::processUartMessage() {
     std::string message;
     do {
         message = uart_protocol_->getFromBuffer();
-        if (message != "") {
+        if (message != "" && message != "{\"T\":105}") {
             for (auto& [servo_name, servo] : servos_) 
             {
                 processServoResponse(servo.motor_id, message);
@@ -312,22 +308,35 @@ void ServoDriver::processServoResponse(uint8_t motor_id, std::string data) {
     auto& servo = servos_[servo_name];
     json jsonObject;
 
+    jsonObject = json::parse(data);
+
+    int response_type = jsonObject["T"].get<int>();
+
+    if (response_type == GripperACommand::CONTROL_SERVO ||
+        response_type == GripperACommand::READ_ENCODER ||
+        response_type == GripperACommand::OPEN_SERVO ||
+        response_type == GripperACommand::CLOSE_SERVO)
+    {
+        RCLCPP_DEBUG(node_->get_logger(), "Skip loopback command");
+        return;
+    }
+
+    double current_pos = jsonObject["pos"].get<double>();
+
     // if the encoder response is exactly the same as previous encoder data, no need to process.
-    if (isServoDataChanged(data) == false) {
+    if (isServoDataChanged(current_pos) == false) {
         // RCLCPP_INFO(node_->get_logger(), "No new data for %d", motor_id);
         return;
     } else {
         // update the pre_encoder_data_ with the new data
-        pre_encoder_data_ = data; 
+        pre_encoder_data_ = current_pos; 
     }
 
     try {
-        jsonObject = json::parse(data);
-
         // **Get the decoded data as the first element + specific driver decoding logic for this gripper**
         // Step 1: unpack data from raw pos:
         // servo_angle = (pos - 1024) * 360/4096
-        double servo_angle_deg = ((jsonObject["pos"].get<double>()) - 1024.0) * MotorConstants::DEGREES_PER_REVOLUTION / MotorConstants::SERVO_ENCODER_STEPS;
+        double servo_angle_deg = (current_pos - 1024.0) * MotorConstants::DEGREES_PER_REVOLUTION / MotorConstants::SERVO_ENCODER_STEPS;
 
         RCLCPP_DEBUG(node_->get_logger(), "Decoded motor angle (degrees): %.2f", servo_angle_deg);
 
@@ -347,7 +356,7 @@ void ServoDriver::processServoResponse(uint8_t motor_id, std::string data) {
 
         // Step 2: Convert to 3D degree:
         // 3D_degree = 185 - servo_degree + 3D_close
-        double servo_state_deg = (REAL_SERVO_CLOSE - servo_angle_deg) + servo.lower_limit;
+        double servo_state_deg = (REAL_SERVO_CLOSE - servo_angle_deg) + servo.position_min;
 
         // **Apply inversion_feedback BEFORE zero position offset**
         if (servo.inverted_feedback) {
@@ -393,7 +402,7 @@ void ServoDriver::processServoResponse(uint8_t motor_id, std::string data) {
  * @param encoder_data The current encoder data. expect a 6-byte vector
  * @return True if the encoder data has changed, false otherwise.
  */
-bool ServoDriver::isServoDataChanged(std::string encoder_data) const {
+bool ServoDriver::isServoDataChanged(double encoder_data) const {
     // Compare first bytes
     return encoder_data != pre_encoder_data_;
 }

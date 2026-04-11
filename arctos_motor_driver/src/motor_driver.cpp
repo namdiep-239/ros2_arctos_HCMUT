@@ -44,7 +44,7 @@ void MotorDriver::setProtocol(std::shared_ptr<UartProtocol> protocol) {
  * @param joint_name The name of the joint to be added.
  * @param motor_id The ID of the motor associated with the joint.
  */
-void MotorDriver::addJoint(const std::string& joint_name, uint8_t motor_id, std::string hardware_type, double gear_ratio, bool inverted,bool inverted_feedback, double zero_position, double lower_limit, double upper_limit) {
+void MotorDriver::addJoint(const std::string& joint_name, uint8_t motor_id, std::string hardware_type, double gear_ratio, bool inverted,bool inverted_feedback, double zero_position) {
     // Check if joint already exists
     if (joints_.find(joint_name) != joints_.end()) {
         RCLCPP_WARN(node_->get_logger(), "Joint %s already exists", joint_name.c_str());
@@ -71,8 +71,6 @@ void MotorDriver::addJoint(const std::string& joint_name, uint8_t motor_id, std:
     joints_[joint_name].inverted = inverted;
     joints_[joint_name].inverted_feedback = inverted_feedback;
     joints_[joint_name].zero_position = zero_position;
-    joints_[joint_name].lower_limit = lower_limit;
-    joints_[joint_name].upper_limit = upper_limit;
     motor_to_joint_map_[motor_id] = joint_name;
 
     joints_[joint_name].last_update = node_->get_clock()->now();  // Initialize timestamp

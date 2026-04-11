@@ -15,7 +15,7 @@
         </xacro:if>
         <xacro:unless value="${sim}">
           <plugin>denso_hand_interface/DensoHandInterface</plugin>
-          <param name="device">/dev/ttyUSB1</param>
+          <param name="device">/dev/ttyACM0</param>
           <param name="baud_rate">115200</param>
           <param name="timeout">1000</param>
         </xacro:unless>

@@ -168,7 +168,7 @@ namespace arctos_interface
             {
                 while (allowSpin.load())
                 {
-                    uart_protocol_->readToBuffer();
+                    uart_protocol_->readToBuffer(false);
                     std::this_thread::sleep_for(std::chrono::milliseconds(5));
                 }
             });

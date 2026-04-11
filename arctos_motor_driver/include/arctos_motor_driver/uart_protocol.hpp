@@ -35,7 +35,7 @@ public:
     bool connected() const { return serial_conn_.isOpen(); }
 
     /// @brief Read incoming UART data and store in receive buffer
-    void readToBuffer();
+    void readToBuffer(bool debug);
     
     /// @brief Get oldest message from buffer (FIFO) and remove it
     std::string getFromBuffer();
@@ -51,6 +51,9 @@ public:
 
     /// @brief Low-level message transmission helper function
     bool sendMsg(const std::string &msg_to_send);
+
+    /// @brief Low-level message transmission helper function appending EOL
+    bool sendMsgRaw(const std::string &msg_to_send_without_eol);
     
 private:
     /// @brief Serial connection object for UART communication
