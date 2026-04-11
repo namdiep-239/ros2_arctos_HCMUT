@@ -300,6 +300,8 @@ namespace arctos_interface
         static std::vector<bool> allowPosition(info_.joints.size(), false);
         // Track idle time for trend reset
         static std::vector<int> idle_counter(info_.joints.size(), 0);
+        // Calculate delta to trend of each joint
+        static std::vector<float> delta_movement(info_.joints.size(), 0.0);
 
         // Resize last command vectors if not already done
         if (last_position_command_.size() != info_.joints.size())
@@ -350,11 +352,13 @@ namespace arctos_interface
                         {
                             RCLCPP_INFO(node_->get_logger(), "Continuing increasing trend %s", info_.joints[i].name.c_str());
                             allowPosition[i] = true;
+                            delta_movement[i] = std::abs(position_delta * 0.8);
                         }
                         else if (trend[i] <= -TREND_THRESHOLD && is_decreasing)
                         {
                             RCLCPP_INFO(node_->get_logger(), "Continuing decreasing trend %s", info_.joints[i].name.c_str());
                             allowPosition[i] = true;
+                            delta_movement[i] = std::abs(position_delta * 0.8);
                         }
                         else if (trend[i] >= TREND_THRESHOLD && is_decreasing)
                         {
@@ -401,12 +405,12 @@ namespace arctos_interface
                             if (trend[i] >= TREND_THRESHOLD) 
                             {
                                 // increasing trend, so increase the padding
-                                last_valid_position_command_[i] += DELTA_COMMAND_INCREASE;
+                                last_valid_position_command_[i] += delta_movement[i];
                             }
                             else if (trend[i] <= -TREND_THRESHOLD) 
                             {
                                 // decreasing trend, so decrease the padding
-                                last_valid_position_command_[i] -= DELTA_COMMAND_INCREASE;
+                                last_valid_position_command_[i] -= delta_movement[i];
                                 trend_text = "DECREASE";
                             }
                             

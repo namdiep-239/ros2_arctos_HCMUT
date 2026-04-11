@@ -18,7 +18,6 @@ find_package(v4l2_camera REQUIRED)
 # find_package(<dependency> REQUIRED)
 install(DIRECTORY
   launch
-  rviz
   DESTINATION share/${PROJECT_NAME}
 )
 
