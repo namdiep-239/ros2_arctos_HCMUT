@@ -6,6 +6,7 @@ Follows Coral TF2 retrain classification tutorial principles
 """
 
 import os
+import json
 import argparse
 import numpy as np
 import tensorflow as tf
@@ -28,7 +29,7 @@ parser.add_argument("--output-dir", type=str, default="models",
 parser.add_argument("--image-size", type=int, default=224)
 parser.add_argument("--batch-size", type=int, default=32)
 parser.add_argument("--epochs", type=int, default=30)
-parser.add_argument("--fine-tune", type=int, default=10,
+parser.add_argument("--fine-tune", type=int, default=20,
                     help="Fine-tune last N layers of base model")
 args = parser.parse_args()
 
@@ -114,11 +115,14 @@ model.summary()
 # Callbacks
 # ---------------------------------------------------------------------
 
+best_model_path = os.path.join(args.output_dir, "gesture_best.h5")
 cb = [
     callbacks.EarlyStopping(monitor="val_loss", patience=5,
                             restore_best_weights=True),
     callbacks.ReduceLROnPlateau(monitor="val_loss",
-                                factor=0.5, patience=3, min_lr=1e-6)
+                                factor=0.5, patience=3, min_lr=1e-6),
+    callbacks.ModelCheckpoint(best_model_path, monitor="val_loss",
+                              save_best_only=True, verbose=1)
 ]
 
 # ---------------------------------------------------------------------
@@ -147,10 +151,12 @@ model.compile(
     metrics=["accuracy"]
 )
 
+initial_epoch = len(history.history["accuracy"])
 fine_history = model.fit(
     train_gen,
     validation_data=val_gen,
-    epochs=args.epochs + args.fine_tune,
+    initial_epoch=initial_epoch,
+    epochs=initial_epoch + args.fine_tune,
     callbacks=cb
 )
 
@@ -188,6 +194,19 @@ print("Training history plot saved to training_history.png")
 model_path = os.path.join(args.output_dir, "gesture_retrained.h5")
 model.save(model_path)
 print(f"Model saved to {model_path}")
+
+# Save metadata for inference scripts (class name mapping + config)
+class_names = [k.replace("-samples", "") for k, _
+               in sorted(train_gen.class_indices.items(), key=lambda x: x[1])]
+metadata = {
+    "class_names": class_names,
+    "image_size": args.image_size,
+    "num_classes": num_classes,
+}
+metadata_path = os.path.join(args.output_dir, "model_metadata.json")
+with open(metadata_path, "w") as f:
+    json.dump(metadata, f, indent=2)
+print(f"Metadata saved to {metadata_path}")
 
 # ---------------------------------------------------------------------
 # Evaluate on test set

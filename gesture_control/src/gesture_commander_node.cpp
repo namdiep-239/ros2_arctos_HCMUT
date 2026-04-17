@@ -16,10 +16,10 @@
  *   /gesture_command    (std_msgs/String)   — executed gesture label, for monitoring
  *
  * Gesture mapping:
- *   thumbs_up → MoveIt2 named pose "home"
- *   point     → Y_joint + point_delta_rad (raise arm)
- *   open      → Right_finger_joint → gripper_open_pos
- *   fist      → Right_finger_joint → gripper_closed_pos
+ *   thumbs-up → MoveIt2 named pose "home"
+ *   point     → Z_joint + point_delta_rad (elbow forward)
+ *   open      → gripper_gear_right_joint → gripper_open_pos  (1.40 rad, wide open)
+ *   fist      → gripper_gear_right_joint → gripper_closed_pos (0.05 rad, gentle grip)
  *   none      → move_group.stop() / servo auto-halt
  */
 
@@ -48,9 +48,9 @@ using GripperCommandAction = control_msgs::action::GripperCommand;
 using MoveGroupInterface   = moveit::planning_interface::MoveGroupInterface;
 using Trigger              = std_srvs::srv::Trigger;
 
-// Y_joint limits (degrees → radians, from ros2_controllers.yaml)
-static constexpr double Y_LOWER_RAD = -100.0 * M_PI / 180.0;   // -1.7453 rad
-static constexpr double Y_UPPER_RAD =  135.0 * M_PI / 180.0;   //  2.3562 rad
+// Z_joint limits (degrees → radians, from ros2_controllers.yaml)
+static constexpr double Z_LOWER_RAD = -119.0 * M_PI / 180.0;   // -2.0769 rad
+static constexpr double Z_UPPER_RAD =  169.0 * M_PI / 180.0;   //  2.9496 rad
 
 // Servo JointJog publish rate (must be > 1/incoming_command_timeout = 10 Hz)
 static constexpr int SERVO_PUBLISH_HZ = 20;
@@ -241,7 +241,7 @@ private:
 
   void executeCommand(const std::string & gesture)
   {
-    if      (gesture == "thumbs_up") { executeHome();                       }
+    if      (gesture == "thumbs-up") { executeHome();                       }
     else if (gesture == "point")     { executePoint();                      }
     else if (gesture == "open")      { executeGripper(gripper_open_pos_);   }
     else if (gesture == "fist")      { executeGripper(gripper_closed_pos_); }
@@ -297,7 +297,7 @@ private:
   void executePointMoveIt()
   {
     RCLCPP_INFO(this->get_logger(),
-                "Raising arm via MoveIt (Y_joint += %.3f rad)...", point_delta_rad_);
+                "Moving arm via MoveIt (Z_joint += %.3f rad)...", point_delta_rad_);
 
     auto current_state = move_group_->getCurrentState(5.0);
     if (!current_state) {
@@ -310,17 +310,17 @@ private:
     current_state->copyJointGroupPositions(jmg, joint_values);
 
     const auto & joint_names = jmg->getVariableNames();
-    auto it = std::find(joint_names.begin(), joint_names.end(), "Y_joint");
+    auto it = std::find(joint_names.begin(), joint_names.end(), "Z_joint");
     if (it == joint_names.end()) {
-      RCLCPP_ERROR(this->get_logger(), "Y_joint not found in 'denso_arm' group.");
+      RCLCPP_ERROR(this->get_logger(), "Z_joint not found in 'denso_arm' group.");
       return;
     }
-    const size_t y_idx = static_cast<size_t>(std::distance(joint_names.begin(), it));
+    const size_t z_idx = static_cast<size_t>(std::distance(joint_names.begin(), it));
 
-    const double current_y = joint_values[y_idx];
-    joint_values[y_idx] = std::clamp(current_y + point_delta_rad_, Y_LOWER_RAD, Y_UPPER_RAD);
+    const double current_z = joint_values[z_idx];
+    joint_values[z_idx] = std::clamp(current_z + point_delta_rad_, Z_LOWER_RAD, Z_UPPER_RAD);
 
-    RCLCPP_INFO(this->get_logger(), "Y_joint: %.4f → %.4f rad", current_y, joint_values[y_idx]);
+    RCLCPP_INFO(this->get_logger(), "Z_joint: %.4f → %.4f rad", current_z, joint_values[z_idx]);
 
     move_group_->setJointValueTarget(joint_values);
     MoveGroupInterface::Plan plan;

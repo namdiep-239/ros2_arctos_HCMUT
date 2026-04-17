@@ -30,10 +30,13 @@ def load_images(folder):
         cls_folder = os.path.join(folder, cls)
         if not os.path.isdir(cls_folder):
             continue
-        files = glob(os.path.join(cls_folder, "*.jpg"))
+        files = sorted(
+            f for ext in ("*.jpg", "*.jpeg", "*.png")
+            for f in glob(os.path.join(cls_folder, ext))
+        )
         for f in files:
             img = tf.io.read_file(f)
-            img = tf.image.decode_jpeg(img, channels=3)
+            img = tf.image.decode_image(img, channels=3, expand_animations=False)
             img = tf.image.resize(img, IMG_SHAPE)
             img = img / 255.0
             images.append(img.numpy())

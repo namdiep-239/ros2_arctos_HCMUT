@@ -14,11 +14,12 @@ inspection_commander_node:
     # Currently under discussion — leave false until pick mechanics are decided.
     enable_pick: false
 
-    # Right_finger_joint positions (metres, from arctos.ros2_control.xacro)
-    # open = gripper wide open to release object
-    # closed = gripper closed to grasp object
-    gripper_open_pos:   0.002
-    gripper_closed_pos: 0.054
+    # gripper_gear_right_joint positions (radians, from arctos_gripper.xacro)
+    # Hardware limits: 0.02 (closed) … 1.4835 (fully open)
+    # open = wide open to release object
+    # closed = gentle grip to grasp object
+    gripper_open_pos:   1.40    # near SRDF "open" = 1.4835 rad
+    gripper_closed_pos: 0.05    # near SRDF "close" = 0.02 rad, gentle grip
 
     # ── Waypoints ─────────────────────────────────────────────────────────────
     # Joint values [X, Y, Z, A, B, C] in radians for the denso_arm group.

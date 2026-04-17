@@ -37,7 +37,7 @@ def generate_launch_description():
         'AI_modules', 'gesture_recognition', 'models'
     )
     edgetpu_model = os.path.join(ai_module_models, 'gesture_retrained_int8_edgetpu.tflite')
-    cpu_model     = os.path.join(ai_module_models, 'gesture_retrained.h5')
+    cpu_model     = os.path.join(ai_module_models, 'gesture_best.h5')
     metadata      = os.path.join(ai_module_models, 'model_metadata.json')
 
     # Config file
