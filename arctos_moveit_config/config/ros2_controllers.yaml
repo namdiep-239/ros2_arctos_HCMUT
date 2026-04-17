@@ -40,12 +40,15 @@ denso_arm_controller:
     # allow_integration_in_goal_trajectories: true   # Allow servo's incremental trajectories
     # open_loop_control: true                        # Don't reject trajectory based on current state mismatch
 
+# Refer: https://control.ros.org/humble/doc/ros2_controllers/gripper_controllers/doc/userdoc.html
 denso_hand_controller:
   ros__parameters:
-    joint: Right_finger_joint
+    joint: gripper_gear_right_joint
 
-    allow_partial_joints_goal: true
-    state_tolerance_check: false  # Disable tolerance checking for simplicity
+    goal_tolerance: 0.05              # rad — tolerated error for declaring success (default 0.01 is too tight)
+    # stall_velocity_threshold: 0.001   # rad/s — velocity below this is considered stalling (default)
+    stall_timeout: 2.0                # seconds — how long to wait after stall before deciding abort/success
+    action_monitor_rate: 10.0         # Hz — rate at which goal progress is evaluated
 
 
 arctos_hardware_interface:
@@ -111,13 +114,20 @@ arctos_hardware_interface:
         zero_position: -0.0
         lower_limit: -360.0     # lower limit, in degree
         upper_limit: 360.0      # upper limit, in degree
-      Right_finger_joint:
+    
+# this should be the name of the node, not namespace name.
+denso_hand_interface:
+  ros__parameters: 
+    gripper:
+      gripper_gear_right_joint:
         motor_id: 7
         requires_homing: false
-        inverted: false            # for application: app request go to 10 rad, but raw request to 10 rad
-        inverted_feedback: false  # for case of request go to 1000, but motor run to -1000
+        inverted: false                 # for application: app request go to 10 rad, but raw request to 10 rad
+        inverted_feedback: false        # for case of request go to 1000, but motor run to -1000
         gear_ratio: 1.0
         hardware_type: MKS_42D
-        zero_position: 0.0
-        lower_limit: 0.002
-        upper_limit: 0.054
+        zero_position: 0.430
+        lower_limit: 0.425              # lower limit, in degree
+        upper_limit: 84.9983            # upper limit, in degree
+        velocity: 200.0 
+        acceleration: 20.0

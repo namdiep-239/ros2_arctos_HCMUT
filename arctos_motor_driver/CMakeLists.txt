@@ -14,7 +14,7 @@ find_package(can_msgs REQUIRED)
 find_package(sensor_msgs REQUIRED)
 find_package(serial REQUIRED)
 
-# ============================================================can protocol====================================================
+# ============================================================ can protocol ====================================================
 # Create library <target> for CAN protocol
 add_library(can_protocol SHARED
   src/can_protocol.cpp
@@ -43,8 +43,8 @@ ament_target_dependencies(can_protocol
   can_msgs
 )
 
-# ============================================================uart protocol====================================================
-# Create library <target> for CAN protocol
+# ============================================================ uart protocol ====================================================
+# Create library <target> for UART protocol
 add_library(uart_protocol SHARED
   src/uart_protocol.cpp
 )
@@ -73,11 +73,12 @@ ament_target_dependencies(uart_protocol
   serial
 )
 
-# ============================================================motor driver====================================================
+# ============================================================ motor driver ====================================================
 
 # Create the main motor driver <target> library
 add_library(${PROJECT_NAME} SHARED
   src/motor_driver.cpp
+  src/servo_driver.cpp
 )
 
 # Specify libraries or flags to use when linking a given target and/or its dependents. 
@@ -134,6 +135,7 @@ ament_export_dependencies(
   rclcpp
   can_msgs
   sensor_msgs
+  serial
   Threads
 )
 

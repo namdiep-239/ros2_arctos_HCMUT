@@ -44,7 +44,7 @@ void MotorDriver::setProtocol(std::shared_ptr<UartProtocol> protocol) {
  * @param joint_name The name of the joint to be added.
  * @param motor_id The ID of the motor associated with the joint.
  */
-void MotorDriver::addJoint(const std::string& joint_name, uint8_t motor_id, std::string hardware_type, double gear_ratio, bool inverted,bool inverted_feedback, double zero_position, double lower_limit, double upper_limit) {
+void MotorDriver::addJoint(const std::string& joint_name, uint8_t motor_id, std::string hardware_type, double gear_ratio, bool inverted,bool inverted_feedback, double zero_position) {
     // Check if joint already exists
     if (joints_.find(joint_name) != joints_.end()) {
         RCLCPP_WARN(node_->get_logger(), "Joint %s already exists", joint_name.c_str());
@@ -71,8 +71,6 @@ void MotorDriver::addJoint(const std::string& joint_name, uint8_t motor_id, std:
     joints_[joint_name].inverted = inverted;
     joints_[joint_name].inverted_feedback = inverted_feedback;
     joints_[joint_name].zero_position = zero_position;
-    joints_[joint_name].lower_limit = lower_limit;
-    joints_[joint_name].upper_limit = upper_limit;
     motor_to_joint_map_[motor_id] = joint_name;
 
     joints_[joint_name].last_update = node_->get_clock()->now();  // Initialize timestamp
@@ -144,18 +142,8 @@ void MotorDriver::setJointPosition(const std::string& joint_name, double positio
     // Convert motor position from radians to degrees
     double motor_position_deg = motor_position * MotorConstants::RAD_TO_DEG;
 
-#if ENCODER_CONVERSION_NEEDED
-    // Convert degrees to encoder counts
-    int32_t encoder_counts = static_cast<int32_t>(
-        (motor_position_deg * MotorConstants::ENCODER_STEPS) / MotorConstants::DEGREES_PER_REVOLUTION
-    );
-#endif
-
     RCLCPP_INFO(node_->get_logger(), "Setting joint %s position to (%s) %.2f radians (%.2f degrees on motor protactor) with gear ratio %.2f:1",
                 joint_name.c_str(), joint.inverted ? "inverted" : "normal", position, motor_position_deg, joint.gear_ratio);
-#if ENCODER_CONVERSION_NEEDED
-    RCLCPP_INFO(node_->get_logger(), "Calculated encoder counts: %d", encoder_counts);
-#endif
 
     // minimum speed is 30 to prevent sending speed = 0, which will stop the motor!
     uint16_t speed = static_cast<uint16_t>(std::clamp(velocity, 30.0, 3000.0));  
@@ -251,7 +239,7 @@ void MotorDriver::processUartMessage() {
                 RCLCPP_ERROR(node_->get_logger(), "Failed to decode UART message: %s", message.c_str());
                 continue;
             }
-            if ((decodedPositions.size() + 1 ) != joints_.size())   // Temporary manual to bypass missing gripper data from miniPC
+            if ((decodedPositions.size()) != joints_.size())
             {
                 RCLCPP_ERROR(node_->get_logger(), "The number of decoded joints does not match with the configured joints!");
             }
@@ -341,14 +329,16 @@ void MotorDriver::processEncoderResponse(uint8_t motor_id, const std::vector<dou
         RCLCPP_DEBUG(node_->get_logger(), "Joint %s: Min = %.3f, Max = %.3f, Current = %.3f", 
                     joint_name.c_str(), joint.position_min, joint.position_max, joint.position);
 
-        joint.position = joint_angle_deg;
+        
         // **Check if joint limits are valid**
         constexpr double TOLERANCE = 0.1;
-        if (joint.position < (joint.position_min - TOLERANCE) || joint.position > (joint.position_max + TOLERANCE)) {
+        if (joint_angle_deg < (joint.position_min - TOLERANCE) || joint_angle_deg > (joint.position_max + TOLERANCE)) {
             RCLCPP_WARN(node_->get_logger(), "Ignoring out-of-bounds encoder value %.3f degrees for joint %s (limits: %.3f to %.3f)", 
-                        joint.position, joint_name.c_str(), joint.position_min, joint.position_max);
+                        joint_angle_deg, joint_name.c_str(), joint.position_min, joint.position_max);
             return;
         }
+
+        joint.position = joint_angle_deg;
 
         // **Update Joint State**
         joint.position_error = joint.command_position - joint.position;

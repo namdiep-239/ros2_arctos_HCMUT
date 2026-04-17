@@ -38,7 +38,7 @@
 const std::string TWIST_TOPIC = "/denso_moveit_servo_node/delta_twist_cmds";
 const std::string JOINT_TOPIC = "/denso_moveit_servo_node/delta_joint_cmds";
 const size_t ROS_QUEUE_SIZE = 10;
-const std::string EEF_FRAME_ID = "gripper_body";
+const std::string EEF_FRAME_ID = "gripper_body_link";
 const std::string BASE_FRAME_ID = "base_link";
 
 // A class for reading the key inputs from the terminal
@@ -205,13 +205,13 @@ int KeyboardServo::keyLoop()
   bool servo_started = false;
 
   double max_velocity_x = 3.0543;
-  double max_velocity_y = 3.4907;
+  double max_velocity_y = 2.4907;
   double max_velocity_z = 3.4907;
   double max_velocity_a = 5.236;
   double max_velocity_b = 5.236;
   double max_velocity_c = 8.3776;
 
-  double scaling = 0.2;
+  double scaling = 0.3;
 
   rclcpp::Rate loop_rate(1);
 

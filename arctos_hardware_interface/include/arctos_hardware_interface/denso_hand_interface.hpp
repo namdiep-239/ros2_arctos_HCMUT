@@ -1,5 +1,5 @@
-#ifndef ARCTOS_HARDWARE_INTERFACE_HPP_
-#define ARCTOS_HARDWARE_INTERFACE_HPP_
+#ifndef DENSO_HAND_INTERFACE_HPP_
+#define DENSO_HAND_INTERFACE_HPP_
 
 #include <string>
 #include <unordered_map>
@@ -10,9 +10,8 @@
 #include <thread>
 #include <atomic>
 
-#include "arctos_motor_driver/motor_driver.hpp"
 #include "arctos_motor_driver/uart_protocol.hpp"
-// #include "arctos_hardware_interface/arctos_services.hpp"
+#include "arctos_motor_driver/servo_driver.hpp"
 
 #include "hardware_interface/handle.hpp"
 #include "hardware_interface/hardware_info.hpp"
@@ -24,15 +23,15 @@
 
 using hardware_interface::return_type;
 
-namespace arctos_interface
+namespace denso_hand_interface
 {
 using CallbackReturn = rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn;
 
-class HARDWARE_INTERFACE_PUBLIC ArctosInterface : public hardware_interface::SystemInterface
+class HARDWARE_INTERFACE_PUBLIC DensoHandInterface : public hardware_interface::SystemInterface
 {
 public:
-  ArctosInterface();
-  ~ArctosInterface();
+  DensoHandInterface();
+  ~DensoHandInterface();
   
   // ROS 2 Control Interface
   
@@ -51,25 +50,19 @@ public:
 protected:
   // Tracking of last commanded positions and velocities
   std::vector<double> last_position_command_;
-  //last valid position command store the highest position command that has been sent to the motor, which is used for trend analysis and filtering.
-  std::vector<double> last_valid_position_command_;
-  std::vector<double> last_velocity_command_;
   
   // Tolerance values for filtering commands
-
-  double position_tolerance_;  /**< The position tolerance for joint control. */
-  double velocity_tolerance_;  /**< The velocity tolerance for joint control. */
+  const double position_tolerance_ = 0.001; // Default position tolerance in radians
+  const double velocity_ = 150.0; // Default 
+  const double acceleration_ = 20.0; // Default acceleration in 0-255 scale
   
   // Joint state storage
-  std::vector<double> joint_position_command_;
-  std::vector<double> joint_velocities_command_;
-  std::vector<double> joint_position_;
-  std::vector<double> joint_velocities_;
-  std::vector<double> ft_states_;
-  std::vector<double> ft_command_;
+  std::vector<double> servo_position_command_;
+  std::vector<double> servo_position_;
+  std::vector<double> servo_velocity_;
 
   // Interface mapping
-  std::unordered_map<std::string, std::vector<std::string>> joint_interfaces = {
+  std::unordered_map<std::string, std::vector<std::string>> servo_interfaces = {
     {"position", {}}, 
     {"velocity", {}}
   };
@@ -77,24 +70,22 @@ protected:
   // Motor driver components
   rclcpp::Node::SharedPtr node_;
   rclcpp::TimerBase::SharedPtr update_timer_;
-  std::shared_ptr<arctos_motor_driver::MotorDriver> motor_driver_;
   std::shared_ptr<arctos_motor_driver::UartProtocol> uart_protocol_;
+  std::shared_ptr<arctos_motor_driver::ServoDriver> servo_driver_;
   // Configuration parameters
   std::vector<uint8_t> motor_ids_;  // Mapping of joint indices to motor IDs
-  bool has_velocity_interface_{false};
   bool has_position_interface_{false};
+  bool has_velocity_interface_{false};
 
 private:
-
-  // std::queue<can_msgs::msg::Frame::SharedPtr> can_message_queue_;
   std::thread spinThread;
   std::atomic<bool> allowSpin;
 
   // Helper functions for motor initialization
-  void initializeMotors();
-  bool setupMotorParameters(const hardware_interface::ComponentInfo& joint_info, uint8_t motor_id);
+  void initializeServos();
+  bool setupServoParameters(const hardware_interface::ComponentInfo& joint_info, uint8_t motor_id);
 };
 
-}  // namespace arctos_interface
+}  // namespace denso_hand_interface
 
-#endif  // ARCTOS_HARDWARE_INTERFACE_HPP_
+#endif  // DENSO_HAND_INTERFACE_HPP_

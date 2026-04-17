@@ -28,7 +28,7 @@ moveit_simple_controller_manager:
   denso_hand_controller:
     type: GripperCommand
     joints:
-      - Right_finger_joint
+      - gripper_gear_right_joint
     action_ns: gripper_cmd
     default: true
     
