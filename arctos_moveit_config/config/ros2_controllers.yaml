@@ -129,5 +129,5 @@ denso_hand_interface:
         zero_position: 0.430
         lower_limit: 0.425              # lower limit, in degree
         upper_limit: 84.9983            # upper limit, in degree
-        velocity: 200.0 
-        acceleration: 20.0
+        velocity: 400.0 
+        acceleration: 150.0

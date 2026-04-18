@@ -216,6 +216,9 @@ private:
         abortGoal(goal_handle, result, "Failed to reach PICK pose");
         busy_ = false; return;
       }
+      // Let arm fully settle at pick pose before closing gripper
+      std::this_thread::sleep_for(
+        std::chrono::milliseconds(static_cast<int>(settle_time_sec_ * 1000)));
       publish_feedback("PICKING", 0.08f);
       sendGripper(gripper_closed_pos_);  // close gripper to grasp
     }

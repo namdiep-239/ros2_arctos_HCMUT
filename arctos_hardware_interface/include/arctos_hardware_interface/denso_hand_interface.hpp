@@ -53,8 +53,8 @@ protected:
   
   // Tolerance values for filtering commands
   const double position_tolerance_ = 0.001; // Default position tolerance in radians
-  const double velocity_ = 150.0; // Default 
-  const double acceleration_ = 20.0; // Default acceleration in 0-255 scale
+  const double velocity_ = 400.0; // Default 
+  const double acceleration_ = 150.0; // Default acceleration in 0-255 scale
   
   // Joint state storage
   std::vector<double> servo_position_command_;
