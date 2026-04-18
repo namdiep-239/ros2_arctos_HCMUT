@@ -290,7 +290,7 @@ namespace arctos_interface
         // Number of consecutive increases/decreases to confirm trend
         static const int TREND_THRESHOLD = 2;
         // Delta increase in joint position to fill up the "empty slot"
-        static const float DELTA_COMMAND_INCREASE = 0.01;
+        // static const float DELTA_COMMAND_INCREASE = 0.01;
 
         static bool isPositionUpdated;
         isPositionUpdated = false;

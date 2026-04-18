@@ -141,7 +141,7 @@ pyenv activate
 Install needed dependency for the project.
 
 ```bash
-pip install python-can ruamel.yaml rich keyboard catkin-pkg lark PyQt5 PySide2 empy==3.3.4
+pip install python-can ruamel.yaml rich keyboard catkin-pkg lark PyQt5 PySide2 empy==3.3.4 tornado numpy pyyaml jinja2 typeguard pymongo Pillow netifaces cbor2
 ```
 
 ### Building the Workspace
@@ -191,6 +191,13 @@ source install/setup.bash
 You should now have the workspace built and ready to use.
 
 ### Getting Started
+
+Make sure to always source the workspace that we've just built before running:
+
+```bash
+cd ~/ros2_ws
+source install/setup.bash
+```
 
 #### Launch the robot
 
