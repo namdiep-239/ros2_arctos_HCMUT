@@ -14,6 +14,11 @@
  */
 namespace arctos_motor_driver {
 
+// ANSI color codes for terminal output
+#define RESET "\033[0m"
+#define RED "\033[31m"
+#define BOLD_RED "\033[1;31m"
+
 #define REAL_SERVO_CLOSE    179.560546875
 #define REAL_SERVO_OPEN     91.318359375
 
@@ -308,7 +313,15 @@ void ServoDriver::processServoResponse(uint8_t motor_id, std::string data) {
     auto& servo = servos_[servo_name];
     json jsonObject;
 
-    jsonObject = json::parse(data);
+    try
+    {
+        jsonObject = json::parse(data);
+    }
+    catch (const std::exception &e)
+    {
+        RCLCPP_ERROR(node_->get_logger(), BOLD_RED "Unknown format %s" RESET, e.what());
+        return;
+    }
 
     int response_type = jsonObject["T"].get<int>();
 
