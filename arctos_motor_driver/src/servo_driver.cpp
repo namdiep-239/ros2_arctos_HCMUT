@@ -14,8 +14,8 @@
  */
 namespace arctos_motor_driver {
 
-#define REAL_SERVO_CLOSE    185
-#define REAL_SERVO_OPEN     90
+#define REAL_SERVO_CLOSE    179.560546875
+#define REAL_SERVO_OPEN     91.318359375
 
 /**
  * @brief Constructs a ServoDriver object.

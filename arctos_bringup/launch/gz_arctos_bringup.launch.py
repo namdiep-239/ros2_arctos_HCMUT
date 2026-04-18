@@ -238,7 +238,7 @@ def generate_launch_description():
         joint_state_broadcaster_spawner,
         delay_robot_arm_controller_spawner,
         delay_rviz_and_moveit_launch,
-        # rosbridge_server_launch,
+        rosbridge_server_launch,
         # camera_node_v4l2,
         camera_node_usbcam,
         # Launch Arguments

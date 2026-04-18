@@ -377,19 +377,20 @@ namespace arctos_interface
                             {
                                 trend[i]++;
                                 RCLCPP_INFO(node_->get_logger(), "Learning increasing trend %s (trend: %d)", info_.joints[i].name.c_str(), trend[i]);
+                                allowPosition[i] = true;
                             }
                             else if (is_decreasing)
                             {
                                 trend[i]--;
                                 RCLCPP_INFO(node_->get_logger(), "Learning decreasing trend %s (trend: %d)", info_.joints[i].name.c_str(), trend[i]);
+                                allowPosition[i] = true;
                             }
-                            allowPosition[i] = true;
+                            
                         }
 
                         // Decide whether to send the position command based on trend analysis
                         if (allowPosition[i])
                         {
-
                             motor_driver_->setJointPosition(info_.joints[i].name, joint_position_command_[i], 0, abs(joint_velocities_command_[i] * 10) * 60);
                             RCLCPP_INFO(node_->get_logger(),
                                         "Sent position command %.5f rad to joint %s. Last command: %.5f.",
@@ -416,8 +417,8 @@ namespace arctos_interface
                             
                             motor_driver_->setJointPosition(info_.joints[i].name, last_valid_position_command_[i], 0, abs(joint_velocities_command_[i] * 10) * 60);
                             RCLCPP_INFO(node_->get_logger(),
-                                        "Sent [padding] for trend [%s], position command %.5f rad to joint %s. Last command: %.5f.",
-                                        trend_text.c_str(), last_valid_position_command_[i], info_.joints[i].name.c_str(),
+                                        "Sent [padding <%.5f>] for trend [%s], position command %.5f rad to joint %s. Last command: %.5f.",
+                                        delta_movement[i], trend_text.c_str(), last_valid_position_command_[i], info_.joints[i].name.c_str(),
                                         last_position_command_[i]);
                         }
                         isPositionUpdated = true;
@@ -433,12 +434,13 @@ namespace arctos_interface
                         RCLCPP_DEBUG(node_->get_logger(),
                                      "Position command for joint %s unchanged: %.3f",
                                      info_.joints[i].name.c_str(), joint_position_command_[i]);
-                        if (idle_counter[i] >= TREND_RESET_THRESHOLD && trend[i] != 0)
+                        if (idle_counter[i] >= TREND_RESET_THRESHOLD)
                         {
                             RCLCPP_INFO(node_->get_logger(), "Resetting trend for joint %s after %d idle cycles",
                                         info_.joints[i].name.c_str(), idle_counter[i]);
                             trend[i] = 0;
                             idle_counter[i] = 0;
+                            delta_movement[i] = 0.0;
                         }
                     }
                 }

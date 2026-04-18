@@ -67,6 +67,8 @@ namespace denso_hand_interface
             node_->declare_parameter(param_prefix + "requires_homing", false);   // Default no homing needed
             node_->declare_parameter(param_prefix + "lower_limit", 0.0);
             node_->declare_parameter(param_prefix + "upper_limit", 0.0);
+            node_->declare_parameter(param_prefix + "velocity", 0.0);
+            node_->declare_parameter(param_prefix + "acceleration", 0.0);
 
             // Get motor ID from parameters
             int motor_id;
@@ -86,6 +88,18 @@ namespace denso_hand_interface
 
             RCLCPP_INFO(node_->get_logger(), "Configured joint %s with motor_id %d",
                         joint.name.c_str(), motor_id);
+
+            if (!node_->get_parameter(param_prefix + "velocity", velocity_))
+            {
+                RCLCPP_ERROR(node_->get_logger(), "Failed to get velocity for joint %s", joint.name.c_str());
+                return CallbackReturn::ERROR;
+            }
+
+            if (!node_->get_parameter(param_prefix + "acceleration", acceleration_))
+            {
+                RCLCPP_ERROR(node_->get_logger(), "Failed to get acceleration for joint %s", joint.name.c_str());
+                return CallbackReturn::ERROR;
+            }
 
             // Track available interfaces
             for (const auto &interface : joint.state_interfaces)
