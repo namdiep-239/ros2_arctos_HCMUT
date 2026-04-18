@@ -90,7 +90,7 @@ First, install the required dependencies:
 - `ros-humble-image-transport-plugins` for the image transport plugins (including image compression).
 
 ```bash
-sudo apt install can-utils python3-rosdep ros-humble-can-msgs ros-humble-ros2-control ros-humble-gz-ros2-control ros-humble-gz-ros2-control-demos ros-humble-gripper-controllers ros-humble-moveit-servo ros-humble-v4l2-camera ros-humble-rqt-image-view ros-humble-image-transport-plugins -y
+sudo apt install can-utils python3-rosdep ros-humble-can-msgs ros-humble-ros2-control ros-humble-gz-ros2-control ros-humble-gz-ros2-control-demos ros-humble-gripper-controllers ros-humble-moveit-servo ros-humble-v4l2-camera ros-humble-rqt-image-view ros-humble-image-transport-plugins ros-humble-rosbridge-server -y
 ```
 
 **Open new terminal**, then create a ROS2 workspace and clone the ROS2 Arctos repository inside the `src/` directory:
