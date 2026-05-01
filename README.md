@@ -213,6 +213,26 @@ To launch the robot with gazebo sim, run the launch file `gz_arctos_bringup.laun
 ros2 launch arctos_bringup gz_arctos_bringup.launch.py use_sim_time:=true
 ```
 
+#### Launch the supporting packages for extra functionality:
+
+To launch MoveToPose action server, that support receiving a Pose or a Joint, and planning-execute the robot to reach that Pose/Joints:
+
+```bash
+ros2 launch denso_remote_control remote_control.launch.py use_sim_time:=false
+```
+
+To launch real-time servo, allowing to rotate each joint (and hopefully, rotate by axis of effector), launch moveit_servo by:
+
+```bash
+ros2 launch denso_moveit_servo denso_moveit_servo.launch.py use_sim_time:=false
+```
+
+To communicate with Unity via Ros-sharp, use:
+
+```bash
+ros2 launch file_server2 ros_sharp_communication.launch.py
+```
+
 ## Individual Package READMEs
 
 Each package has its own **README.md** with more details:
