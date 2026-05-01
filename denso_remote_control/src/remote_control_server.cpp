@@ -77,15 +77,36 @@ private:
     const rclcpp_action::GoalUUID& uuid,
     std::shared_ptr<const MoveToPose::Goal> goal)
   {
-    RCLCPP_INFO(this->get_logger(), "Received goal request with Pose position: %f %f %f, orientation: %f %f %f %f", 
-    goal->pose.position.x,
-    goal->pose.position.y,
-    goal->pose.position.z,
-    goal->pose.orientation.x,
-    goal->pose.orientation.y,
-    goal->pose.orientation.z,
-    goal->pose.orientation.w
-    );
+    bool goalWithPose = goal->use_pose;
+    if (goalWithPose)
+    {
+        RCLCPP_INFO(this->get_logger(), "Received goal request with Pose position: %f %f %f, orientation: %f %f %f %f", 
+        goal->pose.position.x,
+        goal->pose.position.y,
+        goal->pose.position.z,
+        goal->pose.orientation.x,
+        goal->pose.orientation.y,
+        goal->pose.orientation.z,
+        goal->pose.orientation.w
+        );
+    }
+    else
+    {
+        if (goal->joints.size() < 6) {
+            RCLCPP_WARN(this->get_logger(), "Received goal request with insufficient joint positions. Expected at least 6, but got %zu. Rejecting goal.", goal->joints.size());
+            return rclcpp_action::GoalResponse::REJECT;
+        } 
+        RCLCPP_INFO(this->get_logger(), "Received goal request with Joint position: %f %f %f %f %f %f", 
+        goal->joints[0],
+        goal->joints[1],
+        goal->joints[2],
+        goal->joints[3],
+        goal->joints[4],
+        goal->joints[5]
+        );
+        // silently skip joints that's over 6th joint.
+    }
+    
 
     (void)uuid;
     return rclcpp_action::GoalResponse::ACCEPT_AND_EXECUTE;
@@ -125,6 +146,7 @@ private:
     step = "none";
     // result
     auto result = std::make_shared<MoveToPose::Result>();
+    std::vector<double> joint_group_positions;
 
     // Check if there is a cancel request
     if (goal_handle->is_canceling()) {
@@ -138,11 +160,29 @@ private:
     goal_handle->publish_feedback(feedback);
     RCLCPP_INFO(this->get_logger(), "Planning...");
 
-    move_group->setPoseTarget(goal->pose);
+    // two option for planning: use Pose or Joint
+    bool planWithPose = goal->use_pose;
+    if (planWithPose) 
+    {
+        move_group->setPoseTarget(goal->pose);
+    }
+    else
+    {
+        moveit::core::RobotStatePtr current_state = move_group->getCurrentState(10);
+        current_state->copyJointGroupPositions(joint_model_group_target, joint_group_positions);
+        for (size_t i = 0; i < joint_group_positions.size(); i++) {
+          joint_group_positions[i] = goal->joints[i];
+        }
+        move_group->setJointValueTarget(joint_group_positions);
+    }
+    
     bool success = (move_group->plan(my_plan) == moveit::core::MoveItErrorCode::SUCCESS);
+
     if (!success) {
       result->completed = false;
       goal_handle->abort(result);
+      step = "planning failed";
+      goal_handle->publish_feedback(feedback);
       RCLCPP_INFO(this->get_logger(), "Planning failed");
       return;
     }
