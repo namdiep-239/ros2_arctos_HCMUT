@@ -63,6 +63,13 @@ install(PROGRAMS
   RENAME gesture_recognition_node
 )
 
+# ── Python metrics node ───────────────────────────────────────────────────────
+install(PROGRAMS
+  gesture_control/gesture_metrics_node.py
+  DESTINATION lib/${PROJECT_NAME}
+  RENAME gesture_metrics_node
+)
+
 # ── Install scripts, launch, config ──────────────────────────────────────────
 install(DIRECTORY scripts/
   DESTINATION share/${PROJECT_NAME}/scripts

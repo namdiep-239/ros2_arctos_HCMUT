@@ -140,11 +140,12 @@ class InspectionNode(Node):
             return
 
         msg = InspectionResult()
-        msg.header.stamp = self.get_clock().now().to_msg()
-        msg.label      = str(latest.get('label', 'FAIL'))
-        msg.class_id   = int(latest.get('class_id', 0))
-        msg.confidence = float(latest.get('confidence', 0.0))
-        msg.latency_ms = float(latest.get('latency_ms', 0.0))
+        msg.header.stamp     = self.get_clock().now().to_msg()
+        msg.label            = str(latest.get('label', 'FAIL'))
+        msg.class_id         = int(latest.get('class_id', 0))
+        msg.confidence       = float(latest.get('confidence', 0.0))
+        msg.latency_ms       = float(latest.get('latency_ms', 0.0))
+        msg.capture_time_unix = float(latest.get('capture_time_unix', 0.0))
         self.pub.publish(msg)
 
     # ── Cleanup ───────────────────────────────────────────────────────────────

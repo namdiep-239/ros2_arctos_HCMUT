@@ -17,6 +17,7 @@ import os
 import json
 import signal
 import argparse
+import time
 import cv2
 
 
@@ -51,8 +52,7 @@ def main():
     # Open camera
     cap = cv2.VideoCapture(args.camera_id)
     if not cap.isOpened():
-        error = {"error": f"Cannot open camera id={args.camera_id}"}
-        print(json.dumps(error), flush=True)
+        print(json.dumps({"error": f"Cannot open camera id={args.camera_id}"}), flush=True)
         sys.exit(1)
 
     # Graceful shutdown on SIGTERM (sent by the ROS2 node on shutdown)
@@ -65,33 +65,35 @@ def main():
     signal.signal(signal.SIGINT, on_signal)
 
     while running[0]:
+        capture_time = time.time()  # Unix epoch when frame is grabbed
         ret, frame = cap.read()
         if not ret:
             break
 
         result = inferencer.infer(frame)
 
-        # Overlay label + confidence on the frame
-        label = str(result.get("label", "none"))
-        conf = float(result.get("confidence", 0.0))
+        label   = str(result.get("label", "none"))
+        conf    = float(result.get("confidence", 0.0))
         latency = float(result.get("latency_ms", 0.0))
+
+        # JSON is printed BEFORE imshow so the ROS2 pipeline is never blocked
+        # if the window manager is slow or the display call takes extra time.
+        print(json.dumps({
+            "label":             label,
+            "class_id":          int(result.get("class_id", -1)),
+            "confidence":        conf,
+            "latency_ms":        latency,
+            "capture_time_unix": capture_time,
+        }), flush=True)
+
+        # Live preview window
         overlay_text = f"{label} ({conf * 100:.1f}%) | {latency:.2f} ms"
         cv2.putText(frame, overlay_text, (20, 45),
                     cv2.FONT_HERSHEY_SIMPLEX, 1.1, (0, 255, 0), 2)
-
         cv2.imshow(window_title, frame)
         key = cv2.waitKey(1) & 0xFF
         if key == ord('q'):
             break
-
-        # Output result as a single JSON line to stdout
-        # The ROS2 recognition node reads this line-by-line
-        print(json.dumps({
-            "label":      label,
-            "class_id":   int(result.get("class_id", -1)),
-            "confidence": conf,
-            "latency_ms": latency,
-        }), flush=True)
 
     cap.release()
     cv2.destroyAllWindows()

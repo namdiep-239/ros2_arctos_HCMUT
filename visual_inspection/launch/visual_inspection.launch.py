@@ -32,6 +32,8 @@ from moveit_configs_utils import MoveItConfigsBuilder
 def launch_setup(context, *args, **kwargs):
     pkg_share = get_package_share_directory('visual_inspection')
 
+    enable_metrics = LaunchConfiguration('enable_metrics').perform(context).lower() == 'true'
+
     # ── Resolve paths ──────────────────────────────────────────────────────────
     backend_script = os.path.join(pkg_share, 'scripts', 'inspection_inference_backend.py')
 
@@ -98,7 +100,23 @@ def launch_setup(context, *args, **kwargs):
         ],
     )
 
-    return [inspection_node, commander_node]
+    nodes = [inspection_node, commander_node]
+
+    if enable_metrics:
+        metrics_node = Node(
+            package='visual_inspection',
+            executable='inspection_metrics_node',
+            name='inspection_metrics_node',
+            output='screen',
+            parameters=[{
+                'confidence_threshold': 0.70,
+                'stats_interval_sec':   60.0,
+                'use_sim_time':         use_sim_time_bool,
+            }],
+        )
+        nodes.append(metrics_node)
+
+    return nodes
 
 
 def generate_launch_description():
@@ -122,6 +140,11 @@ def generate_launch_description():
             'use_sim_time',
             default_value='false',
             description='Use simulation clock (true for Gazebo, false for real hardware)'),
+
+        DeclareLaunchArgument(
+            'enable_metrics',
+            default_value='false',
+            description='Launch inspection_metrics_node for system-level performance logging'),
 
         OpaqueFunction(function=launch_setup),
     ])

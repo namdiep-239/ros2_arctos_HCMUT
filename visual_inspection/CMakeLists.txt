@@ -55,12 +55,17 @@ install(TARGETS inspection_commander_node
   DESTINATION lib/${PROJECT_NAME}
 )
 
-# ── Python bridge node ─────────────────────────────────────────────────────────
+# ── Python bridge node and metrics node ───────────────────────────────────────
 # Installed directly (not via ament_python_install_package — see NOTE above)
 install(PROGRAMS
   visual_inspection/inspection_node.py
   DESTINATION lib/${PROJECT_NAME}
   RENAME inspection_node
+)
+install(PROGRAMS
+  visual_inspection/inspection_metrics_node.py
+  DESTINATION lib/${PROJECT_NAME}
+  RENAME inspection_metrics_node
 )
 
 # ── Install scripts, launch, config ───────────────────────────────────────────

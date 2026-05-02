@@ -182,6 +182,7 @@ def main():
 
     # ── Main inference loop ───────────────────────────────────────────────────
     while running[0]:
+        capture_time = time.time()   # Unix timestamp of camera grab (for pipeline latency)
         ret, frame = cap.read()
         if not ret:
             break
@@ -203,10 +204,11 @@ def main():
 
         # Output JSON to stdout — one line per frame
         print(json.dumps({
-            "label":      label,
-            "class_id":   class_id,
-            "confidence": confidence,
-            "latency_ms": latency_ms,
+            "label":             label,
+            "class_id":          class_id,
+            "confidence":        confidence,
+            "latency_ms":        latency_ms,
+            "capture_time_unix": capture_time,
         }), flush=True)
 
     cap.release()
