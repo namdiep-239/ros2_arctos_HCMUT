@@ -2,7 +2,7 @@ from launch import LaunchDescription
 from launch.actions import RegisterEventHandler, DeclareLaunchArgument
 from launch.event_handlers import OnProcessExit
 from launch.actions import IncludeLaunchDescription, LogInfo
-from launch.launch_description_sources import PythonLaunchDescriptionSource
+from launch.launch_description_sources import FrontendLaunchDescriptionSource, PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration, PathJoinSubstitution, Command, FindExecutable
 from ament_index_python.packages import get_package_share_directory
 from launch_ros.actions import Node
@@ -154,6 +154,78 @@ def generate_launch_description():
             on_exit=[rviz_node, move_group_launch]
         )
     )
+
+    rosbridge_server = PathJoinSubstitution(
+        [get_package_share_directory('rosbridge_server'), 'launch', 'rosbridge_websocket_launch.xml']
+    )
+
+    rosbridge_server_launch = IncludeLaunchDescription(
+        FrontendLaunchDescriptionSource([rosbridge_server]),
+        launch_arguments={
+            'port': '9090',
+            'fragment_timeout': '600',
+            'unregister_timeout': '10.0',
+            'max_message_size': '100000000',
+            'default_call_service_timeout': '10.0',
+            'call_services_in_new_thread': 'true',
+            'send_action_goals_in_new_thread': 'true'
+        }.items()
+    )
+
+    camera_node_v4l2 = Node(
+        package='v4l2_camera',
+        executable='v4l2_camera_node',
+        name='v4l2_camera',
+        output='screen',
+        parameters=[
+            {
+                'video_device': '/dev/video0',     
+                'image_size': [640, 480],
+                'pixel_format': 'YUYV',             
+                'output_encoding': 'rgb8', 
+                'qos_overrides': {
+                    '/camera/image_raw': {
+                        'publisher': {
+                            'reliability': 'best_effort',
+                            'history': 'keep_last',
+                        }
+                    }
+                }
+            }
+        ],
+        remappings=[
+            ('image_raw', '/camera/image_raw'),
+            ('camera_info', '/camera/camera_info'),
+            ('image_raw/compressed', '/camera/image_raw/compressed'),
+        ]
+    )
+
+    camera_node_usbcam = Node(
+        package='usb_cam',
+        executable='usb_cam_node_exe',
+        name='usb_cam',
+        output='screen',
+        parameters=[
+            {
+                'video_device': '/dev/video0',
+                'image_width': 320,
+                'image_height': 240,
+                'pixel_format': 'mjpeg2rgb',
+                'camera_frame_id': 'camera_optical_frame',
+                'framerate': 30.0,
+                'brightness': 128,
+                'exposure_auto': 3,       # 3 = aperture priority auto
+                'autoexposure': True,
+            }
+        ],
+        remappings=[
+            ('image_raw', '/camera/image_raw'),
+            ('camera_info', '/camera/camera_info'),
+            ('image_raw/compressed', '/camera/image_raw/compressed'),
+        ]
+    )
+
+     # Load controller parameters
     
     return LaunchDescription([
         declare_use_sim_time,
@@ -166,6 +238,9 @@ def generate_launch_description():
         joint_state_broadcaster_spawner,
         delay_robot_arm_controller_spawner,
         delay_rviz_and_moveit_launch,
+        rosbridge_server_launch,
+        # camera_node_v4l2,
+        camera_node_usbcam,
         # Launch Arguments
         DeclareLaunchArgument(
             'use_sim_time',

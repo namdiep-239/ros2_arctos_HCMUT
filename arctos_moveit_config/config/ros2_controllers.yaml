@@ -45,8 +45,8 @@ denso_hand_controller:
   ros__parameters:
     joint: gripper_gear_right_joint
 
-    goal_tolerance: 0.05              # rad — tolerated error for declaring success (default 0.01 is too tight)
-    # stall_velocity_threshold: 0.001   # rad/s — velocity below this is considered stalling (default)
+    goal_tolerance: 0.1               # rad — tolerated error for declaring success (default 0.01 is too tight)
+    stall_velocity_threshold: 0.001   # rad/s — velocity below this is considered stalling (default)
     stall_timeout: 2.0                # seconds — how long to wait after stall before deciding abort/success
     action_monitor_rate: 10.0         # Hz — rate at which goal progress is evaluated
 
@@ -102,8 +102,8 @@ arctos_hardware_interface:
         gear_ratio: 1.0
         hardware_type: MKS_42D
         zero_position: -0.0
-        lower_limit: -120.0         # lower limit, in degree
-        upper_limit: 120.0          # upper limit, in degree
+        lower_limit: -90.0         # lower limit, in degree
+        upper_limit: 90.0          # upper limit, in degree
       C_joint:
         motor_id: 6
         requires_homing: false

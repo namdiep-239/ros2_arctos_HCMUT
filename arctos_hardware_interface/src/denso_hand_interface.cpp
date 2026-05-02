@@ -67,6 +67,8 @@ namespace denso_hand_interface
             node_->declare_parameter(param_prefix + "requires_homing", false);   // Default no homing needed
             node_->declare_parameter(param_prefix + "lower_limit", 0.0);
             node_->declare_parameter(param_prefix + "upper_limit", 0.0);
+            node_->declare_parameter(param_prefix + "velocity", 0.0);
+            node_->declare_parameter(param_prefix + "acceleration", 0.0);
 
             // Get motor ID from parameters
             int motor_id;
@@ -86,6 +88,18 @@ namespace denso_hand_interface
 
             RCLCPP_INFO(node_->get_logger(), "Configured joint %s with motor_id %d",
                         joint.name.c_str(), motor_id);
+
+            if (!node_->get_parameter(param_prefix + "velocity", velocity_))
+            {
+                RCLCPP_ERROR(node_->get_logger(), "Failed to get velocity for joint %s", joint.name.c_str());
+                return CallbackReturn::ERROR;
+            }
+
+            if (!node_->get_parameter(param_prefix + "acceleration", acceleration_))
+            {
+                RCLCPP_ERROR(node_->get_logger(), "Failed to get acceleration for joint %s", joint.name.c_str());
+                return CallbackReturn::ERROR;
+            }
 
             // Track available interfaces
             for (const auto &interface : joint.state_interfaces)
@@ -260,16 +274,28 @@ namespace denso_hand_interface
     It is called after *update* in the realtime loop.
     responsible for updating the data values of the *command_interfaces*
     */
-    return_type DensoHandInterface::write(const rclcpp::Time & /*time*/, const rclcpp::Duration & /*period*/)
+    return_type DensoHandInterface::write(const rclcpp::Time & /*time*/, const rclcpp::Duration & period)
     {
         static bool isPositionUpdated;
         isPositionUpdated = false;
+        static int FLUSH_DURATION = 10000000; // Flush every 10 seconds
+        static int loop_count = static_cast<int>(FLUSH_DURATION / period.nanoseconds());
         // Resize last command vectors if not already done
         if (last_position_command_.size() != info_.joints.size())
         {
             // force homing on first activation
             last_position_command_.resize(info_.joints.size(), -1.0); 
             RCLCPP_INFO(node_->get_logger(), "Initialized last command vectors.");
+        }
+
+        if (loop_count > 0)
+        {
+            loop_count--;
+        }
+        else
+        {
+            uart_protocol_->flush();
+            loop_count = static_cast<int>(FLUSH_DURATION / period.nanoseconds());
         }
 
         for (size_t i = 0; i < info_.joints.size(); i++)

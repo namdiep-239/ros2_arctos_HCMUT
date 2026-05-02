@@ -89,6 +89,7 @@ void UartProtocol::setup(const std::string &serial_device, int32_t baud_rate, in
             std::cerr << "UART: Opened connection on " << serial_device
                   << " at " << baud_rate << " bps with timeout " << timeout_ms << " ms\n";
         }
+        flush();
     } catch (const std::exception& e) {
         throw std::runtime_error(std::string("UART setup failed: ") + e.what());
     }
@@ -107,6 +108,25 @@ bool UartProtocol::sendEmptyMsg()
     return sendMsg("\r");
 }
 
+bool UartProtocol::flush()
+{
+    if (!this->connected())
+    {
+        //std::wcerr << "uart: flush: Serial not connected!\n";
+        return false;
+    }
+    try
+    {
+        serial_conn_.flush();
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << "uart: flush: " << e.what() << '\n';
+        return false;
+    }
+    return true;
+}
+
 /**
  * @brief Decodes a received UART message string into position values.
  * 
@@ -120,7 +140,7 @@ bool UartProtocol::sendEmptyMsg()
  * @note This function currently returns an empty vector - implementation needed
  *       based on the specific protocol format used by the connected device.
  */
-bool UartProtocol::decodeMessage(const std::string data, std::vector<double> &axes) {
+bool UartProtocol::decodeMessage(const std::string data, std::vector<double> &axes, bool with_length) {
     // decode the data here
     // Làm việc trên bản sao (đúng prototype nhận by-value)
     std::string line = data;
@@ -130,8 +150,34 @@ bool UartProtocol::decodeMessage(const std::string data, std::vector<double> &ax
         line.pop_back();
     }
 
+    // --- Optional length validation ---
+    // Wire format with length: "v1,v2,v3,v4,v5,v6#NN"
+    // NN = number of characters in the payload (everything before '#').
+    // RC5 PAC equivalent: IF VAL(RIGHT$(s, ...)) <> LEN(LEFT$(s, ...)) THEN discard
+    std::string payload = line;
+    if (with_length) {
+        const auto hash_pos = line.rfind('#');
+        if (hash_pos == std::string::npos) {
+            std::cerr << "decodeMessage: missing '#' length separator (data='" << line << "')\n";
+            return false;
+        }
+        payload = line.substr(0, hash_pos);
+        const std::string len_field = line.substr(hash_pos + 1);
+        char *len_end = nullptr;
+        const unsigned long reported_len = std::strtoul(len_field.c_str(), &len_end, 10);
+        if (len_end == len_field.c_str() || *len_end != '\0') {
+            std::cerr << "decodeMessage: invalid length field '" << len_field << "'\n";
+            return false;
+        }
+        if (reported_len != payload.size()) {
+            std::cerr << "decodeMessage: length mismatch (got " << reported_len
+                      << ", actual " << payload.size() << ")\n";
+            return false;
+        }
+    }
+
     // Tách theo DELIMITER, loại token rỗng và trim
-    std::vector<std::string> toks = split(line, delimChar());
+    std::vector<std::string> toks = split(payload, delimChar());
     std::vector<std::string> cleaned;
     cleaned.reserve(toks.size());
     for (auto &t : toks) {
@@ -172,21 +218,31 @@ bool UartProtocol::decodeMessage(const std::string data, std::vector<double> &ax
  * @note The message construction needs to be implemented based on the specific
  *       protocol format expected by the connected motor controller/device.
  */
-bool UartProtocol::sendPosition(std::vector<double> &positions) {
- if ((positions.size()) != 6) {
+bool UartProtocol::sendPosition(std::vector<double> &positions, bool with_length) {
+    if ((positions.size()) != 6) {
         std::cerr << "sendPosition: positions must have 6 elements, got "
                   << positions.size() << std::endl;
         return false;
     }
 
     std::ostringstream oss;
-    oss.flags(std::ios::fixed);
-    oss << (int) (positions[0] * 100.0);  // Chuyển sang int với 2 chữ số thập phân
+    oss << (int)(positions[0] * 100.0);
     for (size_t i = 1; i < 6; ++i) {
-        oss << DELIMITER << (int) (positions[i] * 100.0);
+        oss << DELIMITER << (int)(positions[i] * 100.0);
     }
-    oss << kEOL;
-    return sendMsg(oss.str());
+    const std::string payload = oss.str();
+
+    // Optionally append '#' followed by the payload character count.
+    // RC5 PAC sender equivalent:
+    //   S2 = STR$(val1) + "," + ... + "," + STR$(val6)
+    //   WRITE #1, S2 + "#" + STR$(LEN(S2)) + CR
+    std::string frame = payload;
+    if (with_length) {
+        frame += '#';
+        frame += std::to_string(payload.size());
+    }
+    frame += kEOL;
+    return sendMsg(frame);
 }
 
 /**

@@ -283,17 +283,19 @@ namespace arctos_interface
     It is called after *update* in the realtime loop.
     responsible for updating the data values of the *command_interfaces*
     */
-    return_type ArctosInterface::write(const rclcpp::Time & /*time*/, const rclcpp::Duration & /*period*/)
+    return_type ArctosInterface::write(const rclcpp::Time & /*time*/, const rclcpp::Duration & period)
     {
         // Reset trend after 5 cycles of no change
         static const int TREND_RESET_THRESHOLD = 5;
         // Number of consecutive increases/decreases to confirm trend
         static const int TREND_THRESHOLD = 2;
         // Delta increase in joint position to fill up the "empty slot"
-        static const float DELTA_COMMAND_INCREASE = 0.01;
+        // static const float DELTA_COMMAND_INCREASE = 0.01;
 
         static bool isPositionUpdated;
         isPositionUpdated = false;
+        static int FLUSH_DURATION = 10000000; // Flush every 10 seconds
+        static int loop_count = static_cast<int>(FLUSH_DURATION / period.nanoseconds());
         // TREND_THRESHOLD for increasing, -TREND_THRESHOLD for decreasing, 0 for unknown
         static std::vector<int> trend(info_.joints.size(), 0);
         // whether to allow position command to be sent, only set to true when trend changes or command changes significantly
@@ -311,6 +313,16 @@ namespace arctos_interface
             last_valid_position_command_.resize(info_.joints.size(), 0.0);
             last_velocity_command_.resize(info_.joints.size(), 0.0);
             RCLCPP_INFO(node_->get_logger(), "Initialized last command vectors.");
+        }
+
+        if (loop_count > 0)
+        {
+            loop_count--;
+        }
+        else
+        {
+            uart_protocol_->flush();
+            loop_count = static_cast<int>(FLUSH_DURATION / period.nanoseconds());
         }
 
         for (size_t i = 0; i < info_.joints.size(); i++)
@@ -377,19 +389,20 @@ namespace arctos_interface
                             {
                                 trend[i]++;
                                 RCLCPP_INFO(node_->get_logger(), "Learning increasing trend %s (trend: %d)", info_.joints[i].name.c_str(), trend[i]);
+                                allowPosition[i] = true;
                             }
                             else if (is_decreasing)
                             {
                                 trend[i]--;
                                 RCLCPP_INFO(node_->get_logger(), "Learning decreasing trend %s (trend: %d)", info_.joints[i].name.c_str(), trend[i]);
+                                allowPosition[i] = true;
                             }
-                            allowPosition[i] = true;
+                            
                         }
 
                         // Decide whether to send the position command based on trend analysis
                         if (allowPosition[i])
                         {
-
                             motor_driver_->setJointPosition(info_.joints[i].name, joint_position_command_[i], 0, abs(joint_velocities_command_[i] * 10) * 60);
                             RCLCPP_INFO(node_->get_logger(),
                                         "Sent position command %.5f rad to joint %s. Last command: %.5f.",
@@ -416,8 +429,8 @@ namespace arctos_interface
                             
                             motor_driver_->setJointPosition(info_.joints[i].name, last_valid_position_command_[i], 0, abs(joint_velocities_command_[i] * 10) * 60);
                             RCLCPP_INFO(node_->get_logger(),
-                                        "Sent [padding] for trend [%s], position command %.5f rad to joint %s. Last command: %.5f.",
-                                        trend_text.c_str(), last_valid_position_command_[i], info_.joints[i].name.c_str(),
+                                        "Sent [padding <%.5f>] for trend [%s], position command %.5f rad to joint %s. Last command: %.5f.",
+                                        delta_movement[i], trend_text.c_str(), last_valid_position_command_[i], info_.joints[i].name.c_str(),
                                         last_position_command_[i]);
                         }
                         isPositionUpdated = true;
@@ -438,7 +451,7 @@ namespace arctos_interface
                             RCLCPP_INFO(node_->get_logger(), "Resetting trend for joint %s after %d idle cycles",
                                         info_.joints[i].name.c_str(), idle_counter[i]);
                             trend[i] = 0;
-                            idle_counter[i] = 0;
+                            delta_movement[i] = 0.0;
                         }
                     }
                 }

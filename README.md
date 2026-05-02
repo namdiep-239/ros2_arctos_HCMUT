@@ -90,7 +90,7 @@ First, install the required dependencies:
 - `ros-humble-image-transport-plugins` for the image transport plugins (including image compression).
 
 ```bash
-sudo apt install can-utils python3-rosdep ros-humble-can-msgs ros-humble-ros2-control ros-humble-gz-ros2-control ros-humble-gz-ros2-control-demos ros-humble-gripper-controllers ros-humble-moveit-servo ros-humble-v4l2-camera ros-humble-rqt-image-view ros-humble-image-transport-plugins -y
+sudo apt install can-utils python3-rosdep ros-humble-can-msgs ros-humble-ros2-control ros-humble-gz-ros2-control ros-humble-gz-ros2-control-demos ros-humble-gripper-controllers ros-humble-moveit-servo ros-humble-v4l2-camera ros-humble-rqt-image-view ros-humble-image-transport-plugins ros-humble-rosbridge-server -y
 ```
 
 **Open new terminal**, then create a ROS2 workspace and clone the ROS2 Arctos repository inside the `src/` directory:
@@ -141,7 +141,7 @@ pyenv activate
 Install needed dependency for the project.
 
 ```bash
-pip install python-can ruamel.yaml rich keyboard catkin-pkg lark PyQt5 PySide2 empy==3.3.4
+pip install python-can ruamel.yaml rich keyboard catkin-pkg lark PyQt5 PySide2 empy==3.3.4 tornado numpy pyyaml jinja2 typeguard pymongo Pillow netifaces cbor2
 ```
 
 ### Building the Workspace
@@ -192,6 +192,13 @@ You should now have the workspace built and ready to use.
 
 ### Getting Started
 
+Make sure to always source the workspace that we've just built before running:
+
+```bash
+cd ~/ros2_ws
+source install/setup.bash
+```
+
 #### Launch the robot
 
 To launch the robot with real hardware, run the launch file `arctos_bringup.launch.py`:
@@ -204,6 +211,26 @@ To launch the robot with gazebo sim, run the launch file `gz_arctos_bringup.laun
 
 ```bash
 ros2 launch arctos_bringup gz_arctos_bringup.launch.py use_sim_time:=true
+```
+
+#### Launch the supporting packages for extra functionality:
+
+To launch MoveToPose action server, that support receiving a Pose or a Joint, and planning-execute the robot to reach that Pose/Joints:
+
+```bash
+ros2 launch denso_remote_control remote_control.launch.py use_sim_time:=false
+```
+
+To launch real-time servo, allowing to rotate each joint (and hopefully, rotate by axis of effector), launch moveit_servo by:
+
+```bash
+ros2 launch denso_moveit_servo denso_moveit_servo.launch.py use_sim_time:=false
+```
+
+To communicate with Unity via Ros-sharp, use:
+
+```bash
+ros2 launch file_server2 ros_sharp_communication.launch.py
 ```
 
 ## Individual Package READMEs
