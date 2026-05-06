@@ -92,13 +92,6 @@ def generate_launch_description():
         arguments=["denso_hand_controller", "--controller-manager", "/controller_manager"],
     )
 
-    # # Include CAN Launch
-    # can_launch = IncludeLaunchDescription(
-    #     PythonLaunchDescriptionSource(
-    #         PathJoinSubstitution([arctos_hardware_interface_dir, "launch", "can_interface.launch.py"])
-    #     )
-    # )
-
     # Include MoveIt Launch
     move_group_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
@@ -121,6 +114,64 @@ def generate_launch_description():
             on_exit=[rviz_node, move_group_launch]
         ))
     
+    camera_node1 = Node(
+        package='v4l2_camera',
+        executable='v4l2_camera_node',
+        name='v4l2_camera_1',
+        output='screen',
+        parameters=[
+            {
+                'video_device': '/dev/video2',     
+                'image_size': [640, 480],
+                'pixel_format': 'YUYV',             
+                'output_encoding': 'rgb8', 
+                'qos_overrides': {
+                    '/camera/image_raw': {
+                        'publisher': {
+                            'reliability': 'best_effort',
+                            'history': 'keep_last',
+                            'depth': 100,
+                        }
+                    }
+                }
+            }
+        ],
+        remappings=[
+            ('image_raw', '/camera_1/image_raw'),
+            ('camera_info', '/camera_1/camera_info'),
+            ('image_raw/compressed', '/camera_1/image_raw/compressed'),
+        ]
+    )
+
+    camera_node2 = Node(
+        package='v4l2_camera',
+        executable='v4l2_camera_node',
+        name='v4l2_camera_2',
+        output='screen',
+        parameters=[
+            {
+                'video_device': '/dev/video4',     
+                'image_size': [640, 480],
+                'pixel_format': 'YUYV',             
+                'output_encoding': 'rgb8', 
+                'qos_overrides': {
+                    '/camera/image_raw': {
+                        'publisher': {
+                            'reliability': 'best_effort',
+                            'history': 'keep_last',
+                            'depth': 100,
+                        }
+                    }
+                }
+            }
+        ],
+        remappings=[
+            ('image_raw', '/camera_2/image_raw'),
+            ('camera_info', '/camera_2/camera_info'),
+            ('image_raw/compressed', '/camera_2/image_raw/compressed'),
+        ]
+    )
+    
     return LaunchDescription([
         LogInfo(msg=["Launching Arctos Bringup with RViz..."]),
         control_node,
@@ -128,5 +179,6 @@ def generate_launch_description():
         joint_state_broadcaster_spawner,
         delay_robot_arm_controller_spawner,
         delay_rviz_and_moveit_launch,
+        # camera_node,
         # can_launch
     ])

@@ -4,15 +4,8 @@
     "none",
     "open",
     "point",
-    "thumbs_up"
+    "thumbs-up"
   ],
-  "num_classes": 5,
-  "image_size": [
-    224,
-    224
-  ],
-  "test_accuracy": 0.8891,
-  "model_type": "MobileNetV2",
-  "framework": "TensorFlow",
-  "optimized_for": "Google Coral EdgeTPU"
+  "image_size": 224,
+  "num_classes": 5
 }

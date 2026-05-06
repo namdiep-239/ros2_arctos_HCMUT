@@ -16,11 +16,18 @@
  *   /gesture_command    (std_msgs/String)   — executed gesture label, for monitoring
  *
  * Gesture mapping:
- *   thumbs_up → MoveIt2 named pose "home"
- *   point     → Y_joint + point_delta_rad (raise arm)
- *   open      → Right_finger_joint → gripper_open_pos
- *   fist      → Right_finger_joint → gripper_closed_pos
+ *   thumbs-up → MoveIt2 named pose "home"
+ *   point     → Z_joint + point_delta_rad (elbow forward)
+ *   open      → gripper_gear_right_joint → gripper_open_pos  (1.40 rad, wide open)
+ *   fist      → gripper_gear_right_joint → gripper_closed_pos (0.05 rad, gentle grip)
  *   none      → move_group.stop() / servo auto-halt
+ *
+ * Performance metrics logged every 10 s via logPerformanceStats():
+ *   - Detection counts: received / conf_rejected / stability_pending /
+ *     stability_rejected / cooldown_rejected / exec_blocked / executed / plan_failed
+ *   - Command acceptance rate  (executed / received * 100 %)
+ *   - Mean pipe latency  (camera frame capture → gestureCallback, via capture_time_unix)
+ *   - Mean execution latency  (command dispatch → motion complete)
  */
 
 #include <rclcpp/rclcpp.hpp>
@@ -48,9 +55,9 @@ using GripperCommandAction = control_msgs::action::GripperCommand;
 using MoveGroupInterface   = moveit::planning_interface::MoveGroupInterface;
 using Trigger              = std_srvs::srv::Trigger;
 
-// Y_joint limits (degrees → radians, from ros2_controllers.yaml)
-static constexpr double Y_LOWER_RAD = -100.0 * M_PI / 180.0;   // -1.7453 rad
-static constexpr double Y_UPPER_RAD =  135.0 * M_PI / 180.0;   //  2.3562 rad
+// Z_joint limits (degrees → radians, from ros2_controllers.yaml)
+static constexpr double Z_LOWER_RAD = -119.0 * M_PI / 180.0;   // -2.0769 rad
+static constexpr double Z_UPPER_RAD =  169.0 * M_PI / 180.0;   //  2.9496 rad
 
 // Servo JointJog publish rate (must be > 1/incoming_command_timeout = 10 Hz)
 static constexpr int SERVO_PUBLISH_HZ = 20;
@@ -103,13 +110,20 @@ public:
         "/denso_moveit_servo_node/start_servo");
       servo_stop_client_  = this->create_client<Trigger>(
         "/denso_moveit_servo_node/stop_servo");
-      RCLCPP_INFO(this->get_logger(), "Servo mode enabled — JointJog on /denso_moveit_servo_node/delta_joint_cmds");
+      RCLCPP_INFO(this->get_logger(),
+        "Servo mode enabled — JointJog on /denso_moveit_servo_node/delta_joint_cmds");
     }
 
     last_command_time_ = this->now();
 
-    RCLCPP_INFO(this->get_logger(), "GestureCommanderNode created [use_servo=%s] (move_group not yet ready)",
-                use_servo_ ? "true" : "false");
+    // ── Performance stats timer — fires every 10 s ───────────────────────────
+    stats_timer_ = this->create_wall_timer(
+      std::chrono::seconds(10),
+      std::bind(&GestureCommanderNode::logPerformanceStats, this));
+
+    RCLCPP_INFO(this->get_logger(),
+      "GestureCommanderNode created [use_servo=%s] (move_group not yet ready)",
+      use_servo_ ? "true" : "false");
   }
 
   /**
@@ -123,8 +137,8 @@ public:
     move_group_->setMaxVelocityScalingFactor(0.3);
     move_group_->setMaxAccelerationScalingFactor(0.3);
     RCLCPP_INFO(this->get_logger(),
-                "MoveGroupInterface ready  [group=denso_arm  planning_frame=%s]",
-                move_group_->getPlanningFrame().c_str());
+      "MoveGroupInterface ready  [group=denso_arm  planning_frame=%s]",
+      move_group_->getPlanningFrame().c_str());
 
     if (use_servo_) {
       callServoService(servo_start_client_, "start_servo");
@@ -161,6 +175,34 @@ private:
   // ── MoveIt2 ─────────────────────────────────────────────────────────────────
   std::shared_ptr<MoveGroupInterface> move_group_;
 
+  // ── Performance counters (lock-free — all atomic) ───────────────────────────
+  // received         : every detection that passes the move_group guard
+  // conf_rejected    : dropped due to confidence < threshold
+  // stability_pending: buffer not yet full (warming up after gesture change)
+  // stability_rejected: buffer full but not all frames match (unstable gesture)
+  // cooldown_rejected: within command_cooldown_sec of the last command
+  // exec_blocked     : previous command still executing
+  // executed         : commands actually dispatched
+  // plan_failed      : MoveIt planning returned non-SUCCESS
+  std::atomic<uint64_t> stat_received_{0};
+  std::atomic<uint64_t> stat_conf_rejected_{0};
+  std::atomic<uint64_t> stat_stability_pending_{0};
+  std::atomic<uint64_t> stat_stability_rejected_{0};
+  std::atomic<uint64_t> stat_cooldown_rejected_{0};
+  std::atomic<uint64_t> stat_exec_blocked_{0};
+  std::atomic<uint64_t> stat_executed_{0};
+  std::atomic<uint64_t> stat_plan_failed_{0};
+
+  // ── Latency accumulators (guarded by stats_mutex_) ──────────────────────────
+  std::mutex   stats_mutex_;
+  double       pipe_latency_sum_ms_ = 0.0;   // camera capture → this callback
+  uint64_t     pipe_latency_count_  = 0;
+  double       exec_latency_sum_ms_ = 0.0;   // command dispatch → motion complete
+  uint64_t     exec_latency_count_  = 0;
+
+  // ── Stats timer ──────────────────────────────────────────────────────────────
+  rclcpp::TimerBase::SharedPtr stats_timer_;
+
   // ── Servo helper ────────────────────────────────────────────────────────────
 
   void callServoService(rclcpp::Client<Trigger>::SharedPtr client, const std::string & name)
@@ -181,12 +223,15 @@ private:
       return;  // Not yet initialised
     }
 
-    // 1. Filter by confidence
+    stat_received_++;
+
+    // 1. Confidence filter
     if (msg.confidence < static_cast<float>(confidence_threshold_)) {
+      stat_conf_rejected_++;
       return;
     }
 
-    // 2. Update rolling buffer
+    // 2. Rolling stability buffer
     std::string gesture;
     {
       std::lock_guard<std::mutex> lock(buffer_mutex_);
@@ -195,53 +240,117 @@ private:
         gesture_buffer_.pop_front();
       }
       if (static_cast<int>(gesture_buffer_.size()) < stability_frames_) {
+        stat_stability_pending_++;
         return;
       }
 
-      // 3. Check stability: all N entries must be the same
+      // All N entries must agree on the same label
       const std::string & front = gesture_buffer_.front();
       bool all_same = std::all_of(
         gesture_buffer_.begin(), gesture_buffer_.end(),
         [&front](const std::string & s) { return s == front; });
       if (!all_same) {
+        stat_stability_rejected_++;
         return;
       }
       gesture = front;
     }
 
-    // 4. Check cooldown
+    // 3. Cooldown
     double elapsed = (this->now() - last_command_time_).seconds();
     if (elapsed < command_cooldown_sec_) {
+      stat_cooldown_rejected_++;
       return;
     }
 
-    // 5. Skip if a command is already executing
+    // 4. Execution gate
     if (executing_.load()) {
+      stat_exec_blocked_++;
       return;
     }
 
-    // 6. Commit: reset state, launch execution thread
+    // 5. Commit: lock in state before spawning thread
     last_command_time_ = this->now();
     {
       std::lock_guard<std::mutex> lock(buffer_mutex_);
       gesture_buffer_.clear();
     }
     executing_ = true;
+    stat_executed_++;
 
-    RCLCPP_INFO(this->get_logger(),
-                "Gesture triggered: '%s'  (conf=%.2f)", gesture.c_str(), msg.confidence);
+    // Pipe latency: camera frame grab → this callback arrival.
+    // capture_time_unix is Unix epoch (s) from the inference backend.
+    // Only valid when use_sim_time is false (real hardware clock).
+    if (msg.capture_time_unix > 0.0) {
+      double now_unix = std::chrono::duration<double>(
+        std::chrono::system_clock::now().time_since_epoch()).count();
+      double pipe_ms = (now_unix - msg.capture_time_unix) * 1000.0;
+      RCLCPP_INFO(this->get_logger(),
+        "Gesture '%s' triggered  conf=%.2f  pipe_latency=%.0f ms",
+        gesture.c_str(), msg.confidence, pipe_ms);
+      {
+        std::lock_guard<std::mutex> lk(stats_mutex_);
+        pipe_latency_sum_ms_ += pipe_ms;
+        pipe_latency_count_++;
+      }
+    } else {
+      RCLCPP_INFO(this->get_logger(),
+        "Gesture '%s' triggered  conf=%.2f", gesture.c_str(), msg.confidence);
+    }
 
     std::thread([this, gesture]() {
+      auto t0 = std::chrono::steady_clock::now();
       executeCommand(gesture);
+      double exec_ms = std::chrono::duration<double, std::milli>(
+        std::chrono::steady_clock::now() - t0).count();
+      RCLCPP_INFO(this->get_logger(),
+        "Command '%s' done in %.0f ms", gesture.c_str(), exec_ms);
+      {
+        std::lock_guard<std::mutex> lk(stats_mutex_);
+        exec_latency_sum_ms_ += exec_ms;
+        exec_latency_count_++;
+      }
       executing_ = false;
     }).detach();
+  }
+
+  // ── Performance stats ────────────────────────────────────────────────────────
+
+  void logPerformanceStats()
+  {
+    uint64_t rx   = stat_received_.load();
+    uint64_t conf = stat_conf_rejected_.load();
+    uint64_t pend = stat_stability_pending_.load();
+    uint64_t stab = stat_stability_rejected_.load();
+    uint64_t cool = stat_cooldown_rejected_.load();
+    uint64_t blk  = stat_exec_blocked_.load();
+    uint64_t exec = stat_executed_.load();
+    uint64_t fail = stat_plan_failed_.load();
+    double   accept = (rx > 0) ? static_cast<double>(exec) / rx * 100.0 : 0.0;
+
+    RCLCPP_INFO(this->get_logger(),
+      "[PERF] rx=%lu  conf_rej=%lu  pend=%lu  stab_rej=%lu  "
+      "cool_rej=%lu  blk=%lu  exec=%lu  plan_fail=%lu  accept=%.1f%%",
+      rx, conf, pend, stab, cool, blk, exec, fail, accept);
+
+    std::lock_guard<std::mutex> lk(stats_mutex_);
+    if (pipe_latency_count_ > 0) {
+      RCLCPP_INFO(this->get_logger(),
+        "[PERF] pipe_latency  avg=%.0f ms  n=%lu",
+        pipe_latency_sum_ms_ / pipe_latency_count_, pipe_latency_count_);
+    }
+    if (exec_latency_count_ > 0) {
+      RCLCPP_INFO(this->get_logger(),
+        "[PERF] exec_latency  avg=%.0f ms  n=%lu",
+        exec_latency_sum_ms_ / exec_latency_count_, exec_latency_count_);
+    }
   }
 
   // ── Command dispatch ────────────────────────────────────────────────────────
 
   void executeCommand(const std::string & gesture)
   {
-    if      (gesture == "thumbs_up") { executeHome();                       }
+    if      (gesture == "thumbs-up") { executeHome();                       }
     else if (gesture == "point")     { executePoint();                      }
     else if (gesture == "open")      { executeGripper(gripper_open_pos_);   }
     else if (gesture == "fist")      { executeGripper(gripper_closed_pos_); }
@@ -275,6 +384,7 @@ private:
       move_group_->execute(plan);
       RCLCPP_INFO(this->get_logger(), "Home pose reached.");
     } else {
+      stat_plan_failed_++;
       RCLCPP_WARN(this->get_logger(), "Failed to plan home pose.");
     }
 
@@ -297,7 +407,7 @@ private:
   void executePointMoveIt()
   {
     RCLCPP_INFO(this->get_logger(),
-                "Raising arm via MoveIt (Y_joint += %.3f rad)...", point_delta_rad_);
+      "Moving arm via MoveIt (Z_joint += %.3f rad)...", point_delta_rad_);
 
     auto current_state = move_group_->getCurrentState(5.0);
     if (!current_state) {
@@ -310,17 +420,18 @@ private:
     current_state->copyJointGroupPositions(jmg, joint_values);
 
     const auto & joint_names = jmg->getVariableNames();
-    auto it = std::find(joint_names.begin(), joint_names.end(), "Y_joint");
+    auto it = std::find(joint_names.begin(), joint_names.end(), "Z_joint");
     if (it == joint_names.end()) {
-      RCLCPP_ERROR(this->get_logger(), "Y_joint not found in 'denso_arm' group.");
+      RCLCPP_ERROR(this->get_logger(), "Z_joint not found in 'denso_arm' group.");
       return;
     }
-    const size_t y_idx = static_cast<size_t>(std::distance(joint_names.begin(), it));
+    const size_t z_idx = static_cast<size_t>(std::distance(joint_names.begin(), it));
 
-    const double current_y = joint_values[y_idx];
-    joint_values[y_idx] = std::clamp(current_y + point_delta_rad_, Y_LOWER_RAD, Y_UPPER_RAD);
+    const double current_z = joint_values[z_idx];
+    joint_values[z_idx] = std::clamp(current_z + point_delta_rad_, Z_LOWER_RAD, Z_UPPER_RAD);
 
-    RCLCPP_INFO(this->get_logger(), "Y_joint: %.4f → %.4f rad", current_y, joint_values[y_idx]);
+    RCLCPP_INFO(this->get_logger(),
+      "Z_joint: %.4f → %.4f rad", current_z, joint_values[z_idx]);
 
     move_group_->setJointValueTarget(joint_values);
     MoveGroupInterface::Plan plan;
@@ -328,6 +439,7 @@ private:
       move_group_->execute(plan);
       RCLCPP_INFO(this->get_logger(), "Arm raised.");
     } else {
+      stat_plan_failed_++;
       RCLCPP_WARN(this->get_logger(), "Failed to plan arm raise.");
     }
   }
@@ -336,13 +448,13 @@ private:
   // No planning — arm starts moving within one servo publish_period (~150ms)
   void executePointServo()
   {
-    const double velocity  = (point_delta_rad_ >= 0) ? point_velocity_rad_s_ : -point_velocity_rad_s_;
+    const double velocity   = (point_delta_rad_ >= 0) ? point_velocity_rad_s_ : -point_velocity_rad_s_;
     const double duration_s = std::abs(point_delta_rad_) / std::abs(point_velocity_rad_s_);
     const int    steps      = static_cast<int>(duration_s * SERVO_PUBLISH_HZ) + 1;
 
     RCLCPP_INFO(this->get_logger(),
-                "Raising arm via Servo (Z_joint %.3f rad/s for %.2fs, %d steps)...",
-                velocity, duration_s, steps);
+      "Raising arm via Servo (Z_joint %.3f rad/s for %.2fs, %d steps)...",
+      velocity, duration_s, steps);
 
     control_msgs::msg::JointJog jog;
     jog.header.frame_id = "base_link";
@@ -364,8 +476,7 @@ private:
   {
     if (!gripper_client_->wait_for_action_server(std::chrono::seconds(2))) {
       RCLCPP_WARN(this->get_logger(),
-                  "Gripper action server not available: "
-                  "/denso_hand_controller/gripper_cmd");
+        "Gripper action server not available: /denso_hand_controller/gripper_cmd");
       return;
     }
 

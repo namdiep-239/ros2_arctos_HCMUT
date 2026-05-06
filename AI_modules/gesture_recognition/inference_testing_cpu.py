@@ -54,7 +54,7 @@ class GestureCPUInference:
         input_tensor = np.expand_dims(input_tensor, axis=0)
 
         start = time.perf_counter()
-        predictions = self.model.predict(input_tensor, verbose=0)
+        predictions = self.model(input_tensor, training=False).numpy()
         latency = (time.perf_counter() - start) * 1000  # ms
 
         class_id = np.argmax(predictions[0])

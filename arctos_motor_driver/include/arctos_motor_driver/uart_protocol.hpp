@@ -34,20 +34,32 @@ public:
     /// @brief Check if serial connection is established and active
     bool connected() const { return serial_conn_.isOpen(); }
 
+    /// flush the serial connection buffers to maintain stable communication.
+    bool flush();
+
     /// @brief Read incoming UART data and store in receive buffer
-    void readToBuffer();
+    void readToBuffer(bool debug);
     
     /// @brief Get oldest message from buffer (FIFO) and remove it
     std::string getFromBuffer();
 
     /// @brief Decode received message string into position values vector, return true for success decode.
-    bool decodeMessage(const std::string data, std::vector<double> &axes);
+    /// If with_length is true, expects format "payload#LEN" and validates payload length.
+    bool decodeMessage(const std::string data, std::vector<double> &axes, bool with_length = false);
     
-    /// @brief Format position vector into message string and send via UART
-    bool sendPosition(std::vector<double> &positions);
+    /// @brief Format position vector into message string and send via UART.
+    /// If with_length is true, appends "#LEN" where LEN is the payload character count.
+    bool sendPosition(std::vector<double> &positions, bool with_length = false);
     
     /// @brief Send empty message (carriage return) as keep-alive or wake-up signal
     bool sendEmptyMsg();
+
+    /// @brief Low-level message transmission helper function
+    bool sendMsg(const std::string &msg_to_send);
+
+    /// @brief Low-level message transmission helper function appending EOL
+    bool sendMsgRaw(const std::string &msg_to_send_without_eol);
+    
 private:
     /// @brief Serial connection object for UART communication
     serial::Serial serial_conn_;
@@ -55,8 +67,7 @@ private:
     /// @brief FIFO buffer queue for storing received messages
     std::queue<std::string> rev_buffer_;
     
-    /// @brief Low-level message transmission helper function
-    bool sendMsg(const std::string &msg_to_send);
+
 };
 
 } // namespace arctos_motor_driver

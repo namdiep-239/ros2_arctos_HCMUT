@@ -8,6 +8,7 @@
 #include <memory>
 #include <queue>
 #include <thread>
+#include <atomic>
 
 #include "arctos_motor_driver/motor_driver.hpp"
 #include "arctos_motor_driver/uart_protocol.hpp"
@@ -50,6 +51,8 @@ public:
 protected:
   // Tracking of last commanded positions and velocities
   std::vector<double> last_position_command_;
+  //last valid position command store the highest position command that has been sent to the motor, which is used for trend analysis and filtering.
+  std::vector<double> last_valid_position_command_;
   std::vector<double> last_velocity_command_;
   
   // Tolerance values for filtering commands
@@ -85,7 +88,7 @@ private:
 
   // std::queue<can_msgs::msg::Frame::SharedPtr> can_message_queue_;
   std::thread spinThread;
-  bool allowSpin;
+  std::atomic<bool> allowSpin;
 
   // Helper functions for motor initialization
   void initializeMotors();

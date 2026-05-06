@@ -23,7 +23,7 @@ def generate_launch_description():
         .to_moveit_configs()
     )
 
-    use_sim_time = LaunchConfiguration('use_sim_time', default='true')
+    use_sim_time = LaunchConfiguration('use_sim_time', default='false')
 
     declare_use_sim_time = DeclareLaunchArgument(
         'use_sim_time',

@@ -1,5 +1,7 @@
 # Request
 geometry_msgs/Pose pose
+float64[] joints
+bool use_pose
 ---
 #Result
 bool completed

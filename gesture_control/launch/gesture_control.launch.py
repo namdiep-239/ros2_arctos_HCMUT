@@ -1,21 +1,25 @@
 """
 gesture_control.launch.py
 
-Launches both gesture_control nodes:
+Launches the gesture_control nodes:
   1. gesture_recognition_node  — Python 3.10, spawns inference backend subprocess
   2. gesture_commander_node    — C++, MoveGroupInterface + gripper action client
+  3. gesture_metrics_node      — Python 3.10, CSV + JSON performance logger
+                                 (disabled with  enable_metrics:=false)
 
 Launch arguments:
-  inference_mode   edgetpu | cpu   (default: cpu)
-  camera_id        int              (default: 0)
-  python_binary    path             (default: gesture_env Python 3.9.17)
-  use_sim_time     true | false     (default: false — set true for Gazebo)
+  inference_mode    edgetpu | cpu       (default: cpu)
+  camera_id         int                 (default: 0)
+  python_binary     path                (default: gesture_env Python 3.9.17)
+  use_sim_time      true | false        (default: false — set true for Gazebo)
+  enable_metrics    true | false        (default: true)
 """
 
 import os
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument
+from launch.conditions import IfCondition
 from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
 from moveit_configs_utils import MoveItConfigsBuilder
@@ -25,7 +29,6 @@ def generate_launch_description():
     pkg_share = get_package_share_directory('gesture_control')
 
     # ── Resolve paths ─────────────────────────────────────────────────────────
-    # Backend script is installed under the package share directory
     backend_script = os.path.join(pkg_share, 'scripts', 'gesture_inference_backend.py')
 
     # AI models live in the workspace source tree (not installed to avoid
@@ -37,15 +40,12 @@ def generate_launch_description():
         'AI_modules', 'gesture_recognition', 'models'
     )
     edgetpu_model = os.path.join(ai_module_models, 'gesture_retrained_int8_edgetpu.tflite')
-    cpu_model     = os.path.join(ai_module_models, 'gesture_retrained.h5')
+    cpu_model     = os.path.join(ai_module_models, 'gesture_best.h5')
     metadata      = os.path.join(ai_module_models, 'model_metadata.json')
 
-    # Config file
     gesture_config = os.path.join(pkg_share, 'config', 'gesture_config.yaml')
 
     # ── Robot description (needed by MoveGroupInterface) ──────────────────────
-    # Use the real-hardware URDF xacro — the kinematic model is identical to
-    # the Gazebo variant; only the hardware plugin differs, which MoveIt doesn't need.
     moveit_config = (
         MoveItConfigsBuilder("arctos", package_name="arctos_moveit_config")
         .robot_description(file_path="config/arctos.urdf.xacro")
@@ -74,14 +74,18 @@ def generate_launch_description():
         default_value='false',
         description='Use simulation clock (true for Gazebo, false for real hardware)')
 
+    enable_metrics_arg = DeclareLaunchArgument(
+        'enable_metrics',
+        default_value='true',
+        description='Launch the gesture_metrics_node (CSV + JSON performance logger)')
+
     inference_mode = LaunchConfiguration('inference_mode')
     camera_id      = LaunchConfiguration('camera_id')
     python_binary  = LaunchConfiguration('python_binary')
     use_sim_time   = LaunchConfiguration('use_sim_time')
+    enable_metrics = LaunchConfiguration('enable_metrics')
 
     # ── Node: gesture_recognition_node (Python 3.10) ──────────────────────────
-    # Model path is chosen by inference_mode at runtime inside the node
-    # (both paths are passed; the backend script uses the one for its mode)
     recognition_node = Node(
         package='gesture_control',
         executable='gesture_recognition_node',
@@ -114,11 +118,28 @@ def generate_launch_description():
         ],
     )
 
+    # ── Node: gesture_metrics_node (Python 3.10, optional) ───────────────────
+    metrics_node = Node(
+        package='gesture_control',
+        executable='gesture_metrics_node',
+        name='gesture_metrics_node',
+        output='screen',
+        condition=IfCondition(enable_metrics),
+        parameters=[{
+            'confidence_threshold': 0.70,
+            'log_dir':              os.path.expanduser('~/gesture_metrics'),
+            'stats_interval_sec':   30.0,
+            'use_sim_time':         use_sim_time,
+        }],
+    )
+
     return LaunchDescription([
         inference_mode_arg,
         camera_id_arg,
         python_binary_arg,
         use_sim_time_arg,
+        enable_metrics_arg,
         recognition_node,
         commander_node,
+        metrics_node,
     ])

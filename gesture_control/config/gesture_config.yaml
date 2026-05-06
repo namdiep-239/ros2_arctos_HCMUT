@@ -10,15 +10,15 @@ gesture_commander_node:
     # Minimum seconds between two successive commands (cooldown)
     command_cooldown_sec: 2.0
 
-    # Y_joint increment per "point" gesture (radians, ~17 degrees)
-    # Positive = raise arm. Clamped to hardware limits (-100° … +135°).
+    # Z_joint increment per "point" gesture (radians, ~17 degrees)
+    # Positive = elbow forward. Clamped to hardware limits (-119° … +169°).
     point_delta_rad: 0.3
 
-    # Right_finger_joint target positions (radians)
-    # Hardware limits: 0.002 (open) … 0.054 (closed)  — from arctos.ros2_control.xacro
-    # SRDF named states: open=0.002, close=0.054
-    gripper_open_pos: 0.002
-    gripper_closed_pos: 0.054
+    # gripper_gear_right_joint target positions (radians)
+    # Hardware limits: 0.02 (closed) … 1.4835 (fully open) — from arctos_gripper.xacro
+    # SRDF named states: close=0.02, open=1.4835
+    gripper_open_pos: 1.40      # wide open — jaws apart to release / reach object
+    gripper_closed_pos: 0.05    # gentle grip — just above minimum (0.02) for gripping
 
     # ── Servo mode ────────────────────────────────────────────────────────────
     # Set use_servo: true to use MoveIt Servo for 'point' (low latency, no planning).

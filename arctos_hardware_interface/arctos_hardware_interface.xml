@@ -7,4 +7,9 @@
     base_class_type="hardware_interface::SystemInterface">
     <description>The Arctos hardware interface for ROS 2 Control</description>
   </class>
+  <class name="denso_hand_interface/DensoHandInterface"
+    type="denso_hand_interface::DensoHandInterface"
+    base_class_type="hardware_interface::SystemInterface">
+    <description>The Denso hand hardware interface for ROS 2 Control</description>
+  </class>
 </library>

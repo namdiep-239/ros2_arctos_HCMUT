@@ -153,11 +153,12 @@ class GestureRecognitionNode(Node):
             return
 
         msg = GestureDetection()
-        msg.header.stamp = self.get_clock().now().to_msg()
-        msg.label      = str(latest.get('label', 'none'))
-        msg.class_id   = int(latest.get('class_id', -1))
-        msg.confidence = float(latest.get('confidence', 0.0))
-        msg.latency_ms = float(latest.get('latency_ms', 0.0))
+        msg.header.stamp      = self.get_clock().now().to_msg()
+        msg.label             = str(latest.get('label', 'none'))
+        msg.class_id          = int(latest.get('class_id', -1))
+        msg.confidence        = float(latest.get('confidence', 0.0))
+        msg.latency_ms        = float(latest.get('latency_ms', 0.0))
+        msg.capture_time_unix = float(latest.get('capture_time_unix', 0.0))
 
         self.pub.publish(msg)
 
@@ -182,11 +183,15 @@ def main(args=None):
     node = GestureRecognitionNode()
     try:
         rclpy.spin(node)
-    except KeyboardInterrupt:
+    except (KeyboardInterrupt, RuntimeError):
+        # RuntimeError covers the Humble shutdown race on use_sim_time:=true
         pass
     finally:
         node.destroy_node()
-        rclpy.shutdown()
+        try:
+            rclpy.shutdown()
+        except Exception:
+            pass
 
 
 if __name__ == '__main__':
