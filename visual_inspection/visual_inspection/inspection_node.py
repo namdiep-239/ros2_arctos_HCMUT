@@ -40,6 +40,7 @@ class InspectionNode(Node):
         self.declare_parameter('metadata_path', '')
         self.declare_parameter('camera_id', -1)   # -1 = auto-detect
         self.declare_parameter('publish_rate', 10.0)
+        self.declare_parameter('zoom', 1.0)       # digital center-crop zoom factor
 
         self.inference_mode    = self.get_parameter('inference_mode').value
         self.python_binary     = self.get_parameter('python_binary').value
@@ -50,6 +51,7 @@ class InspectionNode(Node):
         self.metadata_path     = self.get_parameter('metadata_path').value
         self.camera_id         = self.get_parameter('camera_id').value
         publish_rate           = self.get_parameter('publish_rate').value
+        self.zoom              = self.get_parameter('zoom').value
 
         # Select model path based on mode
         mode_model = {
@@ -97,6 +99,8 @@ class InspectionNode(Node):
         ]
         if self.camera_id >= 0:
             cmd += ['--camera-id', str(self.camera_id)]
+        if self.zoom > 1.0:
+            cmd += ['--zoom', str(self.zoom)]
 
         self.get_logger().info('Launching inference backend: ' + ' '.join(cmd))
         try:

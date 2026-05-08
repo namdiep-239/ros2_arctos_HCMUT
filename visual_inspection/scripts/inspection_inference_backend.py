@@ -63,6 +63,9 @@ def main():
                         help="Path to model_metadata.json")
     parser.add_argument("--camera-id", type=int, default=None,
                         help="OpenCV camera device index (auto-detect if omitted)")
+    parser.add_argument("--zoom", type=float, default=1.0,
+                        help="Digital center-crop zoom factor (e.g. 2.0 = 2x). "
+                             "Crops the centre 1/zoom of the frame before inference.")
     args = parser.parse_args()
 
     # ── Load metadata ─────────────────────────────────────────────────────────
@@ -155,6 +158,21 @@ def main():
             pred_idx = int(np.argmax(output))
             return class_names[pred_idx], pred_idx, float(output[pred_idx]), latency_ms
 
+    # ── Zoom helper ───────────────────────────────────────────────────────────
+    zoom_factor = max(1.0, args.zoom)
+
+    def apply_zoom(frame):
+        """Center-crop by zoom_factor then scale back to original resolution."""
+        if zoom_factor <= 1.0:
+            return frame
+        h, w = frame.shape[:2]
+        crop_h = int(h / zoom_factor)
+        crop_w = int(w / zoom_factor)
+        y0 = (h - crop_h) // 2
+        x0 = (w - crop_w) // 2
+        return cv2.resize(frame[y0:y0 + crop_h, x0:x0 + crop_w], (w, h),
+                          interpolation=cv2.INTER_LINEAR)
+
     # ── Open camera ───────────────────────────────────────────────────────────
     cam_idx = args.camera_id if args.camera_id is not None else _find_camera()
     if cam_idx is None:
@@ -187,6 +205,7 @@ def main():
         if not ret:
             break
 
+        frame = apply_zoom(frame)
         label, class_id, confidence, latency_ms = run_inference(frame)
 
         # Overlay on frame

@@ -44,6 +44,8 @@ class GestureMetricsNode(Node):
 
         # ── Parameters ────────────────────────────────────────────────────────
         self.declare_parameter('confidence_threshold', 0.70)
+        self.declare_parameter('stability_frames',     3)
+        self.declare_parameter('publish_rate_hz',      10.0)
         self.declare_parameter('log_dir', os.path.expanduser('~/gesture_metrics'))
         self.declare_parameter('stats_interval_sec', 30.0)
 
@@ -76,6 +78,9 @@ class GestureMetricsNode(Node):
         # Latency samples — capped at 20 000 to bound memory
         self._pipe_samples = []   # pipe_latency_ms values
         self._inf_samples  = []   # inference_ms values
+        self._exec_samples = []   # exec_latency_ms values (all gestures combined)
+        # per_gesture_exec[label] = [latency_ms, ...]
+        self._exec_per_gesture = defaultdict(list)
 
         # Executed command log (from /gesture_command)
         self._executed_commands = []
@@ -87,6 +92,9 @@ class GestureMetricsNode(Node):
         self.create_subscription(
             String, '/gesture_command',
             self._on_command, 10)
+        self.create_subscription(
+            String, '/gesture_exec_result',
+            self._on_exec_result, 10)
 
         # ── Periodic stats ────────────────────────────────────────────────────
         self.create_timer(interval, self._print_stats)
@@ -135,6 +143,17 @@ class GestureMetricsNode(Node):
         ts = self.get_clock().now().nanoseconds * 1e-9
         self._executed_commands.append({'timestamp': ts, 'gesture': msg.data})
         self.get_logger().info(f'[CMD] executed: {msg.data}')
+
+    def _on_exec_result(self, msg: String):
+        try:
+            label, ms_str = msg.data.split(':', 1)
+            exec_ms = float(ms_str)
+        except (ValueError, AttributeError):
+            return
+        if len(self._exec_samples) < 20_000:
+            self._exec_samples.append(exec_ms)
+        self._exec_per_gesture[label].append(exec_ms)
+        self.get_logger().info(f'[CMD] exec_latency [{label}]: {exec_ms:.0f} ms')
 
     # ── Stats helpers ──────────────────────────────────────────────────────────
 
@@ -190,6 +209,23 @@ class GestureMetricsNode(Node):
                 f'  inference     mean={st["mean"]:.1f}ms  '
                 f'p50={st["p50"]:.1f}ms  p95={st["p95"]:.1f}ms')
 
+        if self._exec_samples:
+            st = self._latency_stats(self._exec_samples)
+            stab_ms = (self.get_parameter('stability_frames').value - 1) * 100.0
+            pipe_mean = self._latency_stats(self._pipe_samples).get('mean', 0.0)
+            e2e = stab_ms + pipe_mean + st['mean']
+            self.get_logger().info(
+                f'  exec_latency  mean={st["mean"]:.0f}ms  '
+                f'p50={st["p50"]:.0f}ms  p95={st["p95"]:.0f}ms')
+            for label, samples in sorted(self._exec_per_gesture.items()):
+                gs = self._latency_stats(samples)
+                self.get_logger().info(
+                    f'    [{label:<10s}] n={gs["count"]}  '
+                    f'mean={gs["mean"]:.0f}ms  p50={gs["p50"]:.0f}ms')
+            self.get_logger().info(
+                f'  E2E estimate  stab={stab_ms:.0f}ms + pipe={pipe_mean:.0f}ms'
+                f' + exec={st["mean"]:.0f}ms = {e2e:.0f}ms')
+
     def _save_summary(self):
         total = self._total_frames
         above = self._above_threshold
@@ -201,8 +237,15 @@ class GestureMetricsNode(Node):
             'acceptance_rate_pct':    round(above / total * 100.0, 2) if total > 0 else 0.0,
             'commands_executed':      len(self._executed_commands),
             'per_class':              {},
+            'stability_buffer_ms':    (self.get_parameter('stability_frames').value - 1) * 100.0,
             'pipe_latency_ms':        self._latency_stats(self._pipe_samples),
             'inference_latency_ms':   self._latency_stats(self._inf_samples),
+            'exec_latency_ms':        self._latency_stats(self._exec_samples),
+            'exec_latency_per_gesture': {
+                label: self._latency_stats(samples)
+                for label, samples in self._exec_per_gesture.items()
+            },
+            'e2e_latency_ms':         {},
             'command_log':            self._executed_commands,
         }
 
@@ -212,6 +255,21 @@ class GestureMetricsNode(Node):
                 'count':             n,
                 'mean_confidence':   round(s['conf_sum'] / n, 4) if n > 0 else 0.0,
                 'mean_inference_ms': round(s['inf_sum']  / n, 2) if n > 0 else 0.0,
+            }
+
+        # E2E = stability_buffer + pipe + exec
+        pipe_st = summary['pipe_latency_ms']
+        exec_st = summary['exec_latency_ms']
+        if pipe_st and exec_st:
+            stab = summary['stability_buffer_ms']
+            summary['e2e_latency_ms'] = {
+                'components': {
+                    'stability_buffer_ms': stab,
+                    'pipe_latency_ms':     pipe_st.get('mean', 0.0),
+                    'exec_latency_ms':     exec_st.get('mean', 0.0),
+                },
+                'total_mean_ms': round(stab + pipe_st.get('mean', 0.0) + exec_st.get('mean', 0.0), 1),
+                'total_p95_ms':  round(stab + pipe_st.get('p95',  0.0) + exec_st.get('p95',  0.0), 1),
             }
 
         with open(self.json_path, 'w') as f:

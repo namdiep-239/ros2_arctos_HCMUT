@@ -294,7 +294,7 @@ namespace denso_hand_interface
         }
         else
         {
-            uart_protocol_->flush();
+            //uart_protocol_->flush();
             loop_count = static_cast<int>(FLUSH_DURATION / period.nanoseconds());
         }
 

@@ -258,7 +258,31 @@ private:
 
     // ── Classify ──────────────────────────────────────────────────────────────
     publish_feedback("CLASSIFYING", 0.85f);
-    std::string verdict = (total_pass >= total_fail) ? "PASS" : "FAIL";
+
+    if (total_pass == 0 && total_fail == 0) {
+      // No frame passed the confidence threshold — cannot classify.
+      // Return the object to the pick position so the operator can retry.
+      RCLCPP_WARN(this->get_logger(),
+                  "No confident votes collected (threshold=%.2f). "
+                  "Returning object to PICK pose for operator retry.",
+                  confidence_threshold_);
+      publish_feedback("RETURNING_TO_PICK", 0.88f);
+      moveToWaypoint("waypoints.pick");
+      std::this_thread::sleep_for(
+        std::chrono::milliseconds(static_cast<int>(settle_time_sec_ * 1000)));
+      sendGripper(gripper_open_pos_);   // release object at pick position
+      publish_feedback("MOVING_HOME", 0.95f);
+      moveToWaypoint("waypoints.home");
+      result->verdict    = "UNCERTAIN";
+      result->pass_votes = 0;
+      result->fail_votes = 0;
+      publish_feedback("DONE", 1.0f);
+      goal_handle->succeed(result);
+      busy_ = false;
+      return;
+    }
+
+    std::string verdict = (total_pass > total_fail) ? "PASS" : "FAIL";
     RCLCPP_INFO(this->get_logger(),
                 "Verdict: %s  (pass_votes=%d  fail_votes=%d)",
                 verdict.c_str(), total_pass, total_fail);
