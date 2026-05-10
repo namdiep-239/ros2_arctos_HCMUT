@@ -8,7 +8,7 @@
     224,
     224
   ],
-  "test_accuracy": 0.9785,
+  "test_accuracy": 0.983,
   "model_type": "MobileNetV2",
   "framework": "TensorFlow",
   "optimized_for": "Google Coral EdgeTPU"

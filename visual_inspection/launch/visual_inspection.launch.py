@@ -44,7 +44,7 @@ def launch_setup(context, *args, **kwargs):
     )
     edgetpu_model = os.path.join(ai_models, 'inspection_model_int8_edgetpu_src_edgetpu.tflite')
     cpu_model     = os.path.join(ai_models, 'inspection_model_int8.tflite')
-    keras_model   = os.path.join(ai_models, 'best_model.h5')
+    keras_model   = os.path.join(ai_models, 'inspection_model.h5')
     metadata      = os.path.join(ai_models, 'model_metadata.json')
 
     inspection_config = os.path.join(pkg_share, 'config', 'inspection_config.yaml')
@@ -84,6 +84,7 @@ def launch_setup(context, *args, **kwargs):
             'camera_id':          camera_id,
             'publish_rate':       10.0,
             'zoom':               zoom,
+            'fail_threshold':     LaunchConfiguration('fail_threshold'),
             'use_sim_time':       use_sim_time_bool,
         }],
     )
@@ -148,6 +149,11 @@ def generate_launch_description():
             default_value='1.0',
             description='Digital center-crop zoom factor (1.0=off, 2.0=2x, 3.0=3x). '
                         'Crops the centre 1/zoom of the frame before inference.'),
+
+        DeclareLaunchArgument(
+            'fail_threshold',
+            default_value='0.5',
+            description='Min FAIL score to predict FAIL (0.5=argmax, raise to 0.60-0.70 to reduce false rejections)'),
 
         DeclareLaunchArgument(
             'enable_metrics',

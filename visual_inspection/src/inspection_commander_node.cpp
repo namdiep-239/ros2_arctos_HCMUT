@@ -70,8 +70,8 @@ public:
     this->declare_parameter("frames_per_pose",      5);
     this->declare_parameter("settle_time_sec",      0.5);
     this->declare_parameter("enable_pick",          false);
-    this->declare_parameter("gripper_open_pos",     0.002);
-    this->declare_parameter("gripper_closed_pos",   0.054);
+    this->declare_parameter("gripper_open_pos",     1.47);
+    this->declare_parameter("gripper_closed_pos",   0.10);
 
     // Waypoints: 6 joint values each [X,Y,Z,A,B,C] in radians
     // Default all-zero — update inspection_config.yaml after hardware calibration

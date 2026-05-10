@@ -41,6 +41,7 @@ class InspectionNode(Node):
         self.declare_parameter('camera_id', -1)   # -1 = auto-detect
         self.declare_parameter('publish_rate', 10.0)
         self.declare_parameter('zoom', 1.0)       # digital center-crop zoom factor
+        self.declare_parameter('fail_threshold', 0.5)  # min FAIL score to predict FAIL
 
         self.inference_mode    = self.get_parameter('inference_mode').value
         self.python_binary     = self.get_parameter('python_binary').value
@@ -52,6 +53,7 @@ class InspectionNode(Node):
         self.camera_id         = self.get_parameter('camera_id').value
         publish_rate           = self.get_parameter('publish_rate').value
         self.zoom              = self.get_parameter('zoom').value
+        self.fail_threshold    = self.get_parameter('fail_threshold').value
 
         # Select model path based on mode
         mode_model = {
@@ -101,6 +103,8 @@ class InspectionNode(Node):
             cmd += ['--camera-id', str(self.camera_id)]
         if self.zoom > 1.0:
             cmd += ['--zoom', str(self.zoom)]
+        if self.fail_threshold != 0.5:
+            cmd += ['--fail-threshold', str(self.fail_threshold)]
 
         self.get_logger().info('Launching inference backend: ' + ' '.join(cmd))
         try:

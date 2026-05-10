@@ -1,7 +1,7 @@
 inspection_commander_node:
   ros__parameters:
     # Minimum inference confidence to count a frame as a valid vote (0.0–1.0)
-    confidence_threshold: 0.70
+    confidence_threshold: 0.50
 
     # Number of inference frames to collect at each inspection pose
     frames_per_pose: 5
@@ -15,11 +15,11 @@ inspection_commander_node:
     enable_pick: true
 
     # gripper_gear_right_joint positions (radians, from arctos_gripper.xacro)
-    # Hardware limits: 0.02 (closed) … 1.4835 (fully open)
+    # Hardware limits: 0.1 (closed) … 1.47 (fully open)
     # open = wide open to release object
     # closed = gentle grip to grasp object
-    gripper_open_pos:   1.48    # near SRDF "open" = 1.4835 rad
-    gripper_closed_pos: 0.02    # near SRDF "close" = 0.02 rad, gentle grip
+    gripper_open_pos:   1.47    # open position
+    gripper_closed_pos: 0.10    # closed position
 
     # ── Waypoints ─────────────────────────────────────────────────────────────
     # Joint values [X, Y, Z, A, B, C] in radians for the denso_arm group.

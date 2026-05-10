@@ -66,6 +66,12 @@ def main():
     parser.add_argument("--zoom", type=float, default=1.0,
                         help="Digital center-crop zoom factor (e.g. 2.0 = 2x). "
                              "Crops the centre 1/zoom of the frame before inference.")
+    parser.add_argument("--fail-threshold", type=float, default=0.5,
+                        help="Minimum FAIL score required to predict FAIL (default 0.5 = argmax). "
+                             "Raise to 0.60-0.70 to reduce false rejections.")
+    parser.add_argument("--save-frames", type=str, default=None,
+                        help="Directory to save every frame fed into the model. "
+                             "Filename: frame_<timestamp>_<LABEL>_<conf>.jpg")
     args = parser.parse_args()
 
     # ── Load metadata ─────────────────────────────────────────────────────────
@@ -89,7 +95,9 @@ def main():
             t0 = time.perf_counter()
             output = model.predict(preprocess(frame), verbose=0)[0]
             latency_ms = (time.perf_counter() - t0) * 1000
-            pred_idx = int(np.argmax(output))
+            # class_names = ["FAIL", "PASS"], so index 0 = FAIL, index 1 = PASS
+            fail_idx, pass_idx = 0, 1
+            pred_idx = fail_idx if output[fail_idx] >= args.fail_threshold else pass_idx
             return class_names[pred_idx], pred_idx, float(output[pred_idx]), latency_ms
 
     elif args.mode == "edgetpu":
@@ -120,7 +128,8 @@ def main():
             if output_details[0]["dtype"] == np.uint8:
                 scale, zero_point = output_details[0]["quantization"]
                 output = (output.astype(np.float32) - zero_point) * scale
-            pred_idx = int(np.argmax(output))
+            fail_idx, pass_idx = 0, 1
+            pred_idx = fail_idx if output[fail_idx] >= args.fail_threshold else pass_idx
             return class_names[pred_idx], pred_idx, float(output[pred_idx]), latency_ms
 
     else:  # cpu tflite
@@ -155,8 +164,17 @@ def main():
             if output_details[0]["dtype"] == np.uint8:
                 scale, zero_point = output_details[0]["quantization"]
                 output = (output.astype(np.float32) - zero_point) * scale
-            pred_idx = int(np.argmax(output))
+            fail_idx, pass_idx = 0, 1
+            pred_idx = fail_idx if output[fail_idx] >= args.fail_threshold else pass_idx
             return class_names[pred_idx], pred_idx, float(output[pred_idx]), latency_ms
+
+    # ── Save-frames setup ─────────────────────────────────────────────────────
+    save_dir = None
+    frame_counter = 0
+    if args.save_frames:
+        save_dir = os.path.expanduser(args.save_frames)
+        os.makedirs(save_dir, exist_ok=True)
+        print(f"[backend] Saving frames to: {save_dir}", file=sys.stderr, flush=True)
 
     # ── Zoom helper ───────────────────────────────────────────────────────────
     zoom_factor = max(1.0, args.zoom)
@@ -207,6 +225,13 @@ def main():
 
         frame = apply_zoom(frame)
         label, class_id, confidence, latency_ms = run_inference(frame)
+
+        # ── Save frame (exact pixels fed into the model) ──────────────────────
+        if save_dir is not None:
+            frame_counter += 1
+            ts = time.strftime("%Y%m%d_%H%M%S")
+            fname = f"frame_{ts}_{frame_counter:05d}_{label}_{confidence:.2f}.jpg"
+            cv2.imwrite(os.path.join(save_dir, fname), frame)
 
         # Overlay on frame
         color = (0, 200, 0) if label == "PASS" else (0, 0, 220)

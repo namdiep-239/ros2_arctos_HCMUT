@@ -76,8 +76,8 @@ public:
     this->declare_parameter("stability_frames",     3);
     this->declare_parameter("command_cooldown_sec", 2.0);
     this->declare_parameter("point_delta_rad",      0.3);
-    this->declare_parameter("gripper_open_pos",     0.002);
-    this->declare_parameter("gripper_closed_pos",   0.054);
+    this->declare_parameter("gripper_open_pos",     1.47);
+    this->declare_parameter("gripper_closed_pos",   0.10);
     this->declare_parameter("use_servo",            false);
     this->declare_parameter("point_velocity_rad_s", 0.5);
 

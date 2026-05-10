@@ -15,10 +15,10 @@ gesture_commander_node:
     point_delta_rad: 0.3
 
     # gripper_gear_right_joint target positions (radians)
-    # Hardware limits: 0.02 (closed) … 1.4835 (fully open) — from arctos_gripper.xacro
-    # SRDF named states: close=0.02, open=1.4835
-    gripper_open_pos: 1.40      # wide open — jaws apart to release / reach object
-    gripper_closed_pos: 0.05    # gentle grip — just above minimum (0.02) for gripping
+    # Hardware limits: 0.1 (closed) … 1.47 (fully open) — from arctos_gripper.xacro
+    # SRDF named states: close=0.1, open=1.47
+    gripper_open_pos: 1.47      # wide open — jaws apart to release / reach object
+    gripper_closed_pos: 0.10    # closed — grip position
 
     # ── Servo mode ────────────────────────────────────────────────────────────
     # Set use_servo: true to use MoveIt Servo for 'point' (low latency, no planning).
