@@ -76,8 +76,8 @@ public:
     this->declare_parameter("stability_frames",     3);
     this->declare_parameter("command_cooldown_sec", 2.0);
     this->declare_parameter("point_delta_rad",      0.3);
-    this->declare_parameter("gripper_open_pos",     0.002);
-    this->declare_parameter("gripper_closed_pos",   0.054);
+    this->declare_parameter("gripper_open_pos",     1.47);
+    this->declare_parameter("gripper_closed_pos",   0.10);
     this->declare_parameter("use_servo",            false);
     this->declare_parameter("point_velocity_rad_s", 0.5);
 
@@ -95,8 +95,9 @@ public:
       "/gesture_detection", 10,
       std::bind(&GestureCommanderNode::gestureCallback, this, std::placeholders::_1));
 
-    // ── Publisher ────────────────────────────────────────────────────────────
-    cmd_pub_ = this->create_publisher<std_msgs::msg::String>("/gesture_command", 10);
+    // ── Publishers ───────────────────────────────────────────────────────────
+    cmd_pub_         = this->create_publisher<std_msgs::msg::String>("/gesture_command", 10);
+    exec_result_pub_ = this->create_publisher<std_msgs::msg::String>("/gesture_exec_result", 10);
 
     // ── Gripper action client ─────────────────────────────────────────────────
     gripper_client_ = rclcpp_action::create_client<GripperCommandAction>(
@@ -164,7 +165,8 @@ private:
 
   // ── ROS interfaces ──────────────────────────────────────────────────────────
   rclcpp::Subscription<GestureDetection>::SharedPtr gesture_sub_;
-  rclcpp::Publisher<std_msgs::msg::String>::SharedPtr cmd_pub_;
+  rclcpp::Publisher<std_msgs::msg::String>::SharedPtr  cmd_pub_;
+  rclcpp::Publisher<std_msgs::msg::String>::SharedPtr  exec_result_pub_;
   rclcpp_action::Client<GripperCommandAction>::SharedPtr gripper_client_;
 
   // ── Servo interfaces ────────────────────────────────────────────────────────
@@ -310,6 +312,10 @@ private:
         exec_latency_sum_ms_ += exec_ms;
         exec_latency_count_++;
       }
+      // Publish "label:latency_ms" so metrics node can log per-gesture exec latency
+      auto result_msg = std_msgs::msg::String();
+      result_msg.data = gesture + ":" + std::to_string(static_cast<int>(exec_ms));
+      exec_result_pub_->publish(result_msg);
       executing_ = false;
     }).detach();
   }
