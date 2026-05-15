@@ -26,6 +26,7 @@ from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, OpaqueFunction
 from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
+from moveit_configs_utils import MoveItConfigsBuilder
 
 
 def launch_setup(context, *args, **kwargs):
@@ -57,6 +58,15 @@ def launch_setup(context, *args, **kwargs):
     python_binary  = LaunchConfiguration('python_binary')
     zoom           = LaunchConfiguration('zoom')
 
+    # ── MoveIt2 robot description — pick URDF based on sim vs real ─────────────
+    urdf_file = 'config/gz_arctos.urdf.xacro' if use_sim_time_bool else 'config/arctos.urdf.xacro'
+    moveit_config = (
+        MoveItConfigsBuilder("arctos", package_name="arctos_moveit_config")
+        .robot_description(file_path=urdf_file)
+        .robot_description_semantic(file_path="config/arctos.srdf")
+        .to_moveit_configs()
+    )
+
     # ── Node: inspection_node (Python 3.10 bridge) ─────────────────────────────
     inspection_node = Node(
         package='visual_inspection',
@@ -87,6 +97,8 @@ def launch_setup(context, *args, **kwargs):
         output='screen',
         parameters=[
             inspection_config,
+            moveit_config.robot_description,
+            moveit_config.robot_description_semantic,
             {'use_sim_time': use_sim_time_bool},
         ],
     )

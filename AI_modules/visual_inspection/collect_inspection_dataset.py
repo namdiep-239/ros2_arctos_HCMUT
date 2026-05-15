@@ -224,7 +224,9 @@ def collect(args):
     print('=' * 60)
 
     try:
-        # ── Pick: move to pick pose and grasp object ───────────────────────────
+        # ── Pick: open gripper first, then approach and grasp ─────────────────
+        print('\n[PICK] Opening gripper before approach...')
+        node.send_gripper(gripper_open_pos)
         print('\n[PICK] Moving to pick pose...')
         node.move_to_joints(waypoints['pick'], label='pick')
         time.sleep(cfg.get('settle_time_sec', 2.0))
