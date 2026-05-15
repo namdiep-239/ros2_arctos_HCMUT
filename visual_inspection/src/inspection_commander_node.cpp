@@ -15,15 +15,15 @@
  *   /run_inspection     (visual_inspection/action/RunInspection)
  *
  * Motion:
- *   MoveGroupInterface on "denso_arm" planning group (joint-space waypoints).
- *   Gripper via GripperCommand action on /denso_hand_controller/gripper_cmd.
+ *   FollowJointTrajectory action client → denso_arm_controller (no MoveIt).
+ *   Gripper via GripperCommand action → denso_hand_controller.
  *
- * Waypoints (joint values [X,Y,Z,A,B,C] rad) are loaded from ROS2 parameters
- * and intentionally left as zeros — calibrate on hardware and update
- * inspection_config.yaml.
+ * Waypoints (joint values [X,Y,Z,A,B,C] rad) are loaded from ROS2 parameters.
+ * Update inspection_config.yaml after hardware calibration.
  *
  * State machine:
- *   IDLE → MOVING_TO_P1 → COLLECTING_P1
+ *   IDLE → MOVING_TO_PICK (optional)
+ *        → MOVING_TO_P1 → COLLECTING_P1
  *        → MOVING_TO_P2 → COLLECTING_P2
  *        → MOVING_TO_P3 → COLLECTING_P3
  *        → MOVING_TO_P4 → COLLECTING_P4
@@ -35,13 +35,14 @@
 
 #include <rclcpp/rclcpp.hpp>
 #include <rclcpp_action/rclcpp_action.hpp>
-#include <std_msgs/msg/string.hpp>
-#include <moveit/move_group_interface/move_group_interface.h>
+#include <control_msgs/action/follow_joint_trajectory.hpp>
 #include <control_msgs/action/gripper_command.hpp>
+#include <trajectory_msgs/msg/joint_trajectory.hpp>
+#include <trajectory_msgs/msg/joint_trajectory_point.hpp>
 
 #include <atomic>
 #include <chrono>
-#include <deque>
+#include <condition_variable>
 #include <mutex>
 #include <string>
 #include <thread>
@@ -50,11 +51,15 @@
 #include "visual_inspection/msg/inspection_result.hpp"
 #include "visual_inspection/action/run_inspection.hpp"
 
-using InspectionResult   = visual_inspection::msg::InspectionResult;
-using RunInspection      = visual_inspection::action::RunInspection;
-using GoalHandle         = rclcpp_action::ServerGoalHandle<RunInspection>;
-using GripperCommand     = control_msgs::action::GripperCommand;
-using MoveGroupInterface = moveit::planning_interface::MoveGroupInterface;
+using InspectionResult      = visual_inspection::msg::InspectionResult;
+using RunInspection         = visual_inspection::action::RunInspection;
+using GoalHandle            = rclcpp_action::ServerGoalHandle<RunInspection>;
+using GripperCommand        = control_msgs::action::GripperCommand;
+using FollowJointTrajectory = control_msgs::action::FollowJointTrajectory;
+
+static const std::vector<std::string> JOINT_NAMES = {
+  "X_joint", "Y_joint", "Z_joint", "A_joint", "B_joint", "C_joint"
+};
 
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -69,12 +74,11 @@ public:
     this->declare_parameter("confidence_threshold", 0.70);
     this->declare_parameter("frames_per_pose",      5);
     this->declare_parameter("settle_time_sec",      0.5);
+    this->declare_parameter("move_travel_time_sec", 5.0);
     this->declare_parameter("enable_pick",          false);
     this->declare_parameter("gripper_open_pos",     1.47);
     this->declare_parameter("gripper_closed_pos",   0.10);
 
-    // Waypoints: 6 joint values each [X,Y,Z,A,B,C] in radians
-    // Default all-zero — update inspection_config.yaml after hardware calibration
     auto declare_wp = [this](const std::string & name) {
       this->declare_parameter(name, std::vector<double>{0.0, 0.0, 0.0, 0.0, 0.0, 0.0});
     };
@@ -88,19 +92,28 @@ public:
     declare_wp("waypoints.sort_pass");
     declare_wp("waypoints.sort_fail");
 
-    confidence_threshold_ = this->get_parameter("confidence_threshold").as_double();
-    frames_per_pose_      = this->get_parameter("frames_per_pose").as_int();
-    settle_time_sec_      = this->get_parameter("settle_time_sec").as_double();
-    enable_pick_          = this->get_parameter("enable_pick").as_bool();
-    gripper_open_pos_     = this->get_parameter("gripper_open_pos").as_double();
-    gripper_closed_pos_   = this->get_parameter("gripper_closed_pos").as_double();
+    confidence_threshold_  = this->get_parameter("confidence_threshold").as_double();
+    frames_per_pose_       = this->get_parameter("frames_per_pose").as_int();
+    settle_time_sec_       = this->get_parameter("settle_time_sec").as_double();
+    move_travel_time_sec_  = this->get_parameter("move_travel_time_sec").as_double();
+    enable_pick_           = this->get_parameter("enable_pick").as_bool();
+    gripper_open_pos_      = this->get_parameter("gripper_open_pos").as_double();
+    gripper_closed_pos_    = this->get_parameter("gripper_closed_pos").as_double();
 
-    // ── Subscriber: AI results ────────────────────────────────────────────────
+    // ── Arm trajectory action client ──────────────────────────────────────────
+    arm_client_ = rclcpp_action::create_client<FollowJointTrajectory>(
+      this, "/denso_arm_controller/follow_joint_trajectory");
+
+    // ── Gripper action client ─────────────────────────────────────────────────
+    gripper_client_ = rclcpp_action::create_client<GripperCommand>(
+      this, "/denso_hand_controller/gripper_cmd");
+
+    // ── AI result subscriber ──────────────────────────────────────────────────
     result_sub_ = this->create_subscription<InspectionResult>(
       "/inspection_result", 10,
       std::bind(&InspectionCommanderNode::resultCallback, this, std::placeholders::_1));
 
-    // ── Action server ─────────────────────────────────────────────────────────
+    // ── Inspection action server ──────────────────────────────────────────────
     action_server_ = rclcpp_action::create_server<RunInspection>(
       this, "/run_inspection",
       std::bind(&InspectionCommanderNode::handleGoal,     this,
@@ -108,25 +121,9 @@ public:
       std::bind(&InspectionCommanderNode::handleCancel,   this, std::placeholders::_1),
       std::bind(&InspectionCommanderNode::handleAccepted, this, std::placeholders::_1));
 
-    // ── Gripper action client ─────────────────────────────────────────────────
-    gripper_client_ = rclcpp_action::create_client<GripperCommand>(
-      this, "/denso_hand_controller/gripper_cmd");
-
     RCLCPP_INFO(this->get_logger(),
-                "InspectionCommanderNode created (MoveGroup not yet ready)");
-  }
-
-  /**
-   * Call from main() after the executor has started spinning.
-   */
-  void setupMoveGroup(const std::shared_ptr<rclcpp::Node> & node)
-  {
-    move_group_ = std::make_shared<MoveGroupInterface>(node, "denso_arm");
-    move_group_->setMaxVelocityScalingFactor(0.5);
-    move_group_->setMaxAccelerationScalingFactor(0.5);
-    RCLCPP_INFO(this->get_logger(),
-                "MoveGroupInterface ready [planning_frame=%s]",
-                move_group_->getPlanningFrame().c_str());
+                "InspectionCommanderNode ready  [travel=%.1fs  settle=%.1fs]",
+                move_travel_time_sec_, settle_time_sec_);
   }
 
 private:
@@ -134,28 +131,28 @@ private:
   double confidence_threshold_;
   int    frames_per_pose_;
   double settle_time_sec_;
+  double move_travel_time_sec_;
   bool   enable_pick_;
   double gripper_open_pos_;
   double gripper_closed_pos_;
 
   // ── State ───────────────────────────────────────────────────────────────────
-  std::atomic<bool>           busy_;
-  std::mutex                  vote_mutex_;
-  std::vector<InspectionResult> vote_buffer_;   // frames collected at current pose
-  bool                        collecting_{false};
+  std::atomic<bool>             busy_;
+  std::mutex                    vote_mutex_;
+  std::vector<InspectionResult> vote_buffer_;
+  bool                          collecting_{false};
 
   // ── ROS interfaces ──────────────────────────────────────────────────────────
-  rclcpp::Subscription<InspectionResult>::SharedPtr     result_sub_;
-  rclcpp_action::Server<RunInspection>::SharedPtr       action_server_;
-  rclcpp_action::Client<GripperCommand>::SharedPtr      gripper_client_;
-  std::shared_ptr<MoveGroupInterface>                   move_group_;
+  rclcpp::Subscription<InspectionResult>::SharedPtr          result_sub_;
+  rclcpp_action::Server<RunInspection>::SharedPtr            action_server_;
+  rclcpp_action::Client<FollowJointTrajectory>::SharedPtr    arm_client_;
+  rclcpp_action::Client<GripperCommand>::SharedPtr           gripper_client_;
 
-  // ── Incoming AI result ───────────────────────────────────────────────────────
+  // ── AI result callback ───────────────────────────────────────────────────────
   void resultCallback(const InspectionResult & msg)
   {
     if (!collecting_) return;
     if (msg.confidence < static_cast<float>(confidence_threshold_)) return;
-
     std::lock_guard<std::mutex> lock(vote_mutex_);
     vote_buffer_.push_back(msg);
   }
@@ -176,8 +173,7 @@ private:
     return rclcpp_action::GoalResponse::ACCEPT_AND_EXECUTE;
   }
 
-  rclcpp_action::CancelResponse handleCancel(
-    const std::shared_ptr<GoalHandle>)
+  rclcpp_action::CancelResponse handleCancel(const std::shared_ptr<GoalHandle>)
   {
     RCLCPP_INFO(this->get_logger(), "Cancel requested.");
     return rclcpp_action::CancelResponse::ACCEPT;
@@ -185,7 +181,6 @@ private:
 
   void handleAccepted(const std::shared_ptr<GoalHandle> goal_handle)
   {
-    // Spawn execution thread to avoid blocking the executor
     std::thread([this, goal_handle]() { runSequence(goal_handle); }).detach();
   }
 
@@ -216,11 +211,10 @@ private:
         abortGoal(goal_handle, result, "Failed to reach PICK pose");
         busy_ = false; return;
       }
-      // Let arm fully settle at pick pose before closing gripper
       std::this_thread::sleep_for(
         std::chrono::milliseconds(static_cast<int>(settle_time_sec_ * 1000)));
       publish_feedback("PICKING", 0.08f);
-      sendGripper(gripper_closed_pos_);  // close gripper to grasp
+      sendGripper(gripper_closed_pos_);
     }
 
     // ── Inspection poses ──────────────────────────────────────────────────────
@@ -238,18 +232,15 @@ private:
         busy_ = false; return;
       }
 
-      // Move to pose
       publish_feedback("MOVING_TO_" + upperCase(pose_name), progress - 0.05f);
       if (!moveToWaypoint("waypoints." + pose_name)) {
         abortGoal(goal_handle, result, "Failed to reach " + pose_name);
         busy_ = false; return;
       }
 
-      // Settle: wait for arm vibration to damp out
       std::this_thread::sleep_for(
         std::chrono::milliseconds(static_cast<int>(settle_time_sec_ * 1000)));
 
-      // Collect votes
       publish_feedback("COLLECTING_" + upperCase(pose_name), progress);
       auto [p, f] = collectVotes(frames_per_pose_);
       total_pass += p;
@@ -260,17 +251,14 @@ private:
     publish_feedback("CLASSIFYING", 0.85f);
 
     if (total_pass == 0 && total_fail == 0) {
-      // No frame passed the confidence threshold — cannot classify.
-      // Return the object to the pick position so the operator can retry.
       RCLCPP_WARN(this->get_logger(),
-                  "No confident votes collected (threshold=%.2f). "
-                  "Returning object to PICK pose for operator retry.",
+                  "No confident votes collected (threshold=%.2f). Returning to PICK.",
                   confidence_threshold_);
       publish_feedback("RETURNING_TO_PICK", 0.88f);
       moveToWaypoint("waypoints.pick");
       std::this_thread::sleep_for(
         std::chrono::milliseconds(static_cast<int>(settle_time_sec_ * 1000)));
-      sendGripper(gripper_open_pos_);   // release object at pick position
+      sendGripper(gripper_open_pos_);
       publish_feedback("MOVING_HOME", 0.95f);
       moveToWaypoint("waypoints.home");
       result->verdict    = "UNCERTAIN";
@@ -284,8 +272,7 @@ private:
 
     std::string verdict = (total_pass > total_fail) ? "PASS" : "FAIL";
     RCLCPP_INFO(this->get_logger(),
-                "Verdict: %s  (pass_votes=%d  fail_votes=%d)",
-                verdict.c_str(), total_pass, total_fail);
+                "Verdict: %s  (pass=%d  fail=%d)", verdict.c_str(), total_pass, total_fail);
 
     // ── Sort ──────────────────────────────────────────────────────────────────
     const std::string sort_wp = (verdict == "PASS") ? "waypoints.sort_pass" : "waypoints.sort_fail";
@@ -294,16 +281,14 @@ private:
       abortGoal(goal_handle, result, "Failed to reach sort pose");
       busy_ = false; return;
     }
-    // Let arm fully settle at sort pose before releasing / moving home
     std::this_thread::sleep_for(
       std::chrono::milliseconds(static_cast<int>(settle_time_sec_ * 1000) + 500));
-    // Open gripper to release object
     sendGripper(gripper_open_pos_);
     std::this_thread::sleep_for(std::chrono::milliseconds(800));
 
     // ── Return home ───────────────────────────────────────────────────────────
     publish_feedback("MOVING_HOME", 0.95f);
-    moveToWaypoint("waypoints.home");  // best-effort, don't abort on failure
+    moveToWaypoint("waypoints.home");
     std::this_thread::sleep_for(
       std::chrono::milliseconds(static_cast<int>(settle_time_sec_ * 1000) + 500));
 
@@ -318,14 +303,10 @@ private:
     busy_ = false;
   }
 
-  // ── Motion helpers ───────────────────────────────────────────────────────────
+  // ── Motion helper ────────────────────────────────────────────────────────────
 
   bool moveToWaypoint(const std::string & param_name)
   {
-    if (!move_group_) {
-      RCLCPP_ERROR(this->get_logger(), "MoveGroup not initialised.");
-      return false;
-    }
     auto joint_values = this->get_parameter(param_name).as_double_array();
     if (joint_values.size() != 6) {
       RCLCPP_ERROR(this->get_logger(),
@@ -334,15 +315,73 @@ private:
       return false;
     }
 
-    move_group_->setJointValueTarget(joint_values);
-    MoveGroupInterface::Plan plan;
-    if (move_group_->plan(plan) != moveit::core::MoveItErrorCode::SUCCESS) {
-      RCLCPP_WARN(this->get_logger(), "Planning failed for waypoint '%s'", param_name.c_str());
+    if (!arm_client_->wait_for_action_server(std::chrono::seconds(3))) {
+      RCLCPP_ERROR(this->get_logger(), "Arm controller not available.");
       return false;
     }
-    move_group_->execute(plan);
-    return true;
+
+    // Build single-point trajectory
+    trajectory_msgs::msg::JointTrajectoryPoint pt;
+    pt.positions  = joint_values;
+    pt.velocities = std::vector<double>(6, 0.0);
+    pt.time_from_start.sec    = static_cast<int32_t>(move_travel_time_sec_);
+    pt.time_from_start.nanosec =
+      static_cast<uint32_t>((move_travel_time_sec_ - static_cast<int32_t>(move_travel_time_sec_)) * 1e9);
+
+    trajectory_msgs::msg::JointTrajectory traj;
+    traj.joint_names = JOINT_NAMES;
+    traj.points      = {pt};
+
+    FollowJointTrajectory::Goal goal;
+    goal.trajectory = traj;
+
+    // Block until result using a condition variable
+    std::mutex              cv_mutex;
+    std::condition_variable cv;
+    bool result_received = false;
+    bool success         = false;
+
+    auto opts = rclcpp_action::Client<FollowJointTrajectory>::SendGoalOptions();
+
+    opts.goal_response_callback =
+      [&](const rclcpp_action::ClientGoalHandle<FollowJointTrajectory>::SharedPtr & handle) {
+        if (!handle) {
+          RCLCPP_ERROR(this->get_logger(), "Goal rejected by arm controller for '%s'",
+                       param_name.c_str());
+          std::lock_guard<std::mutex> lk(cv_mutex);
+          result_received = true;
+          success         = false;
+          cv.notify_one();
+        }
+      };
+
+    opts.result_callback =
+      [&](const rclcpp_action::ClientGoalHandle<FollowJointTrajectory>::WrappedResult & res) {
+        std::lock_guard<std::mutex> lk(cv_mutex);
+        success         = (res.result->error_code == FollowJointTrajectory::Result::SUCCESSFUL);
+        result_received = true;
+        cv.notify_one();
+        if (!success) {
+          RCLCPP_WARN(this->get_logger(),
+                      "Controller returned error %d for waypoint '%s'",
+                      res.result->error_code, param_name.c_str());
+        }
+      };
+
+    arm_client_->async_send_goal(goal, opts);
+
+    const double timeout_sec = move_travel_time_sec_ + 5.0;
+    std::unique_lock<std::mutex> lk(cv_mutex);
+    if (!cv.wait_for(lk, std::chrono::duration<double>(timeout_sec),
+                     [&] { return result_received; }))
+    {
+      RCLCPP_ERROR(this->get_logger(), "Motion timeout for waypoint '%s'", param_name.c_str());
+      return false;
+    }
+    return success;
   }
+
+  // ── Gripper helper ───────────────────────────────────────────────────────────
 
   void sendGripper(double position)
   {
@@ -350,7 +389,7 @@ private:
       RCLCPP_WARN(this->get_logger(), "Gripper action server not available.");
       return;
     }
-    auto goal = GripperCommand::Goal();
+    GripperCommand::Goal goal;
     goal.command.position   = position;
     goal.command.max_effort = 0.0;
     gripper_client_->async_send_goal(goal);
@@ -359,10 +398,6 @@ private:
 
   // ── Vote collection ──────────────────────────────────────────────────────────
 
-  /**
-   * Enables result collection for the given duration (based on target frame
-   * count), then disables it and returns (pass_count, fail_count).
-   */
   std::pair<int, int> collectVotes(int target_frames)
   {
     {
@@ -371,7 +406,6 @@ private:
     }
     collecting_ = true;
 
-    // Wait until we have enough frames or timeout (3× expected time)
     const auto deadline = std::chrono::steady_clock::now()
                           + std::chrono::milliseconds(target_frames * 300);
     while (std::chrono::steady_clock::now() < deadline) {
@@ -390,7 +424,7 @@ private:
       else                   ++fail;
     }
     RCLCPP_INFO(this->get_logger(),
-                "  Votes collected: %zu frames  PASS=%d  FAIL=%d",
+                "  Votes: %zu frames  PASS=%d  FAIL=%d",
                 vote_buffer_.size(), pass, fail);
     return {pass, fail};
   }
@@ -428,19 +462,8 @@ private:
 int main(int argc, char ** argv)
 {
   rclcpp::init(argc, argv);
-
   auto node = std::make_shared<InspectionCommanderNode>();
-
-  rclcpp::executors::MultiThreadedExecutor executor;
-  executor.add_node(node);
-  std::thread spin_thread([&executor]() { executor.spin(); });
-
-  node->setupMoveGroup(std::static_pointer_cast<rclcpp::Node>(node));
-
-  RCLCPP_INFO(rclcpp::get_logger("inspection_commander"),
-              "Ready — waiting for /run_inspection goals.");
-
-  spin_thread.join();
+  rclcpp::spin(node);
   rclcpp::shutdown();
   return 0;
 }

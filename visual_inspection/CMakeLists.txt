@@ -14,9 +14,8 @@ find_package(rclpy REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(sensor_msgs REQUIRED)
-find_package(moveit_ros_planning_interface REQUIRED)
-find_package(moveit_msgs REQUIRED)
 find_package(control_msgs REQUIRED)
+find_package(trajectory_msgs REQUIRED)
 find_package(std_srvs REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
 
@@ -39,9 +38,8 @@ ament_target_dependencies(inspection_commander_node
   rclcpp_action
   std_msgs
   geometry_msgs
-  moveit_ros_planning_interface
-  moveit_msgs
   control_msgs
+  trajectory_msgs
 )
 
 # Link generated C++ typesupport
