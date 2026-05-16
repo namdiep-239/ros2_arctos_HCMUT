@@ -224,7 +224,13 @@ def main():
             break
 
         frame = apply_zoom(frame)
-        label, class_id, confidence, latency_ms = run_inference(frame)
+
+        # Skip inference if no object is present (flat/empty frame).
+        # Grayscale std-dev < 8 means the frame is too uniform to contain an object.
+        if np.std(cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)) < 8.0:
+            label, class_id, confidence, latency_ms = "NO_OBJECT", -1, 0.0, 0.0
+        else:
+            label, class_id, confidence, latency_ms = run_inference(frame)
 
         # ── Save frame (exact pixels fed into the model) ──────────────────────
         if save_dir is not None:
