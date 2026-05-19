@@ -67,7 +67,7 @@ IDLE
 
 ### `inspection_node` (Python 3.10)
 
-Bridges ROS2 to the inference backend. Subscribes to `/camera/image_raw`, forwards frames to the backend subprocess, publishes results on `/inspection_result`.
+Bridges ROS2 to the inference backend. Spawns `inspection_inference_backend.py` as a subprocess, reads its JSON stdout, and publishes results on `/inspection_result`.
 
 **Key parameters:**
 
@@ -85,18 +85,18 @@ Bridges ROS2 to the inference backend. Subscribes to `/camera/image_raw`, forwar
 
 All joint values are `[X, Y, Z, A, B, C]` in radians.
 
-| Waypoint | Degrees | Purpose |
-|---|---|---|
-| `home` | [0, 0, 0, 0, 0, 0] | Safe resting pose |
-| `pick` | [0°, 35°, 145°, 0°, 0°, 0°] | Above object, pre-grasp |
-| `inspect_p1` | [-1°, 30°, 80°, 0°, 65°, 91°] | Side view +90° |
-| `inspect_p2` | [-1°, 30°, 80°, 0°, 70°, -10°] | Front face 0° |
-| `inspect_p3` | [-1°, 30°, 80°, 0°, 70°, -90°] | Side view -90° |
-| `inspect_p4` | [-1°, 30°, 80°, -20°, 65°, 90°] | Tilted view |
-| `inspect_p5` | [-1°, 30°, 80°, 25°, 70°, 74°] | Opposite tilt |
-| `pre_place` | [0°, -10°, 128°, 0°, 62°, 90°] | Retract before sorting — clears inspection camera |
-| `sort_pass` | [-90°, 30°, 120°, 0°, 30°, -1°] | PASS tray |
-| `sort_fail` | [90°, 30°, 120°, 0°, 30°, -1°] | FAIL tray |
+| Waypoint | Angles [X,Y,Z,A,B,C] | Calibrated | Purpose |
+|---|---|---|---|
+| `home` | [0°, 0°, 0°, 0°, 0°, 0°] | — | Safe resting pose |
+| `pick` | [0°, 32°, 150°, 0°, 0°, 0°] | 2026-05-16 | Above object, pre-grasp |
+| `inspect_p1` | [-1°, 30°, 80°, 0°, 65°, 91°] | 2026-05-15 | Side view +90° |
+| `inspect_p2` | [-1°, 30°, 80°, 0°, 70°, -10°] | 2026-05-13 | Front face 0° |
+| `inspect_p3` | [-1°, 30°, 80°, 0°, 70°, -90°] | 2026-05-13 | Side view −90° |
+| `inspect_p4` | [-1°, 30°, 80°, 25°, 70°, 74°] | 2026-05-15 | Tilt up +25° |
+| `inspect_p5` | [-1°, 30°, 80°, -20°, 65°, 90°] | 2026-05-15 | Tilt down −20° |
+| `pre_place` | [0°, -10°, 128°, 0°, 62°, 90°] | 2026-05-13 | Retract before sort — clears camera |
+| `sort_pass` | [-90°, 30°, 120°, 0°, 30°, -1°] | 2026-05-13 | PASS tray |
+| `sort_fail` | [90°, 30°, 120°, 0°, 30°, -1°] | 2026-04-10 | FAIL tray |
 
 ---
 
@@ -109,7 +109,17 @@ All joint values are `[X, Y, Z, A, B, C]` in radians.
 | `inspection_model_int8_edgetpu_src_edgetpu.tflite` | EdgeTPU-compiled — Coral USB |
 | `model_metadata.json` | Class labels, input shape, training metrics |
 
-Classes: **PASS**, **FAIL**
+**Current model performance (test set, 368 images — balanced 188 FAIL / 180 PASS):**
+```
+Accuracy      : 99.73 %
+FAIL recall   : 99 %  (1 missed defect out of 188)
+PASS recall   : 100 % (0 false rejects out of 180)
+```
+
+Trained with MobileNetV2 + focal loss (γ=2.0) + label smoothing 0.1.
+See `~/Coding/inspection/README.md` for full training details.
+
+Classes: **PASS** (index 1), **FAIL** (index 0)
 
 ---
 
@@ -147,6 +157,20 @@ ros2 action send_goal /run_inspection visual_inspection/action/RunInspection \
 ros2 topic echo /inspection_result        # AI votes per frame
 ros2 topic echo /run_inspection/_action/feedback  # state machine progress
 ```
+
+### `inspection_metrics_node` (Python, optional)
+
+Logs per-session PASS/FAIL vote statistics. Enable with `enable_metrics:=true`.
+
+---
+
+## Empty-frame handling
+
+When no object is in the camera field of view the backend outputs `NO_OBJECT` instead
+of running inference (frames with grayscale std-dev < 8 are skipped). This prevents
+an empty white background being classified as PASS.
+The commander node ignores `NO_OBJECT` frames automatically because their confidence
+is 0.0, which is below `confidence_threshold`.
 
 ---
 
