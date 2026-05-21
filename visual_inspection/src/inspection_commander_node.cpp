@@ -85,6 +85,7 @@ public:
     declare_wp("waypoints.inspect_p3");
     declare_wp("waypoints.inspect_p4");
     declare_wp("waypoints.inspect_p5");
+    declare_wp("waypoints.pre_place");
     declare_wp("waypoints.sort_pass");
     declare_wp("waypoints.sort_fail");
 
@@ -211,6 +212,10 @@ private:
 
     // ── PICK (optional) ───────────────────────────────────────────────────────
     if (enable_pick_) {
+      // Ensure gripper is open before approaching the object
+      publish_feedback("OPENING_GRIPPER", 0.03f);
+      sendGripper(gripper_open_pos_);
+
       publish_feedback("MOVING_TO_PICK", 0.05f);
       if (!moveToWaypoint("waypoints.pick")) {
         abortGoal(goal_handle, result, "Failed to reach PICK pose");
@@ -286,6 +291,13 @@ private:
     RCLCPP_INFO(this->get_logger(),
                 "Verdict: %s  (pass_votes=%d  fail_votes=%d)",
                 verdict.c_str(), total_pass, total_fail);
+
+    // ── Pre-place: retract arm to clear inspection camera before sorting ──────
+    publish_feedback("MOVING_TO_PRE_PLACE", 0.88f);
+    if (!moveToWaypoint("waypoints.pre_place")) {
+      abortGoal(goal_handle, result, "Failed to reach pre_place pose");
+      busy_ = false; return;
+    }
 
     // ── Sort ──────────────────────────────────────────────────────────────────
     const std::string sort_wp = (verdict == "PASS") ? "waypoints.sort_pass" : "waypoints.sort_fail";
